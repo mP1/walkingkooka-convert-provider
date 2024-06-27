@@ -17,24 +17,20 @@
 
 package walkingkooka.convert.provider;
 
-import walkingkooka.reflect.PublicStaticHelper;
+import walkingkooka.convert.Converter;
+import walkingkooka.convert.ConverterContext;
 
-/**
- * A collection of ConverterProvider(s).
- */
-public final class ConverterProviders implements PublicStaticHelper {
+import java.util.Optional;
+import java.util.Set;
 
-    /**
-     * {@see FakeConverterProvider}
-     */
-    public static ConverterProvider fake() {
-        return new FakeConverterProvider();
+public class FakeConverterProvider implements ConverterProvider {
+    @Override
+    public <C extends ConverterContext> Optional<Converter<C>> converter(final ConverterName name) {
+        throw new UnsupportedOperationException();
     }
 
-    /**
-     * Stop creation
-     */
-    private ConverterProviders() {
+    @Override
+    public Set<ConverterInfo> converterInfos() {
         throw new UnsupportedOperationException();
     }
 }
