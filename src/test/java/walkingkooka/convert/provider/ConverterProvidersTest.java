@@ -17,9 +17,10 @@
 
 package walkingkooka.convert.provider;
 
-import walkingkooka.reflect.*;
+import walkingkooka.reflect.JavaVisibility;
+import walkingkooka.reflect.PublicStaticHelperTesting;
 
-import java.lang.reflect.*;
+import java.lang.reflect.Method;
 
 public final class ConverterProvidersTest implements PublicStaticHelperTesting<ConverterProviders> {
 

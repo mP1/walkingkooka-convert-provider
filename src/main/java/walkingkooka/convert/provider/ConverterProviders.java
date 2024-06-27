@@ -17,13 +17,7 @@
 
 package walkingkooka.convert.provider;
 
-import walkingkooka.net.*;
-import walkingkooka.reflect.*;
-import walkingkooka.text.*;
-import walkingkooka.tree.expression.*;
-import walkingkooka.tree.expression.function.*;
-
-import java.util.*;
+import walkingkooka.reflect.PublicStaticHelper;
 
 /**
  * A collection of ConverterProvider(s).
