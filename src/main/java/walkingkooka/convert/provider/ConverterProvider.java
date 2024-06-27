@@ -35,6 +35,7 @@
 package walkingkooka.convert.provider;
 
 import walkingkooka.convert.Converter;
+import walkingkooka.convert.ConverterContext;
 
 import java.util.Optional;
 import java.util.Set;
@@ -46,16 +47,16 @@ import java.util.Set;
 public interface ConverterProvider {
 
     /**
-     * Resolves the given {@link ConverterName} to a {@link ConverterName}.
+     * Resolves the given {@link ConverterName} to a {@link Converter}.
      */
-    Optional<Converter> converter(final ConverterName selector);
+    <C extends ConverterContext> Optional<Converter<C>> converter(final ConverterName selector);
 
     /**
      * Helper that invokes {@link #converter(ConverterName)} and throws a {@link IllegalArgumentException}
      * if none was found.
      */
-    default Converter converterOrFail(final ConverterName name) {
-        return this.converter(name)
+    default <C extends ConverterContext> Converter<C> converterOrFail(final ConverterName name) {
+        return this.<C>converter(name)
                 .orElseThrow(
                         () -> new IllegalArgumentException("Unknown converter " + name)
                 );
