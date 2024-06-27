@@ -87,13 +87,13 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
             BOOLEAN_TO_NUMBER_STRING
     );
 
-    private final static String CHARACTER_OR_STRING_THEN_STRING = "character-or-string-then";
+    private final static String CHARACTER_OR_STRING_TO_STRING_THEN_STRING = "character-or-string-to-string-then";
 
     /**
-     * The name of the {@link Converter} returned by {@link Converters#characterOrStringThen(Converter)}
+     * The name of the {@link Converter} returned by {@link Converters#characterOrStringToStringThen(Converter)}
      */
-    public final static ConverterName CHARACTER_OR_STRING_THEN = new ConverterName(
-            CHARACTER_OR_STRING_THEN_STRING
+    public final static ConverterName CHARACTER_OR_STRING_TO_STRING_THEN = new ConverterName(
+            CHARACTER_OR_STRING_TO_STRING_THEN_STRING
     );
 
     private final static String COLLECTION_STRING = "collection";
@@ -399,8 +399,8 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
             case BOOLEAN_TO_NUMBER_STRING:
                 converterName = BOOLEAN_TO_NUMBER;
                 break;
-            case CHARACTER_OR_STRING_THEN_STRING:
-                converterName = CHARACTER_OR_STRING_THEN;
+            case CHARACTER_OR_STRING_TO_STRING_THEN_STRING:
+                converterName = CHARACTER_OR_STRING_TO_STRING_THEN;
                 break;
             case COLLECTION_STRING:
                 converterName = COLLECTION;
