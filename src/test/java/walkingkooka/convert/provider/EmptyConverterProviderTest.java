@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 Miroslav Pokorny (github.com/mP1)
+ * Copyright 2019 Miroslav Pokorny (github.com/mP1)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,31 +17,28 @@
 
 package walkingkooka.convert.provider;
 
-import walkingkooka.reflect.PublicStaticHelper;
+import org.junit.jupiter.api.Test;
+import walkingkooka.reflect.JavaVisibility;
 
-/**
- * A collection of ConverterProvider(s).
- */
-public final class ConverterProviders implements PublicStaticHelper {
+public final class EmptyConverterProviderTest implements ConverterProviderTesting<EmptyConverterProvider> {
 
-    /**
-     * {@see EmptyConverterProvider}
-     */
-    public static ConverterProvider empty() {
+    @Test
+    public void testConverterInfos() {
+        this.converterInfosAndCheck();
+    }
+
+    @Override
+    public EmptyConverterProvider createConverterProvider() {
         return EmptyConverterProvider.INSTANCE;
     }
 
-    /**
-     * {@see FakeConverterProvider}
-     */
-    public static ConverterProvider fake() {
-        return new FakeConverterProvider();
+    @Override
+    public Class<EmptyConverterProvider> type() {
+        return EmptyConverterProvider.class;
     }
 
-    /**
-     * Stop creation
-     */
-    private ConverterProviders() {
-        throw new UnsupportedOperationException();
+    @Override
+    public JavaVisibility typeVisibility() {
+        return JavaVisibility.PACKAGE_PRIVATE;
     }
 }
