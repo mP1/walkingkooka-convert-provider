@@ -17,11 +17,62 @@
 
 package walkingkooka.convert.provider;
 
+import org.junit.jupiter.api.Test;
+import walkingkooka.collect.set.Sets;
+import walkingkooka.convert.Converter;
+import walkingkooka.convert.Converters;
 import walkingkooka.plugin.PluginNameTesting;
+import walkingkooka.reflect.FieldAttributes;
+import walkingkooka.reflect.JavaVisibility;
+import walkingkooka.reflect.MethodAttributes;
+import walkingkooka.text.CaseKind;
+import walkingkooka.text.CharacterConstant;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
+import java.beans.Visibility;
+import java.util.Arrays;
+import java.util.Set;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
 final public class ConverterNameTest implements PluginNameTesting<ConverterName> {
+
+    @Test
+    public void testConstantNamesMatchConvertersFactoryMethods() {
+        final Set<String> constantNames = Arrays.stream(ConverterName.class.getFields())
+                .filter(m -> FieldAttributes.STATIC.is(m))
+                .filter(m -> JavaVisibility.of(m) == JavaVisibility.PUBLIC)
+                .filter(m -> m.getType() == ConverterName.class)
+                .map(m -> {
+                    try {
+                        final ConverterName n = (ConverterName) m.get(null);
+                        return n.value();
+                    } catch (final Exception rethrow) {
+                        throw new Error(rethrow);
+                    }
+                }).filter(n -> false == "fake".equals(n))
+                .collect(Collectors.toCollection(Sets::sorted));
+
+        final Set<String> factoryNames = Arrays.stream(Converters.class.getMethods())
+                .filter(m -> MethodAttributes.STATIC.is(m))
+                .filter(m -> JavaVisibility.of(m) == JavaVisibility.PUBLIC)
+                .map(m -> m.getName())
+                .filter(n -> false == "fake".equals(n))
+                .map(m -> CaseKind.CAMEL.change(m, CaseKind.KEBAB).toLowerCase())
+                .collect(Collectors.toCollection(Sets::sorted));
+
+        this.checkEquals(
+                CharacterConstant.with('\n').toSeparatedString(
+                        constantNames,
+                        Function.identity()
+                ),
+                CharacterConstant.with('\n').toSeparatedString(
+                        factoryNames,
+                        Function.identity()
+                )
+        );
+    }
 
     @Override
     public ConverterName createName(final String name) {
