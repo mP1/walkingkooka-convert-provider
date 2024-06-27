@@ -69,15 +69,6 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
 
     // constants........................................................................................................
 
-    private final static String BIG_DECIMAL_TO_BOOLEAN_STRING = "big-decimal-to-boolean";
-
-    /**
-     * The name of the {@link Converter} returned by {@link Converters#bigDecimalToBoolean}
-     */
-    public final static ConverterName BIG_DECIMAL_TO_BOOLEAN = new ConverterName(
-            BIG_DECIMAL_TO_BOOLEAN_STRING
-    );
-
     private final static String BOOLEAN_TO_NUMBER_STRING = "boolean-to-number";
 
     /**
@@ -402,9 +393,6 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
         final ConverterName converterName;
 
         switch(name) {
-            case BIG_DECIMAL_TO_BOOLEAN_STRING:
-                converterName = BIG_DECIMAL_TO_BOOLEAN;
-                break;
             case BOOLEAN_TO_NUMBER_STRING:
                 converterName = BOOLEAN_TO_NUMBER;
                 break;
