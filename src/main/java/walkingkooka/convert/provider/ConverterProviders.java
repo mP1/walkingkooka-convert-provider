@@ -36,6 +36,13 @@ public final class ConverterProviders implements PublicStaticHelper {
     );
 
     /**
+     * {@see ConvertersConverterProvider}
+     */
+    public static ConverterProvider converters() {
+        return ConvertersConverterProvider.INSTANCE;
+    }
+
+    /**
      * {@see EmptyConverterProvider}
      */
     public static ConverterProvider empty() {
