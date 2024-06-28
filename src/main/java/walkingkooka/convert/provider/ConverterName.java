@@ -366,15 +366,6 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
             STRING_TO_NUMBER_STRING
     );
 
-    private final static String THEN_STRING_OR_CHARACTER_STRING = "then-string-or-character";
-
-    /**
-     * The name of the {@link Converter} returned by {@link Converters#thenStringOrCharacter(Converter)}
-     */
-    public final static ConverterName THEN_STRING_OR_CHARACTER = new ConverterName(
-            THEN_STRING_OR_CHARACTER_STRING
-    );
-
     private final static String TO_BOOLEAN_STRING = "to-boolean";
 
     /**
@@ -491,9 +482,6 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
                 break;
             case STRING_TO_NUMBER_STRING:
                 converterName = STRING_TO_NUMBER;
-                break;
-            case THEN_STRING_OR_CHARACTER_STRING:
-                converterName = THEN_STRING_OR_CHARACTER;
                 break;
             case TO_BOOLEAN_STRING:
                 converterName = TO_BOOLEAN;
