@@ -321,13 +321,13 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
             SIMPLE_STRING
     );
 
-    private final static String STRING_TO_CHARACTER_STRING = "string-to-character";
+    private final static String STRING_TO_CHARACTER_OR_STRING_STRING = "string-to-character-or-string";
 
     /**
-     * The name of the {@link Converter} returned by {@link Converters#stringToCharacter()}
+     * The name of the {@link Converter} returned by {@link Converters#stringToCharacterOrString()}
      */
-    public final static ConverterName STRING_TO_CHARACTER = new ConverterName(
-            STRING_TO_CHARACTER_STRING
+    public final static ConverterName STRING_TO_CHARACTER_OR_STRING = new ConverterName(
+            STRING_TO_CHARACTER_OR_STRING_STRING
     );
 
     private final static String STRING_TO_LOCAL_DATE_STRING = "string-to-local-date";
@@ -477,8 +477,8 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
             case SIMPLE_STRING:
                 converterName = SIMPLE;
                 break;
-            case STRING_TO_CHARACTER_STRING:
-                converterName = STRING_TO_CHARACTER;
+            case STRING_TO_CHARACTER_OR_STRING_STRING:
+                converterName = STRING_TO_CHARACTER_OR_STRING;
                 break;
             case STRING_TO_LOCAL_DATE_STRING:
                 converterName = STRING_TO_LOCAL_DATE;
