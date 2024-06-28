@@ -49,7 +49,7 @@ public interface ConverterProvider {
     /**
      * Resolves the given {@link ConverterName} to a {@link Converter}.
      */
-    <C extends ConverterContext> Optional<Converter<C>> converter(final ConverterName selector);
+    <C extends ConverterContext> Optional<Converter<C>> converter(final ConverterName name);
 
     /**
      * Helper that invokes {@link #converter(ConverterName)} and throws a {@link IllegalArgumentException}
