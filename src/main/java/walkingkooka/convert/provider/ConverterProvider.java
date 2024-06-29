@@ -47,15 +47,15 @@ import java.util.Set;
 public interface ConverterProvider {
 
     /**
-     * Resolves the given {@link ConverterName} to a {@link Converter}.
+     * Resolves the given {@link ConverterSelector} to a {@link Converter}.
      */
-    <C extends ConverterContext> Optional<Converter<C>> converter(final ConverterName name);
+    <C extends ConverterContext> Optional<Converter<C>> converter(final ConverterSelector selector);
 
     /**
-     * Helper that invokes {@link #converter(ConverterName)} and throws a {@link IllegalArgumentException}
+     * Helper that invokes {@link #converter(ConverterSelector)} and throws a {@link IllegalArgumentException}
      * if none was found.
      */
-    default <C extends ConverterContext> Converter<C> converterOrFail(final ConverterName name) {
+    default <C extends ConverterContext> Converter<C> converterOrFail(final ConverterSelector name) {
         return this.<C>converter(name)
                 .orElseThrow(
                         () -> new IllegalArgumentException("Unknown converter " + name)
