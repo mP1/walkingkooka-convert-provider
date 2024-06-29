@@ -40,58 +40,58 @@ public interface ConverterProviderTesting<T extends ConverterProvider> extends C
         );
     }
 
-    default void converterAndCheck(final ConverterName name) {
+    default void converterAndCheck(final ConverterSelector selector) {
         this.converterAndCheck(
                 this.createConverterProvider(),
-                name,
+                selector,
                 Optional.empty()
         );
     }
 
     default void converterAndCheck(final ConverterProvider provider,
-                                   final ConverterName name) {
+                                   final ConverterSelector selector) {
         this.converterAndCheck(
                 provider,
-                name,
+                selector,
                 Optional.empty()
         );
     }
 
-    default void converterAndCheck(final ConverterName name,
+    default void converterAndCheck(final ConverterSelector selector,
                                    final Converter<?> expected) {
         this.converterAndCheck(
                 this.createConverterProvider(),
-                name,
+                selector,
                 Optional.of(expected)
         );
     }
 
     default void converterAndCheck(final ConverterProvider provider,
-                                   final ConverterName name,
+                                   final ConverterSelector selector,
                                    final Converter<?> expected) {
         this.converterAndCheck(
                 provider,
-                name,
+                selector,
                 Optional.of(expected)
         );
     }
 
-    default void converterAndCheck(final ConverterName name,
+    default void converterAndCheck(final ConverterSelector selector,
                                    final Optional<Converter<?>> expected) {
         this.converterAndCheck(
                 this.createConverterProvider(),
-                name,
+                selector,
                 expected
         );
     }
 
     default void converterAndCheck(final ConverterProvider provider,
-                                   final ConverterName name,
+                                   final ConverterSelector selector,
                                    final Optional<Converter<?>> expected) {
         this.checkEquals(
                 expected,
-                provider.converter(name),
-                () -> name.toString()
+                provider.converter(selector),
+                selector::toString
         );
     }
 

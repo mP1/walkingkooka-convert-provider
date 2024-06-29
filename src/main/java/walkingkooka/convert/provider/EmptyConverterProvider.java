@@ -36,8 +36,8 @@ final class EmptyConverterProvider implements ConverterProvider{
     }
 
     @Override
-    public <C extends ConverterContext> Optional<Converter<C>> converter(final ConverterName name) {
-        Objects.requireNonNull(name, "name");
+    public <C extends ConverterContext> Optional<Converter<C>> converter(final ConverterSelector selector) {
+        Objects.requireNonNull(selector, "selector");
 
         return Optional.empty();
     }
