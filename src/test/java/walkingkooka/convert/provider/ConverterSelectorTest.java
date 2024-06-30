@@ -21,14 +21,22 @@ import org.junit.jupiter.api.Test;
 import walkingkooka.HashCodeEqualsDefinedTesting2;
 import walkingkooka.InvalidCharacterException;
 import walkingkooka.ToStringTesting;
+import walkingkooka.collect.list.Lists;
+import walkingkooka.convert.Converter;
+import walkingkooka.convert.ConverterContext;
+import walkingkooka.convert.Converters;
 import walkingkooka.reflect.ClassTesting2;
 import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.test.ParseStringTesting;
+import walkingkooka.text.CharSequences;
 import walkingkooka.text.HasTextTesting;
 import walkingkooka.text.printer.TreePrintableTesting;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallingTesting;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
+
+import java.util.List;
+import java.util.function.BiFunction;
 
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertSame;
@@ -43,6 +51,10 @@ public final class ConverterSelectorTest implements ClassTesting2<ConverterSelec
         TreePrintableTesting {
 
     private final static ConverterName NAME = ConverterName.with("super-magic-converter123");
+
+    private final static ConverterName NAME2 = ConverterName.with("converter2");
+
+    private final static ConverterName NAME3 = ConverterName.with("converter3");
 
     private final static String TEXT = "$0.00";
 
@@ -207,6 +219,373 @@ public final class ConverterSelectorTest implements ClassTesting2<ConverterSelec
         return thrown;
     }
 
+    // converter........................................................................................................
+
+    @Test
+    public void testParseTextAndCreateNoText() {
+        final Converter<ConverterContext> expected = Converters.fake();
+
+        this.parseTextAndCreateAndCheck(
+                NAME + "",
+                (n, p) -> {
+                    checkName(n, NAME);
+                    checkParameters(p);
+
+                    return expected;
+                },
+                expected
+        );
+    }
+
+    @Test
+    public void testParseTextAndCreateSpacesText() {
+        final Converter<ConverterContext> expected = Converters.fake();
+
+        this.parseTextAndCreateAndCheck(
+                NAME + " ",
+                (n, p) -> {
+                    checkName(n, NAME);
+                    checkParameters(p);
+
+                    return expected;
+                },
+                expected
+        );
+    }
+
+    @Test
+    public void testParseTextAndCreateSpacesText2() {
+        final Converter<ConverterContext> expected = Converters.fake();
+
+        this.parseTextAndCreateAndCheck(
+                NAME + "   ",
+                (n, p) -> {
+                    checkName(n, NAME);
+                    checkParameters(p);
+
+                    return expected;
+                },
+                expected
+        );
+    }
+
+    @Test
+    public void testParseTextAndCreateOpenParensFail() {
+        this.parseTextAndCreateFails(
+                NAME + " (",
+                "Invalid character '(' at 25 in \"super-magic-converter123 (\""
+        );
+    }
+
+    @Test
+    public void testParseTextAndCreateDoubleLiteral() {
+        final Converter<ConverterContext> expected = Converters.fake();
+
+        this.parseTextAndCreateAndCheck(
+                NAME + " (1)",
+                (n, p) -> {
+                    checkName(n, NAME);
+                    checkParameters(p, 1.0);
+
+                    return expected;
+                },
+                expected
+        );
+    }
+
+    @Test
+    public void testParseTextAndCreateNegativeDoubleLiteral() {
+        final Converter<ConverterContext> expected = Converters.fake();
+
+        this.parseTextAndCreateAndCheck(
+                NAME + " (-1)",
+                (n, p) -> {
+                    checkName(n, NAME);
+                    checkParameters(p, -1.0);
+
+                    return expected;
+                },
+                expected
+        );
+    }
+
+    @Test
+    public void testParseTextAndCreateDoubleLiteralWithDecimals() {
+        final Converter<ConverterContext> expected = Converters.fake();
+
+        this.parseTextAndCreateAndCheck(
+                NAME + " (1.25)",
+                (n, p) -> {
+                    checkName(n, NAME);
+                    checkParameters(p, 1.25);
+
+                    return expected;
+                },
+                expected
+        );
+    }
+
+    @Test
+    public void testParseTextAndCreateDoubleMissingClosingParensFail() {
+        this.parseTextAndCreateFails(
+                NAME + " (1",
+                "Invalid character '1' at 26 in \"super-magic-converter123 (1\""
+        );
+    }
+
+    @Test
+    public void testParseTextAndCreateStringUnclosedFail() {
+        this.parseTextAndCreateFails(
+                NAME + " (\"unclosed",
+                "Missing terminating '\"'"
+        );
+    }
+
+    @Test
+    public void testParseTextAndCreateEmptyParameterList() {
+        final Converter<ConverterContext> expected = Converters.fake();
+
+        this.parseTextAndCreateAndCheck(
+                NAME + " ()",
+                (n, p) -> {
+                    checkName(n, NAME);
+                    checkParameters(p);
+
+                    return expected;
+                },
+                expected
+        );
+    }
+
+    @Test
+    public void testParseTextAndCreateEmptyParameterListWithExtraSpaces() {
+        final Converter<ConverterContext> expected = Converters.fake();
+
+        this.parseTextAndCreateAndCheck(
+                NAME + "  ( )",
+                (n, p) -> {
+                    checkName(n, NAME);
+                    checkParameters(p);
+
+                    return expected;
+                },
+                expected
+        );
+    }
+
+    @Test
+    public void testParseTextAndCreateEmptyParameterListWithExtraSpaces2() {
+        final Converter<ConverterContext> expected = Converters.fake();
+
+        this.parseTextAndCreateAndCheck(
+                NAME + "   (  )",
+                (n, p) -> {
+                    checkName(n, NAME);
+                    checkParameters(p);
+
+                    return expected;
+                },
+                expected
+        );
+    }
+
+    @Test
+    public void testParseTextAndCreateStringLiteral() {
+        final Converter<ConverterContext> expected = Converters.fake();
+
+        this.parseTextAndCreateAndCheck(
+                NAME + " (\"string-literal-parameter\")",
+                (n, p) -> {
+                    checkName(n, NAME);
+                    checkParameters(p, "string-literal-parameter");
+
+                    return expected;
+                },
+                expected
+        );
+    }
+
+    @Test
+    public void testParseTextAndCreateStringLiteralStringLiteral() {
+        final Converter<ConverterContext> expected = Converters.fake();
+
+        this.parseTextAndCreateAndCheck(
+                NAME + " (\"string-literal-parameter-1\",\"string-literal-parameter-2\")",
+                (n, p) -> {
+                    checkName(n, NAME);
+                    checkParameters(p, "string-literal-parameter-1", "string-literal-parameter-2");
+
+                    return expected;
+                },
+                expected
+        );
+    }
+
+    @Test
+    public void testParseTextAndCreateStringLiteralStringLiteralWithExtraSpaceIgnored() {
+        final Converter<ConverterContext> expected = Converters.fake();
+
+        this.parseTextAndCreateAndCheck(
+                NAME + "  ( \"string-literal-parameter-1\" , \"string-literal-parameter-2\" )",
+                (n, p) -> {
+                    checkName(n, NAME);
+                    checkParameters(p, "string-literal-parameter-1", "string-literal-parameter-2");
+
+                    return expected;
+                },
+                expected
+        );
+    }
+
+    @Test
+    public void testParseTextAndCreateConverter() {
+        final Converter<ConverterContext> expected1 = Converters.fake();
+        final Converter<ConverterContext> expected2 = Converters.fake();
+
+        this.parseTextAndCreateAndCheck(
+                NAME + " (" + NAME2 + ")",
+                (n, p) -> {
+                    if (n.equals(NAME)) {
+                        checkParameters(p, expected2);
+                        return expected1;
+                    }
+                    if (n.equals(NAME2)) {
+                        checkParameters(p);
+                        return expected2;
+                    }
+
+                    throw new IllegalArgumentException("Unknown converter " + n);
+                },
+                expected1
+        );
+    }
+
+    @Test
+    public void testParseTextAndCreateConverterConverter() {
+        final Converter<ConverterContext> expected1 = Converters.fake();
+        final Converter<ConverterContext> expected2 = Converters.fake();
+        final Converter<ConverterContext> expected3 = Converters.fake();
+
+        this.parseTextAndCreateAndCheck(
+                NAME + " (" + NAME2 + "," + NAME3 + ")",
+                (n, p) -> {
+                    if (n.equals(NAME)) {
+                        checkParameters(p, expected2, expected3);
+                        return expected1;
+                    }
+                    if (n.equals(NAME2)) {
+                        checkParameters(p);
+                        return expected2;
+                    }
+                    if (n.equals(NAME3)) {
+                        checkParameters(p);
+                        return expected3;
+                    }
+
+                    throw new IllegalArgumentException("Unknown converter " + n);
+                },
+                expected1
+        );
+    }
+
+    @Test
+    public void testParseTextAndCreateNestedConverter() {
+        final Converter<ConverterContext> expected1 = Converters.fake();
+        final Converter<ConverterContext> expected2 = Converters.fake();
+        final Converter<ConverterContext> expected3 = Converters.fake();
+
+        this.parseTextAndCreateAndCheck(
+                NAME + " (" + NAME2 + "(" + NAME3 + "))",
+                (n, p) -> {
+                    if (n.equals(NAME)) {
+                        checkParameters(p, expected2);
+                        return expected1;
+                    }
+                    if (n.equals(NAME2)) {
+                        checkParameters(p, expected3);
+                        return expected2;
+                    }
+                    if (n.equals(NAME3)) {
+                        checkParameters(p);
+                        return expected3;
+                    }
+
+                    throw new IllegalArgumentException("Unknown converter " + n);
+                },
+                expected1
+        );
+    }
+
+    private void parseTextAndCreateFails(final String selector,
+                                         final String expected) {
+        this.parseTextAndCreateFails(
+                selector,
+                (n, p) -> {
+                    throw new UnsupportedOperationException();
+                },
+                expected
+        );
+    }
+
+    private void parseTextAndCreateFails(final String selector,
+                                         final BiFunction<ConverterName, List<?>, Converter<ConverterContext>> factory,
+                                         final String expected) {
+        final IllegalArgumentException thrown = assertThrows(
+                IllegalArgumentException.class,
+                () -> ConverterSelector.parse(selector)
+                        .parseTextAndCreate(factory)
+        );
+        this.checkEquals(
+                expected,
+                thrown.getMessage(),
+                () -> "converter " + CharSequences.quoteAndEscape(selector)
+        );
+    }
+
+    private void parseTextAndCreateAndCheck(final String selector,
+                                            final BiFunction<ConverterName, List<?>, Converter<ConverterContext>> factory,
+                                            final Converter<ConverterContext> expected) {
+        this.checkEquals(
+                expected,
+                ConverterSelector.parse(selector)
+                        .parseTextAndCreate(factory)
+        );
+    }
+
+    private void checkName(final ConverterName name,
+                           final String expected) {
+        this.checkName(
+                name,
+                ConverterName.with(expected)
+        );
+    }
+
+    private void checkName(final ConverterName name,
+                           final ConverterName expected) {
+        this.checkEquals(
+                expected,
+                name,
+                "name"
+        );
+    }
+
+    private void checkParameters(final List<?> parameters,
+                                 final Object... expected) {
+        this.checkParameters(
+                parameters,
+                Lists.of(expected)
+        );
+    }
+
+    private void checkParameters(final List<?> parameters,
+                                 final List<?> expected) {
+        this.checkEquals(
+                expected,
+                parameters,
+                "parameters"
+        );
+    }
+
     // equals...........................................................................................................
 
     @Test
@@ -293,7 +672,7 @@ public final class ConverterSelectorTest implements ClassTesting2<ConverterSelec
 
     @Override
     public ConverterSelector unmarshall(final JsonNode json,
-                                                final JsonNodeUnmarshallContext context) {
+                                        final JsonNodeUnmarshallContext context) {
         return ConverterSelector.unmarshall(
                 json,
                 context
