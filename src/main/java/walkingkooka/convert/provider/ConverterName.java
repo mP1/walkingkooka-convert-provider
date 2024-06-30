@@ -35,7 +35,7 @@
 package walkingkooka.convert.provider;
 
 import walkingkooka.Cast;
-import walkingkooka.collect.set.Sets;
+import walkingkooka.collect.map.Maps;
 import walkingkooka.convert.Converter;
 import walkingkooka.convert.Converters;
 import walkingkooka.naming.Name;
@@ -48,11 +48,13 @@ import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 /**
  * The {@link Name} of a {@link Converter}. Note comparator names are case-sensitive.
@@ -70,17 +72,42 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
     public final static int MAX_LENGTH = PluginName.MAX_LENGTH;
 
     // constants........................................................................................................
-    
+
     private static ConverterName registerConstantName(final String name) {
+        return registerConstantName(
+                name,
+                (Function<List<?>, Converter<?>>)null
+        );
+    }
+
+    private static ConverterName registerConstantName(final String name,
+                                                      final Supplier<Converter<?>> converter) {
+        return registerConstantName(
+                name,
+                (p) -> {
+                    if(false == p.isEmpty()) {
+                        throw new IllegalArgumentException("Expected no parameters got " + p.size() + "=" + p);
+                    }
+
+                    return converter.get();
+                }
+        );
+    }
+
+    private static ConverterName registerConstantName(final String name,
+                                                      final Function<List<?>, Converter<?>> factory) {
         final ConverterName converterName = new ConverterName(name);
-        CONSTANTS.add(converterName);
+        NAME_TO_FACTORY.put(
+                converterName,
+                factory
+        );
         return converterName;
     }
 
     /**
      * Holds all constants in a {@link Set}.
      */
-    final static Set<ConverterName> CONSTANTS = Sets.sorted();
+    final static Map<ConverterName, Function<List<?>, Converter<?>>> NAME_TO_FACTORY = Maps.sorted();
 
 
     private final static String BOOLEAN_TO_NUMBER_STRING = "boolean-to-number";
@@ -89,7 +116,8 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
      * The name of the {@link Converter} returned by {@link Converters#booleanToNumber()}
      */
     public final static ConverterName BOOLEAN_TO_NUMBER = registerConstantName(
-            BOOLEAN_TO_NUMBER_STRING
+            BOOLEAN_TO_NUMBER_STRING,
+            Converters::booleanToNumber
     );
 
     private final static String CHAIN_STRING = "chain";
@@ -107,7 +135,8 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
      * The name of the {@link Converter} returned by {@link Converters#characterOrStringToString}
      */
     public final static ConverterName CHARACTER_OR_STRING_TO_STRING = registerConstantName(
-            CHARACTER_OR_STRING_TO_STRING_STRING
+            CHARACTER_OR_STRING_TO_STRING_STRING,
+            Converters::characterOrStringToString
     );
 
     private final static String COLLECTION_STRING = "collection";
@@ -116,7 +145,17 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
      * The name of the {@link Converter} returned by {@link Converters#collection(List)}
      */
     public final static ConverterName COLLECTION = registerConstantName(
-            COLLECTION_STRING
+            COLLECTION_STRING,
+            (p) -> {
+                for(final Object parameter : p) {
+                    if (false == parameter instanceof Converter) {
+                        throw new IllegalArgumentException("Expected only Converter(s) got " + parameter);
+                    }
+                }
+                return Converters.collection(
+                        Cast.to(p)
+                );
+            }
     );
 
     private final static String CUSTOM_TO_STRING_STRING = "custom-to-string";
@@ -134,7 +173,8 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
      * The name of the {@link Converter} returned by {@link Converters#hasTextToString()}
      */
     public final static ConverterName HAS_TEXT_TO_STRING = registerConstantName(
-            HAS_TEXT_TO_STRING_STRING
+            HAS_TEXT_TO_STRING_STRING,
+            Converters::hasTextToString
     );
 
     private final static String LOCAL_DATE_TIME_TO_LOCAL_DATE_STRING = "local-date-time-to-local-date";
@@ -143,7 +183,8 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
      * The name of the {@link Converter} returned by {@link Converters#localDateTimeToLocalDate()}
      */
     public final static ConverterName LOCAL_DATE_TIME_TO_LOCAL_DATE = registerConstantName(
-            LOCAL_DATE_TIME_TO_LOCAL_DATE_STRING
+            LOCAL_DATE_TIME_TO_LOCAL_DATE_STRING,
+            Converters::localDateTimeToLocalDate
     );
 
     private final static String LOCAL_DATE_TIME_TO_LOCAL_TIME_STRING = "local-date-time-to-local-time";
@@ -152,7 +193,8 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
      * The name of the {@link Converter} returned by {@link Converters#localDateTimeToLocalTime()}
      */
     public final static ConverterName LOCAL_DATE_TIME_TO_LOCAL_TIME = registerConstantName(
-            LOCAL_DATE_TIME_TO_LOCAL_TIME_STRING
+            LOCAL_DATE_TIME_TO_LOCAL_TIME_STRING,
+            Converters::localDateTimeToLocalTime
     );
 
     private final static String LOCAL_DATE_TIME_TO_NUMBER_STRING = "local-date-time-to-number";
@@ -161,7 +203,8 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
      * The name of the {@link Converter} returned by {@link Converters#localDateTimeToNumber()}.
      */
     public final static ConverterName LOCAL_DATE_TIME_TO_NUMBER = registerConstantName(
-            LOCAL_DATE_TIME_TO_NUMBER_STRING
+            LOCAL_DATE_TIME_TO_NUMBER_STRING,
+            Converters::localDateTimeToNumber
     );
 
     private final static String LOCAL_DATE_TIME_TO_STRING_STRING = "local-date-time-to-string";
@@ -179,7 +222,8 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
      * The name of the {@link Converter} returned by {@link Converters#localDateToLocalDateTime()}
      */
     public final static ConverterName LOCAL_DATE_TO_LOCAL_DATE_TIME = registerConstantName(
-            LOCAL_DATE_TO_LOCAL_DATE_TIME_STRING
+            LOCAL_DATE_TO_LOCAL_DATE_TIME_STRING,
+            Converters::localDateToLocalDateTime
     );
 
     private final static String LOCAL_DATE_TO_NUMBER_STRING = "local-date-to-number";
@@ -188,7 +232,8 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
      * The name of the {@link Converter} returned by {@link Converters#localDateToNumber()}
      */
     public final static ConverterName LOCAL_DATE_TO_NUMBER = registerConstantName(
-            LOCAL_DATE_TO_NUMBER_STRING
+            LOCAL_DATE_TO_NUMBER_STRING,
+            Converters::localDateToNumber
     );
 
     private final static String LOCAL_DATE_TO_STRING_STRING = "local-date-to-string";
@@ -206,7 +251,8 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
      * The name of the {@link Converter} returned by {@link Converters#localTimeToLocalDateTime()}
      */
     public final static ConverterName LOCAL_TIME_TO_LOCAL_DATE_TIME = registerConstantName(
-            LOCAL_TIME_TO_LOCAL_DATE_TIME_STRING
+            LOCAL_TIME_TO_LOCAL_DATE_TIME_STRING,
+            Converters::localTimeToLocalDateTime
     );
 
     private final static String LOCAL_TIME_TO_NUMBER_STRING = "local-time-to-number";
@@ -215,7 +261,8 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
      * The name of the {@link Converter} returned by {@link Converters#localTimeToNumber}
      */
     public final static ConverterName LOCAL_TIME_TO_NUMBER = registerConstantName(
-            LOCAL_TIME_TO_NUMBER_STRING
+            LOCAL_TIME_TO_NUMBER_STRING,
+            Converters::localTimeToNumber
     );
 
     private final static String LOCAL_TIME_TO_STRING_STRING = "local-time-to-string";
@@ -242,7 +289,8 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
      * The name of the {@link Converter} returned by {@link Converters#never()}
      */
     public final static ConverterName NEVER = registerConstantName(
-            NEVER_STRING
+            NEVER_STRING,
+            Converters::never
     );
 
     private final static String NUMBER_TO_BOOLEAN_STRING = "number-to-boolean";
@@ -251,7 +299,8 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
      * The name of the {@link Converter} returned by {@link Converters#numberToBoolean()}
      */
     public final static ConverterName NUMBER_TO_BOOLEAN = registerConstantName(
-            NUMBER_TO_BOOLEAN_STRING
+            NUMBER_TO_BOOLEAN_STRING,
+            Converters::numberToBoolean
     );
 
     private final static String NUMBER_TO_LOCAL_DATE_STRING = "number-to-local-date";
@@ -260,7 +309,8 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
      * The name of the {@link Converter} returned by {@link Converters#numberToLocalDate()}
      */
     public final static ConverterName NUMBER_TO_LOCAL_DATE = registerConstantName(
-            NUMBER_TO_LOCAL_DATE_STRING
+            NUMBER_TO_LOCAL_DATE_STRING,
+            Converters::numberToLocalDate
     );
 
     private final static String NUMBER_TO_LOCAL_DATE_TIME_STRING = "number-to-local-date-time";
@@ -269,7 +319,8 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
      * The name of the {@link Converter} returned by {@link Converters#numberToLocalDateTime()}
      */
     public final static ConverterName NUMBER_TO_LOCAL_DATE_TIME = registerConstantName(
-            NUMBER_TO_LOCAL_DATE_TIME_STRING
+            NUMBER_TO_LOCAL_DATE_TIME_STRING,
+            Converters::numberToLocalDateTime
     );
 
     private final static String NUMBER_TO_LOCAL_TIME_STRING = "number-to-local-time";
@@ -278,7 +329,8 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
      * The name of the {@link Converter} returned by {@link Converters#numberToLocalTime()} 
      */
     public final static ConverterName NUMBER_TO_LOCAL_TIME = registerConstantName(
-            NUMBER_TO_LOCAL_TIME_STRING
+            NUMBER_TO_LOCAL_TIME_STRING,
+            Converters::numberToLocalTime
     );
 
     private final static String NUMBER_TO_NUMBER_STRING = "number-to-number";
@@ -287,7 +339,8 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
      * The name of the {@link Converter} returned by {@link Converters#numberToNumber()}
      */
     public final static ConverterName NUMBER_TO_NUMBER = registerConstantName(
-            NUMBER_TO_NUMBER_STRING
+            NUMBER_TO_NUMBER_STRING,
+            Converters::numberToNumber
     );
 
     private final static String NUMBER_TO_STRING_STRING = "number-to-string";
@@ -302,10 +355,11 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
     private final static String OBJECT_STRING = "object";
 
     /**
-     * The name of the {@link Converter} returned by {@link Converters#objectToString()}.
+     * The name of the {@link Converter} returned by {@link Converters#object()}.
      */
     public final static ConverterName OBJECT = registerConstantName(
-            OBJECT_STRING
+            OBJECT_STRING,
+            Converters::object
     );
     
     private final static String OBJECT_TO_STRING_STRING = "object-to-string";
@@ -314,7 +368,8 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
      * The name of the {@link Converter} returned by {@link Converters#objectToString()}.
      */
     public final static ConverterName OBJECT_TO_STRING = registerConstantName(
-            OBJECT_TO_STRING_STRING
+            OBJECT_TO_STRING_STRING,
+            Converters::objectToString
     );
 
     private final static String PARSER_STRING = "parser";
@@ -332,7 +387,8 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
      * The name of the {@link Converter} returned by {@link Converters#simple()}.
      */
     public final static ConverterName SIMPLE = registerConstantName(
-            SIMPLE_STRING
+            SIMPLE_STRING,
+            Converters::simple
     );
 
     private final static String STRING_TO_CHARACTER_OR_STRING_STRING = "string-to-character-or-string";
@@ -341,7 +397,8 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
      * The name of the {@link Converter} returned by {@link Converters#stringToCharacterOrString()}
      */
     public final static ConverterName STRING_TO_CHARACTER_OR_STRING = registerConstantName(
-            STRING_TO_CHARACTER_OR_STRING_STRING
+            STRING_TO_CHARACTER_OR_STRING_STRING,
+            Converters::stringToCharacterOrString
     );
 
     private final static String STRING_TO_LOCAL_DATE_STRING = "string-to-local-date";
