@@ -144,7 +144,7 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
     private final static String LOCAL_DATE_TIME_TO_NUMBER_STRING = "local-date-time-to-number";
 
     /**
-     * The name of the {@link Converter} returned by {@link Converters#localDateTimeToNumber(long)}.
+     * The name of the {@link Converter} returned by {@link Converters#localDateTimeToNumber()}.
      */
     public final static ConverterName LOCAL_DATE_TIME_TO_NUMBER = new ConverterName(
             LOCAL_DATE_TIME_TO_NUMBER_STRING
@@ -171,7 +171,7 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
     private final static String LOCAL_DATE_TO_NUMBER_STRING = "local-date-to-number";
 
     /**
-     * The name of the {@link Converter} returned by {@link Converters#localDateToNumber(long)}
+     * The name of the {@link Converter} returned by {@link Converters#localDateToNumber()}
      */
     public final static ConverterName LOCAL_DATE_TO_NUMBER = new ConverterName(
             LOCAL_DATE_TO_NUMBER_STRING
@@ -243,7 +243,7 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
     private final static String NUMBER_TO_LOCAL_DATE_STRING = "number-to-local-date";
 
     /**
-     * The name of the {@link Converter} returned by {@link Converters#numberToLocalDate(long)}
+     * The name of the {@link Converter} returned by {@link Converters#numberToLocalDate()}
      */
     public final static ConverterName NUMBER_TO_LOCAL_DATE = new ConverterName(
             NUMBER_TO_LOCAL_DATE_STRING
@@ -252,7 +252,7 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
     private final static String NUMBER_TO_LOCAL_DATE_TIME_STRING = "number-to-local-date-time";
 
     /**
-     * The name of the {@link Converter} returned by {@link Converters#numberToLocalDateTime(long)} 
+     * The name of the {@link Converter} returned by {@link Converters#numberToLocalDateTime()}
      */
     public final static ConverterName NUMBER_TO_LOCAL_DATE_TIME = new ConverterName(
             NUMBER_TO_LOCAL_DATE_TIME_STRING
