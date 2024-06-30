@@ -17,9 +17,129 @@
 
 package walkingkooka.convert.provider;
 
+import org.junit.jupiter.api.Test;
+import walkingkooka.collect.list.Lists;
+import walkingkooka.collect.set.Sets;
+import walkingkooka.convert.Converter;
+import walkingkooka.convert.ConverterContext;
+import walkingkooka.convert.Converters;
 import walkingkooka.reflect.JavaVisibility;
+import walkingkooka.reflect.MethodAttributes;
+import walkingkooka.text.CaseKind;
+
+import java.lang.reflect.Method;
+import java.util.Optional;
+import java.util.Set;
 
 public final class ConvertersConverterProviderTest implements ConverterProviderTesting<ConvertersConverterProvider> {
+
+    @Test
+    public void testConverterBooleanToNumber() {
+        this.converterAndCheck(
+                ConverterSelector.with(
+                        ConverterName.BOOLEAN_TO_NUMBER,
+                        ""
+                ),
+                Converters.booleanToNumber()
+        );
+    }
+
+    @Test
+    public void testConverterCharacterOrStringToString() {
+        this.converterAndCheck(
+                ConverterSelector.with(
+                        ConverterName.CHARACTER_OR_STRING_TO_STRING,
+                        ""
+                ),
+                Converters.characterOrStringToString()
+        );
+    }
+
+    @Test
+    public void testConverterFactoryMethodWithoutParameters() {
+        final Set<ConverterName> missing = Sets.sorted();
+
+        int i = 0;
+
+        for(final Method method : Converters.class.getMethods()) {
+            if(JavaVisibility.PUBLIC != JavaVisibility.of(method)) {
+               continue;
+            }
+
+            if(false ==MethodAttributes.STATIC.is(method)) {
+                continue;
+            }
+
+            final String methodName = method.getName();
+            if("fake".equals(methodName)) {
+                continue;
+            }
+
+            if(method.getReturnType() != Converter.class) {
+                continue;
+            }
+
+            if(method.getParameters().length > 0) {
+                continue;
+            }
+
+            final String name = CaseKind.CAMEL.change(
+                    methodName,
+                    CaseKind.KEBAB
+            );
+
+            System.out.println(method + " " + name);
+
+            final ConverterName converterName = ConverterName.with(name);
+            final Optional<Converter<ConverterContext>> converter = ConvertersConverterProvider.INSTANCE.converter(
+                    ConverterSelector.with(
+                            converterName,
+                            ""
+                    )
+            );
+            if(false == converter.isPresent()) {
+                missing.add(converterName);
+            }
+
+            i++;
+        }
+
+        this.checkNotEquals(
+                0,
+                i
+        );
+
+        this.checkEquals(
+                Sets.empty(),
+                missing
+        );
+    }
+
+    @Test
+    public void testConverterCollection() {
+        this.converterAndCheck(
+                ConverterSelector.parse("collection (boolean-to-number)"),
+                Converters.collection(
+                        Lists.of(
+                                Converters.booleanToNumber()
+                        )
+                )
+        );
+    }
+
+    @Test
+    public void testConverterCollection2() {
+        this.converterAndCheck(
+                ConverterSelector.parse("collection (boolean-to-number, character-or-string-to-string)"),
+                Converters.collection(
+                        Lists.of(
+                                Converters.booleanToNumber(),
+                                Converters.characterOrStringToString()
+                        )
+                )
+        );
+    }
+
     @Override
     public ConvertersConverterProvider createConverterProvider() {
         return ConvertersConverterProvider.INSTANCE;

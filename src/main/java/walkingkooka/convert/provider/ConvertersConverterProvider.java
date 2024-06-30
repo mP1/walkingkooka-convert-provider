@@ -17,15 +17,19 @@
 
 package walkingkooka.convert.provider;
 
+import walkingkooka.Cast;
 import walkingkooka.collect.set.Sets;
 import walkingkooka.convert.Converter;
 import walkingkooka.convert.ConverterContext;
 import walkingkooka.convert.Converters;
 import walkingkooka.net.UrlPath;
+import walkingkooka.text.CharSequences;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
@@ -42,9 +46,10 @@ final class ConvertersConverterProvider implements ConverterProvider {
         super();
 
         this.infos = Sets.readOnly(
-                ConverterName.CONSTANTS.stream()
-                .map(ConvertersConverterProvider::nameToConverterInfo)
-                .collect(Collectors.toCollection(Sets::sorted))
+                ConverterName.NAME_TO_FACTORY.keySet()
+                        .stream()
+                        .map(ConvertersConverterProvider::nameToConverterInfo)
+                        .collect(Collectors.toCollection(Sets::sorted))
         );
     }
 
@@ -63,8 +68,28 @@ final class ConvertersConverterProvider implements ConverterProvider {
     public <C extends ConverterContext> Optional<Converter<C>> converter(final ConverterSelector selector) {
         Objects.requireNonNull(selector, "selector");
 
-        // https://github.com/mP1/walkingkooka-convert-provider/issues/19
-        return Optional.empty();
+        Converter<C> converter = null;
+
+        // first verify the ConverterSelection#name exists...
+        if (ConverterName.NAME_TO_FACTORY.containsKey(selector.name())) {
+
+            // try and parseText.
+            converter = selector.parseTextAndCreate(
+                    (n, p) -> {
+                        final Function<List<?>, Converter<?>> creator = ConverterName.NAME_TO_FACTORY.get(n);
+                        if (null == creator) {
+                            throw new IllegalArgumentException("Unknown converter " + CharSequences.quoteAndEscape(n.value()));
+                        }
+                        return Cast.to(
+                                creator.apply(p)
+                        );
+                    }
+            );
+        }
+
+        return Optional.ofNullable(
+                converter
+        );
     }
 
     @Override
