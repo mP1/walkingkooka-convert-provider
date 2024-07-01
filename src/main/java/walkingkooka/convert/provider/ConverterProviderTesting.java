@@ -57,11 +57,29 @@ public interface ConverterProviderTesting<T extends ConverterProvider> extends C
         );
     }
 
+    default void converterAndCheck(final String selector,
+                                   final Converter<?> expected) {
+        this.converterAndCheck(
+                ConverterSelector.parse(selector),
+                expected
+        );
+    }
+
     default void converterAndCheck(final ConverterSelector selector,
                                    final Converter<?> expected) {
         this.converterAndCheck(
                 this.createConverterProvider(),
                 selector,
+                expected
+        );
+    }
+
+    default void converterAndCheck(final ConverterProvider provider,
+                                   final String selector,
+                                   final Converter<?> expected) {
+        this.converterAndCheck(
+                provider,
+                ConverterSelector.parse(selector),
                 expected
         );
     }
