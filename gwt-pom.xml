@@ -24,7 +24,7 @@
     <scm>
         <connection>scm:git:https://github.com/mP1/walkingkooka-convert-provider.git</connection>
         <developerConnection>scm:git:git@github.com:mP1/walkingkooka-convert-provider.git</developerConnection>
-        <url>https://github.com/mP1/walkingkooka-tree</url>
+        <url>https://github.com/mP1/walkingkooka-convert-provider</url>
         <tag>HEAD</tag>
     </scm>
     <issueManagement>
