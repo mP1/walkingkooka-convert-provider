@@ -58,28 +58,28 @@ public final class ConvertersConverterProviderTest implements ConverterProviderT
     @Test
     public void testConverterFactoryMethodWithoutParameters() {
         final Set<ConverterName> missing = Sets.sorted();
-
+        final ConvertersConverterProvider provider = this.createConverterProvider();
         int i = 0;
 
-        for(final Method method : Converters.class.getMethods()) {
-            if(JavaVisibility.PUBLIC != JavaVisibility.of(method)) {
-               continue;
+        for (final Method method : Converters.class.getMethods()) {
+            if (JavaVisibility.PUBLIC != JavaVisibility.of(method)) {
+                continue;
             }
 
-            if(false ==MethodAttributes.STATIC.is(method)) {
+            if (false == MethodAttributes.STATIC.is(method)) {
                 continue;
             }
 
             final String methodName = method.getName();
-            if("fake".equals(methodName)) {
+            if ("fake".equals(methodName)) {
                 continue;
             }
 
-            if(method.getReturnType() != Converter.class) {
+            if (method.getReturnType() != Converter.class) {
                 continue;
             }
 
-            if(method.getParameters().length > 0) {
+            if (method.getParameters().length > 0) {
                 continue;
             }
 
@@ -91,13 +91,13 @@ public final class ConvertersConverterProviderTest implements ConverterProviderT
             System.out.println(method + " " + name);
 
             final ConverterName converterName = ConverterName.with(name);
-            final Optional<Converter<ConverterContext>> converter = ConvertersConverterProvider.INSTANCE.converter(
-                    ConverterSelector.with(
-                            converterName,
-                            ""
-                    )
-            );
-            if(false == converter.isPresent()) {
+
+            try {
+                ConverterSelector.with(
+                        converterName,
+                        ""
+                ).parseTextAndCreate(provider);
+            } catch (final Exception fail) {
                 missing.add(converterName);
             }
 

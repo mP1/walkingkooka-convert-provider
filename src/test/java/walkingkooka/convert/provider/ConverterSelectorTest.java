@@ -18,6 +18,7 @@
 package walkingkooka.convert.provider;
 
 import org.junit.jupiter.api.Test;
+import walkingkooka.Cast;
 import walkingkooka.HashCodeEqualsDefinedTesting2;
 import walkingkooka.InvalidCharacterException;
 import walkingkooka.ToStringTesting;
@@ -36,6 +37,7 @@ import walkingkooka.tree.json.marshall.JsonNodeMarshallingTesting;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.function.BiFunction;
 
 import static org.junit.jupiter.api.Assertions.assertNotSame;
@@ -520,20 +522,18 @@ public final class ConverterSelectorTest implements ClassTesting2<ConverterSelec
                                          final String expected) {
         this.parseTextAndCreateFails(
                 selector,
-                (n, p) -> {
-                    throw new UnsupportedOperationException();
-                },
+                ConverterProviders.fake(),
                 expected
         );
     }
 
     private void parseTextAndCreateFails(final String selector,
-                                         final BiFunction<ConverterName, List<?>, Converter<ConverterContext>> factory,
+                                         final ConverterProvider provider,
                                          final String expected) {
         final IllegalArgumentException thrown = assertThrows(
                 IllegalArgumentException.class,
                 () -> ConverterSelector.parse(selector)
-                        .parseTextAndCreate(factory)
+                        .parseTextAndCreate(provider)
         );
         this.checkEquals(
                 expected,
@@ -545,10 +545,33 @@ public final class ConverterSelectorTest implements ClassTesting2<ConverterSelec
     private void parseTextAndCreateAndCheck(final String selector,
                                             final BiFunction<ConverterName, List<?>, Converter<ConverterContext>> factory,
                                             final Converter<ConverterContext> expected) {
+        this.parseTextAndCreateAndCheck(
+                selector,
+                new FakeConverterProvider() {
+                    @Override
+                    public <C extends ConverterContext> Optional<Converter<C>> converter(final ConverterName name,
+                                                                                         final List<?> values) {
+                        return Optional.of(
+                                Cast.to(
+                                        factory.apply(
+                                                name,
+                                                values
+                                        )
+                                )
+                        );
+                    }
+                },
+                expected
+        );
+    }
+
+    private void parseTextAndCreateAndCheck(final String selector,
+                                            final ConverterProvider provider,
+                                            final Converter<ConverterContext> expected) {
         this.checkEquals(
                 expected,
                 ConverterSelector.parse(selector)
-                        .parseTextAndCreate(factory)
+                        .parseTextAndCreate(provider)
         );
     }
 

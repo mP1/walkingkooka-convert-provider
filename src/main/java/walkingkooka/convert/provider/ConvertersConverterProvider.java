@@ -18,6 +18,7 @@
 package walkingkooka.convert.provider;
 
 import walkingkooka.Cast;
+import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.set.Sets;
 import walkingkooka.convert.Converter;
 import walkingkooka.convert.ConverterContext;
@@ -65,30 +66,22 @@ final class ConvertersConverterProvider implements ConverterProvider {
     }
 
     @Override
-    public <C extends ConverterContext> Optional<Converter<C>> converter(final ConverterSelector selector) {
-        Objects.requireNonNull(selector, "selector");
+    public <C extends ConverterContext> Optional<Converter<C>> converter(final ConverterName name,
+                                                                         final List<?> values) {
+        Objects.requireNonNull(name, "name");
+        Objects.requireNonNull(values, "values");
 
-        Converter<C> converter = null;
+        Converter<?> converter = null;
 
-        // first verify the ConverterSelection#name exists...
-        if (ConverterName.NAME_TO_FACTORY.containsKey(selector.name())) {
-
-            // try and parseText.
-            converter = selector.parseTextAndCreate(
-                    (n, p) -> {
-                        final Function<List<?>, Converter<?>> creator = ConverterName.NAME_TO_FACTORY.get(n);
-                        if (null == creator) {
-                            throw new IllegalArgumentException("Unknown converter " + CharSequences.quoteAndEscape(n.value()));
-                        }
-                        return Cast.to(
-                                creator.apply(p)
-                        );
-                    }
+        final Function<List<?>, Converter<?>> factory = ConverterName.NAME_TO_FACTORY.get(name);
+        if (null != factory) {
+            converter = factory.apply(
+                    Lists.immutable(values)
             );
         }
 
         return Optional.ofNullable(
-                converter
+                Cast.to(converter)
         );
     }
 

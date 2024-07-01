@@ -18,11 +18,13 @@
 package walkingkooka.convert.provider;
 
 import org.junit.jupiter.api.Test;
+import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.set.Sets;
 import walkingkooka.convert.Converter;
 import walkingkooka.reflect.ClassTesting2;
 import walkingkooka.text.printer.TreePrintableTesting;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -32,52 +34,31 @@ public interface ConverterProviderTesting<T extends ConverterProvider> extends C
         TreePrintableTesting {
 
     @Test
-    default void testConverterWithNullFails() {
+    default void testConverterWithNullNameFails() {
         assertThrows(
                 NullPointerException.class,
                 () -> this.createConverterProvider()
-                        .converter(null)
+                        .converter(
+                                null,
+                                Lists.empty()
+                        )
         );
     }
 
-    default void converterAndCheck(final ConverterSelector selector) {
-        this.converterAndCheck(
-                this.createConverterProvider(),
-                selector,
-                Optional.empty()
-        );
-    }
-
-    default void converterAndCheck(final ConverterProvider provider,
-                                   final ConverterSelector selector) {
-        this.converterAndCheck(
-                provider,
-                selector,
-                Optional.empty()
+    @Test
+    default void testConverterWithNullValueFails() {
+        assertThrows(
+                NullPointerException.class,
+                () -> this.createConverterProvider()
+                        .converter(
+                                ConverterName.BOOLEAN_TO_NUMBER,
+                                null
+                        )
         );
     }
 
     default void converterAndCheck(final ConverterSelector selector,
                                    final Converter<?> expected) {
-        this.converterAndCheck(
-                this.createConverterProvider(),
-                selector,
-                Optional.of(expected)
-        );
-    }
-
-    default void converterAndCheck(final ConverterProvider provider,
-                                   final ConverterSelector selector,
-                                   final Converter<?> expected) {
-        this.converterAndCheck(
-                provider,
-                selector,
-                Optional.of(expected)
-        );
-    }
-
-    default void converterAndCheck(final ConverterSelector selector,
-                                   final Optional<Converter<?>> expected) {
         this.converterAndCheck(
                 this.createConverterProvider(),
                 selector,
@@ -87,11 +68,45 @@ public interface ConverterProviderTesting<T extends ConverterProvider> extends C
 
     default void converterAndCheck(final ConverterProvider provider,
                                    final ConverterSelector selector,
+                                   final Converter<?> expected) {
+        this.checkEquals(
+                expected,
+                selector.parseTextAndCreate(provider)
+        );
+    }
+
+    default void converterAndCheck(final ConverterName name,
+                                   final List<?> values,
+                                   final Converter<?> expected) {
+        this.converterAndCheck(
+                name,
+                values,
+                Optional.of(expected)
+        );
+    }
+
+    default void converterAndCheck(final ConverterName name,
+                                   final List<?> values,
+                                   final Optional<Converter<?>> expected) {
+        this.converterAndCheck(
+                this.createConverterProvider(),
+                name,
+                values,
+                expected
+        );
+    }
+
+    default void converterAndCheck(final ConverterProvider provider,
+                                   final ConverterName name,
+                                   final List<?> values,
                                    final Optional<Converter<?>> expected) {
         this.checkEquals(
                 expected,
-                provider.converter(selector),
-                selector::toString
+                provider.converter(
+                        name,
+                        values
+                ),
+                () -> provider + " " + name + " " + values
         );
     }
 
