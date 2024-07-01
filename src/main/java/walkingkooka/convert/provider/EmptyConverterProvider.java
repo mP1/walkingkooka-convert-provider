@@ -21,6 +21,7 @@ import walkingkooka.collect.set.Sets;
 import walkingkooka.convert.Converter;
 import walkingkooka.convert.ConverterContext;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
@@ -36,8 +37,10 @@ final class EmptyConverterProvider implements ConverterProvider{
     }
 
     @Override
-    public <C extends ConverterContext> Optional<Converter<C>> converter(final ConverterSelector selector) {
-        Objects.requireNonNull(selector, "selector");
+    public <C extends ConverterContext> Optional<Converter<C>> converter(final ConverterName name,
+                                                                         final List<?> values) {
+        Objects.requireNonNull(name, "name");
+        Objects.requireNonNull(values, "values");
 
         return Optional.empty();
     }

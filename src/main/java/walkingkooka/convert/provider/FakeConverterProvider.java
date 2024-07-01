@@ -20,12 +20,14 @@ package walkingkooka.convert.provider;
 import walkingkooka.convert.Converter;
 import walkingkooka.convert.ConverterContext;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
 public class FakeConverterProvider implements ConverterProvider {
     @Override
-    public <C extends ConverterContext> Optional<Converter<C>> converter(final ConverterSelector selector) {
+    public <C extends ConverterContext> Optional<Converter<C>> converter(final ConverterName name,
+                                                                         final List<?> values) {
         throw new UnsupportedOperationException();
     }
 

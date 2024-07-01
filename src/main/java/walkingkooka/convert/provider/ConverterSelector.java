@@ -139,15 +139,16 @@ public final class ConverterSelector implements HasName<ConverterName>,
      * number-to-number
      * collection ( number-to-boolen, number-number, string-to-local-date "yyyy-mm-dd")
      * </pre>
+     * The {@link ConverterProvider} will be used to fetch {@link Converter} with any parameters.
      */
-    public <C extends ConverterContext> Converter<C> parseTextAndCreate(final BiFunction<ConverterName, List<?>, Converter<C>> factory) {
-        Objects.requireNonNull(factory, "factory");
+    public <C extends ConverterContext> Converter<C> parseTextAndCreate(final ConverterProvider provider) {
+        Objects.requireNonNull(provider, "provider");
 
         final TextCursor cursor = TextCursors.charSequence(this.text());
 
         final List<?> parameters = parseParameters(
                 cursor,
-                factory
+                provider
         );
 
         skipSpaces(cursor);
@@ -156,7 +157,7 @@ public final class ConverterSelector implements HasName<ConverterName>,
             invalidCharacter(cursor);
         }
 
-        return factory.apply(
+        return provider.converterOrFail(
                 this.name(),
                 parameters
         );
@@ -166,7 +167,7 @@ public final class ConverterSelector implements HasName<ConverterName>,
      * Attempts to parse an optional {@link Converter}.
      */
     private <C extends ConverterContext> Optional<Converter<C>> parseConverterAndParameters(final TextCursor cursor,
-                                                                                            final BiFunction<ConverterName, List<?>, Converter<C>> factory) {
+                                                                                            final ConverterProvider provider) {
         Converter<C> converter;
 
         final Optional<ConverterName> maybeConverterName = CONVERTER_NAME_PARSER.parse(
@@ -176,11 +177,11 @@ public final class ConverterSelector implements HasName<ConverterName>,
 
         if (maybeConverterName.isPresent()) {
 
-            converter = factory.apply(
+            converter = provider.converterOrFail(
                     maybeConverterName.get(),
                     parseParameters(
                             cursor,
-                            factory
+                            provider
                     )
             );
         } else {
@@ -204,7 +205,7 @@ public final class ConverterSelector implements HasName<ConverterName>,
      * Tries to parse a parameter list if an OPEN-PARENS is present.
      */
     private <C extends ConverterContext> List<Object> parseParameters(final TextCursor cursor,
-                                                                      final BiFunction<ConverterName, List<?>, Converter<C>> factory) {
+                                                                      final ConverterProvider provider) {
         skipSpaces(cursor);
 
         final List<Object> parameters = Lists.array();
@@ -216,7 +217,7 @@ public final class ConverterSelector implements HasName<ConverterName>,
                 // try a converter
                 final Optional<Converter<C>> maybeConverter = parseConverterAndParameters(
                         cursor,
-                        factory
+                        provider
                 );
                 if (maybeConverter.isPresent()) {
                     parameters.add(maybeConverter.get());
