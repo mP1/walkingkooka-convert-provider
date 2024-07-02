@@ -328,7 +328,10 @@ public final class ConverterSelector implements HasName<ConverterName>,
 
     private void invalidCharacter(final TextCursor cursor) {
         final TextCursorLineInfo lineInfo = cursor.lineInfo();
-        final int pos = lineInfo.textOffset() - 1;
+        final int pos = Math.max(
+                lineInfo.textOffset() - 1,
+                0
+        );
 
         throw new InvalidCharacterException(
                 lineInfo.text()

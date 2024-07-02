@@ -224,6 +224,24 @@ public final class ConverterSelectorTest implements ClassTesting2<ConverterSelec
     // converter........................................................................................................
 
     @Test
+    public void testParseTextAndCreateFails() {
+        final String text = NAME + " text/plain";
+
+        final InvalidCharacterException thrown = assertThrows(
+                InvalidCharacterException.class,
+                () -> ConverterSelector.parse(text)
+                        .parseTextAndCreate(ConverterProviders.fake())
+        );
+
+        this.checkEquals(
+                new InvalidCharacterException(
+                        text, text.indexOf(' ') + 1)
+                        .getMessage(),
+                thrown.getMessage()
+        );
+    }
+
+    @Test
     public void testParseTextAndCreateNoText() {
         final Converter<ConverterContext> expected = Converters.fake();
 
