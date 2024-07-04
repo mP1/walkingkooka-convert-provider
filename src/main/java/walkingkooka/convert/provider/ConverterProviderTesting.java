@@ -21,6 +21,7 @@ import org.junit.jupiter.api.Test;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.set.Sets;
 import walkingkooka.convert.Converter;
+import walkingkooka.plugin.ProviderTesting;
 import walkingkooka.reflect.ClassTesting2;
 import walkingkooka.text.printer.TreePrintableTesting;
 
@@ -30,8 +31,7 @@ import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public interface ConverterProviderTesting<T extends ConverterProvider> extends ClassTesting2<T>,
-        TreePrintableTesting {
+public interface ConverterProviderTesting<T extends ConverterProvider> extends ProviderTesting<T> {
 
     @Test
     default void testConverterWithNullNameFails() {
