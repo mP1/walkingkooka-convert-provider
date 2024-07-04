@@ -36,6 +36,7 @@ package walkingkooka.convert.provider;
 
 import walkingkooka.convert.Converter;
 import walkingkooka.convert.ConverterContext;
+import walkingkooka.plugin.Provider;
 
 import java.util.List;
 import java.util.Optional;
@@ -45,7 +46,7 @@ import java.util.Set;
  * A provider supports listing available {@link ConverterInfo} and fetching implementations using a
  * {@link ConverterName}.
  */
-public interface ConverterProvider {
+public interface ConverterProvider extends Provider {
 
     /**
      * Resolves the given {@link ConverterName} to a {@link Converter} with the given parameter values.
