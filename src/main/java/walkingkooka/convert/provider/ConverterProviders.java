@@ -68,6 +68,17 @@ public final class ConverterProviders implements PublicStaticHelper {
     }
 
     /**
+     * {@see MappedConverterProvider}
+     */
+    public static ConverterProvider mapped(final Set<ConverterInfo> infos,
+                                           final ConverterProvider provider) {
+        return MappedConverterProvider.with(
+                infos,
+                provider
+        );
+    }
+
+    /**
      * Stop creation
      */
     private ConverterProviders() {
