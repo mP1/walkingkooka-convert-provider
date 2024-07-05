@@ -22,8 +22,6 @@ import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.set.Sets;
 import walkingkooka.convert.Converter;
 import walkingkooka.plugin.ProviderTesting;
-import walkingkooka.reflect.ClassTesting2;
-import walkingkooka.text.printer.TreePrintableTesting;
 
 import java.util.List;
 import java.util.Optional;

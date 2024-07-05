@@ -18,10 +18,8 @@
 package walkingkooka.convert.provider;
 
 import org.junit.jupiter.api.Test;
-import walkingkooka.Cast;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.set.Sets;
-import walkingkooka.convert.ConverterContexts;
 import walkingkooka.convert.Converters;
 import walkingkooka.reflect.JavaVisibility;
 

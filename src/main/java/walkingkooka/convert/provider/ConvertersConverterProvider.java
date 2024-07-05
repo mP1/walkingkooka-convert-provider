@@ -24,7 +24,6 @@ import walkingkooka.convert.Converter;
 import walkingkooka.convert.ConverterContext;
 import walkingkooka.convert.Converters;
 import walkingkooka.net.UrlPath;
-import walkingkooka.text.CharSequences;
 
 import java.util.List;
 import java.util.Objects;
