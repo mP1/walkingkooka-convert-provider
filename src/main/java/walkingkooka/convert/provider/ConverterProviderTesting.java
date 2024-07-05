@@ -94,6 +94,15 @@ public interface ConverterProviderTesting<T extends ConverterProvider> extends P
     }
 
     default void converterAndCheck(final ConverterName name,
+                                   final List<?> values) {
+        this.converterAndCheck(
+                name,
+                values,
+                Optional.empty()
+        );
+    }
+
+    default void converterAndCheck(final ConverterName name,
                                    final List<?> values,
                                    final Converter<?> expected) {
         this.converterAndCheck(
