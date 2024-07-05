@@ -50,7 +50,6 @@ import java.math.MathContext;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.function.BiFunction;
 
 /**
  * Contains the {@link ConverterName} and some text which may contain an expression for a {@link Converter}.

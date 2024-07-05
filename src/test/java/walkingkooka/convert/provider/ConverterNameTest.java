@@ -19,7 +19,6 @@ package walkingkooka.convert.provider;
 
 import org.junit.jupiter.api.Test;
 import walkingkooka.collect.set.Sets;
-import walkingkooka.convert.Converter;
 import walkingkooka.convert.Converters;
 import walkingkooka.plugin.PluginNameTesting;
 import walkingkooka.reflect.FieldAttributes;
@@ -30,7 +29,6 @@ import walkingkooka.text.CharacterConstant;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
-import java.beans.Visibility;
 import java.util.Arrays;
 import java.util.Set;
 import java.util.function.Function;

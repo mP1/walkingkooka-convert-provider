@@ -18,7 +18,6 @@
 package walkingkooka.convert.provider;
 
 import walkingkooka.Cast;
-import walkingkooka.collect.list.Lists;
 import walkingkooka.convert.Converter;
 import walkingkooka.convert.ConverterContext;
 import walkingkooka.plugin.ProviderCollection;
