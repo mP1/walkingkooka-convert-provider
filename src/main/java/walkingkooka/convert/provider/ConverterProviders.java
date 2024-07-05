@@ -36,7 +36,7 @@ public final class ConverterProviders implements PublicStaticHelper {
      * converter will be appended to this base.
      */
     public final static AbsoluteUrl BASE_URL = Url.parseAbsolute(
-            "https://github.com/mP1/walkingkooka-convert/" + Converter.class.getSimpleName()
+            "https://github.com/mP1/walkingkooka-convert-provider/" + Converter.class.getSimpleName()
     );
 
     /**
