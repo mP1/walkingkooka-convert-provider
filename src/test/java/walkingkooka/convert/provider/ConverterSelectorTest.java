@@ -594,14 +594,6 @@ public final class ConverterSelectorTest implements ClassTesting2<ConverterSelec
     }
 
     private void checkName(final ConverterName name,
-                           final String expected) {
-        this.checkName(
-                name,
-                ConverterName.with(expected)
-        );
-    }
-
-    private void checkName(final ConverterName name,
                            final ConverterName expected) {
         this.checkEquals(
                 expected,
