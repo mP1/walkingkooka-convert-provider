@@ -221,7 +221,7 @@ public final class ConverterSelectorTest implements ClassTesting2<ConverterSelec
         return thrown;
     }
 
-    // converter........................................................................................................
+    // ParseTextAndCreate...............................................................................................
 
     @Test
     public void testParseTextAndCreateFails() {
