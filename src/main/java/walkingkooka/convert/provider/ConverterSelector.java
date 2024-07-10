@@ -39,6 +39,7 @@ import walkingkooka.text.cursor.parser.ParserContexts;
 import walkingkooka.text.cursor.parser.ParserException;
 import walkingkooka.text.cursor.parser.ParserToken;
 import walkingkooka.text.cursor.parser.Parsers;
+import walkingkooka.text.cursor.parser.StringParserToken;
 import walkingkooka.text.printer.IndentingPrinter;
 import walkingkooka.text.printer.TreePrintable;
 import walkingkooka.tree.json.JsonNode;
@@ -141,53 +142,21 @@ public final class ConverterSelector implements HasName<ConverterName>,
      * The {@link ConverterProvider} will be used to fetch {@link Converter} with any parameters.
      */
     public <C extends ConverterContext> Converter<C> parseTextAndCreate(final ConverterProvider provider) {
-        Objects.requireNonNull(provider, "provider");
+        Objects.requireNonNull(provider, "provided");
 
-        final TextCursor cursor = TextCursors.charSequence(this.text());
-
-        final List<?> parameters = parseParameters(
-                cursor,
-                provider
+        return this.selector.evaluateText(
+                (final TextCursor cursor, final ParserContext context) -> CONVERTER_NAME_PARSER.parse(
+                        cursor,
+                        context
+                ).map(
+                        (final ParserToken token) ->
+                                ConverterName.with(
+                                        token.cast(StringParserToken.class)
+                                                .value()
+                                )
+                ),
+                provider::converterOrFail
         );
-
-        skipSpaces(cursor);
-
-        if (false == cursor.isEmpty()) {
-            invalidCharacter(cursor);
-        }
-
-        return provider.converterOrFail(
-                this.name(),
-                parameters
-        );
-    }
-
-    /**
-     * Attempts to parse an optional {@link Converter}.
-     */
-    private <C extends ConverterContext> Optional<Converter<C>> parseConverterAndParameters(final TextCursor cursor,
-                                                                                            final ConverterProvider provider) {
-        Converter<C> converter;
-
-        final Optional<ConverterName> maybeConverterName = CONVERTER_NAME_PARSER.parse(
-                cursor,
-                PARSER_CONTEXT
-        ).map((ParserToken token) -> ConverterName.with(token.text()));
-
-        if (maybeConverterName.isPresent()) {
-
-            converter = provider.converterOrFail(
-                    maybeConverterName.get(),
-                    parseParameters(
-                            cursor,
-                            provider
-                    )
-            );
-        } else {
-            converter = null;
-        }
-
-        return Optional.ofNullable(converter);
     }
 
     /**
@@ -199,148 +168,6 @@ public final class ConverterSelector implements HasName<ConverterName>,
             1,
             ConverterName.MAX_LENGTH
     );
-
-    /**
-     * Tries to parse a parameter list if an OPEN-PARENS is present.
-     */
-    private <C extends ConverterContext> List<Object> parseParameters(final TextCursor cursor,
-                                                                      final ConverterProvider provider) {
-        skipSpaces(cursor);
-
-        final List<Object> parameters = Lists.array();
-
-        if (tryMatch(PARAMETER_BEGIN, cursor)) {
-            for (; ; ) {
-                skipSpaces(cursor);
-
-                // try a converter
-                final Optional<Converter<C>> maybeConverter = parseConverterAndParameters(
-                        cursor,
-                        provider
-                );
-                if (maybeConverter.isPresent()) {
-                    parameters.add(maybeConverter.get());
-                    continue;
-                }
-
-                // try for a double literal
-                final Optional<Double> maybeNumber = NUMBER_LITERAL.parse(
-                        cursor,
-                        PARSER_CONTEXT
-                ).map(
-                        t -> t.cast(DoubleParserToken.class).value()
-                );
-                if (maybeNumber.isPresent()) {
-                    parameters.add(maybeNumber.get());
-                    continue;
-                }
-
-                // try for a string literal
-                try {
-                    final Optional<String> maybeString = STRING_LITERAL.parse(
-                            cursor,
-                            PARSER_CONTEXT
-                    ).map(
-                            t -> t.cast(DoubleQuotedParserToken.class).value()
-                    );
-                    if (maybeString.isPresent()) {
-                        parameters.add(maybeString.get());
-                        continue;
-                    }
-                } catch (final ParserException cause) {
-                    throw new IllegalArgumentException(cause.getMessage(), cause);
-                }
-
-                if (tryMatch(PARAMETER_SEPARATOR, cursor)) {
-                    continue;
-                }
-
-                if (tryMatch(PARAMETER_END, cursor)) {
-                    break;
-                }
-
-                // must be an invalid character complain!
-                invalidCharacter(cursor);
-            }
-        }
-
-        return Lists.immutable(parameters);
-    }
-
-    /**
-     * Consumes any whitespace, don't really care how many or if any were skipped.
-     */
-    private static void skipSpaces(final TextCursor cursor) {
-        SPACE.parse(cursor, PARSER_CONTEXT);
-    }
-
-    /**
-     * Matches any whitespace.
-     */
-    private final static Parser<ParserContext> SPACE = Parsers.character(CharPredicates.whitespace())
-            .repeating();
-
-    /**
-     * Returns true if the token represented by the given {@link Parser} was found.
-     */
-    private static boolean tryMatch(final Parser<ParserContext> parser,
-                                    final TextCursor cursor) {
-        return parser.parse(
-                cursor,
-                PARSER_CONTEXT
-        ).isPresent();
-    }
-
-    /**
-     * Matches a LEFT PARENS which marks the start of a converter parameters.
-     */
-    private final static Parser<ParserContext> PARAMETER_BEGIN = Parsers.string("(", CaseSensitivity.SENSITIVE);
-
-    /**
-     * Matches a COMMA which separates individual parameters.
-     */
-    private final static Parser<ParserContext> PARAMETER_SEPARATOR = Parsers.string(",", CaseSensitivity.SENSITIVE);
-
-
-    /**
-     * Matches a RIGHT PARENS which marks the end of a converter parameters.
-     */
-    private final static Parser<ParserContext> PARAMETER_END = Parsers.string(")", CaseSensitivity.SENSITIVE);
-
-    /**
-     * Number literal parameters are double literals using DOT as the decimal separator.
-     */
-    private final static Parser<ParserContext> NUMBER_LITERAL = Parsers.doubleParser();
-
-    /**
-     * String literal parameters must be double-quoted and support backslash escaping.
-     */
-    private final static Parser<ParserContext> STRING_LITERAL = Parsers.doubleQuoted();
-
-    /**
-     * Singleton which can be reused.
-     */
-    private final static ParserContext PARSER_CONTEXT = ParserContexts.basic(
-            DateTimeContexts.fake(), // dates are not supported
-            DecimalNumberContexts.american(MathContext.UNLIMITED) // only the decimal char is actually required.
-    );
-
-    private void invalidCharacter(final TextCursor cursor) {
-        final TextCursorLineInfo lineInfo = cursor.lineInfo();
-        final int pos = Math.max(
-                lineInfo.textOffset() - 1,
-                0
-        );
-
-        throw new InvalidCharacterException(
-                lineInfo.text()
-                        .toString(),
-                pos
-        ).setTextAndPosition(
-                this.toString(),
-                this.name().textLength() + pos + 1 // +1 or the SPACE following the name
-        );
-    }
 
     // Object...........................................................................................................
 
