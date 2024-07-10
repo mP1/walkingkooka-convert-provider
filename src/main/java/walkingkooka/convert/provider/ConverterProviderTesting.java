@@ -87,7 +87,7 @@ public interface ConverterProviderTesting<T extends ConverterProvider> extends P
                                    final Converter<?> expected) {
         this.checkEquals(
                 expected,
-                selector.parseTextAndCreate(provider)
+                selector.evaluateText(provider)
         );
     }
 

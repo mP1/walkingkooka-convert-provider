@@ -94,7 +94,7 @@ public final class ConvertersConverterProviderTest implements ConverterProviderT
                 ConverterSelector.with(
                         converterName,
                         ""
-                ).parseTextAndCreate(provider);
+                ).evaluateText(provider);
             } catch (final Exception fail) {
                 missing.add(converterName);
             }
