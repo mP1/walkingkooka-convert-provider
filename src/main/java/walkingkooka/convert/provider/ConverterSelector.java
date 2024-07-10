@@ -17,26 +17,14 @@
 
 package walkingkooka.convert.provider;
 
-import walkingkooka.InvalidCharacterException;
-import walkingkooka.collect.list.Lists;
 import walkingkooka.convert.Converter;
 import walkingkooka.convert.ConverterContext;
-import walkingkooka.datetime.DateTimeContexts;
-import walkingkooka.math.DecimalNumberContexts;
 import walkingkooka.naming.HasName;
 import walkingkooka.plugin.PluginSelector;
-import walkingkooka.predicate.character.CharPredicates;
-import walkingkooka.text.CaseSensitivity;
 import walkingkooka.text.HasText;
 import walkingkooka.text.cursor.TextCursor;
-import walkingkooka.text.cursor.TextCursorLineInfo;
-import walkingkooka.text.cursor.TextCursors;
-import walkingkooka.text.cursor.parser.DoubleParserToken;
-import walkingkooka.text.cursor.parser.DoubleQuotedParserToken;
 import walkingkooka.text.cursor.parser.Parser;
 import walkingkooka.text.cursor.parser.ParserContext;
-import walkingkooka.text.cursor.parser.ParserContexts;
-import walkingkooka.text.cursor.parser.ParserException;
 import walkingkooka.text.cursor.parser.ParserToken;
 import walkingkooka.text.cursor.parser.Parsers;
 import walkingkooka.text.cursor.parser.StringParserToken;
@@ -47,10 +35,7 @@ import walkingkooka.tree.json.marshall.JsonNodeContext;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
-import java.math.MathContext;
-import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 /**
  * Contains the {@link ConverterName} and some text which may contain an expression for a {@link Converter}.
@@ -125,7 +110,7 @@ public final class ConverterSelector implements HasName<ConverterName>,
 
     private final PluginSelector<ConverterName> selector;
 
-    // parseTextAndCreate...............................................................................................
+    // evaluateText...............................................................................................
 
     /**
      * Parses the {@link #text()} as an expression that contains an optional parameter list which may include
@@ -141,7 +126,7 @@ public final class ConverterSelector implements HasName<ConverterName>,
      * </pre>
      * The {@link ConverterProvider} will be used to fetch {@link Converter} with any parameters.
      */
-    public <C extends ConverterContext> Converter<C> parseTextAndCreate(final ConverterProvider provider) {
+    public <C extends ConverterContext> Converter<C> evaluateText(final ConverterProvider provider) {
         Objects.requireNonNull(provider, "provided");
 
         return this.selector.evaluateText(

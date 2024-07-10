@@ -221,16 +221,16 @@ public final class ConverterSelectorTest implements ClassTesting2<ConverterSelec
         return thrown;
     }
 
-    // ParseTextAndCreate...............................................................................................
+    // EvaluateText.....................................................................................................
 
     @Test
-    public void testParseTextAndCreateFails() {
+    public void testEvaluateTextFails() {
         final String text = NAME + " text/plain";
 
         final InvalidCharacterException thrown = assertThrows(
                 InvalidCharacterException.class,
                 () -> ConverterSelector.parse(text)
-                        .parseTextAndCreate(ConverterProviders.fake())
+                        .evaluateText(ConverterProviders.fake())
         );
 
         this.checkEquals(
@@ -242,10 +242,10 @@ public final class ConverterSelectorTest implements ClassTesting2<ConverterSelec
     }
 
     @Test
-    public void testParseTextAndCreateNoText() {
+    public void testEvaluateTextNoText() {
         final Converter<ConverterContext> expected = Converters.fake();
 
-        this.parseTextAndCreateAndCheck(
+        this.evaluateTextAndCheck(
                 NAME + "",
                 (n, p) -> {
                     checkName(n, NAME);
@@ -258,10 +258,10 @@ public final class ConverterSelectorTest implements ClassTesting2<ConverterSelec
     }
 
     @Test
-    public void testParseTextAndCreateSpacesText() {
+    public void testEvaluateTextSpacesText() {
         final Converter<ConverterContext> expected = Converters.fake();
 
-        this.parseTextAndCreateAndCheck(
+        this.evaluateTextAndCheck(
                 NAME + " ",
                 (n, p) -> {
                     checkName(n, NAME);
@@ -274,10 +274,10 @@ public final class ConverterSelectorTest implements ClassTesting2<ConverterSelec
     }
 
     @Test
-    public void testParseTextAndCreateSpacesText2() {
+    public void testEvaluateTextSpacesText2() {
         final Converter<ConverterContext> expected = Converters.fake();
 
-        this.parseTextAndCreateAndCheck(
+        this.evaluateTextAndCheck(
                 NAME + "   ",
                 (n, p) -> {
                     checkName(n, NAME);
@@ -290,18 +290,18 @@ public final class ConverterSelectorTest implements ClassTesting2<ConverterSelec
     }
 
     @Test
-    public void testParseTextAndCreateOpenParensFail() {
-        this.parseTextAndCreateFails(
+    public void testEvaluateTextOpenParensFail() {
+        this.evaluateTextFails(
                 NAME + " (",
                 "Invalid character '(' at 25 in \"super-magic-converter123 (\""
         );
     }
 
     @Test
-    public void testParseTextAndCreateDoubleLiteral() {
+    public void testEvaluateTextDoubleLiteral() {
         final Converter<ConverterContext> expected = Converters.fake();
 
-        this.parseTextAndCreateAndCheck(
+        this.evaluateTextAndCheck(
                 NAME + " (1)",
                 (n, p) -> {
                     checkName(n, NAME);
@@ -314,10 +314,10 @@ public final class ConverterSelectorTest implements ClassTesting2<ConverterSelec
     }
 
     @Test
-    public void testParseTextAndCreateNegativeDoubleLiteral() {
+    public void testEvaluateTextNegativeDoubleLiteral() {
         final Converter<ConverterContext> expected = Converters.fake();
 
-        this.parseTextAndCreateAndCheck(
+        this.evaluateTextAndCheck(
                 NAME + " (-1)",
                 (n, p) -> {
                     checkName(n, NAME);
@@ -330,10 +330,10 @@ public final class ConverterSelectorTest implements ClassTesting2<ConverterSelec
     }
 
     @Test
-    public void testParseTextAndCreateDoubleLiteralWithDecimals() {
+    public void testEvaluateTextDoubleLiteralWithDecimals() {
         final Converter<ConverterContext> expected = Converters.fake();
 
-        this.parseTextAndCreateAndCheck(
+        this.evaluateTextAndCheck(
                 NAME + " (1.25)",
                 (n, p) -> {
                     checkName(n, NAME);
@@ -346,26 +346,26 @@ public final class ConverterSelectorTest implements ClassTesting2<ConverterSelec
     }
 
     @Test
-    public void testParseTextAndCreateDoubleMissingClosingParensFail() {
-        this.parseTextAndCreateFails(
+    public void testEvaluateTextDoubleMissingClosingParensFail() {
+        this.evaluateTextFails(
                 NAME + " (1",
                 "Invalid character '1' at 26 in \"super-magic-converter123 (1\""
         );
     }
 
     @Test
-    public void testParseTextAndCreateStringUnclosedFail() {
-        this.parseTextAndCreateFails(
+    public void testEvaluateTextStringUnclosedFail() {
+        this.evaluateTextFails(
                 NAME + " (\"unclosed",
                 "Missing terminating '\"'"
         );
     }
 
     @Test
-    public void testParseTextAndCreateEmptyParameterList() {
+    public void testEvaluateTextEmptyParameterList() {
         final Converter<ConverterContext> expected = Converters.fake();
 
-        this.parseTextAndCreateAndCheck(
+        this.evaluateTextAndCheck(
                 NAME + " ()",
                 (n, p) -> {
                     checkName(n, NAME);
@@ -378,10 +378,10 @@ public final class ConverterSelectorTest implements ClassTesting2<ConverterSelec
     }
 
     @Test
-    public void testParseTextAndCreateEmptyParameterListWithExtraSpaces() {
+    public void testEvaluateTextEmptyParameterListWithExtraSpaces() {
         final Converter<ConverterContext> expected = Converters.fake();
 
-        this.parseTextAndCreateAndCheck(
+        this.evaluateTextAndCheck(
                 NAME + "  ( )",
                 (n, p) -> {
                     checkName(n, NAME);
@@ -394,10 +394,10 @@ public final class ConverterSelectorTest implements ClassTesting2<ConverterSelec
     }
 
     @Test
-    public void testParseTextAndCreateEmptyParameterListWithExtraSpaces2() {
+    public void testEvaluateTextEmptyParameterListWithExtraSpaces2() {
         final Converter<ConverterContext> expected = Converters.fake();
 
-        this.parseTextAndCreateAndCheck(
+        this.evaluateTextAndCheck(
                 NAME + "   (  )",
                 (n, p) -> {
                     checkName(n, NAME);
@@ -410,10 +410,10 @@ public final class ConverterSelectorTest implements ClassTesting2<ConverterSelec
     }
 
     @Test
-    public void testParseTextAndCreateStringLiteral() {
+    public void testEvaluateTextStringLiteral() {
         final Converter<ConverterContext> expected = Converters.fake();
 
-        this.parseTextAndCreateAndCheck(
+        this.evaluateTextAndCheck(
                 NAME + " (\"string-literal-parameter\")",
                 (n, p) -> {
                     checkName(n, NAME);
@@ -426,10 +426,10 @@ public final class ConverterSelectorTest implements ClassTesting2<ConverterSelec
     }
 
     @Test
-    public void testParseTextAndCreateStringLiteralStringLiteral() {
+    public void testEvaluateTextStringLiteralStringLiteral() {
         final Converter<ConverterContext> expected = Converters.fake();
 
-        this.parseTextAndCreateAndCheck(
+        this.evaluateTextAndCheck(
                 NAME + " (\"string-literal-parameter-1\",\"string-literal-parameter-2\")",
                 (n, p) -> {
                     checkName(n, NAME);
@@ -442,10 +442,10 @@ public final class ConverterSelectorTest implements ClassTesting2<ConverterSelec
     }
 
     @Test
-    public void testParseTextAndCreateStringLiteralStringLiteralWithExtraSpaceIgnored() {
+    public void testEvaluateTextStringLiteralStringLiteralWithExtraSpaceIgnored() {
         final Converter<ConverterContext> expected = Converters.fake();
 
-        this.parseTextAndCreateAndCheck(
+        this.evaluateTextAndCheck(
                 NAME + "  ( \"string-literal-parameter-1\" , \"string-literal-parameter-2\" )",
                 (n, p) -> {
                     checkName(n, NAME);
@@ -458,11 +458,11 @@ public final class ConverterSelectorTest implements ClassTesting2<ConverterSelec
     }
 
     @Test
-    public void testParseTextAndCreateConverter() {
+    public void testEvaluateTextConverter() {
         final Converter<ConverterContext> expected1 = Converters.fake();
         final Converter<ConverterContext> expected2 = Converters.fake();
 
-        this.parseTextAndCreateAndCheck(
+        this.evaluateTextAndCheck(
                 NAME + " (" + NAME2 + ")",
                 (n, p) -> {
                     if (n.equals(NAME)) {
@@ -481,12 +481,12 @@ public final class ConverterSelectorTest implements ClassTesting2<ConverterSelec
     }
 
     @Test
-    public void testParseTextAndCreateConverterConverter() {
+    public void testEvaluateTextConverterConverter() {
         final Converter<ConverterContext> expected1 = Converters.fake();
         final Converter<ConverterContext> expected2 = Converters.fake();
         final Converter<ConverterContext> expected3 = Converters.fake();
 
-        this.parseTextAndCreateAndCheck(
+        this.evaluateTextAndCheck(
                 NAME + " (" + NAME2 + "," + NAME3 + ")",
                 (n, p) -> {
                     if (n.equals(NAME)) {
@@ -509,12 +509,12 @@ public final class ConverterSelectorTest implements ClassTesting2<ConverterSelec
     }
 
     @Test
-    public void testParseTextAndCreateNestedConverter() {
+    public void testEvaluateTextNestedConverter() {
         final Converter<ConverterContext> expected1 = Converters.fake();
         final Converter<ConverterContext> expected2 = Converters.fake();
         final Converter<ConverterContext> expected3 = Converters.fake();
 
-        this.parseTextAndCreateAndCheck(
+        this.evaluateTextAndCheck(
                 NAME + " (" + NAME2 + "(" + NAME3 + "))",
                 (n, p) -> {
                     if (n.equals(NAME)) {
@@ -536,22 +536,22 @@ public final class ConverterSelectorTest implements ClassTesting2<ConverterSelec
         );
     }
 
-    private void parseTextAndCreateFails(final String selector,
+    private void evaluateTextFails(final String selector,
                                          final String expected) {
-        this.parseTextAndCreateFails(
+        this.evaluateTextFails(
                 selector,
                 ConverterProviders.fake(),
                 expected
         );
     }
 
-    private void parseTextAndCreateFails(final String selector,
+    private void evaluateTextFails(final String selector,
                                          final ConverterProvider provider,
                                          final String expected) {
         final IllegalArgumentException thrown = assertThrows(
                 IllegalArgumentException.class,
                 () -> ConverterSelector.parse(selector)
-                        .parseTextAndCreate(provider)
+                        .evaluateText(provider)
         );
         this.checkEquals(
                 expected,
@@ -560,10 +560,10 @@ public final class ConverterSelectorTest implements ClassTesting2<ConverterSelec
         );
     }
 
-    private void parseTextAndCreateAndCheck(final String selector,
+    private void evaluateTextAndCheck(final String selector,
                                             final BiFunction<ConverterName, List<?>, Converter<ConverterContext>> factory,
                                             final Converter<ConverterContext> expected) {
-        this.parseTextAndCreateAndCheck(
+        this.evaluateTextAndCheck(
                 selector,
                 new FakeConverterProvider() {
                     @Override
@@ -583,13 +583,13 @@ public final class ConverterSelectorTest implements ClassTesting2<ConverterSelec
         );
     }
 
-    private void parseTextAndCreateAndCheck(final String selector,
+    private void evaluateTextAndCheck(final String selector,
                                             final ConverterProvider provider,
                                             final Converter<ConverterContext> expected) {
         this.checkEquals(
                 expected,
                 ConverterSelector.parse(selector)
-                        .parseTextAndCreate(provider)
+                        .evaluateText(provider)
         );
     }
 
