@@ -43,7 +43,7 @@ final class ConverterProviderCollection implements ConverterProvider {
 
     private ConverterProviderCollection(final Set<ConverterProvider> providers) {
         this.providers = ProviderCollection.with(
-                new ProviderCollectionProviderGetter<ConverterProvider, ConverterName, ConverterSelector, Converter<?>>() {
+                new ProviderCollectionProviderGetter<>() {
                     @Override
                     public Optional<Converter<?>> get(final ConverterProvider provider,
                                                       final ConverterName name,
