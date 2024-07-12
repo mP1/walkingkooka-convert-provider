@@ -19,9 +19,8 @@ package walkingkooka.convert.provider;
 
 import walkingkooka.convert.Converter;
 import walkingkooka.convert.ConverterContext;
-import walkingkooka.naming.HasName;
 import walkingkooka.plugin.PluginSelector;
-import walkingkooka.text.HasText;
+import walkingkooka.plugin.PluginSelectorLike;
 import walkingkooka.text.cursor.TextCursor;
 import walkingkooka.text.cursor.parser.Parser;
 import walkingkooka.text.cursor.parser.ParserContext;
@@ -29,7 +28,6 @@ import walkingkooka.text.cursor.parser.ParserToken;
 import walkingkooka.text.cursor.parser.Parsers;
 import walkingkooka.text.cursor.parser.StringParserToken;
 import walkingkooka.text.printer.IndentingPrinter;
-import walkingkooka.text.printer.TreePrintable;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeContext;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
@@ -40,9 +38,7 @@ import java.util.Objects;
 /**
  * Contains the {@link ConverterName} and some text which may contain an expression for a {@link Converter}.
  */
-public final class ConverterSelector implements HasName<ConverterName>,
-        HasText,
-        TreePrintable {
+public final class ConverterSelector implements PluginSelectorLike<ConverterName> {
 
     /**
      * Parses the given text into a {@link ConverterSelector}. Note the text following the {@link ConverterName} is not validated in any form and simply stored.
