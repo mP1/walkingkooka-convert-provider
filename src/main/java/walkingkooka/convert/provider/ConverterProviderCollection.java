@@ -20,7 +20,9 @@ package walkingkooka.convert.provider;
 import walkingkooka.Cast;
 import walkingkooka.convert.Converter;
 import walkingkooka.convert.ConverterContext;
+import walkingkooka.naming.Name;
 import walkingkooka.plugin.ProviderCollection;
+import walkingkooka.plugin.ProviderCollectionProviderGetter;
 
 import java.util.List;
 import java.util.Objects;
@@ -41,10 +43,25 @@ final class ConverterProviderCollection implements ConverterProvider {
 
     private ConverterProviderCollection(final Set<ConverterProvider> providers) {
         this.providers = ProviderCollection.with(
-                Function.identity(), // inputToName
-                (p, n, v) -> Cast.to(
-                        p.converter(n, v)
-                ),
+                new ProviderCollectionProviderGetter<ConverterProvider, ConverterName, ConverterSelector, Converter<?>>() {
+                    @Override
+                    public Optional<Converter<?>> get(final ConverterProvider provider,
+                                                      final ConverterName name,
+                                                      final List<?> values) {
+                        return Cast.to(
+                                provider.converter(
+                                        name,
+                                        values
+                                )
+                        );
+                    }
+
+                    @Override
+                    public Optional<Converter<?>> get(final ConverterProvider provider,
+                                                      final ConverterSelector selector) {
+                        throw new UnsupportedOperationException();
+                    }
+                },
                 ConverterProvider::converterInfos,
                 Converter.class.getSimpleName(),
                 providers
@@ -67,9 +84,7 @@ final class ConverterProviderCollection implements ConverterProvider {
         return this.providers.infos();
     }
 
-    private final ProviderCollection<ConverterName, ConverterInfo, ConverterProvider,
-            ConverterName,
-            Converter<?>> providers;
+    private final ProviderCollection<ConverterProvider, ConverterName, ConverterInfo, ConverterSelector, Converter<?>> providers;
 
     @Override
     public String toString() {
