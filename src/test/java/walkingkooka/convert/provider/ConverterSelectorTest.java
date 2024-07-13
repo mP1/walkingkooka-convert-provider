@@ -19,38 +19,24 @@ package walkingkooka.convert.provider;
 
 import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
-import walkingkooka.HashCodeEqualsDefinedTesting2;
 import walkingkooka.InvalidCharacterException;
-import walkingkooka.ToStringTesting;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.convert.Converter;
 import walkingkooka.convert.ConverterContext;
 import walkingkooka.convert.Converters;
-import walkingkooka.reflect.ClassTesting2;
+import walkingkooka.plugin.PluginSelectorLikeTesting;
 import walkingkooka.reflect.JavaVisibility;
-import walkingkooka.test.ParseStringTesting;
 import walkingkooka.text.CharSequences;
-import walkingkooka.text.HasTextTesting;
-import walkingkooka.text.printer.TreePrintableTesting;
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.marshall.JsonNodeMarshallingTesting;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.function.BiFunction;
 
-import static org.junit.jupiter.api.Assertions.assertNotSame;
-import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public final class ConverterSelectorTest implements ClassTesting2<ConverterSelector>,
-        HashCodeEqualsDefinedTesting2<ConverterSelector>,
-        HasTextTesting,
-        ToStringTesting<ConverterSelector>,
-        ParseStringTesting<ConverterSelector>,
-        JsonNodeMarshallingTesting<ConverterSelector>,
-        TreePrintableTesting {
+public final class ConverterSelectorTest implements PluginSelectorLikeTesting<ConverterSelector, ConverterName> {
 
     private final static ConverterName NAME = ConverterName.with("super-magic-converter123");
 
@@ -60,165 +46,25 @@ public final class ConverterSelectorTest implements ClassTesting2<ConverterSelec
 
     private final static String TEXT = "$0.00";
 
-    @Test
-    public void testWithNullNameFails() {
-        assertThrows(
-                NullPointerException.class,
-                () -> ConverterSelector.with(
-                        null,
-                        TEXT
-                )
+    @Override
+    public ConverterSelector createPluginSelectorLike(final ConverterName name,
+                                                      final String text) {
+        return ConverterSelector.with(
+                name,
+                text
         );
     }
 
-    @Test
-    public void testWithNullTextFails() {
-        assertThrows(
-                NullPointerException.class,
-                () -> ConverterSelector.with(
-                        NAME,
-                        null
-                )
-        );
-    }
-
-    @Test
-    public void testWith() {
-        final ConverterSelector selector = ConverterSelector.with(
-                NAME,
-                TEXT
-        );
-
-        this.checkEquals(NAME, selector.name(), "name");
-        this.textAndCheck(
-                selector,
-                TEXT
-        );
-    }
-
-    // setName..........................................................................................................
-
-    @Test
-    public void testSetNameWithNullFails() {
-        assertThrows(
-                NullPointerException.class,
-                () -> ConverterSelector.with(
-                        NAME,
-                        TEXT
-                ).setName(null)
-        );
-    }
-
-    @Test
-    public void testSetNameWithSame() {
-        final ConverterSelector selector = ConverterSelector.with(
-                NAME,
-                TEXT
-        );
-        assertSame(
-                selector,
-                selector.setName(NAME)
-        );
-    }
-
-    @Test
-    public void testSetNameWithDifferent() {
-        final ConverterSelector selector = ConverterSelector.with(
-                NAME,
-                TEXT
-        );
-        final ConverterName differentName = ConverterName.with("different");
-        final ConverterSelector different = selector.setName(differentName);
-
-        assertNotSame(
-                different,
-                selector
-        );
-        this.checkEquals(
-                differentName,
-                different.name(),
-                "name"
-        );
-        this.textAndCheck(
-                selector,
-                TEXT
-        );
+    @Override
+    public ConverterName createName(final String value) {
+        return ConverterName.with(value);
     }
 
     // parse............................................................................................................
 
-    @Test
-    public void testParseInvalidConverterNameFails() {
-        this.parseStringFails(
-                "A!34",
-                new InvalidCharacterException("A!34", 1)
-                        .appendToMessage(" in \"A!34\"")
-        );
-    }
-
-    @Test
-    public void testParseConverterName() {
-        final String text = "super-magic-converter123";
-        this.parseStringAndCheck(
-                text,
-                ConverterSelector.with(
-                        ConverterName.with(text),
-                        ""
-                )
-        );
-    }
-
-    @Test
-    public void testParseConverterNameSpace() {
-        final String text = "super-magic-converter123";
-        this.parseStringAndCheck(
-                text + " ",
-                ConverterSelector.with(
-                        ConverterName.with(text),
-                        ""
-                )
-        );
-    }
-
-    @Test
-    public void testParseConverterNameSpacePatternText() {
-        final String name = "super-magic-converter123";
-        final String patternText = "@@";
-
-        this.parseStringAndCheck(
-                name + " " + patternText,
-                ConverterSelector.with(
-                        ConverterName.with(name),
-                        patternText
-                )
-        );
-    }
-
-    // ConverterSelector.parse must be able to parse all ConverterSelector.toString.
-
-    @Test
-    public void testParseToString() {
-        final ConverterSelector selector = ConverterSelector.parse("super-magic-converter123");
-
-        this.parseStringAndCheck(
-                selector.toString(),
-                selector
-        );
-    }
-
     @Override
     public ConverterSelector parseString(final String text) {
         return ConverterSelector.parse(text);
-    }
-
-    @Override
-    public Class<? extends RuntimeException> parseStringFailedExpected(final Class<? extends RuntimeException> type) {
-        return type;
-    }
-
-    @Override
-    public RuntimeException parseStringFailedExpected(final RuntimeException thrown) {
-        return thrown;
     }
 
     // EvaluateText.....................................................................................................
@@ -619,60 +465,6 @@ public final class ConverterSelectorTest implements ClassTesting2<ConverterSelec
         );
     }
 
-    // equals...........................................................................................................
-
-    @Test
-    public void testEqualsDifferentName() {
-        this.checkNotEquals(
-                ConverterSelector.with(
-                        ConverterName.with("different"),
-                        TEXT
-                )
-        );
-    }
-
-    @Test
-    public void testEqualsDifferentText() {
-        this.checkNotEquals(
-                ConverterSelector.with(
-                        NAME,
-                        "different"
-                )
-        );
-    }
-
-    @Override
-    public ConverterSelector createObject() {
-        return ConverterSelector.with(
-                NAME,
-                TEXT
-        );
-    }
-
-    // ToString.........................................................................................................
-
-    @Test
-    public void testToString() {
-        this.toStringAndCheck(
-                ConverterSelector.with(
-                        NAME,
-                        TEXT
-                ),
-                "super-magic-converter123 $0.00"
-        );
-    }
-
-    @Test
-    public void testToStringWithQuotes() {
-        this.toStringAndCheck(
-                ConverterSelector.with(
-                        NAME,
-                        "\"Hello\""
-                ),
-                "super-magic-converter123 \"Hello\""
-        );
-    }
-
     // ClassTesting.....................................................................................................
 
     @Override
@@ -714,25 +506,16 @@ public final class ConverterSelectorTest implements ClassTesting2<ConverterSelec
 
     @Override
     public ConverterSelector createJsonNodeMarshallingValue() {
-        return this.createObject();
-    }
-
-    // TreePrintable....................................................................................................
-
-    @Test
-    public void testTreePrintWithoutText() {
-        this.treePrintAndCheck(
-                ConverterSelector.parse("abc123"),
-                "abc123\n"
+        return ConverterSelector.with(
+                NAME,
+                TEXT
         );
     }
 
-    @Test
-    public void testTreePrintWithText() {
-        this.treePrintAndCheck(
-                ConverterSelector.parse("super-magic-converter123 $0.00"),
-                "super-magic-converter123\n" +
-                        "  \"$0.00\"\n"
-        );
+    // type name testing................................................................................................
+
+    @Override
+    public String typeNamePrefix() {
+        return Converter.class.getSimpleName();
     }
 }
