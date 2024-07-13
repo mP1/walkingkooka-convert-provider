@@ -104,6 +104,14 @@ public final class ConverterSelector implements PluginSelectorLike<ConverterName
         return this.selector.text();
     }
 
+    @Override
+    public ConverterSelector setText(final String text) {
+        final PluginSelector<ConverterName> different = this.selector.setText(text);
+        return this.selector.equals(different) ?
+                this :
+                new ConverterSelector(different);
+    }
+
     private final PluginSelector<ConverterName> selector;
 
     // evaluateText...............................................................................................
