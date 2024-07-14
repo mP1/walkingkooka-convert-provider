@@ -33,6 +33,7 @@ import walkingkooka.tree.json.marshall.JsonNodeContext;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -114,7 +115,17 @@ public final class ConverterSelector implements PluginSelectorLike<ConverterName
 
     private final PluginSelector<ConverterName> selector;
 
-    // evaluateText...............................................................................................
+    // setValues........................................................................................................
+
+    @Override
+    public ConverterSelector setValues(final List<?> values) {
+        final PluginSelector<ConverterName> different = this.selector.setValues(values);
+        return this.selector.equals(different) ?
+                this :
+                new ConverterSelector(different);
+    }
+
+    // evaluateText.....................................................................................................
 
     /**
      * Parses the {@link #text()} as an expression that contains an optional parameter list which may include
