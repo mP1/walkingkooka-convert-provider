@@ -45,9 +45,9 @@ final class ConverterProviderCollection implements ConverterProvider {
         this.providers = ProviderCollection.with(
                 new ProviderCollectionProviderGetter<>() {
                     @Override
-                    public Optional<Converter<?>> get(final ConverterProvider provider,
-                                                      final ConverterName name,
-                                                      final List<?> values) {
+                    public Converter<?> get(final ConverterProvider provider,
+                                            final ConverterName name,
+                                            final List<?> values) {
                         return Cast.to(
                                 provider.converter(
                                         name,
@@ -57,8 +57,8 @@ final class ConverterProviderCollection implements ConverterProvider {
                     }
 
                     @Override
-                    public Optional<Converter<?>> get(final ConverterProvider provider,
-                                                      final ConverterSelector selector) {
+                    public Converter<?> get(final ConverterProvider provider,
+                                            final ConverterSelector selector) {
                         throw new UnsupportedOperationException();
                     }
                 },
@@ -69,8 +69,8 @@ final class ConverterProviderCollection implements ConverterProvider {
     }
 
     @Override
-    public <C extends ConverterContext> Optional<Converter<C>> converter(final ConverterName name,
-                                                                         final List<?> values) {
+    public <C extends ConverterContext> Converter<C> converter(final ConverterName name,
+                                                               final List<?> values) {
         return Cast.to(
                 this.providers.get(
                 name,

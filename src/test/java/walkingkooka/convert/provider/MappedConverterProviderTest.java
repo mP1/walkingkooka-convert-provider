@@ -79,10 +79,9 @@ public final class MappedConverterProviderTest implements ConverterProviderTesti
     }
 
     @Test
-    public void testConverterUnknown() {
-        this.converterAndCheck(
-                ConverterName.with("unknown"),
-                Lists.empty()
+    public void testConverterWithUnknownFails() {
+        this.converterFails(
+                ConverterSelector.parse("unknown")
         );
     }
 
@@ -116,16 +115,15 @@ public final class MappedConverterProviderTest implements ConverterProviderTesti
                 new FakeConverterProvider() {
 
                     @Override
-                    public <C extends ConverterContext> Optional<Converter<C>> converter(final ConverterName name,
+                    public <C extends ConverterContext> Converter<C> converter(final ConverterName name,
                                                                                          final List<?> values) {
                         Objects.requireNonNull(name, "name");
                         Objects.requireNonNull(values, "values");
 
-                        return Optional.ofNullable(
-                                name.equals(ORIGINAL_NAME) ?
-                                        Cast.to(CONVERTER) :
-                                        null
-                        );
+                        if(false == name.equals(ORIGINAL_NAME)) {
+                            throw new IllegalArgumentException("Unknown Converter " + name);
+                        }
+                        return Cast.to(CONVERTER);
                     }
 
                     @Override

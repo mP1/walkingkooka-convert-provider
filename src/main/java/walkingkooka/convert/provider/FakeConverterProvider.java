@@ -26,8 +26,8 @@ import java.util.Set;
 
 public class FakeConverterProvider implements ConverterProvider {
     @Override
-    public <C extends ConverterContext> Optional<Converter<C>> converter(final ConverterName name,
-                                                                         final List<?> values) {
+    public <C extends ConverterContext> Converter<C> converter(final ConverterName name,
+                                                               final List<?> values) {
         throw new UnsupportedOperationException();
     }
 
