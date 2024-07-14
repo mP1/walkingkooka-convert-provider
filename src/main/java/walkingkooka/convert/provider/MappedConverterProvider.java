@@ -58,18 +58,16 @@ final class MappedConverterProvider implements ConverterProvider {
     }
 
     @Override
-    public <C extends ConverterContext> Optional<Converter<C>> converter(final ConverterName name,
-                                                                         final List<?> values) {
+    public <C extends ConverterContext> Converter<C> converter(final ConverterName name,
+                                                               final List<?> values) {
         Objects.requireNonNull(name, "name");
         Objects.requireNonNull(values, "values");
 
-        return this.nameMapper.apply(name)
-                .flatMap(
-                        n -> this.provider.converter(
-                                n,
-                                values
-                        )
-                );
+        return this.provider.converter(
+                this.nameMapper.apply(name)
+                .orElseThrow(() -> new IllegalArgumentException("Unknown converter " + name)),
+                values
+        );
     }
 
     /**

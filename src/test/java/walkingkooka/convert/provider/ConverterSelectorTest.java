@@ -407,20 +407,18 @@ public final class ConverterSelectorTest implements PluginSelectorLikeTesting<Co
     }
 
     private void evaluateTextAndCheck(final String selector,
-                                            final BiFunction<ConverterName, List<?>, Converter<ConverterContext>> factory,
-                                            final Converter<ConverterContext> expected) {
+                                      final BiFunction<ConverterName, List<?>, Converter<ConverterContext>> factory,
+                                      final Converter<ConverterContext> expected) {
         this.evaluateTextAndCheck(
                 selector,
                 new FakeConverterProvider() {
                     @Override
-                    public <C extends ConverterContext> Optional<Converter<C>> converter(final ConverterName name,
-                                                                                         final List<?> values) {
-                        return Optional.of(
-                                Cast.to(
-                                        factory.apply(
-                                                name,
-                                                values
-                                        )
+                    public <C extends ConverterContext> Converter<C> converter(final ConverterName name,
+                                                                               final List<?> values) {
+                        return Cast.to(
+                                factory.apply(
+                                        name,
+                                        values
                                 )
                         );
                     }
@@ -430,8 +428,8 @@ public final class ConverterSelectorTest implements PluginSelectorLikeTesting<Co
     }
 
     private void evaluateTextAndCheck(final String selector,
-                                            final ConverterProvider provider,
-                                            final Converter<ConverterContext> expected) {
+                                      final ConverterProvider provider,
+                                      final Converter<ConverterContext> expected) {
         this.checkEquals(
                 expected,
                 ConverterSelector.parse(selector)

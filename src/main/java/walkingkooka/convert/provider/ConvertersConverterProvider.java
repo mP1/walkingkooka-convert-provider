@@ -65,22 +65,20 @@ final class ConvertersConverterProvider implements ConverterProvider {
     }
 
     @Override
-    public <C extends ConverterContext> Optional<Converter<C>> converter(final ConverterName name,
-                                                                         final List<?> values) {
+    public <C extends ConverterContext> Converter<C> converter(final ConverterName name,
+                                                               final List<?> values) {
         Objects.requireNonNull(name, "name");
         Objects.requireNonNull(values, "values");
 
-        Converter<?> converter = null;
-
         final Function<List<?>, Converter<?>> factory = ConverterName.NAME_TO_FACTORY.get(name);
-        if (null != factory) {
-            converter = factory.apply(
-                    Lists.immutable(values)
-            );
+        if (null == factory) {
+            throw new IllegalArgumentException("Unknown converter " + name);
         }
 
-        return Optional.ofNullable(
-                Cast.to(converter)
+        return Cast.to(
+                factory.apply(
+                        Lists.immutable(values)
+                )
         );
     }
 

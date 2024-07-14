@@ -155,7 +155,7 @@ public final class ConverterSelector implements PluginSelectorLike<ConverterName
                                                 .value()
                                 )
                 ),
-                provider::converterOrFail
+                provider::converter
         );
     }
 

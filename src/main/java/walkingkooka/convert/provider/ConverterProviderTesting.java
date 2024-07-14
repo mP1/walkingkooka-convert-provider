@@ -55,6 +55,27 @@ public interface ConverterProviderTesting<T extends ConverterProvider> extends P
         );
     }
 
+    default void converterFails(final String selector) {
+        this.converterFails(
+                ConverterSelector.parse(selector)
+        );
+    }
+
+    default void converterFails(final ConverterSelector selector) {
+        this.converterFails(
+                this.createConverterProvider(),
+                selector
+        );
+    }
+
+    default void converterFails(final ConverterProvider provider,
+                                final ConverterSelector selector) {
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> selector.evaluateText(provider)
+        );
+    }
+
     default void converterAndCheck(final String selector,
                                    final Converter<?> expected) {
         this.converterAndCheck(
@@ -92,27 +113,8 @@ public interface ConverterProviderTesting<T extends ConverterProvider> extends P
     }
 
     default void converterAndCheck(final ConverterName name,
-                                   final List<?> values) {
-        this.converterAndCheck(
-                name,
-                values,
-                Optional.empty()
-        );
-    }
-
-    default void converterAndCheck(final ConverterName name,
                                    final List<?> values,
                                    final Converter<?> expected) {
-        this.converterAndCheck(
-                name,
-                values,
-                Optional.of(expected)
-        );
-    }
-
-    default void converterAndCheck(final ConverterName name,
-                                   final List<?> values,
-                                   final Optional<Converter<?>> expected) {
         this.converterAndCheck(
                 this.createConverterProvider(),
                 name,
@@ -125,18 +127,6 @@ public interface ConverterProviderTesting<T extends ConverterProvider> extends P
                                    final ConverterName name,
                                    final List<?> values,
                                    final Converter<?> expected) {
-        this.converterAndCheck(
-                provider,
-                name,
-                values,
-                Optional.of(expected)
-        );
-    }
-
-    default void converterAndCheck(final ConverterProvider provider,
-                                   final ConverterName name,
-                                   final List<?> values,
-                                   final Optional<Converter<?>> expected) {
         this.checkEquals(
                 expected,
                 provider.converter(

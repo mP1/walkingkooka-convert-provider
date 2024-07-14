@@ -52,13 +52,6 @@ public final class ConverterProviders implements PublicStaticHelper {
     }
 
     /**
-     * {@see EmptyConverterProvider}
-     */
-    public static ConverterProvider empty() {
-        return EmptyConverterProvider.INSTANCE;
-    }
-
-    /**
      * {@see FakeConverterProvider}
      */
     public static ConverterProvider fake() {
