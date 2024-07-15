@@ -70,18 +70,34 @@ public final class MappedConverterProviderTest implements ConverterProviderTesti
     }
 
     @Test
-    public void testConverter() {
+    public void testConverterSelectorWithUnknownFails() {
+        this.converterFails(
+                ConverterSelector.parse("unknown")
+        );
+    }
+
+    @Test
+    public void testConverterSelector() {
         this.converterAndCheck(
-                NAME,
-                Lists.empty(),
+                ConverterSelector.parse("" + NAME),
                 CONVERTER
         );
     }
 
     @Test
-    public void testConverterWithUnknownFails() {
+    public void testConverterNameWithUnknownFails() {
         this.converterFails(
-                ConverterSelector.parse("unknown")
+                ConverterName.with("unknown"),
+                Lists.empty()
+        );
+    }
+
+    @Test
+    public void testConverterName() {
+        this.converterAndCheck(
+                NAME,
+                Lists.empty(),
+                CONVERTER
         );
     }
 

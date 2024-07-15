@@ -32,7 +32,7 @@ import java.util.Set;
 public final class ConvertersConverterProviderTest implements ConverterProviderTesting<ConvertersConverterProvider> {
 
     @Test
-    public void testConverterBooleanToNumber() {
+    public void testConverterSelectorBooleanToNumber() {
         this.converterAndCheck(
                 ConverterSelector.with(
                         ConverterName.BOOLEAN_TO_NUMBER,
@@ -43,12 +43,30 @@ public final class ConvertersConverterProviderTest implements ConverterProviderT
     }
 
     @Test
-    public void testConverterCharacterOrStringToString() {
+    public void testConverterSelectorCharacterOrStringToString() {
         this.converterAndCheck(
                 ConverterSelector.with(
                         ConverterName.CHARACTER_OR_STRING_TO_STRING,
                         ""
                 ),
+                Converters.characterOrStringToString()
+        );
+    }
+
+    @Test
+    public void testConverterNameBooleanToNumber() {
+        this.converterAndCheck(
+                ConverterName.BOOLEAN_TO_NUMBER,
+                Lists.empty(),
+                Converters.booleanToNumber()
+        );
+    }
+
+    @Test
+    public void testConverterNameCharacterOrStringToString() {
+        this.converterAndCheck(
+                ConverterName.CHARACTER_OR_STRING_TO_STRING,
+                Lists.empty(),
                 Converters.characterOrStringToString()
         );
     }

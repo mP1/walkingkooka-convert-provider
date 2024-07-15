@@ -32,6 +32,11 @@ import java.util.Set;
 public interface ConverterProvider extends Provider {
 
     /**
+     * Resolves the given {@link ConverterSelector} to a {@link Converter}.
+     */
+    <C extends ConverterContext> Converter<C> converter(final ConverterSelector selector);
+
+    /**
      * Resolves the given {@link ConverterName} to a {@link Converter} with the given parameter values.
      */
     <C extends ConverterContext> Converter<C> converter(final ConverterName name,
