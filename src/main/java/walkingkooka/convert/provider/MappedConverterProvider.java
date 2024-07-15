@@ -58,6 +58,13 @@ final class MappedConverterProvider implements ConverterProvider {
     }
 
     @Override
+    public <C extends ConverterContext> Converter<C> converter(final ConverterSelector selector) {
+        Objects.requireNonNull(selector, "selector");
+
+        return selector.evaluateText(this);
+    }
+
+    @Override
     public <C extends ConverterContext> Converter<C> converter(final ConverterName name,
                                                                final List<?> values) {
         Objects.requireNonNull(name, "name");

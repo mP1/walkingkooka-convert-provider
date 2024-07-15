@@ -36,6 +36,13 @@ final class EmptyConverterProvider implements ConverterProvider{
     }
 
     @Override
+    public <C extends ConverterContext> Converter<C> converter(final ConverterSelector selector) {
+        Objects.requireNonNull(selector, "selector");
+
+        throw new IllegalArgumentException("Unknown converter " + selector.name());
+    }
+
+    @Override
     public <C extends ConverterContext> Converter<C> converter(final ConverterName name,
                                                                final List<?> values) {
         Objects.requireNonNull(name, "name");

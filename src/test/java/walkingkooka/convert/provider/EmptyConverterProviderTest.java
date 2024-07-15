@@ -18,6 +18,7 @@
 package walkingkooka.convert.provider;
 
 import org.junit.jupiter.api.Test;
+import walkingkooka.collect.list.Lists;
 import walkingkooka.reflect.JavaVisibility;
 
 public final class EmptyConverterProviderTest implements ConverterProviderTesting<EmptyConverterProvider> {
@@ -25,6 +26,19 @@ public final class EmptyConverterProviderTest implements ConverterProviderTestin
     @Test
     public void testConverterInfos() {
         this.converterInfosAndCheck();
+    }
+
+    @Test
+    public void testConverterSelectorFails() {
+        this.converterFails("unknown");
+    }
+
+    @Test
+    public void testConverterNameFails() {
+        this.converterFails(
+                ConverterName.with("unknown"),
+                Lists.empty()
+        );
     }
 
     @Override

@@ -31,25 +31,15 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public interface ConverterProviderTesting<T extends ConverterProvider> extends ProviderTesting<T> {
 
-    @Test
-    default void testConverterWithNullNameFails() {
-        assertThrows(
-                NullPointerException.class,
-                () -> this.createConverterProvider()
-                        .converter(
-                                null,
-                                Lists.empty()
-                        )
-        );
-    }
+
+    // converter(ConverterSelector)................................................................................
 
     @Test
-    default void testConverterWithNullValueFails() {
+    default void testConverterWithNullSelectorFails() {
         assertThrows(
                 NullPointerException.class,
                 () -> this.createConverterProvider()
                         .converter(
-                                ConverterName.BOOLEAN_TO_NUMBER,
                                 null
                         )
         );
@@ -108,7 +98,54 @@ public interface ConverterProviderTesting<T extends ConverterProvider> extends P
                                    final Converter<?> expected) {
         this.checkEquals(
                 expected,
-                selector.evaluateText(provider)
+                provider.converter(selector)
+        );
+    }
+
+    // converter(ConverterName, List<?>)................................................................................
+
+    @Test
+    default void testConverterWithNullNameFails() {
+        assertThrows(
+                NullPointerException.class,
+                () -> this.createConverterProvider()
+                        .converter(
+                                null,
+                                Lists.empty()
+                        )
+        );
+    }
+
+    @Test
+    default void testConverterWithNullValueFails() {
+        assertThrows(
+                NullPointerException.class,
+                () -> this.createConverterProvider()
+                        .converter(
+                                ConverterName.BOOLEAN_TO_NUMBER,
+                                null
+                        )
+        );
+    }
+
+    default void converterFails(final ConverterName name,
+                                final List<?> values) {
+        this.converterFails(
+                this.createConverterProvider(),
+                name,
+                values
+        );
+    }
+
+    default void converterFails(final ConverterProvider provider,
+                                final ConverterName name,
+                                final List<?> values) {
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> provider.converter(
+                        name,
+                        values
+                )
         );
     }
 
