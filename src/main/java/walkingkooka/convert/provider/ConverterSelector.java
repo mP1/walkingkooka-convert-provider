@@ -142,7 +142,7 @@ public final class ConverterSelector implements PluginSelectorLike<ConverterName
      * The {@link ConverterProvider} will be used to fetch {@link Converter} with any parameters.
      */
     public <C extends ConverterContext> Converter<C> evaluateText(final ConverterProvider provider) {
-        Objects.requireNonNull(provider, "provided");
+        Objects.requireNonNull(provider, "provider");
 
         return this.selector.evaluateText(
                 (final TextCursor cursor, final ParserContext context) -> CONVERTER_NAME_PARSER.parse(
