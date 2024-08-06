@@ -206,9 +206,7 @@ public final class ConverterSelector implements PluginSelectorLike<ConverterName
     }
 
     private JsonNode marshall(final JsonNodeMarshallContext context) {
-        return JsonNode.string(
-                this.toString()
-        );
+        return this.selector.marshall(context);
     }
 
     static {
