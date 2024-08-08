@@ -27,6 +27,8 @@ import walkingkooka.convert.ConverterContext;
 import walkingkooka.convert.Converters;
 import walkingkooka.net.AbsoluteUrl;
 import walkingkooka.net.Url;
+import walkingkooka.plugin.ProviderContext;
+import walkingkooka.plugin.ProviderContexts;
 import walkingkooka.reflect.JavaVisibility;
 
 import java.util.List;
@@ -46,6 +48,8 @@ public final class MappedConverterProviderTest implements ConverterProviderTesti
     private final static ConverterName ORIGINAL_NAME = ConverterName.with("original-converter-123");
 
     private final static Converter<ConverterContext> CONVERTER = Converters.fake();
+
+    private final static ProviderContext CONTEXT = ProviderContexts.fake();
 
     @Test
     public void testWithNullViewFails() {
@@ -72,7 +76,8 @@ public final class MappedConverterProviderTest implements ConverterProviderTesti
     @Test
     public void testConverterSelectorWithUnknownFails() {
         this.converterFails(
-                ConverterSelector.parse("unknown")
+                ConverterSelector.parse("unknown"),
+                CONTEXT
         );
     }
 
@@ -80,6 +85,7 @@ public final class MappedConverterProviderTest implements ConverterProviderTesti
     public void testConverterSelector() {
         this.converterAndCheck(
                 ConverterSelector.parse("" + NAME),
+                CONTEXT,
                 CONVERTER
         );
     }
@@ -88,7 +94,8 @@ public final class MappedConverterProviderTest implements ConverterProviderTesti
     public void testConverterNameWithUnknownFails() {
         this.converterFails(
                 ConverterName.with("unknown"),
-                Lists.empty()
+                Lists.empty(),
+                CONTEXT
         );
     }
 
@@ -97,6 +104,7 @@ public final class MappedConverterProviderTest implements ConverterProviderTesti
         this.converterAndCheck(
                 NAME,
                 Lists.empty(),
+                CONTEXT,
                 CONVERTER
         );
     }
@@ -132,9 +140,11 @@ public final class MappedConverterProviderTest implements ConverterProviderTesti
 
                     @Override
                     public <C extends ConverterContext> Converter<C> converter(final ConverterName name,
-                                                                                         final List<?> values) {
+                                                                               final List<?> values,
+                                                                               final ProviderContext context) {
                         Objects.requireNonNull(name, "name");
                         Objects.requireNonNull(values, "values");
+                        Objects.requireNonNull(context, "context");
 
                         if(false == name.equals(ORIGINAL_NAME)) {
                             throw new IllegalArgumentException("Unknown Converter " + name);

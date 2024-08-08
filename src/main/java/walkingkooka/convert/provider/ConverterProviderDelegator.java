@@ -19,24 +19,31 @@ package walkingkooka.convert.provider;
 
 import walkingkooka.convert.Converter;
 import walkingkooka.convert.ConverterContext;
+import walkingkooka.plugin.ProviderContext;
 
 import java.util.List;
 import java.util.Set;
 
 public interface ConverterProviderDelegator extends ConverterProvider {
     @Override
-    default <C extends ConverterContext> Converter<C> converter(final ConverterSelector selector) {
+    default <C extends ConverterContext> Converter<C> converter(final ConverterSelector selector,
+                                                                final ProviderContext context) {
         return this.converterProvider()
-                .converter(selector);
+                .converter(
+                        selector,
+                        context
+                );
     }
 
     @Override
     default <C extends ConverterContext> Converter<C> converter(final ConverterName name,
-                                                                final List<?> values) {
+                                                                final List<?> values,
+                                                                final ProviderContext context) {
         return this.converterProvider()
                 .converter(
                         name,
-                        values
+                        values,
+                        context
                 );
     }
 

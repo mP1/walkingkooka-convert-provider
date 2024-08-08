@@ -21,11 +21,15 @@ import org.junit.jupiter.api.Test;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.set.Sets;
 import walkingkooka.convert.Converters;
+import walkingkooka.plugin.ProviderContext;
+import walkingkooka.plugin.ProviderContexts;
 import walkingkooka.reflect.JavaVisibility;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class ConverterProviderCollectionTest implements ConverterProviderTesting<ConverterProviderCollection> {
+
+    private final static ProviderContext CONTEXT = ProviderContexts.fake();
 
     @Test
     public void testWithNullProvidersFails() {
@@ -43,6 +47,7 @@ public final class ConverterProviderCollectionTest implements ConverterProviderT
                 ConverterProviderCollection.with(Sets.of(provider)),
                 ConverterName.BOOLEAN_TO_NUMBER,
                 Lists.empty(),
+                CONTEXT,
                 Converters.booleanToNumber()
         );
     }

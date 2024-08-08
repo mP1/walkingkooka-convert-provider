@@ -20,6 +20,7 @@ package walkingkooka.convert.provider;
 import walkingkooka.convert.Converter;
 import walkingkooka.convert.ConverterContext;
 import walkingkooka.plugin.Provider;
+import walkingkooka.plugin.ProviderContext;
 
 import java.util.List;
 import java.util.Optional;
@@ -34,13 +35,15 @@ public interface ConverterProvider extends Provider {
     /**
      * Resolves the given {@link ConverterSelector} to a {@link Converter}.
      */
-    <C extends ConverterContext> Converter<C> converter(final ConverterSelector selector);
+    <C extends ConverterContext> Converter<C> converter(final ConverterSelector selector,
+                                                        final ProviderContext context);
 
     /**
      * Resolves the given {@link ConverterName} to a {@link Converter} with the given parameter values.
      */
     <C extends ConverterContext> Converter<C> converter(final ConverterName name,
-                                                        final List<?> values);
+                                                        final List<?> values,
+                                                        final ProviderContext context);
 
     /**
      * Returns all available {@link ConverterInfo}

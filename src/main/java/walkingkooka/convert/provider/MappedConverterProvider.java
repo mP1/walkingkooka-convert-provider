@@ -20,6 +20,7 @@ package walkingkooka.convert.provider;
 import walkingkooka.convert.Converter;
 import walkingkooka.convert.ConverterContext;
 import walkingkooka.plugin.PluginInfoSetLike;
+import walkingkooka.plugin.ProviderContext;
 import walkingkooka.text.CharacterConstant;
 
 import java.util.List;
@@ -58,22 +59,28 @@ final class MappedConverterProvider implements ConverterProvider {
     }
 
     @Override
-    public <C extends ConverterContext> Converter<C> converter(final ConverterSelector selector) {
+    public <C extends ConverterContext> Converter<C> converter(final ConverterSelector selector,
+                                                               final ProviderContext context) {
         Objects.requireNonNull(selector, "selector");
 
-        return selector.evaluateText(this);
+        return selector.evaluateText(
+                this,
+                context
+        );
     }
 
     @Override
     public <C extends ConverterContext> Converter<C> converter(final ConverterName name,
-                                                               final List<?> values) {
+                                                               final List<?> values,
+                                                               final ProviderContext context) {
         Objects.requireNonNull(name, "name");
         Objects.requireNonNull(values, "values");
 
         return this.provider.converter(
                 this.nameMapper.apply(name)
                 .orElseThrow(() -> new IllegalArgumentException("Unknown converter " + name)),
-                values
+                values,
+                context
         );
     }
 
