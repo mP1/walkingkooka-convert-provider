@@ -19,9 +19,13 @@ package walkingkooka.convert.provider;
 
 import org.junit.jupiter.api.Test;
 import walkingkooka.collect.list.Lists;
+import walkingkooka.plugin.ProviderContext;
+import walkingkooka.plugin.ProviderContexts;
 import walkingkooka.reflect.JavaVisibility;
 
 public final class EmptyConverterProviderTest implements ConverterProviderTesting<EmptyConverterProvider> {
+
+    private final static ProviderContext CONTEXT = ProviderContexts.fake();
 
     @Test
     public void testConverterInfos() {
@@ -30,14 +34,18 @@ public final class EmptyConverterProviderTest implements ConverterProviderTestin
 
     @Test
     public void testConverterSelectorFails() {
-        this.converterFails("unknown");
+        this.converterFails(
+                "unknown",
+                CONTEXT
+        );
     }
 
     @Test
     public void testConverterNameFails() {
         this.converterFails(
                 ConverterName.with("unknown"),
-                Lists.empty()
+                Lists.empty(),
+                CONTEXT
         );
     }
 

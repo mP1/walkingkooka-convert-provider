@@ -23,6 +23,7 @@ import walkingkooka.convert.ConverterContext;
 import walkingkooka.naming.Name;
 import walkingkooka.plugin.ProviderCollection;
 import walkingkooka.plugin.ProviderCollectionProviderGetter;
+import walkingkooka.plugin.ProviderContext;
 
 import java.util.List;
 import java.util.Objects;
@@ -47,18 +48,21 @@ final class ConverterProviderCollection implements ConverterProvider {
                     @Override
                     public Converter<?> get(final ConverterProvider provider,
                                             final ConverterName name,
-                                            final List<?> values) {
+                                            final List<?> values,
+                                            final ProviderContext context) {
                         return Cast.to(
                                 provider.converter(
                                         name,
-                                        values
+                                        values,
+                                        context
                                 )
                         );
                     }
 
                     @Override
                     public Converter<?> get(final ConverterProvider provider,
-                                            final ConverterSelector selector) {
+                                            final ConverterSelector selector,
+                                            final ProviderContext context) {
                         throw new UnsupportedOperationException();
                     }
                 },
@@ -69,20 +73,26 @@ final class ConverterProviderCollection implements ConverterProvider {
     }
 
     @Override
-    public <C extends ConverterContext> Converter<C> converter(final ConverterSelector selector) {
+    public <C extends ConverterContext> Converter<C> converter(final ConverterSelector selector,
+                                                               final ProviderContext context) {
         Objects.requireNonNull(selector, "selector");
 
-        return selector.evaluateText(this);
+        return selector.evaluateText(
+                this,
+                context
+        );
     }
 
     @Override
     public <C extends ConverterContext> Converter<C> converter(final ConverterName name,
-                                                               final List<?> values) {
+                                                               final List<?> values,
+                                                               final ProviderContext context) {
         return Cast.to(
                 this.providers.get(
-                name,
-                values
-            )
+                        name,
+                        values,
+                        context
+                )
         );
     }
 

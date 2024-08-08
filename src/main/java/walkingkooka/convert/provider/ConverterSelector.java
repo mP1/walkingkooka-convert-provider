@@ -21,6 +21,7 @@ import walkingkooka.convert.Converter;
 import walkingkooka.convert.ConverterContext;
 import walkingkooka.plugin.PluginSelector;
 import walkingkooka.plugin.PluginSelectorLike;
+import walkingkooka.plugin.ProviderContext;
 import walkingkooka.text.cursor.TextCursor;
 import walkingkooka.text.cursor.parser.Parser;
 import walkingkooka.text.cursor.parser.ParserContext;
@@ -141,13 +142,15 @@ public final class ConverterSelector implements PluginSelectorLike<ConverterName
      * </pre>
      * The {@link ConverterProvider} will be used to fetch {@link Converter} with any parameters.
      */
-    public <C extends ConverterContext> Converter<C> evaluateText(final ConverterProvider provider) {
+    public <C extends ConverterContext> Converter<C> evaluateText(final ConverterProvider provider,
+                                                                  final ProviderContext context) {
         Objects.requireNonNull(provider, "provider");
+        Objects.requireNonNull(provider, "context");
 
         return this.selector.evaluateText(
-                (final TextCursor cursor, final ParserContext context) -> CONVERTER_NAME_PARSER.parse(
+                (final TextCursor cursor, final ParserContext c) -> CONVERTER_NAME_PARSER.parse(
                         cursor,
-                        context
+                        c
                 ).map(
                         (final ParserToken token) ->
                                 ConverterName.with(
@@ -155,7 +158,8 @@ public final class ConverterSelector implements PluginSelectorLike<ConverterName
                                                 .value()
                                 )
                 ),
-                provider::converter
+                provider::converter,
+                context
         );
     }
 

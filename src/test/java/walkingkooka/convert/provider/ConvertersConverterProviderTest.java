@@ -22,6 +22,8 @@ import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.set.Sets;
 import walkingkooka.convert.Converter;
 import walkingkooka.convert.Converters;
+import walkingkooka.plugin.ProviderContext;
+import walkingkooka.plugin.ProviderContexts;
 import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.reflect.MethodAttributes;
 import walkingkooka.text.CaseKind;
@@ -31,6 +33,8 @@ import java.util.Set;
 
 public final class ConvertersConverterProviderTest implements ConverterProviderTesting<ConvertersConverterProvider> {
 
+    private final static ProviderContext CONTEXT = ProviderContexts.fake();
+
     @Test
     public void testConverterSelectorBooleanToNumber() {
         this.converterAndCheck(
@@ -38,6 +42,7 @@ public final class ConvertersConverterProviderTest implements ConverterProviderT
                         ConverterName.BOOLEAN_TO_NUMBER,
                         ""
                 ),
+                CONTEXT,
                 Converters.booleanToNumber()
         );
     }
@@ -49,6 +54,7 @@ public final class ConvertersConverterProviderTest implements ConverterProviderT
                         ConverterName.CHARACTER_OR_STRING_TO_STRING,
                         ""
                 ),
+                CONTEXT,
                 Converters.characterOrStringToString()
         );
     }
@@ -58,6 +64,7 @@ public final class ConvertersConverterProviderTest implements ConverterProviderT
         this.converterAndCheck(
                 ConverterName.BOOLEAN_TO_NUMBER,
                 Lists.empty(),
+                CONTEXT,
                 Converters.booleanToNumber()
         );
     }
@@ -67,6 +74,7 @@ public final class ConvertersConverterProviderTest implements ConverterProviderT
         this.converterAndCheck(
                 ConverterName.CHARACTER_OR_STRING_TO_STRING,
                 Lists.empty(),
+                CONTEXT,
                 Converters.characterOrStringToString()
         );
     }
@@ -112,7 +120,10 @@ public final class ConvertersConverterProviderTest implements ConverterProviderT
                 ConverterSelector.with(
                         converterName,
                         ""
-                ).evaluateText(provider);
+                ).evaluateText(
+                        provider,
+                        CONTEXT
+                );
             } catch (final Exception fail) {
                 missing.add(converterName);
             }
@@ -135,6 +146,7 @@ public final class ConvertersConverterProviderTest implements ConverterProviderT
     public void testConverterCollection() {
         this.converterAndCheck(
                 ConverterSelector.parse("collection (boolean-to-number)"),
+                CONTEXT,
                 Converters.collection(
                         Lists.of(
                                 Converters.booleanToNumber()
@@ -147,6 +159,7 @@ public final class ConvertersConverterProviderTest implements ConverterProviderT
     public void testConverterCollection2() {
         this.converterAndCheck(
                 ConverterSelector.parse("collection (boolean-to-number, character-or-string-to-string)"),
+                CONTEXT,
                 Converters.collection(
                         Lists.of(
                                 Converters.booleanToNumber(),
