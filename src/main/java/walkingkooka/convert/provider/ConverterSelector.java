@@ -82,6 +82,7 @@ public final class ConverterSelector implements PluginSelectorLike<ConverterName
      * Would be setter that returns a {@link ConverterSelector} with the given {@link ConverterName},
      * creating a new instance if necessary.
      */
+    @Override
     public ConverterSelector setName(final ConverterName name) {
         Objects.requireNonNull(name, "name");
 
