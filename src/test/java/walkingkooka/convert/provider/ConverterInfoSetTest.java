@@ -67,6 +67,18 @@ public final class ConverterInfoSetTest implements PluginInfoSetLikeTesting<Conv
         );
     }
 
+    // ImmutableSetTesting..............................................................................................
+
+    @Override
+    public void testSetElementsNullFails() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void testSetElementsSame() {
+        throw new UnsupportedOperationException();
+    }
+
     // json.............................................................................................................
 
     @Test
