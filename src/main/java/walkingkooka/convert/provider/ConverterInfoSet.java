@@ -18,6 +18,7 @@
 package walkingkooka.convert.provider;
 
 import walkingkooka.collect.iterator.Iterators;
+import walkingkooka.collect.set.ImmutableSetDefaults;
 import walkingkooka.collect.set.Sets;
 import walkingkooka.net.http.server.hateos.HateosResource;
 import walkingkooka.plugin.PluginInfoSetLike;
@@ -30,15 +31,13 @@ import java.util.AbstractSet;
 import java.util.Iterator;
 import java.util.Objects;
 import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * A read only {@link Set} of {@link ConverterInfo} sorted by {@link ConverterName}.
  */
-public final class ConverterInfoSet extends AbstractSet<ConverterInfo> implements PluginInfoSetLike<ConverterInfo, ConverterName> {
-
-    static {
-        Sets.registerImmutableType(ConverterInfoSet.class);
-    }
+public final class ConverterInfoSet extends AbstractSet<ConverterInfo> implements PluginInfoSetLike<ConverterInfo, ConverterName>,
+        ImmutableSetDefaults<ConverterInfoSet, ConverterInfo> {
 
     /**
      * Parses the CSV text into a {@link ConverterInfoSet}.
@@ -81,6 +80,23 @@ public final class ConverterInfoSet extends AbstractSet<ConverterInfo> implement
     }
 
     private final Set<ConverterInfo> infos;
+
+    // ImmutableSet.....................................................................................................
+
+    @Override
+    public ConverterInfoSet setElements(final Set<ConverterInfo> elements) {
+        final ConverterInfoSet copy = with(elements);
+        return this.equals(copy) ?
+                this :
+                copy;
+    }
+
+    @Override
+    public Set<ConverterInfo> toSet() {
+        return new TreeSet<>(
+                this.infos
+        );
+    }
 
     // json.............................................................................................................
 
