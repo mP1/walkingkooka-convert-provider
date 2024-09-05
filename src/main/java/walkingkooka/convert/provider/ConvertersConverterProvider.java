@@ -20,6 +20,7 @@ package walkingkooka.convert.provider;
 import walkingkooka.Cast;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.set.Sets;
+import walkingkooka.collect.set.SortedSets;
 import walkingkooka.convert.Converter;
 import walkingkooka.convert.ConverterContext;
 import walkingkooka.convert.Converters;
@@ -50,7 +51,7 @@ final class ConvertersConverterProvider implements ConverterProvider {
                 ConverterName.NAME_TO_FACTORY.keySet()
                         .stream()
                         .map(ConvertersConverterProvider::nameToConverterInfo)
-                        .collect(Collectors.toCollection(Sets::sorted))
+                        .collect(Collectors.toCollection(SortedSets::tree))
         );
     }
 

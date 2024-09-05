@@ -20,6 +20,7 @@ package walkingkooka.convert.provider;
 import walkingkooka.collect.iterator.Iterators;
 import walkingkooka.collect.set.ImmutableSetDefaults;
 import walkingkooka.collect.set.Sets;
+import walkingkooka.collect.set.SortedSets;
 import walkingkooka.net.http.server.hateos.HateosResource;
 import walkingkooka.plugin.PluginInfoSetLike;
 import walkingkooka.tree.json.JsonNode;
@@ -56,7 +57,7 @@ public final class ConverterInfoSet extends AbstractSet<ConverterInfo> implement
     public static ConverterInfoSet with(final Set<ConverterInfo> infos) {
         Objects.requireNonNull(infos, "infos");
 
-        final Set<ConverterInfo> copy = Sets.sorted(HateosResource.comparator());
+        final Set<ConverterInfo> copy = SortedSets.tree(HateosResource.comparator());
         copy.addAll(infos);
         return new ConverterInfoSet(copy);
     }
