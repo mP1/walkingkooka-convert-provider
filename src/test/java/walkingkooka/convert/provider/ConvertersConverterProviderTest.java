@@ -20,6 +20,7 @@ package walkingkooka.convert.provider;
 import org.junit.jupiter.api.Test;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.set.Sets;
+import walkingkooka.collect.set.SortedSets;
 import walkingkooka.convert.Converter;
 import walkingkooka.convert.Converters;
 import walkingkooka.plugin.ProviderContext;
@@ -30,6 +31,7 @@ import walkingkooka.text.CaseKind;
 
 import java.lang.reflect.Method;
 import java.util.Set;
+import java.util.SortedSet;
 
 public final class ConvertersConverterProviderTest implements ConverterProviderTesting<ConvertersConverterProvider> {
 
@@ -81,7 +83,7 @@ public final class ConvertersConverterProviderTest implements ConverterProviderT
 
     @Test
     public void testConverterFactoryMethodWithoutParameters() {
-        final Set<ConverterName> missing = Sets.sorted();
+        final Set<ConverterName> missing = SortedSets.tree();
         final ConvertersConverterProvider provider = this.createConverterProvider();
         int i = 0;
 

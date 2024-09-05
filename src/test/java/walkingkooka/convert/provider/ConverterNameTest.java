@@ -19,6 +19,7 @@ package walkingkooka.convert.provider;
 
 import org.junit.jupiter.api.Test;
 import walkingkooka.collect.set.Sets;
+import walkingkooka.collect.set.SortedSets;
 import walkingkooka.convert.Converters;
 import walkingkooka.plugin.PluginNameTesting;
 import walkingkooka.reflect.FieldAttributes;
@@ -50,7 +51,7 @@ final public class ConverterNameTest implements PluginNameTesting<ConverterName>
                         throw new Error(rethrow);
                     }
                 }).filter(n -> false == "fake".equals(n))
-                .collect(Collectors.toCollection(Sets::sorted));
+                .collect(Collectors.toCollection(SortedSets::tree));
 
         final Set<String> factoryNames = Arrays.stream(Converters.class.getMethods())
                 .filter(m -> MethodAttributes.STATIC.is(m))
@@ -58,7 +59,7 @@ final public class ConverterNameTest implements PluginNameTesting<ConverterName>
                 .map(m -> m.getName())
                 .filter(n -> false == "fake".equals(n))
                 .map(m -> CaseKind.CAMEL.change(m, CaseKind.KEBAB).toLowerCase())
-                .collect(Collectors.toCollection(Sets::sorted));
+                .collect(Collectors.toCollection(SortedSets::tree));
 
         this.checkEquals(
                 CharacterConstant.with('\n').toSeparatedString(
