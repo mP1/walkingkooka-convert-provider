@@ -37,8 +37,7 @@ import java.util.TreeSet;
 /**
  * A read only {@link Set} of {@link ConverterInfo} sorted by {@link ConverterName}.
  */
-public final class ConverterInfoSet extends AbstractSet<ConverterInfo> implements PluginInfoSetLike<ConverterInfo, ConverterName>,
-        ImmutableSetDefaults<ConverterInfoSet, ConverterInfo> {
+public final class ConverterInfoSet extends AbstractSet<ConverterInfo> implements PluginInfoSetLike<ConverterInfoSet, ConverterInfo, ConverterName> {
 
     /**
      * Parses the CSV text into a {@link ConverterInfoSet}.
