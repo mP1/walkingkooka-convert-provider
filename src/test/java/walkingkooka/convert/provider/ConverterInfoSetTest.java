@@ -59,11 +59,16 @@ public final class ConverterInfoSetTest implements PluginInfoSetLikeTesting<Conv
     public ConverterInfoSet createSet() {
         return ConverterInfoSet.with(
                 Sets.of(
-                        ConverterInfo.with(
-                                Url.parseAbsolute("https://example.com/Converter123"),
-                                ConverterName.with("Converter123")
-                        )
+                        this.info()
                 )
+        );
+    }
+
+    @Override
+    public ConverterInfo info() {
+        return ConverterInfo.with(
+                Url.parseAbsolute("https://example.com/Converter123"),
+                ConverterName.with("Converter123")
         );
     }
 

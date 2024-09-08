@@ -39,6 +39,10 @@ import java.util.TreeSet;
  */
 public final class ConverterInfoSet extends AbstractSet<ConverterInfo> implements PluginInfoSetLike<ConverterInfoSet, ConverterInfo, ConverterName> {
 
+    public final static ConverterInfoSet EMPTY = new ConverterInfoSet(
+            Sets.empty()
+    );
+
     /**
      * Parses the CSV text into a {@link ConverterInfoSet}.
      */
@@ -58,7 +62,9 @@ public final class ConverterInfoSet extends AbstractSet<ConverterInfo> implement
 
         final Set<ConverterInfo> copy = SortedSets.tree(HateosResource.comparator());
         copy.addAll(infos);
-        return new ConverterInfoSet(copy);
+        return copy.isEmpty() ?
+                EMPTY :
+                new ConverterInfoSet(copy);
     }
 
     private ConverterInfoSet(final Set<ConverterInfo> infos) {
