@@ -110,7 +110,7 @@ public final class ConverterInfo implements PluginInfoLike<ConverterInfo, Conver
         return PluginInfoLike.unmarshall(
                 node,
                 context,
-                ConverterName.class,
+                ConverterName::with,
                 ConverterInfo::with
         );
     }
