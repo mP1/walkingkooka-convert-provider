@@ -96,22 +96,17 @@ public final class ConverterInfoSetTest implements PluginInfoSetLikeTesting<Conv
 
     @Test
     public void testMarshallNotEmpty2() {
-        final ConverterInfoSet set = ConverterInfoSet.with(
-                Sets.of(
-                        ConverterInfo.with(
-                                Url.parseAbsolute("https://example.com/test123"),
-                                ConverterName.with("test123")
-                        )
-                )
-        );
-
         this.marshallAndCheck(
-                set,
+                ConverterInfoSet.with(
+                        Sets.of(
+                                ConverterInfo.with(
+                                        Url.parseAbsolute("https://example.com/test123"),
+                                        ConverterName.with("test123")
+                                )
+                        )
+                ),
                 "[\n" +
-                        "  {\n" +
-                        "    \"url\": \"https://example.com/test123\",\n" +
-                        "    \"name\": \"test123\"\n" +
-                        "  }\n" +
+                        "  \"https://example.com/test123 test123\"\n" +
                         "]"
         );
     }
