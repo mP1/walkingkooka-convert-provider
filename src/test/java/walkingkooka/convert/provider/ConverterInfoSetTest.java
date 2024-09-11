@@ -89,7 +89,7 @@ public final class ConverterInfoSetTest implements PluginInfoSetLikeTesting<Conv
     @Test
     public void testMarshallEmpty() {
         this.marshallAndCheck(
-                ConverterInfoSet.with(Sets.empty()),
+                ConverterInfoSet.EMPTY,
                 JsonNode.array()
         );
     }

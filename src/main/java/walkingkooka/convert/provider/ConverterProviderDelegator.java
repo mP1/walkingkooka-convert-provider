@@ -48,7 +48,7 @@ public interface ConverterProviderDelegator extends ConverterProvider {
     }
 
     @Override
-    default Set<ConverterInfo> converterInfos() {
+    default ConverterInfoSet converterInfos() {
         return this.converterProvider()
                 .converterInfos();
     }

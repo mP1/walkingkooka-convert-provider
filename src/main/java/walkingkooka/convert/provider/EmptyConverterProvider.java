@@ -57,8 +57,8 @@ final class EmptyConverterProvider implements ConverterProvider{
     }
 
     @Override
-    public Set<ConverterInfo> converterInfos() {
-        return Sets.empty();
+    public ConverterInfoSet converterInfos() {
+        return ConverterInfoSet.EMPTY;
     }
 
     @Override

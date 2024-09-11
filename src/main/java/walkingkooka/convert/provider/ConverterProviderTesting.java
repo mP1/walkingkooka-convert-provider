@@ -217,6 +217,8 @@ public interface ConverterProviderTesting<T extends ConverterProvider> extends P
         );
     }
 
+    // converterInfos...................................................................................................
+
     default void converterInfosAndCheck(final ConverterInfo... expected) {
         this.converterInfosAndCheck(
                 this.createConverterProvider(),
@@ -228,13 +230,15 @@ public interface ConverterProviderTesting<T extends ConverterProvider> extends P
                                         final ConverterInfo... expected) {
         this.converterInfosAndCheck(
                 provider,
-                Sets.of(
-                        expected
+                ConverterInfoSet.with(
+                        Sets.of(
+                                expected
+                        )
                 )
         );
     }
 
-    default void converterInfosAndCheck(final Set<ConverterInfo> expected) {
+    default void converterInfosAndCheck(final ConverterInfoSet expected) {
         this.converterInfosAndCheck(
                 this.createConverterProvider(),
                 expected
@@ -242,7 +246,7 @@ public interface ConverterProviderTesting<T extends ConverterProvider> extends P
     }
 
     default void converterInfosAndCheck(final ConverterProvider provider,
-                                        final Set<ConverterInfo> expected) {
+                                        final ConverterInfoSet expected) {
         this.checkEquals(
                 expected,
                 provider.converterInfos(),
