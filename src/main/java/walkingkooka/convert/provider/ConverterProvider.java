@@ -48,5 +48,5 @@ public interface ConverterProvider extends Provider {
     /**
      * Returns all available {@link ConverterInfo}
      */
-    Set<ConverterInfo> converterInfos();
+    ConverterInfoSet converterInfos();
 }

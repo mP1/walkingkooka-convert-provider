@@ -41,7 +41,7 @@ public class FakeConverterProvider implements ConverterProvider {
     }
 
     @Override
-    public Set<ConverterInfo> converterInfos() {
+    public ConverterInfoSet converterInfos() {
         throw new UnsupportedOperationException();
     }
 }

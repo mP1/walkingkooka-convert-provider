@@ -52,9 +52,11 @@ final class MappedConverterProvider implements ConverterProvider {
                 provider.converterInfos()
         );
         this.provider = provider;
-        this.infos = PluginInfoSetLike.merge(
-                infos,
-                provider.converterInfos()
+        this.infos = ConverterInfoSet.with(
+                PluginInfoSetLike.merge(
+                        infos,
+                        provider.converterInfos()
+                )
         );
     }
 
@@ -95,11 +97,11 @@ final class MappedConverterProvider implements ConverterProvider {
     private final ConverterProvider provider;
 
     @Override
-    public Set<ConverterInfo> converterInfos() {
+    public ConverterInfoSet converterInfos() {
         return this.infos;
     }
 
-    private final Set<ConverterInfo> infos;
+    private final ConverterInfoSet infos;
 
     @Override
     public String toString() {

@@ -47,11 +47,13 @@ final class ConvertersConverterProvider implements ConverterProvider {
     private ConvertersConverterProvider() {
         super();
 
-        this.infos = Sets.readOnly(
-                ConverterName.NAME_TO_FACTORY.keySet()
-                        .stream()
-                        .map(ConvertersConverterProvider::nameToConverterInfo)
-                        .collect(Collectors.toCollection(SortedSets::tree))
+        this.infos = ConverterInfoSet.with(
+                Sets.readOnly(
+                        ConverterName.NAME_TO_FACTORY.keySet()
+                                .stream()
+                                .map(ConvertersConverterProvider::nameToConverterInfo)
+                                .collect(Collectors.toCollection(SortedSets::tree))
+                )
         );
     }
 
@@ -98,11 +100,11 @@ final class ConvertersConverterProvider implements ConverterProvider {
     }
 
     @Override
-    public Set<ConverterInfo> converterInfos() {
+    public ConverterInfoSet converterInfos() {
         return this.infos;
     }
 
-    private final Set<ConverterInfo> infos;
+    private final ConverterInfoSet infos;
 
     @Override
     public String toString() {

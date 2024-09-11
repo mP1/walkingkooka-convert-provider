@@ -153,8 +153,8 @@ public final class MappedConverterProviderTest implements ConverterProviderTesti
                     }
 
                     @Override
-                    public Set<ConverterInfo> converterInfos() {
-                        return Sets.of(
+                    public ConverterInfoSet converterInfos() {
+                        return ConverterInfoSet.EMPTY.concat(
                                 ConverterInfo.with(
                                         URL,
                                         ORIGINAL_NAME

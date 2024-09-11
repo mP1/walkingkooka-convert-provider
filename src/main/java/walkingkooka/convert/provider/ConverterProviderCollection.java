@@ -97,8 +97,10 @@ final class ConverterProviderCollection implements ConverterProvider {
     }
 
     @Override
-    public Set<ConverterInfo> converterInfos() {
-        return this.providers.infos();
+    public ConverterInfoSet converterInfos() {
+        return ConverterInfoSet.with(
+                this.providers.infos()
+        );
     }
 
     private final ProviderCollection<ConverterProvider, ConverterName, ConverterInfo, ConverterSelector, Converter<?>> providers;
