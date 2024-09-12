@@ -19,6 +19,7 @@ package walkingkooka.convert.provider;
 
 import walkingkooka.convert.Converter;
 import walkingkooka.convert.ConverterContext;
+import walkingkooka.plugin.FilteredProviderGuard;
 import walkingkooka.plugin.ProviderContext;
 
 import java.util.List;
@@ -39,6 +40,10 @@ final class FilteredConverterProvider implements ConverterProvider {
 
     private FilteredConverterProvider(final ConverterProvider provider,
                                       final ConverterInfoSet infos) {
+        this.guard = FilteredProviderGuard.with(
+                infos.names(),
+                (n) -> new IllegalArgumentException("Unknown converter " + n)
+        );
         this.provider = provider;
         this.infos = infos;
     }
@@ -56,12 +61,18 @@ final class FilteredConverterProvider implements ConverterProvider {
     public <C extends ConverterContext> Converter<C> converter(final ConverterName name,
                                                                final List<?> values,
                                                                final ProviderContext context) {
+        Objects.requireNonNull(name, "name");
+        Objects.requireNonNull(values, "values");
+        Objects.requireNonNull(context, "context");
+
         return this.provider.converter(
-                name,
+                this.guard.name(name),
                 values,
                 context
         );
     }
+
+    private final FilteredProviderGuard<ConverterName, ConverterSelector> guard;
 
     private final ConverterProvider provider;
 
