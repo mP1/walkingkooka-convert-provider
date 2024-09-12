@@ -52,8 +52,18 @@ public final class FilteredConverterProviderTest implements ConverterProviderTes
 
     @Test
     public void testConverterWithFilteredFails() {
+        final ConverterName NAME = ConverterName.BOOLEAN_TO_NUMBER;
+
+        this.converterAndCheck(
+                ConverterProviders.converters(),
+                NAME,
+                Lists.empty(),
+                CONTEXT,
+                Converters.booleanToNumber()
+        );
+
         this.converterFails(
-                ConverterName.with("unknown123"),
+                NAME,
                 Lists.empty(),
                 CONTEXT
         );
