@@ -66,6 +66,17 @@ public final class ConverterProviders implements PublicStaticHelper {
     }
 
     /**
+     * {@see FilteredConverterProvider}
+     */
+    public static ConverterProvider filtered(final ConverterProvider provider,
+                                             final ConverterInfoSet infos) {
+        return FilteredConverterProvider.with(
+                provider,
+                infos
+        );
+    }
+
+    /**
      * {@see MappedConverterProvider}
      */
     public static ConverterProvider mapped(final Set<ConverterInfo> infos,
