@@ -31,6 +31,7 @@ import walkingkooka.plugin.ProviderContext;
 import walkingkooka.plugin.ProviderContexts;
 import walkingkooka.reflect.JavaVisibility;
 
+import java.lang.invoke.CallSite;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -67,7 +68,7 @@ public final class MappedConverterProviderTest implements ConverterProviderTesti
         assertThrows(
                 NullPointerException.class,
                 () -> MappedConverterProvider.with(
-                        Sets.empty(),
+                        ConverterInfoSet.EMPTY,
                         null
                 )
         );
@@ -130,7 +131,7 @@ public final class MappedConverterProviderTest implements ConverterProviderTesti
     @Override
     public MappedConverterProvider createConverterProvider() {
         return MappedConverterProvider.with(
-                Sets.of(
+                ConverterInfoSet.EMPTY.concat(
                         ConverterInfo.with(
                                 URL,
                                 NAME

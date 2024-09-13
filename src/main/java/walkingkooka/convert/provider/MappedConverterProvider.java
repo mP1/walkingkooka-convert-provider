@@ -21,6 +21,7 @@ import walkingkooka.convert.Converter;
 import walkingkooka.convert.ConverterContext;
 import walkingkooka.plugin.PluginInfoSetLike;
 import walkingkooka.plugin.ProviderContext;
+import walkingkooka.plugin.ProviderMapper;
 import walkingkooka.text.CharacterConstant;
 
 import java.util.List;
@@ -34,7 +35,7 @@ import java.util.function.Function;
  */
 final class MappedConverterProvider implements ConverterProvider {
 
-    static MappedConverterProvider with(final Set<ConverterInfo> infos,
+    static MappedConverterProvider with(final ConverterInfoSet infos,
                                         final ConverterProvider provider) {
         Objects.requireNonNull(infos, "infos");
         Objects.requireNonNull(provider, "provider");
@@ -45,18 +46,13 @@ final class MappedConverterProvider implements ConverterProvider {
         );
     }
 
-    private MappedConverterProvider(final Set<ConverterInfo> infos,
+    private MappedConverterProvider(final ConverterInfoSet infos,
                                     final ConverterProvider provider) {
-        this.nameMapper = PluginInfoSetLike.nameMapper(
-                infos,
-                provider.converterInfos()
-        );
         this.provider = provider;
-        this.infos = ConverterInfoSet.with(
-                PluginInfoSetLike.merge(
-                        infos,
-                        provider.converterInfos()
-                )
+        this.mapper = ProviderMapper.with(
+                infos,
+                provider.converterInfos(),
+                (n) -> new IllegalArgumentException("Unknown converter " + n)
         );
     }
 
@@ -79,17 +75,11 @@ final class MappedConverterProvider implements ConverterProvider {
         Objects.requireNonNull(values, "values");
 
         return this.provider.converter(
-                this.nameMapper.apply(name)
-                .orElseThrow(() -> new IllegalArgumentException("Unknown converter " + name)),
+                this.mapper.name(name),
                 values,
                 context
         );
     }
-
-    /**
-     * A function that maps incoming {@link ConverterName} to the target provider after mapping them across using the {@link walkingkooka.net.AbsoluteUrl}.
-     */
-    private final Function<ConverterName, Optional<ConverterName>> nameMapper;
 
     /**
      * The original wrapped {@link ConverterProvider}.
@@ -98,16 +88,13 @@ final class MappedConverterProvider implements ConverterProvider {
 
     @Override
     public ConverterInfoSet converterInfos() {
-        return this.infos;
+        return this.mapper.infos();
     }
 
-    private final ConverterInfoSet infos;
+    private final ProviderMapper<ConverterName, ConverterSelector, ConverterInfo, ConverterInfoSet> mapper;
 
     @Override
     public String toString() {
-        return CharacterConstant.COMMA.toSeparatedString(
-                this.infos,
-                ConverterInfo::toString
-        );
+        return this.mapper.toString();
     }
 }
