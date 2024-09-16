@@ -21,7 +21,6 @@ import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
 import walkingkooka.ToStringTesting;
 import walkingkooka.collect.list.Lists;
-import walkingkooka.collect.set.Sets;
 import walkingkooka.convert.Converter;
 import walkingkooka.convert.ConverterContext;
 import walkingkooka.convert.Converters;
@@ -31,16 +30,13 @@ import walkingkooka.plugin.ProviderContext;
 import walkingkooka.plugin.ProviderContexts;
 import walkingkooka.reflect.JavaVisibility;
 
-import java.lang.invoke.CallSite;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
-import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public final class MappedConverterProviderTest implements ConverterProviderTesting<MappedConverterProvider>,
-        ToStringTesting<MappedConverterProvider> {
+public final class FilteredMappedConverterProviderTest implements ConverterProviderTesting<FilteredMappedConverterProvider>,
+        ToStringTesting<FilteredMappedConverterProvider> {
 
     private final static AbsoluteUrl URL = Url.parseAbsolute("https://example.com/converter123");
 
@@ -56,7 +52,7 @@ public final class MappedConverterProviderTest implements ConverterProviderTesti
     public void testWithNullViewFails() {
         assertThrows(
                 NullPointerException.class,
-                () -> MappedConverterProvider.with(
+                () -> FilteredMappedConverterProvider.with(
                         null,
                         ConverterProviders.fake()
                 )
@@ -67,7 +63,7 @@ public final class MappedConverterProviderTest implements ConverterProviderTesti
     public void testWithNullProviderFails() {
         assertThrows(
                 NullPointerException.class,
-                () -> MappedConverterProvider.with(
+                () -> FilteredMappedConverterProvider.with(
                         ConverterInfoSet.EMPTY,
                         null
                 )
@@ -129,8 +125,8 @@ public final class MappedConverterProviderTest implements ConverterProviderTesti
     }
 
     @Override
-    public MappedConverterProvider createConverterProvider() {
-        return MappedConverterProvider.with(
+    public FilteredMappedConverterProvider createConverterProvider() {
+        return FilteredMappedConverterProvider.with(
                 ConverterInfoSet.EMPTY.concat(
                         ConverterInfo.with(
                                 URL,
@@ -169,8 +165,8 @@ public final class MappedConverterProviderTest implements ConverterProviderTesti
     // Class............................................................................................................
 
     @Override
-    public Class<MappedConverterProvider> type() {
-        return MappedConverterProvider.class;
+    public Class<FilteredMappedConverterProvider> type() {
+        return FilteredMappedConverterProvider.class;
     }
 
     @Override

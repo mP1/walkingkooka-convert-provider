@@ -28,21 +28,21 @@ import java.util.Objects;
 /**
  * A {@link ConverterProvider} that wraps a view of new {@link ConverterName} to a wrapped {@link ConverterProvider}.
  */
-final class MappedConverterProvider implements ConverterProvider {
+final class FilteredMappedConverterProvider implements ConverterProvider {
 
-    static MappedConverterProvider with(final ConverterInfoSet infos,
-                                        final ConverterProvider provider) {
+    static FilteredMappedConverterProvider with(final ConverterInfoSet infos,
+                                                final ConverterProvider provider) {
         Objects.requireNonNull(infos, "infos");
         Objects.requireNonNull(provider, "provider");
 
-        return new MappedConverterProvider(
+        return new FilteredMappedConverterProvider(
                 infos,
                 provider
         );
     }
 
-    private MappedConverterProvider(final ConverterInfoSet infos,
-                                    final ConverterProvider provider) {
+    private FilteredMappedConverterProvider(final ConverterInfoSet infos,
+                                            final ConverterProvider provider) {
         this.provider = provider;
         this.mapper = FilteredProviderMapper.with(
                 infos,
