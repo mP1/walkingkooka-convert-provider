@@ -19,16 +19,11 @@ package walkingkooka.convert.provider;
 
 import walkingkooka.convert.Converter;
 import walkingkooka.convert.ConverterContext;
-import walkingkooka.plugin.PluginInfoSetLike;
+import walkingkooka.plugin.FilteredProviderMapper;
 import walkingkooka.plugin.ProviderContext;
-import walkingkooka.plugin.ProviderMapper;
-import walkingkooka.text.CharacterConstant;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
-import java.util.Set;
-import java.util.function.Function;
 
 /**
  * A {@link ConverterProvider} that wraps a view of new {@link ConverterName} to a wrapped {@link ConverterProvider}.
@@ -49,7 +44,7 @@ final class MappedConverterProvider implements ConverterProvider {
     private MappedConverterProvider(final ConverterInfoSet infos,
                                     final ConverterProvider provider) {
         this.provider = provider;
-        this.mapper = ProviderMapper.with(
+        this.mapper = FilteredProviderMapper.with(
                 infos,
                 provider.converterInfos(),
                 (n) -> new IllegalArgumentException("Unknown converter " + n)
@@ -91,7 +86,7 @@ final class MappedConverterProvider implements ConverterProvider {
         return this.mapper.infos();
     }
 
-    private final ProviderMapper<ConverterName, ConverterSelector, ConverterInfo, ConverterInfoSet> mapper;
+    private final FilteredProviderMapper<ConverterName, ConverterSelector, ConverterInfo, ConverterInfoSet> mapper;
 
     @Override
     public String toString() {
