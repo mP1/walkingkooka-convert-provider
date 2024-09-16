@@ -77,11 +77,11 @@ public final class ConverterProviders implements PublicStaticHelper {
     }
 
     /**
-     * {@see MappedConverterProvider}
+     * {@see FilteredMappedConverterProvider}
      */
-    public static ConverterProvider mapped(final ConverterInfoSet infos,
-                                           final ConverterProvider provider) {
-        return MappedConverterProvider.with(
+    public static ConverterProvider filteredMapped(final ConverterInfoSet infos,
+                                                   final ConverterProvider provider) {
+        return FilteredMappedConverterProvider.with(
                 infos,
                 provider
         );
