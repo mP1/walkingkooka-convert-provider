@@ -20,7 +20,7 @@ package walkingkooka.convert.provider;
 import walkingkooka.convert.Converter;
 import walkingkooka.convert.ConverterContext;
 import walkingkooka.plugin.*;
-import walkingkooka.plugin.RenamingProviderMapper;
+import walkingkooka.plugin.MergedProviderMapper;
 
 import java.util.List;
 import java.util.Objects;
@@ -28,23 +28,23 @@ import java.util.Objects;
 /**
  * A {@link ConverterProvider} that supports renaming {@link ConverterName} before invoking a wrapped {@link ConverterProvider}.
  */
-final class RenamedMappedConverterProvider implements ConverterProvider {
+final class MergedMappedConverterProvider implements ConverterProvider {
 
-    static RenamedMappedConverterProvider with(final ConverterInfoSet infos,
-                                               final ConverterProvider provider) {
+    static MergedMappedConverterProvider with(final ConverterInfoSet infos,
+                                              final ConverterProvider provider) {
         Objects.requireNonNull(infos, "infos");
         Objects.requireNonNull(provider, "provider");
 
-        return new RenamedMappedConverterProvider(
+        return new MergedMappedConverterProvider(
                 infos,
                 provider
         );
     }
 
-    private RenamedMappedConverterProvider(final ConverterInfoSet infos,
-                                           final ConverterProvider provider) {
+    private MergedMappedConverterProvider(final ConverterInfoSet infos,
+                                          final ConverterProvider provider) {
         this.provider = provider;
-        this.mapper = RenamingProviderMapper.with(
+        this.mapper = MergedProviderMapper.with(
                 infos,
                 provider.converterInfos(),
                 (n) -> new IllegalArgumentException("Unknown converter " + n)
@@ -86,7 +86,7 @@ final class RenamedMappedConverterProvider implements ConverterProvider {
         return this.mapper.infos();
     }
 
-    private final RenamingProviderMapper<ConverterName, ConverterSelector, ConverterInfo, ConverterInfoSet> mapper;
+    private final MergedProviderMapper<ConverterName, ConverterSelector, ConverterInfo, ConverterInfoSet> mapper;
 
     @Override
     public String toString() {
