@@ -39,17 +39,17 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public final class RenamedMappedConverterProviderTest implements ConverterProviderTesting<RenamedMappedConverterProvider>,
         ToStringTesting<RenamedMappedConverterProvider> {
 
-    private final static AbsoluteUrl RENAME_URL = Url.parseAbsolute("https://example.com/rename-converter123");
+    private final static AbsoluteUrl RENAMED_URL = Url.parseAbsolute("https://example.com/renamed-converter-111");
 
-    private final static ConverterName RENAME_NAME = ConverterName.with("different-rename-converter-name-123");
+    private final static ConverterName RENAMED_RENAME_NAME = ConverterName.with("renamed-rename-converter-111");
 
-    private final static ConverterName RENAME_PROVIDER_NAME = ConverterName.with("rename-converter-123");
+    private final static ConverterName RENAMED_PROVIDER_NAME = ConverterName.with("renamed-provider-only-converter-111");
 
     private final static Converter<ConverterContext> RENAME_CONVERTER = Converters.fake();
 
-    private final static AbsoluteUrl PROVIDER_ONLY_URL = Url.parseAbsolute("https://example.com/provider-only-converter123");
+    private final static AbsoluteUrl PROVIDER_ONLY_URL = Url.parseAbsolute("https://example.com/provider-only-converter-222");
 
-    private final static ConverterName PROVIDER_ONLY_NAME = ConverterName.with("provider-converter-123");
+    private final static ConverterName PROVIDER_ONLY_NAME = ConverterName.with("provider-only-converter-222");
 
     private final static Converter<ConverterContext> PROVIDER_ONLY_CONVERTER = Converters.fake();
 
@@ -88,7 +88,7 @@ public final class RenamedMappedConverterProviderTest implements ConverterProvid
     @Test
     public void testConverterSelectorWithRename() {
         this.converterAndCheck(
-                ConverterSelector.parse("" + RENAME_NAME),
+                ConverterSelector.parse("" + RENAMED_RENAME_NAME),
                 CONTEXT,
                 RENAME_CONVERTER
         );
@@ -115,7 +115,7 @@ public final class RenamedMappedConverterProviderTest implements ConverterProvid
     @Test
     public void testConverterNameWithRename() {
         this.converterAndCheck(
-                RENAME_NAME,
+                RENAMED_RENAME_NAME,
                 Lists.empty(),
                 CONTEXT,
                 RENAME_CONVERTER
@@ -136,8 +136,8 @@ public final class RenamedMappedConverterProviderTest implements ConverterProvid
     public void testInfos() {
         this.converterInfosAndCheck(
                 ConverterInfo.with(
-                        RENAME_URL,
-                        RENAME_NAME
+                        RENAMED_URL,
+                        RENAMED_RENAME_NAME
                 ),
                 ConverterInfo.with(
                         PROVIDER_ONLY_URL,
@@ -150,7 +150,7 @@ public final class RenamedMappedConverterProviderTest implements ConverterProvid
     public void testToString() {
         this.toStringAndCheck(
                 this.createConverterProvider(),
-                "https://example.com/rename-converter123 different-rename-converter-name-123,https://example.com/provider-only-converter123 provider-converter-123"
+                "https://example.com/provider-only-converter-222 provider-only-converter-222,https://example.com/renamed-converter-111 renamed-rename-converter-111"
         );
     }
 
@@ -160,12 +160,8 @@ public final class RenamedMappedConverterProviderTest implements ConverterProvid
                 ConverterInfoSet.with(
                         Sets.of(
                                 ConverterInfo.with(
-                                        RENAME_URL,
-                                        RENAME_NAME
-                                ),
-                                ConverterInfo.with(
-                                        PROVIDER_ONLY_URL,
-                                        PROVIDER_ONLY_NAME
+                                        RENAMED_URL,
+                                        RENAMED_RENAME_NAME
                                 )
                         )
                 ),
@@ -179,7 +175,7 @@ public final class RenamedMappedConverterProviderTest implements ConverterProvid
                         Objects.requireNonNull(values, "values");
                         Objects.requireNonNull(context, "context");
 
-                        if (name.equals(RENAME_PROVIDER_NAME)) {
+                        if (name.equals(RENAMED_PROVIDER_NAME)) {
                             return Cast.to(RENAME_CONVERTER);
                         }
                         if (name.equals(PROVIDER_ONLY_NAME)) {
@@ -193,8 +189,8 @@ public final class RenamedMappedConverterProviderTest implements ConverterProvid
                         return ConverterInfoSet.with(
                                 Sets.of(
                                         ConverterInfo.with(
-                                                RENAME_URL,
-                                                RENAME_PROVIDER_NAME
+                                                RENAMED_URL,
+                                                RENAMED_PROVIDER_NAME
                                         ),
                                         ConverterInfo.with(
                                                 PROVIDER_ONLY_URL,
