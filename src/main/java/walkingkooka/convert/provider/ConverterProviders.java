@@ -88,6 +88,17 @@ public final class ConverterProviders implements PublicStaticHelper {
     }
 
     /**
+     * {@see RenamedMappedConverterProvider}
+     */
+    public static ConverterProvider renamedMapped(final ConverterInfoSet infos,
+                                                  final ConverterProvider provider) {
+        return RenamedMappedConverterProvider.with(
+                infos,
+                provider
+        );
+    }
+
+    /**
      * Stop creation
      */
     private ConverterProviders() {
