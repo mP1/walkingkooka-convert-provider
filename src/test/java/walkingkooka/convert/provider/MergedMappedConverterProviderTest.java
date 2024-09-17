@@ -36,8 +36,8 @@ import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public final class RenamedMappedConverterProviderTest implements ConverterProviderTesting<RenamedMappedConverterProvider>,
-        ToStringTesting<RenamedMappedConverterProvider> {
+public final class MergedMappedConverterProviderTest implements ConverterProviderTesting<MergedMappedConverterProvider>,
+        ToStringTesting<MergedMappedConverterProvider> {
 
     private final static AbsoluteUrl RENAMED_URL = Url.parseAbsolute("https://example.com/renamed-converter-111");
 
@@ -59,7 +59,7 @@ public final class RenamedMappedConverterProviderTest implements ConverterProvid
     public void testWithNullInfosFails() {
         assertThrows(
                 NullPointerException.class,
-                () -> RenamedMappedConverterProvider.with(
+                () -> MergedMappedConverterProvider.with(
                         null,
                         ConverterProviders.fake()
                 )
@@ -70,7 +70,7 @@ public final class RenamedMappedConverterProviderTest implements ConverterProvid
     public void testWithNullProviderFails() {
         assertThrows(
                 NullPointerException.class,
-                () -> RenamedMappedConverterProvider.with(
+                () -> MergedMappedConverterProvider.with(
                         ConverterInfoSet.EMPTY,
                         null
                 )
@@ -155,8 +155,8 @@ public final class RenamedMappedConverterProviderTest implements ConverterProvid
     }
 
     @Override
-    public RenamedMappedConverterProvider createConverterProvider() {
-        return RenamedMappedConverterProvider.with(
+    public MergedMappedConverterProvider createConverterProvider() {
+        return MergedMappedConverterProvider.with(
                 ConverterInfoSet.with(
                         Sets.of(
                                 ConverterInfo.with(
@@ -206,8 +206,8 @@ public final class RenamedMappedConverterProviderTest implements ConverterProvid
     // Class............................................................................................................
 
     @Override
-    public Class<RenamedMappedConverterProvider> type() {
-        return RenamedMappedConverterProvider.class;
+    public Class<MergedMappedConverterProvider> type() {
+        return MergedMappedConverterProvider.class;
     }
 
     @Override
