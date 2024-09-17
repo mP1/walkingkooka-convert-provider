@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * A {@link ConverterProvider} that supports renameing {@link ConverterName} before invoking a wrapped {@link ConverterProvider}.
+ * A {@link ConverterProvider} that supports renaming {@link ConverterName} before invoking a wrapped {@link ConverterProvider}.
  */
 final class RenamedMappedConverterProvider implements ConverterProvider {
 
