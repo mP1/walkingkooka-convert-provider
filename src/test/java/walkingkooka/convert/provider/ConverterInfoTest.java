@@ -17,12 +17,33 @@
 
 package walkingkooka.convert.provider;
 
+import org.junit.jupiter.api.Test;
 import walkingkooka.net.AbsoluteUrl;
+import walkingkooka.net.Url;
 import walkingkooka.plugin.PluginInfoLikeTesting;
+import walkingkooka.tree.expression.ExpressionFunctionName;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 public final class ConverterInfoTest implements PluginInfoLikeTesting<ConverterInfo, ConverterName> {
+
+    @Test
+    public void testSetNameWithDifferent() {
+        final AbsoluteUrl url = Url.parseAbsolute("https://example/converter123");
+        final ConverterName different = ConverterName.with("different");
+
+        this.setNameAndCheck(
+                ConverterInfo.with(
+                        url,
+                        ConverterName.with("original-converter-name")
+                ),
+                different,
+                ConverterInfo.with(
+                        url,
+                        different
+                )
+        );
+    }
 
     // ClassTesting.....................................................................................................
 

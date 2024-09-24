@@ -70,6 +70,18 @@ public final class ConverterInfo implements PluginInfoLike<ConverterInfo, Conver
         return this.name;
     }
 
+    @Override
+    public ConverterInfo setName(final ConverterName name) {
+        Objects.requireNonNull(name, "name");
+
+        return this.name.equals(name) ?
+                this :
+                new ConverterInfo(
+                        this.url,
+                        name
+                );
+    }
+
     private final ConverterName name;
 
     // Object...........................................................................................................
