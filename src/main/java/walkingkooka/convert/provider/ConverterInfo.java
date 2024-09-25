@@ -20,78 +20,80 @@ package walkingkooka.convert.provider;
 import walkingkooka.Cast;
 import walkingkooka.convert.Converter;
 import walkingkooka.net.AbsoluteUrl;
-import walkingkooka.net.Url;
+import walkingkooka.net.http.server.hateos.HateosResource;
+import walkingkooka.plugin.PluginInfo;
 import walkingkooka.plugin.PluginInfoLike;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeContext;
+import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
-import java.util.Objects;
-
 /**
- * Provides a few bits of info describing a {@link Converter}. The {@link AbsoluteUrl} must be a unique identifier,
- * with the {@link ConverterName} being a shorter human friendly reference.
+ * Captures a unique {@link AbsoluteUrl} and {@link ConverterName} for a {@link Converter}.
  */
-public final class ConverterInfo implements PluginInfoLike<ConverterInfo, ConverterName> {
+public final class ConverterInfo implements PluginInfoLike<ConverterInfo, ConverterName>,
+        HateosResource<ConverterName> {
 
     public static ConverterInfo parse(final String text) {
-        return PluginInfoLike.parse(
-                text,
-                ConverterName::with,
-                ConverterInfo::with
+        return new ConverterInfo(
+                PluginInfo.parse(
+                        text,
+                        ConverterName::with
+                )
         );
     }
 
     public static ConverterInfo with(final AbsoluteUrl url,
                                      final ConverterName name) {
         return new ConverterInfo(
-                Objects.requireNonNull(url, "url"),
-                Objects.requireNonNull(name, "name")
+                PluginInfo.with(
+                        url,
+                        name
+                )
         );
     }
 
-    private ConverterInfo(final AbsoluteUrl url,
-                          final ConverterName name) {
-        this.url = url;
-        this.name = name;
+    private ConverterInfo(final PluginInfo<ConverterName> pluginInfo) {
+        this.pluginInfo = pluginInfo;
     }
+
+    // HasAbsoluteUrl...................................................................................................
 
     @Override
     public AbsoluteUrl url() {
-        return this.url;
+        return this.pluginInfo.url();
     }
-
-    private final AbsoluteUrl url;
 
     // HasName..........................................................................................................
 
     @Override
     public ConverterName name() {
-        return this.name;
+        return this.pluginInfo.name();
     }
 
     @Override
     public ConverterInfo setName(final ConverterName name) {
-        Objects.requireNonNull(name, "name");
-
-        return this.name.equals(name) ?
+        return this.name().equals(name) ?
                 this :
                 new ConverterInfo(
-                        this.url,
-                        name
+                        this.pluginInfo.setName(name)
                 );
     }
 
-    private final ConverterName name;
+    private final PluginInfo<ConverterName> pluginInfo;
+
+    // Comparable.......................................................................................................
+
+    @Override
+    public int compareTo(final ConverterInfo other) {
+        return this.pluginInfo.compareTo(other.pluginInfo);
+    }
 
     // Object...........................................................................................................
 
     @Override
     public int hashCode() {
-        return Objects.hash(
-                this.url,
-                this.name
-        );
+        return this.pluginInfo.hashCode();
     }
 
     @Override
@@ -102,40 +104,38 @@ public final class ConverterInfo implements PluginInfoLike<ConverterInfo, Conver
     }
 
     private boolean equals0(final ConverterInfo other) {
-        return this.url.equals(other.url) &&
-                this.name.equals(other.name);
+        return this.pluginInfo.equals(other.pluginInfo);
     }
 
     @Override
     public String toString() {
-        return PluginInfoLike.toString(this);
+        return this.pluginInfo.toString();
     }
 
     // Json.............................................................................................................
 
     static void register() {
+        // helps force registry of json marshaller
+    }
 
+    private JsonNode marshall(final JsonNodeMarshallContext context) {
+        return JsonNode.string(this.toString());
     }
 
     static ConverterInfo unmarshall(final JsonNode node,
                                     final JsonNodeUnmarshallContext context) {
-        return PluginInfoLike.unmarshall(
-                node,
-                context,
-                ConverterName::with,
-                ConverterInfo::with
+        return ConverterInfo.parse(
+                node.stringOrFail()
         );
     }
 
     static {
-        Url.parseAbsoluteOrRelative("/");
-        ConverterName.with("Hello"); // force json registry
-
         JsonNodeContext.register(
                 JsonNodeContext.computeTypeName(ConverterInfo.class),
                 ConverterInfo::unmarshall,
                 ConverterInfo::marshall,
                 ConverterInfo.class
         );
+        ConverterName.with("hello"); // trigger static init and json marshall/unmarshall registry
     }
 }
