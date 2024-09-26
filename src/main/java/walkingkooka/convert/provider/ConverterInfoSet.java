@@ -17,12 +17,13 @@
 
 package walkingkooka.convert.provider;
 
-import walkingkooka.collect.iterator.Iterators;
-import walkingkooka.collect.set.ImmutableSetDefaults;
+import walkingkooka.collect.set.ImmutableSet;
 import walkingkooka.collect.set.Sets;
-import walkingkooka.collect.set.SortedSets;
-import walkingkooka.net.http.server.hateos.HateosResource;
+import walkingkooka.net.AbsoluteUrl;
+import walkingkooka.net.UrlFragment;
+import walkingkooka.plugin.PluginInfoSet;
 import walkingkooka.plugin.PluginInfoSetLike;
+import walkingkooka.text.printer.IndentingPrinter;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeContext;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
@@ -32,7 +33,6 @@ import java.util.AbstractSet;
 import java.util.Iterator;
 import java.util.Objects;
 import java.util.Set;
-import java.util.TreeSet;
 
 /**
  * A read only {@link Set} of {@link ConverterInfo} sorted by {@link ConverterName}.
@@ -40,82 +40,151 @@ import java.util.TreeSet;
 public final class ConverterInfoSet extends AbstractSet<ConverterInfo> implements PluginInfoSetLike<ConverterInfoSet, ConverterInfo, ConverterName> {
 
     public final static ConverterInfoSet EMPTY = new ConverterInfoSet(
-            Sets.empty()
+            PluginInfoSet.with(
+                    Sets.<ConverterInfo>empty()
+            )
     );
 
-    /**
-     * Parses the CSV text into a {@link ConverterInfoSet}.
-     */
     public static ConverterInfoSet parse(final String text) {
-        return PluginInfoSetLike.parse(
-                text,
-                ConverterInfo::parse,
-                ConverterInfoSet::with
+        return new ConverterInfoSet(
+                PluginInfoSet.parse(
+                        text,
+                        ConverterInfo::parse
+                )
         );
     }
 
-    /**
-     * Factory that creates a {@link ConverterInfoSet} with the provided {@link ConverterInfo}.
-     */
     public static ConverterInfoSet with(final Set<ConverterInfo> infos) {
         Objects.requireNonNull(infos, "infos");
 
-        final Set<ConverterInfo> copy = SortedSets.tree(HateosResource.comparator());
-        copy.addAll(infos);
-        return copy.isEmpty() ?
+        final PluginInfoSet<ConverterName, ConverterInfo> pluginInfoSet = PluginInfoSet.with(infos);
+        return pluginInfoSet.isEmpty() ?
                 EMPTY :
-                new ConverterInfoSet(copy);
+                new ConverterInfoSet(pluginInfoSet);
     }
 
-    private ConverterInfoSet(final Set<ConverterInfo> infos) {
-        this.infos = infos;
+    private ConverterInfoSet(final PluginInfoSet<ConverterName, ConverterInfo> pluginInfoSet) {
+        this.pluginInfoSet = pluginInfoSet;
+    }
+
+    // PluginInfoSetLike................................................................................................
+
+    @Override
+    public Set<ConverterName> names() {
+        return this.pluginInfoSet.names();
+    }
+
+    @Override
+    public Set<AbsoluteUrl> url() {
+        return this.pluginInfoSet.url();
+    }
+
+    @Override
+    public UrlFragment urlFragment() {
+        return this.pluginInfoSet.urlFragment();
+    }
+
+    @Override
+    public ConverterInfoSet filter(final ConverterInfoSet infos) {
+        return this.setElements(
+                this.pluginInfoSet.filter(
+                        infos.pluginInfoSet
+                )
+        );
+    }
+
+    @Override
+    public ConverterInfoSet renameIfPresent(ConverterInfoSet renameInfos) {
+        return this.setElements(
+                this.pluginInfoSet.renameIfPresent(
+                        renameInfos.pluginInfoSet
+                )
+        );
+    }
+
+    @Override
+    public ConverterInfoSet concat(final ConverterInfo info) {
+        return this.setElements(
+                this.pluginInfoSet.concat(info)
+        );
+    }
+
+    @Override
+    public ConverterInfoSet delete(final ConverterInfo info) {
+        return this.setElements(
+                this.pluginInfoSet.delete(info)
+        );
+    }
+
+    @Override
+    public ConverterInfoSet replace(final ConverterInfo oldInfo,
+                                    final ConverterInfo newInfo) {
+        return this.setElements(
+                this.pluginInfoSet.replace(
+                        oldInfo,
+                        newInfo
+                )
+        );
+    }
+
+    @Override
+    public ImmutableSet<ConverterInfo> setElementsFailIfDifferent(final Set<ConverterInfo> infos) {
+        return this.setElements(
+                this.pluginInfoSet.setElementsFailIfDifferent(
+                        infos
+                )
+        );
+    }
+
+    @Override
+    public ConverterInfoSet setElements(final Set<ConverterInfo> infos) {
+        final ConverterInfoSet after = new ConverterInfoSet(
+                this.pluginInfoSet.setElements(infos)
+        );
+        return this.pluginInfoSet.equals(infos) ?
+                this :
+                after;
+    }
+
+    @Override
+    public Set<ConverterInfo> toSet() {
+        return this.pluginInfoSet.toSet();
+    }
+
+    // TreePrintable....................................................................................................
+
+    @Override
+    public String text() {
+        return this.pluginInfoSet.text();
+    }
+
+    // TreePrintable....................................................................................................
+
+    @Override
+    public void printTree(final IndentingPrinter printer) {
+        printer.println(this.getClass().getSimpleName());
+        printer.indent();
+        {
+            this.pluginInfoSet.printTree(printer);
+        }
+        printer.outdent();
     }
 
     // AbstractSet......................................................................................................
 
     @Override
     public Iterator<ConverterInfo> iterator() {
-        return Iterators.readOnly(
-                this.infos.iterator()
-        );
+        return this.pluginInfoSet.iterator();
     }
 
     @Override
     public int size() {
-        return this.infos.size();
+        return this.pluginInfoSet.size();
     }
 
-    private final Set<ConverterInfo> infos;
-
-    // ImmutableSet.....................................................................................................
-
-    @Override
-    public ConverterInfoSet setElements(final Set<ConverterInfo> elements) {
-        final ConverterInfoSet copy = with(elements);
-        return this.equals(copy) ?
-                this :
-                copy;
-    }
-
-    @Override
-    public Set<ConverterInfo> toSet() {
-        return new TreeSet<>(
-                this.infos
-        );
-    }
+    private final PluginInfoSet<ConverterName, ConverterInfo> pluginInfoSet;
 
     // json.............................................................................................................
-
-    static {
-        ConverterInfo.register(); // force registry of json marshaller
-
-        JsonNodeContext.register(
-                JsonNodeContext.computeTypeName(ConverterInfoSet.class),
-                ConverterInfoSet::unmarshall,
-                ConverterInfoSet::marshall,
-                ConverterInfoSet.class
-        );
-    }
 
     private JsonNode marshall(final JsonNodeMarshallContext context) {
         return context.marshallCollection(this);
@@ -129,6 +198,15 @@ public final class ConverterInfoSet extends AbstractSet<ConverterInfo> implement
                         node,
                         ConverterInfo.class
                 )
+        );
+    }
+
+    static {
+        JsonNodeContext.register(
+                JsonNodeContext.computeTypeName(ConverterInfoSet.class),
+                ConverterInfoSet::unmarshall,
+                ConverterInfoSet::marshall,
+                ConverterInfoSet.class
         );
     }
 }
