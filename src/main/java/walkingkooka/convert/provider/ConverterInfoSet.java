@@ -202,6 +202,8 @@ public final class ConverterInfoSet extends AbstractSet<ConverterInfo> implement
     }
 
     static {
+        ConverterInfo.register(); // force json registry
+
         JsonNodeContext.register(
                 JsonNodeContext.computeTypeName(ConverterInfoSet.class),
                 ConverterInfoSet::unmarshall,
