@@ -89,8 +89,9 @@ public final class ConverterSelectorTest implements PluginSelectorLikeTesting<Co
 
         this.checkEquals(
                 new InvalidCharacterException(
-                        text, text.indexOf(' ') + 1)
-                        .getMessage(),
+                        text,
+                        text.indexOf(' ')
+                ).getMessage(),
                 thrown.getMessage()
         );
     }
@@ -146,8 +147,8 @@ public final class ConverterSelectorTest implements PluginSelectorLikeTesting<Co
     @Test
     public void testEvaluateTextOpenParensFail() {
         this.evaluateTextFails(
-                NAME + " (",
-                "Invalid character '(' at 25 in \"super-magic-converter123 (\""
+                NAME + "(",
+                "Invalid character '(' at 24 in \"super-magic-converter123(\""
         );
     }
 
@@ -202,8 +203,8 @@ public final class ConverterSelectorTest implements PluginSelectorLikeTesting<Co
     @Test
     public void testEvaluateTextDoubleMissingClosingParensFail() {
         this.evaluateTextFails(
-                NAME + " (1",
-                "Invalid character '1' at 26 in \"super-magic-converter123 (1\""
+                NAME + "(1",
+                "Invalid character '1' at 25 in \"super-magic-converter123(1\""
         );
     }
 
