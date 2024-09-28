@@ -125,6 +125,13 @@ public final class ConverterInfoSet extends AbstractSet<ConverterInfo> implement
     }
 
     @Override
+    public ConverterInfoSet deleteAll(final Collection<ConverterInfo> infos) {
+        return this.setElements(
+                this.pluginInfoSet.deleteAll(infos)
+        );
+    }
+
+    @Override
     public ConverterInfoSet replace(final ConverterInfo oldInfo,
                                     final ConverterInfo newInfo) {
         return this.setElements(
