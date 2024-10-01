@@ -47,7 +47,7 @@ final class MergedMappedConverterProvider implements ConverterProvider {
         this.mapper = MergedProviderMapper.with(
                 infos,
                 provider.converterInfos(),
-                (n) -> new IllegalArgumentException("Unknown converter " + n)
+                ConverterPluginHelper.INSTANCE
         );
     }
 

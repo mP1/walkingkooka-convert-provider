@@ -42,7 +42,7 @@ final class FilteredConverterProvider implements ConverterProvider {
                                       final ConverterInfoSet infos) {
         this.guard = FilteredProviderGuard.with(
                 infos.names(),
-                (n) -> new IllegalArgumentException("Unknown converter " + n)
+                ConverterPluginHelper.INSTANCE
         );
         this.provider = provider;
         this.infos = infos;
