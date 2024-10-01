@@ -47,7 +47,7 @@ final class FilteredMappedConverterProvider implements ConverterProvider {
         this.mapper = FilteredProviderMapper.with(
                 infos,
                 provider.converterInfos(),
-                (n) -> new IllegalArgumentException("Unknown converter " + n)
+                ConverterPluginHelper.INSTANCE
         );
     }
 
