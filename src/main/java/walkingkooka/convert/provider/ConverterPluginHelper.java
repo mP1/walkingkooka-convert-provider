@@ -105,6 +105,11 @@ final class ConverterPluginHelper implements PluginHelper<ConverterName, Convert
     }
 
     @Override
+    public String label() {
+        return "Converter";
+    }
+
+    @Override
     public String toString() {
         return this.getClass().getSimpleName();
     }
