@@ -17,13 +17,24 @@
 
 package walkingkooka.convert.provider;
 
+import walkingkooka.plugin.PluginAlias;
 import walkingkooka.plugin.PluginHelperTesting;
 import walkingkooka.reflect.JavaVisibility;
 
-public final class ConverterPluginHelperTest implements PluginHelperTesting<ConverterPluginHelper, ConverterName, ConverterInfo, ConverterInfoSet, ConverterSelector> {
+public final class ConverterPluginHelperTest implements PluginHelperTesting<ConverterPluginHelper,
+        ConverterName,
+        ConverterInfo,
+        ConverterInfoSet,
+        ConverterSelector,
+        PluginAlias<ConverterName, ConverterSelector>> {
+
     @Override
     public ConverterPluginHelper createPluginHelper() {
         return ConverterPluginHelper.INSTANCE;
+    }
+
+    public ConverterName createName() {
+        return ConverterName.LOCAL_DATE_TIME_TO_LOCAL_DATE;
     }
 
     // class............................................................................................................
