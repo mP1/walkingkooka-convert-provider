@@ -33,6 +33,7 @@ public final class ConverterPluginHelperTest implements PluginHelperTesting<Conv
         return ConverterPluginHelper.INSTANCE;
     }
 
+    @Override
     public ConverterName createName() {
         return ConverterName.LOCAL_DATE_TIME_TO_LOCAL_DATE;
     }
