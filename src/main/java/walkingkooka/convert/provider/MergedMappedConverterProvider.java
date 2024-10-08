@@ -86,7 +86,7 @@ final class MergedMappedConverterProvider implements ConverterProvider {
         return this.mapper.infos();
     }
 
-    private final MergedProviderMapper<ConverterName, ConverterInfo, ConverterInfoSet, ConverterSelector> mapper;
+    private final MergedProviderMapper<ConverterName, ConverterInfo, ConverterInfoSet, ConverterSelector, PluginAlias<ConverterName, ConverterSelector>> mapper;
 
     @Override
     public String toString() {

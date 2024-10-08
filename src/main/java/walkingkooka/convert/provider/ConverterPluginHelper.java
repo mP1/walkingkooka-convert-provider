@@ -20,6 +20,7 @@ package walkingkooka.convert.provider;
 import walkingkooka.collect.set.Sets;
 import walkingkooka.naming.Name;
 import walkingkooka.net.AbsoluteUrl;
+import walkingkooka.plugin.PluginAlias;
 import walkingkooka.plugin.PluginHelper;
 import walkingkooka.text.cursor.TextCursor;
 import walkingkooka.text.cursor.parser.ParserContext;
@@ -33,7 +34,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
 
-final class ConverterPluginHelper implements PluginHelper<ConverterName, ConverterInfo, ConverterInfoSet, ConverterSelector> {
+final class ConverterPluginHelper implements PluginHelper<ConverterName, ConverterInfo, ConverterInfoSet, ConverterSelector, PluginAlias<ConverterName, ConverterSelector>> {
 
     final static ConverterPluginHelper INSTANCE = new ConverterPluginHelper();
 
@@ -102,6 +103,18 @@ final class ConverterPluginHelper implements PluginHelper<ConverterName, Convert
     @Override
     public ConverterSelector parseSelector(final String text) {
         return ConverterSelector.parse(text);
+    }
+
+    @Override
+    public PluginAlias<ConverterName, ConverterSelector> alias(final ConverterName name,
+                                                               final Optional<ConverterSelector> selector,
+                                                               final Optional<AbsoluteUrl> url) {
+        PluginAlias.with(
+                name,
+                selector,
+                url
+        );
+        throw new UnsupportedOperationException();
     }
 
     @Override

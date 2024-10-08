@@ -20,6 +20,7 @@ package walkingkooka.convert.provider;
 import walkingkooka.convert.Converter;
 import walkingkooka.convert.ConverterContext;
 import walkingkooka.plugin.FilteredProviderMapper;
+import walkingkooka.plugin.PluginAlias;
 import walkingkooka.plugin.ProviderContext;
 
 import java.util.List;
@@ -86,7 +87,7 @@ final class FilteredMappedConverterProvider implements ConverterProvider {
         return this.mapper.infos();
     }
 
-    private final FilteredProviderMapper<ConverterName, ConverterInfo, ConverterInfoSet, ConverterSelector> mapper;
+    private final FilteredProviderMapper<ConverterName, ConverterInfo, ConverterInfoSet, ConverterSelector, PluginAlias<ConverterName, ConverterSelector>> mapper;
 
     @Override
     public String toString() {
