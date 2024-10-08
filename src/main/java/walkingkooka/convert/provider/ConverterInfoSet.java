@@ -81,11 +81,6 @@ public final class ConverterInfoSet extends AbstractSet<ConverterInfo> implement
     }
 
     @Override
-    public UrlFragment urlFragment() {
-        return this.pluginInfoSet.urlFragment();
-    }
-
-    @Override
     public ConverterInfoSet filter(final ConverterInfoSet infos) {
         return this.setElements(
                 this.pluginInfoSet.filter(
