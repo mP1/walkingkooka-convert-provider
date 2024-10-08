@@ -86,7 +86,7 @@ final class FilteredMappedConverterProvider implements ConverterProvider {
         return this.mapper.infos();
     }
 
-    private final FilteredProviderMapper<ConverterName, ConverterSelector, ConverterInfo, ConverterInfoSet> mapper;
+    private final FilteredProviderMapper<ConverterName, ConverterInfo, ConverterInfoSet, ConverterSelector> mapper;
 
     @Override
     public String toString() {
