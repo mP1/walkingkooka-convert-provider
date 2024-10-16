@@ -37,7 +37,7 @@ import java.util.Set;
 /**
  * A read only {@link Set} of {@link ConverterInfo} sorted by {@link ConverterName}.
  */
-public final class ConverterInfoSet extends AbstractSet<ConverterInfo> implements PluginInfoSetLike<ConverterName, ConverterInfo, ConverterInfoSet> {
+public final class ConverterInfoSet extends AbstractSet<ConverterInfo> implements PluginInfoSetLike<ConverterName, ConverterInfo, ConverterInfoSet, ConverterSelector, ConverterAlias, ConverterAliasSet> {
 
     public final static ConverterInfoSet EMPTY = new ConverterInfoSet(
             PluginInfoSet.with(
