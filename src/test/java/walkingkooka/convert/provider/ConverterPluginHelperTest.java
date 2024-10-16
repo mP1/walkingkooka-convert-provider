@@ -17,7 +17,6 @@
 
 package walkingkooka.convert.provider;
 
-import walkingkooka.plugin.PluginAlias;
 import walkingkooka.plugin.PluginHelperTesting;
 import walkingkooka.reflect.JavaVisibility;
 

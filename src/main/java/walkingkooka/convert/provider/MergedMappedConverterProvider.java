@@ -20,7 +20,6 @@ package walkingkooka.convert.provider;
 import walkingkooka.convert.Converter;
 import walkingkooka.convert.ConverterContext;
 import walkingkooka.plugin.*;
-import walkingkooka.plugin.MergedProviderMapper;
 
 import java.util.List;
 import java.util.Objects;

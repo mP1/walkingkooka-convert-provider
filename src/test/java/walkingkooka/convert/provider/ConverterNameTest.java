@@ -18,7 +18,6 @@
 package walkingkooka.convert.provider;
 
 import org.junit.jupiter.api.Test;
-import walkingkooka.collect.set.Sets;
 import walkingkooka.collect.set.SortedSets;
 import walkingkooka.convert.Converters;
 import walkingkooka.plugin.PluginNameTesting;

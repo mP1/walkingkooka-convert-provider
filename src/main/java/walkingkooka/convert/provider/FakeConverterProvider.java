@@ -22,8 +22,6 @@ import walkingkooka.convert.ConverterContext;
 import walkingkooka.plugin.ProviderContext;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.Set;
 
 public class FakeConverterProvider implements ConverterProvider {
 

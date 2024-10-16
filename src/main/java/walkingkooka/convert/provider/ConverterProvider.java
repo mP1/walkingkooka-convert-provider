@@ -23,8 +23,6 @@ import walkingkooka.plugin.Provider;
 import walkingkooka.plugin.ProviderContext;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.Set;
 
 /**
  * A provider supports listing available {@link ConverterInfo} and fetching implementations using a

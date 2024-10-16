@@ -31,7 +31,6 @@ import walkingkooka.text.CaseKind;
 
 import java.lang.reflect.Method;
 import java.util.Set;
-import java.util.SortedSet;
 
 public final class ConvertersConverterProviderTest implements ConverterProviderTesting<ConvertersConverterProvider> {
 
