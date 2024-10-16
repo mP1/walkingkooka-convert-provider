@@ -17,14 +17,12 @@
 
 package walkingkooka.convert.provider;
 
-import walkingkooka.collect.set.Sets;
 import walkingkooka.convert.Converter;
 import walkingkooka.convert.ConverterContext;
 import walkingkooka.plugin.ProviderContext;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 /**
  * A {@link ConverterProvider} that is empty without any {@link Converter}.
