@@ -28,7 +28,7 @@ import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 import static org.junit.jupiter.api.Assertions.assertSame;
 
-public final class ConverterInfoSetTest implements PluginInfoSetLikeTesting<ConverterName, ConverterInfo, ConverterInfoSet>,
+public final class ConverterInfoSetTest implements PluginInfoSetLikeTesting<ConverterName, ConverterInfo, ConverterInfoSet, ConverterSelector, ConverterAlias, ConverterAliasSet>,
         ClassTesting<ConverterInfoSet> {
 
     @Test
