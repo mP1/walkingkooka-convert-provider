@@ -28,8 +28,8 @@ import java.util.Optional;
 public final class ConverterAlias implements PluginAliasLike<ConverterName, ConverterSelector, ConverterAlias> {
 
     public static ConverterAlias with(final ConverterName name,
-                                               final Optional<ConverterSelector> selector,
-                                               final Optional<AbsoluteUrl> url) {
+                                      final Optional<ConverterSelector> selector,
+                                      final Optional<AbsoluteUrl> url) {
         return new ConverterAlias(
                 PluginAlias.with(
                         name,
