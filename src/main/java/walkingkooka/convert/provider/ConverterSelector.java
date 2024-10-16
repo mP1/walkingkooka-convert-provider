@@ -149,30 +149,11 @@ public final class ConverterSelector implements PluginSelectorLike<ConverterName
         Objects.requireNonNull(provider, "context");
 
         return this.selector.evaluateText(
-                (final TextCursor cursor, final ParserContext c) -> CONVERTER_NAME_PARSER.parse(
-                        cursor,
-                        c
-                ).map(
-                        (final ParserToken token) ->
-                                ConverterName.with(
-                                        token.cast(StringParserToken.class)
-                                                .value()
-                                )
-                ),
+                ConverterPluginHelper.INSTANCE::parseName,
                 provider::converter,
                 context
         );
     }
-
-    /**
-     * A parser that returns a {@link ConverterName}.
-     */
-    private final static Parser<ParserContext> CONVERTER_NAME_PARSER = Parsers.stringInitialAndPartCharPredicate(
-            (c) -> ConverterName.isChar(0, c),
-            (c) -> ConverterName.isChar(1, c),
-            1,
-            ConverterName.MAX_LENGTH
-    );
 
     // Object...........................................................................................................
 
