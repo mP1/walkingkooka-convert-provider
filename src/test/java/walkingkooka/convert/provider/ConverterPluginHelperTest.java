@@ -26,7 +26,8 @@ public final class ConverterPluginHelperTest implements PluginHelperTesting<Conv
         ConverterInfo,
         ConverterInfoSet,
         ConverterSelector,
-        PluginAlias<ConverterName, ConverterSelector>> {
+        ConverterAlias,
+        ConverterAliasSet> {
 
     @Override
     public ConverterPluginHelper createPluginHelper() {

@@ -20,7 +20,6 @@ package walkingkooka.convert.provider;
 import walkingkooka.collect.set.Sets;
 import walkingkooka.naming.Name;
 import walkingkooka.net.AbsoluteUrl;
-import walkingkooka.plugin.PluginAlias;
 import walkingkooka.plugin.PluginHelper;
 import walkingkooka.text.cursor.TextCursor;
 import walkingkooka.text.cursor.parser.ParserContext;
@@ -32,9 +31,15 @@ import java.util.Comparator;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.SortedSet;
 import java.util.function.Function;
 
-final class ConverterPluginHelper implements PluginHelper<ConverterName, ConverterInfo, ConverterInfoSet, ConverterSelector, PluginAlias<ConverterName, ConverterSelector>> {
+final class ConverterPluginHelper implements PluginHelper<ConverterName,
+        ConverterInfo,
+        ConverterInfoSet,
+        ConverterSelector,
+        ConverterAlias,
+        ConverterAliasSet> {
 
     final static ConverterPluginHelper INSTANCE = new ConverterPluginHelper();
 
@@ -106,15 +111,19 @@ final class ConverterPluginHelper implements PluginHelper<ConverterName, Convert
     }
 
     @Override
-    public PluginAlias<ConverterName, ConverterSelector> alias(final ConverterName name,
-                                                               final Optional<ConverterSelector> selector,
-                                                               final Optional<AbsoluteUrl> url) {
-        PluginAlias.with(
+    public ConverterAlias alias(final ConverterName name,
+                                final Optional<ConverterSelector> selector,
+                                final Optional<AbsoluteUrl> url) {
+        return ConverterAlias.with(
                 name,
                 selector,
                 url
         );
-        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public ConverterAliasSet aliasSet(final SortedSet<ConverterAlias> aliases) {
+        return ConverterAliasSet.with(aliases);
     }
 
     @Override
