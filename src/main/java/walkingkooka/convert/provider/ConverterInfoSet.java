@@ -80,6 +80,11 @@ public final class ConverterInfoSet extends AbstractSet<ConverterInfo> implement
     }
 
     @Override
+    public ConverterAliasSet aliasSet() {
+        return ConverterPluginHelper.INSTANCE.toAliasSet(this);
+    }
+
+    @Override
     public ConverterInfoSet filter(final ConverterInfoSet infos) {
         return this.setElements(
                 this.pluginInfoSet.filter(
