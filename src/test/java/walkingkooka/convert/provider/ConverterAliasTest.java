@@ -76,6 +76,29 @@ public final class ConverterAliasTest implements PluginAliasLikeTesting<Converte
         );
     }
 
+    // parse............................................................................................................
+
+    @Test
+    public void testParse() {
+        this.parseStringAndCheck(
+                "alias1 name1 https://example.com",
+                ConverterAlias.with(
+                        ConverterName.with("alias1"),
+                        Optional.of(
+                                ConverterSelector.parse("name1")
+                        ),
+                        Optional.of(
+                                Url.parseAbsolute("https://example.com")
+                        )
+                )
+        );
+    }
+
+    @Override
+    public ConverterAlias parseString(final String text) {
+        return ConverterAlias.parse(text);
+    }
+
     // Comparable.......................................................................................................
 
     @Override

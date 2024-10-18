@@ -20,6 +20,7 @@ package walkingkooka.convert.provider;
 import walkingkooka.collect.set.Sets;
 import walkingkooka.naming.Name;
 import walkingkooka.net.AbsoluteUrl;
+import walkingkooka.plugin.PluginAlias;
 import walkingkooka.plugin.PluginHelper;
 import walkingkooka.text.cursor.TextCursor;
 import walkingkooka.text.cursor.parser.ParserContext;
@@ -119,6 +120,11 @@ final class ConverterPluginHelper implements PluginHelper<ConverterName,
                 selector,
                 url
         );
+    }
+
+    @Override
+    public ConverterAlias alias(final PluginAlias<ConverterName, ConverterSelector> pluginAlias) {
+        return ConverterAlias.with(pluginAlias);
     }
 
     @Override
