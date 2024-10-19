@@ -79,16 +79,16 @@ public final class ConverterAliasSetTest implements PluginAliasSetLikeTesting<Co
     }
 
     @Test
-    public void testAliasWithName() {
-        this.aliasAndCheck(
+    public void testAliasSelectorWithName() {
+        this.aliasSelectorAndCheck(
                 this.createSet(),
                 ConverterName.with("abc")
         );
     }
 
     @Test
-    public void testAliasWithAlias() {
-        this.aliasAndCheck(
+    public void testAliasSelectorWithAlias() {
+        this.aliasSelectorAndCheck(
                 this.createSet(),
                 ConverterName.with("custom-alias"),
                 ConverterSelector.parse("custom(1)")
