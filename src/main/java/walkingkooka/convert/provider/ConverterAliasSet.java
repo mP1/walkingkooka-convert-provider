@@ -95,8 +95,8 @@ public final class ConverterAliasSet extends AbstractSet<ConverterAlias>
     }
 
     @Override
-    public boolean containsNameOrAlias(final ConverterName name) {
-        return this.pluginAliasSet.containsNameOrAlias(name);
+    public boolean containsAliasOrName(final ConverterName aliasOrName) {
+        return this.pluginAliasSet.containsAliasOrName(aliasOrName);
     }
 
     @Override
