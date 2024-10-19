@@ -60,10 +60,10 @@ public final class ConverterAliasSetTest implements PluginAliasSetLikeTesting<Co
     // name.............................................................................................................
 
     @Test
-    public void testNameWithName() {
+    public void testAliasOrNameWithName() {
         final ConverterName abc = ConverterName.with("abc");
 
-        this.nameAndCheck(
+        this.aliasOrNameAndCheck(
                 this.createSet(),
                 abc,
                 abc
@@ -71,8 +71,8 @@ public final class ConverterAliasSetTest implements PluginAliasSetLikeTesting<Co
     }
 
     @Test
-    public void testNameWithAlias() {
-        this.nameAndCheck(
+    public void testAliasOrNameWithAlias() {
+        this.aliasOrNameAndCheck(
                 this.createSet(),
                 ConverterName.with("sunshine-alias")
         );

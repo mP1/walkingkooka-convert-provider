@@ -85,8 +85,8 @@ public final class ConverterAliasSet extends AbstractSet<ConverterAlias>
     }
 
     @Override
-    public Optional<ConverterName> name(final ConverterName name) {
-        return this.pluginAliasSet.name(name);
+    public Optional<ConverterName> aliasOrName(final ConverterName name) {
+        return this.pluginAliasSet.aliasOrName(name);
     }
 
     @Override
