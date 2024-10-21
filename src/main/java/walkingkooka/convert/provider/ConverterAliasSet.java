@@ -23,6 +23,7 @@ import walkingkooka.plugin.PluginAliasSet;
 import walkingkooka.plugin.PluginAliasSetLike;
 import walkingkooka.text.CharacterConstant;
 import walkingkooka.text.printer.IndentingPrinter;
+import walkingkooka.tree.expression.ExpressionFunctionName;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeContext;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
@@ -103,6 +104,20 @@ public final class ConverterAliasSet extends AbstractSet<ConverterAlias>
     public ConverterAliasSet concatOrReplace(final ConverterAlias alias) {
         return new ConverterAliasSet(
                 this.pluginAliasSet.concatOrReplace(alias)
+        );
+    }
+
+    @Override
+    public ConverterAliasSet deleteAliasOrNameAll(final Collection<ConverterName> aliasOrNames) {
+        return this.setElements(
+                this.pluginAliasSet.deleteAliasOrNameAll(aliasOrNames)
+        );
+    }
+
+    @Override
+    public ConverterAliasSet keepAliasOrNameAll(final Collection<ConverterName> aliasOrNames) {
+        return this.setElements(
+                this.pluginAliasSet.keepAliasOrNameAll(aliasOrNames)
         );
     }
 
