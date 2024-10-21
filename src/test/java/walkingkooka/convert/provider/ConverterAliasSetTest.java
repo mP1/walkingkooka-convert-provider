@@ -74,7 +74,8 @@ public final class ConverterAliasSetTest implements PluginAliasSetLikeTesting<Co
     public void testAliasOrNameWithAlias() {
         this.aliasOrNameAndCheck(
                 this.createSet(),
-                ConverterName.with("sunshine-alias")
+                ConverterName.with("sunshine-alias"),
+                ConverterName.with("sunshine")
         );
     }
 
