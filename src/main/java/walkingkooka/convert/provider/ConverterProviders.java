@@ -22,6 +22,7 @@ import walkingkooka.net.AbsoluteUrl;
 import walkingkooka.net.Url;
 import walkingkooka.reflect.PublicStaticHelper;
 
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -36,6 +37,17 @@ public final class ConverterProviders implements PublicStaticHelper {
     public final static AbsoluteUrl BASE_URL = Url.parseAbsolute(
             "https://github.com/mP1/walkingkooka-convert-provider/" + Converter.class.getSimpleName()
     );
+
+    /**
+     * {@see AliasesConverterProvider}
+     */
+    public static ConverterProvider aliases(final ConverterAliasSet aliases,
+                                            final ConverterProvider provider) {
+        return AliasesConverterProvider.with(
+                aliases,
+                provider
+        );
+    }
 
     /**
      * {@see ConverterProviderCollection}
