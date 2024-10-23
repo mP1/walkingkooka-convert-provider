@@ -32,10 +32,10 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public interface ConverterProviderTesting<T extends ConverterProvider> extends ProviderTesting<T> {
 
 
-    // converter(ConverterSelector)................................................................................
+    // converter(ConverterSelector).....................................................................................
 
     @Test
-    default void testConverterWithNullSelectorFails() {
+    default void testConverterSelectorWithNullSelectorFails() {
         assertThrows(
                 NullPointerException.class,
                 () -> this.createConverterProvider()
@@ -47,7 +47,7 @@ public interface ConverterProviderTesting<T extends ConverterProvider> extends P
     }
 
     @Test
-    default void testConverterWithNullContextFails() {
+    default void testConverterSelectorWithNullContextFails() {
         assertThrows(
                 NullPointerException.class,
                 () -> this.createConverterProvider()
@@ -136,7 +136,7 @@ public interface ConverterProviderTesting<T extends ConverterProvider> extends P
     // converter(ConverterName, List<?>)................................................................................
 
     @Test
-    default void testConverterWithNullNameFails() {
+    default void testConverterNameWithNullNameFails() {
         assertThrows(
                 NullPointerException.class,
                 () -> this.createConverterProvider()
@@ -149,7 +149,7 @@ public interface ConverterProviderTesting<T extends ConverterProvider> extends P
     }
 
     @Test
-    default void testConverterWithNullValueFails() {
+    default void testConverterNameWithNullValueFails() {
         assertThrows(
                 NullPointerException.class,
                 () -> this.createConverterProvider()
@@ -157,6 +157,19 @@ public interface ConverterProviderTesting<T extends ConverterProvider> extends P
                                 ConverterName.BOOLEAN_TO_NUMBER,
                                 null,
                                 ProviderContexts.fake()
+                        )
+        );
+    }
+
+    @Test
+    default void testConverterNameWithNullContextFails() {
+        assertThrows(
+                NullPointerException.class,
+                () -> this.createConverterProvider()
+                        .converter(
+                                ConverterName.BOOLEAN_TO_NUMBER,
+                                Lists.empty(),
+                                null
                         )
         );
     }
