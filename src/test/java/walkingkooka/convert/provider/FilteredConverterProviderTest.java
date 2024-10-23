@@ -33,7 +33,7 @@ public final class FilteredConverterProviderTest implements ConverterProviderTes
     private final static ProviderContext CONTEXT = ProviderContexts.fake();
 
     @Test
-    public void testConverter() {
+    public void testConverterName() {
         final ConverterName name = ConverterName.LOCAL_DATE_TIME_TO_NUMBER;
         final List<?> values = Lists.empty();
 
