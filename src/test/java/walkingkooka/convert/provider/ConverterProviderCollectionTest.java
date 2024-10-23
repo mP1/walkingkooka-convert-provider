@@ -40,13 +40,27 @@ public final class ConverterProviderCollectionTest implements ConverterProviderT
     }
 
     @Test
-    public void testGet() {
+    public void testConverterName() {
         final ConverterProvider provider = ConverterProviders.converters();
 
         this.converterAndCheck(
                 ConverterProviderCollection.with(Sets.of(provider)),
                 ConverterName.BOOLEAN_TO_NUMBER,
                 Lists.empty(),
+                CONTEXT,
+                Converters.booleanToNumber()
+        );
+    }
+
+    @Test
+    public void testConverterSelector() {
+        final ConverterProvider provider = ConverterProviders.converters();
+
+        this.converterAndCheck(
+                ConverterProviderCollection.with(Sets.of(provider)),
+                ConverterSelector.parse(
+                        "" + ConverterName.BOOLEAN_TO_NUMBER
+                ),
                 CONTEXT,
                 Converters.booleanToNumber()
         );
