@@ -68,6 +68,7 @@ final class FilteredMappedConverterProvider implements ConverterProvider {
                                                                final ProviderContext context) {
         Objects.requireNonNull(name, "name");
         Objects.requireNonNull(values, "values");
+        Objects.requireNonNull(context, "context");
 
         return this.provider.converter(
                 this.mapper.name(name),
