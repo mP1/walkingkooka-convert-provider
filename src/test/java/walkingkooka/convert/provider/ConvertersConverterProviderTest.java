@@ -121,7 +121,7 @@ public final class ConvertersConverterProviderTest implements ConverterProviderT
                 ConverterSelector.with(
                         converterName,
                         ""
-                ).evaluateText(
+                ).evaluateValueText(
                         provider,
                         CONTEXT
                 );

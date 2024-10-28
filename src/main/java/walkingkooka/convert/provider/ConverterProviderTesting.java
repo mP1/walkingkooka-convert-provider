@@ -80,7 +80,7 @@ public interface ConverterProviderTesting<T extends ConverterProvider> extends P
                                 final ProviderContext context) {
         assertThrows(
                 IllegalArgumentException.class,
-                () -> selector.evaluateText(
+                () -> selector.evaluateValueText(
                         provider,
                         context
                 )

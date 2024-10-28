@@ -56,7 +56,7 @@ final class FilteredMappedConverterProvider implements ConverterProvider {
                                                                final ProviderContext context) {
         Objects.requireNonNull(selector, "selector");
 
-        return selector.evaluateText(
+        return selector.evaluateValueText(
                 this,
                 context
         );

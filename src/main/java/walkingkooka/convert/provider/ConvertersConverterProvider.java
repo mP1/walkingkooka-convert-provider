@@ -71,7 +71,7 @@ final class ConvertersConverterProvider implements ConverterProvider {
                                                                final ProviderContext context) {
         Objects.requireNonNull(selector, "selector");
 
-        return selector.evaluateText(
+        return selector.evaluateValueText(
                 this,
                 context
         );

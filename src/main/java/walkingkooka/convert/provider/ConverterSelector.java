@@ -97,13 +97,13 @@ public final class ConverterSelector implements PluginSelectorLike<ConverterName
      * hold the pattern text itself.
      */
     @Override
-    public String text() {
-        return this.selector.text();
+    public String valueText() {
+        return this.selector.valueText();
     }
 
     @Override
-    public ConverterSelector setText(final String text) {
-        final PluginSelector<ConverterName> different = this.selector.setText(text);
+    public ConverterSelector setValueText(final String text) {
+        final PluginSelector<ConverterName> different = this.selector.setValueText(text);
         return this.selector.equals(different) ?
                 this :
                 new ConverterSelector(different);
@@ -124,7 +124,7 @@ public final class ConverterSelector implements PluginSelectorLike<ConverterName
     // evaluateText.....................................................................................................
 
     /**
-     * Parses the {@link #text()} as an expression that contains an optional parameter list which may include
+     * Parses the {@link #valueText()}  as an expression that contains an optional parameter list which may include
      * <ul>
      * <li>{@link ConverterName}</li>
      * <li>double literals including negative or leading minus signs.</li>
@@ -137,12 +137,12 @@ public final class ConverterSelector implements PluginSelectorLike<ConverterName
      * </pre>
      * The {@link ConverterProvider} will be used to fetch {@link Converter} with any parameters.
      */
-    public <C extends ConverterContext> Converter<C> evaluateText(final ConverterProvider provider,
-                                                                  final ProviderContext context) {
+    public <C extends ConverterContext> Converter<C> evaluateValueText(final ConverterProvider provider,
+                                                                       final ProviderContext context) {
         Objects.requireNonNull(provider, "provider");
         Objects.requireNonNull(provider, "context");
 
-        return this.selector.evaluateText(
+        return this.selector.evaluateValueText(
                 ConverterPluginHelper.INSTANCE::parseName,
                 provider::converter,
                 context
