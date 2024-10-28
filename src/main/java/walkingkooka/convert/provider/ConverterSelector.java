@@ -85,7 +85,7 @@ public final class ConverterSelector implements PluginSelectorLike<ConverterName
                 new ConverterSelector(
                         PluginSelector.with(
                                 name,
-                                this.text()
+                                this.valueText()
                         )
                 );
     }
