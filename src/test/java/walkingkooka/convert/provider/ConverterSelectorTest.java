@@ -24,7 +24,7 @@ import walkingkooka.collect.list.Lists;
 import walkingkooka.convert.Converter;
 import walkingkooka.convert.ConverterContext;
 import walkingkooka.convert.Converters;
-import walkingkooka.plugin.PluginSelectorEvaluateTextProvider;
+import walkingkooka.plugin.PluginSelectorEvaluateValueTextProvider;
 import walkingkooka.plugin.PluginSelectorLikeTesting;
 import walkingkooka.plugin.ProviderContext;
 import walkingkooka.plugin.ProviderContexts;
@@ -70,16 +70,16 @@ public final class ConverterSelectorTest implements PluginSelectorLikeTesting<Co
         return ConverterSelector.parse(text);
     }
 
-    // EvaluateText.....................................................................................................
+    // EvaluateValueText................................................................................................
 
     @Test
-    public void testEvaluateTextFails() {
+    public void testEvaluateValueTextFails() {
         final String text = NAME + " text/plain";
 
         final InvalidCharacterException thrown = assertThrows(
                 InvalidCharacterException.class,
                 () -> ConverterSelector.parse(text)
-                        .evaluateText(
+                        .evaluateValueText(
                                 ConverterProviders.fake(),
                                 CONTEXT
                         )
@@ -95,10 +95,10 @@ public final class ConverterSelectorTest implements PluginSelectorLikeTesting<Co
     }
 
     @Test
-    public void testEvaluateTextNoText() {
+    public void testEvaluateValueTextNoText() {
         final Converter<ConverterContext> expected = Converters.fake();
 
-        this.evaluateTextAndCheck(
+        this.evaluateValueTextAndCheck(
                 NAME + "",
                 (n, p, x) -> {
                     checkName(n, NAME);
@@ -111,10 +111,10 @@ public final class ConverterSelectorTest implements PluginSelectorLikeTesting<Co
     }
 
     @Test
-    public void testEvaluateTextSpacesText() {
+    public void testEvaluateValueTextSpacesText() {
         final Converter<ConverterContext> expected = Converters.fake();
 
-        this.evaluateTextAndCheck(
+        this.evaluateValueTextAndCheck(
                 NAME + " ",
                 (n, p, x) -> {
                     checkName(n, NAME);
@@ -127,10 +127,10 @@ public final class ConverterSelectorTest implements PluginSelectorLikeTesting<Co
     }
 
     @Test
-    public void testEvaluateTextSpacesText2() {
+    public void testEvaluateValueTextSpacesText2() {
         final Converter<ConverterContext> expected = Converters.fake();
 
-        this.evaluateTextAndCheck(
+        this.evaluateValueTextAndCheck(
                 NAME + "   ",
                 (n, p, x) -> {
                     checkName(n, NAME);
@@ -143,18 +143,18 @@ public final class ConverterSelectorTest implements PluginSelectorLikeTesting<Co
     }
 
     @Test
-    public void testEvaluateTextOpenParensFail() {
-        this.evaluateTextFails(
+    public void testEvaluateValueTextOpenParensFail() {
+        this.evaluateValueTextFails(
                 NAME + "(",
                 "Invalid character '(' at 24 in \"super-magic-converter123(\""
         );
     }
 
     @Test
-    public void testEvaluateTextDoubleLiteral() {
+    public void testEvaluateValueTextDoubleLiteral() {
         final Converter<ConverterContext> expected = Converters.fake();
 
-        this.evaluateTextAndCheck(
+        this.evaluateValueTextAndCheck(
                 NAME + " (1)",
                 (n, p, x) -> {
                     checkName(n, NAME);
@@ -167,10 +167,10 @@ public final class ConverterSelectorTest implements PluginSelectorLikeTesting<Co
     }
 
     @Test
-    public void testEvaluateTextNegativeDoubleLiteral() {
+    public void testEvaluateValueTextNegativeDoubleLiteral() {
         final Converter<ConverterContext> expected = Converters.fake();
 
-        this.evaluateTextAndCheck(
+        this.evaluateValueTextAndCheck(
                 NAME + " (-1)",
                 (n, p, x) -> {
                     checkName(n, NAME);
@@ -183,10 +183,10 @@ public final class ConverterSelectorTest implements PluginSelectorLikeTesting<Co
     }
 
     @Test
-    public void testEvaluateTextDoubleLiteralWithDecimals() {
+    public void testEvaluateValueTextDoubleLiteralWithDecimals() {
         final Converter<ConverterContext> expected = Converters.fake();
 
-        this.evaluateTextAndCheck(
+        this.evaluateValueTextAndCheck(
                 NAME + " (1.25)",
                 (n, p, x) -> {
                     checkName(n, NAME);
@@ -199,31 +199,31 @@ public final class ConverterSelectorTest implements PluginSelectorLikeTesting<Co
     }
 
     @Test
-    public void testEvaluateTextDoubleMissingClosingParensFail() {
+    public void testEvaluateValueTextDoubleMissingClosingParensFail() {
         this.checkEquals(
                 25,
                 NAME.textLength() + 1
         );
 
-        this.evaluateTextFails(
+        this.evaluateValueTextFails(
                 NAME + "(1",
                 "Invalid character '1' at 25 in \"super-magic-converter123(1\""
         );
     }
 
     @Test
-    public void testEvaluateTextStringUnclosedFail() {
-        this.evaluateTextFails(
+    public void testEvaluateValueTextStringUnclosedFail() {
+        this.evaluateValueTextFails(
                 NAME + " (\"unclosed",
                 "Missing terminating '\"'"
         );
     }
 
     @Test
-    public void testEvaluateTextEmptyParameterList() {
+    public void testEvaluateValueTextEmptyParameterList() {
         final Converter<ConverterContext> expected = Converters.fake();
 
-        this.evaluateTextAndCheck(
+        this.evaluateValueTextAndCheck(
                 NAME + " ()",
                 (n, p, x) -> {
                     checkName(n, NAME);
@@ -236,10 +236,10 @@ public final class ConverterSelectorTest implements PluginSelectorLikeTesting<Co
     }
 
     @Test
-    public void testEvaluateTextEmptyParameterListWithExtraSpaces() {
+    public void testEvaluateValueTextEmptyParameterListWithExtraSpaces() {
         final Converter<ConverterContext> expected = Converters.fake();
 
-        this.evaluateTextAndCheck(
+        this.evaluateValueTextAndCheck(
                 NAME + "  ( )",
                 (n, p, x) -> {
                     checkName(n, NAME);
@@ -252,10 +252,10 @@ public final class ConverterSelectorTest implements PluginSelectorLikeTesting<Co
     }
 
     @Test
-    public void testEvaluateTextEmptyParameterListWithExtraSpaces2() {
+    public void testEvaluateValueTextEmptyParameterListWithExtraSpaces2() {
         final Converter<ConverterContext> expected = Converters.fake();
 
-        this.evaluateTextAndCheck(
+        this.evaluateValueTextAndCheck(
                 NAME + "   (  )",
                 (n, p, x) -> {
                     checkName(n, NAME);
@@ -268,10 +268,10 @@ public final class ConverterSelectorTest implements PluginSelectorLikeTesting<Co
     }
 
     @Test
-    public void testEvaluateTextStringLiteral() {
+    public void testEvaluateValueTextStringLiteral() {
         final Converter<ConverterContext> expected = Converters.fake();
 
-        this.evaluateTextAndCheck(
+        this.evaluateValueTextAndCheck(
                 NAME + " (\"string-literal-parameter\")",
                 (n, p, x) -> {
                     checkName(n, NAME);
@@ -284,10 +284,10 @@ public final class ConverterSelectorTest implements PluginSelectorLikeTesting<Co
     }
 
     @Test
-    public void testEvaluateTextStringLiteralStringLiteral() {
+    public void testEvaluateValueTextStringLiteralStringLiteral() {
         final Converter<ConverterContext> expected = Converters.fake();
 
-        this.evaluateTextAndCheck(
+        this.evaluateValueTextAndCheck(
                 NAME + " (\"string-literal-parameter-1\",\"string-literal-parameter-2\")",
                 (n, p, x) -> {
                     checkName(n, NAME);
@@ -300,10 +300,10 @@ public final class ConverterSelectorTest implements PluginSelectorLikeTesting<Co
     }
 
     @Test
-    public void testEvaluateTextStringLiteralStringLiteralWithExtraSpaceIgnored() {
+    public void testEvaluateValueTextStringLiteralStringLiteralWithExtraSpaceIgnored() {
         final Converter<ConverterContext> expected = Converters.fake();
 
-        this.evaluateTextAndCheck(
+        this.evaluateValueTextAndCheck(
                 NAME + "  ( \"string-literal-parameter-1\" , \"string-literal-parameter-2\" )",
                 (n, p, x) -> {
                     checkName(n, NAME);
@@ -316,11 +316,11 @@ public final class ConverterSelectorTest implements PluginSelectorLikeTesting<Co
     }
 
     @Test
-    public void testEvaluateTextConverter() {
+    public void testEvaluateValueTextConverter() {
         final Converter<ConverterContext> expected1 = Converters.fake();
         final Converter<ConverterContext> expected2 = Converters.fake();
 
-        this.evaluateTextAndCheck(
+        this.evaluateValueTextAndCheck(
                 NAME + " (" + NAME2 + ")",
                 (n, p, x) -> {
                     if (n.equals(NAME)) {
@@ -339,12 +339,12 @@ public final class ConverterSelectorTest implements PluginSelectorLikeTesting<Co
     }
 
     @Test
-    public void testEvaluateTextConverterConverter() {
+    public void testEvaluateValueTextConverterConverter() {
         final Converter<ConverterContext> expected1 = Converters.fake();
         final Converter<ConverterContext> expected2 = Converters.fake();
         final Converter<ConverterContext> expected3 = Converters.fake();
 
-        this.evaluateTextAndCheck(
+        this.evaluateValueTextAndCheck(
                 NAME + " (" + NAME2 + "," + NAME3 + ")",
                 (n, p, x) -> {
                     if (n.equals(NAME)) {
@@ -367,12 +367,12 @@ public final class ConverterSelectorTest implements PluginSelectorLikeTesting<Co
     }
 
     @Test
-    public void testEvaluateTextNestedConverter() {
+    public void testEvaluateValueTextNestedConverter() {
         final Converter<ConverterContext> expected1 = Converters.fake();
         final Converter<ConverterContext> expected2 = Converters.fake();
         final Converter<ConverterContext> expected3 = Converters.fake();
 
-        this.evaluateTextAndCheck(
+        this.evaluateValueTextAndCheck(
                 NAME + " (" + NAME2 + "(" + NAME3 + "))",
                 (n, p, x) -> {
                     if (n.equals(NAME)) {
@@ -394,19 +394,19 @@ public final class ConverterSelectorTest implements PluginSelectorLikeTesting<Co
         );
     }
 
-    private void evaluateTextFails(final String selector,
+    private void evaluateValueTextFails(final String selector,
                                    final String expected) {
-        this.evaluateTextFails(
+        this.evaluateValueTextFails(
                 selector,
                 CONTEXT,
                 expected
         );
     }
 
-    private void evaluateTextFails(final String selector,
+    private void evaluateValueTextFails(final String selector,
                                    final ProviderContext context,
                                    final String expected) {
-        this.evaluateTextFails(
+        this.evaluateValueTextFails(
                 selector,
                 ConverterProviders.fake(),
                 context,
@@ -414,14 +414,14 @@ public final class ConverterSelectorTest implements PluginSelectorLikeTesting<Co
         );
     }
 
-    private void evaluateTextFails(final String selector,
+    private void evaluateValueTextFails(final String selector,
                                    final ConverterProvider provider,
                                    final ProviderContext context,
                                    final String expected) {
         final IllegalArgumentException thrown = assertThrows(
                 IllegalArgumentException.class,
                 () -> ConverterSelector.parse(selector)
-                        .evaluateText(
+                        .evaluateValueText(
                                 provider,
                                 context
                         )
@@ -433,10 +433,10 @@ public final class ConverterSelectorTest implements PluginSelectorLikeTesting<Co
         );
     }
 
-    private void evaluateTextAndCheck(final String selector,
-                                      final PluginSelectorEvaluateTextProvider<ConverterName, Converter<ConverterContext>> factory,
+    private void evaluateValueTextAndCheck(final String selector,
+                                      final PluginSelectorEvaluateValueTextProvider<ConverterName, Converter<ConverterContext>> factory,
                                       final Converter<ConverterContext> expected) {
-        this.evaluateTextAndCheck(
+        this.evaluateValueTextAndCheck(
                 selector,
                 new FakeConverterProvider() {
                     @Override
@@ -457,14 +457,14 @@ public final class ConverterSelectorTest implements PluginSelectorLikeTesting<Co
         );
     }
 
-    private void evaluateTextAndCheck(final String selector,
-                                      final ConverterProvider provider,
-                                      final ProviderContext context,
-                                      final Converter<ConverterContext> expected) {
+    private void evaluateValueTextAndCheck(final String selector,
+                                           final ConverterProvider provider,
+                                           final ProviderContext context,
+                                           final Converter<ConverterContext> expected) {
         this.checkEquals(
                 expected,
                 ConverterSelector.parse(selector)
-                        .evaluateText(
+                        .evaluateValueText(
                                 provider,
                                 context
                         )

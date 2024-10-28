@@ -187,7 +187,7 @@ public final class AliasesConverterProviderTest implements ConverterProviderTest
                     @Override
                     public <C extends ConverterContext> Converter<C> converter(final ConverterSelector selector,
                                                                                final ProviderContext context) {
-                        return selector.evaluateText(
+                        return selector.evaluateValueText(
                                 this,
                                 context
                         );
