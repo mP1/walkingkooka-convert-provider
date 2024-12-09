@@ -33,6 +33,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.Objects;
 import java.util.Set;
+import java.util.function.Predicate;
 
 /**
  * A read only {@link Set} of {@link ConverterInfo} sorted by {@link ConverterName}.
@@ -127,6 +128,13 @@ public final class ConverterInfoSet extends AbstractSet<ConverterInfo> implement
     public ConverterInfoSet deleteAll(final Collection<ConverterInfo> infos) {
         return this.setElements(
                 this.pluginInfoSet.deleteAll(infos)
+        );
+    }
+
+    @Override
+    public ConverterInfoSet deleteIf(final Predicate<? super ConverterInfo> predicate) {
+        return this.setElements(
+                this.pluginInfoSet.deleteIf(predicate)
         );
     }
 
