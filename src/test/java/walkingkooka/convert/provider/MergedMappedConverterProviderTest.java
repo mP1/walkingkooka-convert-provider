@@ -37,7 +37,7 @@ import java.util.Objects;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class MergedMappedConverterProviderTest implements ConverterProviderTesting<MergedMappedConverterProvider>,
-        ToStringTesting<MergedMappedConverterProvider> {
+    ToStringTesting<MergedMappedConverterProvider> {
 
     private final static AbsoluteUrl RENAMED_URL = Url.parseAbsolute("https://example.com/renamed-converter-111");
 
@@ -58,148 +58,148 @@ public final class MergedMappedConverterProviderTest implements ConverterProvide
     @Test
     public void testWithNullInfosFails() {
         assertThrows(
-                NullPointerException.class,
-                () -> MergedMappedConverterProvider.with(
-                        null,
-                        ConverterProviders.fake()
-                )
+            NullPointerException.class,
+            () -> MergedMappedConverterProvider.with(
+                null,
+                ConverterProviders.fake()
+            )
         );
     }
 
     @Test
     public void testWithNullProviderFails() {
         assertThrows(
-                NullPointerException.class,
-                () -> MergedMappedConverterProvider.with(
-                        ConverterInfoSet.EMPTY,
-                        null
-                )
+            NullPointerException.class,
+            () -> MergedMappedConverterProvider.with(
+                ConverterInfoSet.EMPTY,
+                null
+            )
         );
     }
 
     @Test
     public void testConverterSelectorWithUnknownFails() {
         this.converterFails(
-                ConverterSelector.parse("unknown"),
-                CONTEXT
+            ConverterSelector.parse("unknown"),
+            CONTEXT
         );
     }
 
     @Test
     public void testConverterSelectorWithRename() {
         this.converterAndCheck(
-                ConverterSelector.parse("" + RENAMED_RENAME_NAME),
-                CONTEXT,
-                RENAME_CONVERTER
+            ConverterSelector.parse("" + RENAMED_RENAME_NAME),
+            CONTEXT,
+            RENAME_CONVERTER
         );
     }
 
     @Test
     public void testConverterSelectorWithProviderOnly() {
         this.converterAndCheck(
-                ConverterSelector.parse("" + PROVIDER_ONLY_NAME),
-                CONTEXT,
-                PROVIDER_ONLY_CONVERTER
+            ConverterSelector.parse("" + PROVIDER_ONLY_NAME),
+            CONTEXT,
+            PROVIDER_ONLY_CONVERTER
         );
     }
 
     @Test
     public void testConverterNameWithUnknownFails() {
         this.converterFails(
-                ConverterName.with("unknown"),
-                Lists.empty(),
-                CONTEXT
+            ConverterName.with("unknown"),
+            Lists.empty(),
+            CONTEXT
         );
     }
 
     @Test
     public void testConverterNameWithRename() {
         this.converterAndCheck(
-                RENAMED_RENAME_NAME,
-                Lists.empty(),
-                CONTEXT,
-                RENAME_CONVERTER
+            RENAMED_RENAME_NAME,
+            Lists.empty(),
+            CONTEXT,
+            RENAME_CONVERTER
         );
     }
 
     @Test
     public void testConverterNameWithProviderOnly() {
         this.converterAndCheck(
-                PROVIDER_ONLY_NAME,
-                Lists.empty(),
-                CONTEXT,
-                PROVIDER_ONLY_CONVERTER
+            PROVIDER_ONLY_NAME,
+            Lists.empty(),
+            CONTEXT,
+            PROVIDER_ONLY_CONVERTER
         );
     }
 
     @Test
     public void testInfos() {
         this.converterInfosAndCheck(
-                ConverterInfo.with(
-                        RENAMED_URL,
-                        RENAMED_RENAME_NAME
-                ),
-                ConverterInfo.with(
-                        PROVIDER_ONLY_URL,
-                        PROVIDER_ONLY_NAME
-                )
+            ConverterInfo.with(
+                RENAMED_URL,
+                RENAMED_RENAME_NAME
+            ),
+            ConverterInfo.with(
+                PROVIDER_ONLY_URL,
+                PROVIDER_ONLY_NAME
+            )
         );
     }
 
     @Test
     public void testToString() {
         this.toStringAndCheck(
-                this.createConverterProvider(),
-                "https://example.com/provider-only-converter-222 provider-only-converter-222,https://example.com/renamed-converter-111 renamed-rename-converter-111"
+            this.createConverterProvider(),
+            "https://example.com/provider-only-converter-222 provider-only-converter-222,https://example.com/renamed-converter-111 renamed-rename-converter-111"
         );
     }
 
     @Override
     public MergedMappedConverterProvider createConverterProvider() {
         return MergedMappedConverterProvider.with(
-                ConverterInfoSet.with(
-                        Sets.of(
-                                ConverterInfo.with(
-                                        RENAMED_URL,
-                                        RENAMED_RENAME_NAME
-                                )
-                        )
-                ),
-                new FakeConverterProvider() {
+            ConverterInfoSet.with(
+                Sets.of(
+                    ConverterInfo.with(
+                        RENAMED_URL,
+                        RENAMED_RENAME_NAME
+                    )
+                )
+            ),
+            new FakeConverterProvider() {
 
-                    @Override
-                    public <C extends ConverterContext> Converter<C> converter(final ConverterName name,
-                                                                               final List<?> values,
-                                                                               final ProviderContext context) {
-                        Objects.requireNonNull(name, "name");
-                        Objects.requireNonNull(values, "values");
-                        Objects.requireNonNull(context, "context");
+                @Override
+                public <C extends ConverterContext> Converter<C> converter(final ConverterName name,
+                                                                           final List<?> values,
+                                                                           final ProviderContext context) {
+                    Objects.requireNonNull(name, "name");
+                    Objects.requireNonNull(values, "values");
+                    Objects.requireNonNull(context, "context");
 
-                        if (name.equals(RENAMED_PROVIDER_NAME)) {
-                            return Cast.to(RENAME_CONVERTER);
-                        }
-                        if (name.equals(PROVIDER_ONLY_NAME)) {
-                            return Cast.to(PROVIDER_ONLY_CONVERTER);
-                        }
-                        throw new IllegalArgumentException("Unknown Converter " + name);
+                    if (name.equals(RENAMED_PROVIDER_NAME)) {
+                        return Cast.to(RENAME_CONVERTER);
                     }
-
-                    @Override
-                    public ConverterInfoSet converterInfos() {
-                        return ConverterInfoSet.with(
-                                Sets.of(
-                                        ConverterInfo.with(
-                                                RENAMED_URL,
-                                                RENAMED_PROVIDER_NAME
-                                        ),
-                                        ConverterInfo.with(
-                                                PROVIDER_ONLY_URL,
-                                                PROVIDER_ONLY_NAME
-                                        )
-                                )
-                        );
+                    if (name.equals(PROVIDER_ONLY_NAME)) {
+                        return Cast.to(PROVIDER_ONLY_CONVERTER);
                     }
+                    throw new IllegalArgumentException("Unknown Converter " + name);
                 }
+
+                @Override
+                public ConverterInfoSet converterInfos() {
+                    return ConverterInfoSet.with(
+                        Sets.of(
+                            ConverterInfo.with(
+                                RENAMED_URL,
+                                RENAMED_PROVIDER_NAME
+                            ),
+                            ConverterInfo.with(
+                                PROVIDER_ONLY_URL,
+                                PROVIDER_ONLY_NAME
+                            )
+                        )
+                    );
+                }
+            }
         );
     }
 

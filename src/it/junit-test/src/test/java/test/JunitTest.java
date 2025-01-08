@@ -12,8 +12,8 @@ public class JunitTest {
     @Test
     public void testAssertEquals() {
         Assert.assertEquals(
-                1,
-                1
+            1,
+            1
         );
     }
 }

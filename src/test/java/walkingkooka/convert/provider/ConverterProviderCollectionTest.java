@@ -34,8 +34,8 @@ public final class ConverterProviderCollectionTest implements ConverterProviderT
     @Test
     public void testWithNullProvidersFails() {
         assertThrows(
-                NullPointerException.class,
-                () -> ConverterProviderCollection.with(null)
+            NullPointerException.class,
+            () -> ConverterProviderCollection.with(null)
         );
     }
 
@@ -44,11 +44,11 @@ public final class ConverterProviderCollectionTest implements ConverterProviderT
         final ConverterProvider provider = ConverterProviders.converters();
 
         this.converterAndCheck(
-                ConverterProviderCollection.with(Sets.of(provider)),
-                ConverterName.BOOLEAN_TO_NUMBER,
-                Lists.empty(),
-                CONTEXT,
-                Converters.booleanToNumber()
+            ConverterProviderCollection.with(Sets.of(provider)),
+            ConverterName.BOOLEAN_TO_NUMBER,
+            Lists.empty(),
+            CONTEXT,
+            Converters.booleanToNumber()
         );
     }
 
@@ -57,12 +57,12 @@ public final class ConverterProviderCollectionTest implements ConverterProviderT
         final ConverterProvider provider = ConverterProviders.converters();
 
         this.converterAndCheck(
-                ConverterProviderCollection.with(Sets.of(provider)),
-                ConverterSelector.parse(
-                        "" + ConverterName.BOOLEAN_TO_NUMBER
-                ),
-                CONTEXT,
-                Converters.booleanToNumber()
+            ConverterProviderCollection.with(Sets.of(provider)),
+            ConverterSelector.parse(
+                "" + ConverterName.BOOLEAN_TO_NUMBER
+            ),
+            CONTEXT,
+            Converters.booleanToNumber()
         );
     }
 
@@ -71,17 +71,17 @@ public final class ConverterProviderCollectionTest implements ConverterProviderT
         final ConverterProvider provider = ConverterProviders.converters();
 
         this.converterInfosAndCheck(
-                ConverterProviderCollection.with(Sets.of(provider)),
-                provider.converterInfos()
+            ConverterProviderCollection.with(Sets.of(provider)),
+            provider.converterInfos()
         );
     }
 
     @Override
     public ConverterProviderCollection createConverterProvider() {
         return ConverterProviderCollection.with(
-                Sets.of(
-                        ConverterProviders.converters()
-                )
+            Sets.of(
+                ConverterProviders.converters()
+            )
         );
     }
 

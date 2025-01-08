@@ -32,24 +32,24 @@ import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
  * Captures a unique {@link AbsoluteUrl} and {@link ConverterName} for a {@link Converter}.
  */
 public final class ConverterInfo implements PluginInfoLike<ConverterInfo, ConverterName>,
-        HateosResource<ConverterName> {
+    HateosResource<ConverterName> {
 
     public static ConverterInfo parse(final String text) {
         return new ConverterInfo(
-                PluginInfo.parse(
-                        text,
-                        ConverterName::with
-                )
+            PluginInfo.parse(
+                text,
+                ConverterName::with
+            )
         );
     }
 
     public static ConverterInfo with(final AbsoluteUrl url,
                                      final ConverterName name) {
         return new ConverterInfo(
-                PluginInfo.with(
-                        url,
-                        name
-                )
+            PluginInfo.with(
+                url,
+                name
+            )
         );
     }
 
@@ -74,10 +74,10 @@ public final class ConverterInfo implements PluginInfoLike<ConverterInfo, Conver
     @Override
     public ConverterInfo setName(final ConverterName name) {
         return this.name().equals(name) ?
-                this :
-                new ConverterInfo(
-                        this.pluginInfo.setName(name)
-                );
+            this :
+            new ConverterInfo(
+                this.pluginInfo.setName(name)
+            );
     }
 
     private final PluginInfo<ConverterName> pluginInfo;
@@ -99,8 +99,8 @@ public final class ConverterInfo implements PluginInfoLike<ConverterInfo, Conver
     @Override
     public boolean equals(final Object other) {
         return this == other ||
-                other instanceof ConverterInfo &&
-                        this.equals0(Cast.to(other));
+            other instanceof ConverterInfo &&
+                this.equals0(Cast.to(other));
     }
 
     private boolean equals0(final ConverterInfo other) {
@@ -125,16 +125,16 @@ public final class ConverterInfo implements PluginInfoLike<ConverterInfo, Conver
     static ConverterInfo unmarshall(final JsonNode node,
                                     final JsonNodeUnmarshallContext context) {
         return ConverterInfo.parse(
-                node.stringOrFail()
+            node.stringOrFail()
         );
     }
 
     static {
         JsonNodeContext.register(
-                JsonNodeContext.computeTypeName(ConverterInfo.class),
-                ConverterInfo::unmarshall,
-                ConverterInfo::marshall,
-                ConverterInfo.class
+            JsonNodeContext.computeTypeName(ConverterInfo.class),
+            ConverterInfo::unmarshall,
+            ConverterInfo::marshall,
+            ConverterInfo.class
         );
         ConverterName.with("hello"); // trigger static init and json marshall/unmarshall registry
     }

@@ -33,8 +33,8 @@ final class AliasesConverterProvider implements ConverterProvider {
     static AliasesConverterProvider with(final ConverterAliasSet aliases,
                                          final ConverterProvider provider) {
         return new AliasesConverterProvider(
-                Objects.requireNonNull(aliases, "aliases"),
-                Objects.requireNonNull(provider, "provider")
+            Objects.requireNonNull(aliases, "aliases"),
+            Objects.requireNonNull(provider, "provider")
         );
     }
 
@@ -50,8 +50,8 @@ final class AliasesConverterProvider implements ConverterProvider {
     public <C extends ConverterContext> Converter<C> converter(final ConverterSelector selector,
                                                                final ProviderContext context) {
         return this.provider.converter(
-                this.aliases.selector(selector),
-                context
+            this.aliases.selector(selector),
+            context
         );
     }
 
@@ -75,15 +75,15 @@ final class AliasesConverterProvider implements ConverterProvider {
             }
             // assumes that $provider caches selectors to converter
             converter = provider.converter(
-                    selector.get(),
-                    context
+                selector.get(),
+                context
             );
         } else {
             converter = provider.converter(
-                    aliases.aliasOrName(name)
-                            .orElseThrow(() -> new IllegalArgumentException("Unknown Converter " + name)),
-                    values,
-                    context
+                aliases.aliasOrName(name)
+                    .orElseThrow(() -> new IllegalArgumentException("Unknown Converter " + name)),
+                values,
+                context
             );
         }
 

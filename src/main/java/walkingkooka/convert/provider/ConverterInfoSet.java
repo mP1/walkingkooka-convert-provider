@@ -41,17 +41,17 @@ import java.util.function.Predicate;
 public final class ConverterInfoSet extends AbstractSet<ConverterInfo> implements PluginInfoSetLike<ConverterName, ConverterInfo, ConverterInfoSet, ConverterSelector, ConverterAlias, ConverterAliasSet> {
 
     public final static ConverterInfoSet EMPTY = new ConverterInfoSet(
-            PluginInfoSet.with(
-                    Sets.<ConverterInfo>empty()
-            )
+        PluginInfoSet.with(
+            Sets.<ConverterInfo>empty()
+        )
     );
 
     public static ConverterInfoSet parse(final String text) {
         return new ConverterInfoSet(
-                PluginInfoSet.parse(
-                        text,
-                        ConverterInfo::parse
-                )
+            PluginInfoSet.parse(
+                text,
+                ConverterInfo::parse
+            )
         );
     }
 
@@ -60,8 +60,8 @@ public final class ConverterInfoSet extends AbstractSet<ConverterInfo> implement
 
         final PluginInfoSet<ConverterName, ConverterInfo> pluginInfoSet = PluginInfoSet.with(infos);
         return pluginInfoSet.isEmpty() ?
-                EMPTY :
-                new ConverterInfoSet(pluginInfoSet);
+            EMPTY :
+            new ConverterInfoSet(pluginInfoSet);
     }
 
     private ConverterInfoSet(final PluginInfoSet<ConverterName, ConverterInfo> pluginInfoSet) {
@@ -88,53 +88,53 @@ public final class ConverterInfoSet extends AbstractSet<ConverterInfo> implement
     @Override
     public ConverterInfoSet filter(final ConverterInfoSet infos) {
         return this.setElements(
-                this.pluginInfoSet.filter(
-                        infos.pluginInfoSet
-                )
+            this.pluginInfoSet.filter(
+                infos.pluginInfoSet
+            )
         );
     }
 
     @Override
     public ConverterInfoSet renameIfPresent(ConverterInfoSet renameInfos) {
         return this.setElements(
-                this.pluginInfoSet.renameIfPresent(
-                        renameInfos.pluginInfoSet
-                )
+            this.pluginInfoSet.renameIfPresent(
+                renameInfos.pluginInfoSet
+            )
         );
     }
 
     @Override
     public ConverterInfoSet concat(final ConverterInfo info) {
         return this.setElements(
-                this.pluginInfoSet.concat(info)
+            this.pluginInfoSet.concat(info)
         );
     }
 
     @Override
     public ConverterInfoSet concatAll(final Collection<ConverterInfo> infos) {
         return this.setElements(
-                this.pluginInfoSet.concatAll(infos)
+            this.pluginInfoSet.concatAll(infos)
         );
     }
 
     @Override
     public ConverterInfoSet delete(final ConverterInfo info) {
         return this.setElements(
-                this.pluginInfoSet.delete(info)
+            this.pluginInfoSet.delete(info)
         );
     }
 
     @Override
     public ConverterInfoSet deleteAll(final Collection<ConverterInfo> infos) {
         return this.setElements(
-                this.pluginInfoSet.deleteAll(infos)
+            this.pluginInfoSet.deleteAll(infos)
         );
     }
 
     @Override
     public ConverterInfoSet deleteIf(final Predicate<? super ConverterInfo> predicate) {
         return this.setElements(
-                this.pluginInfoSet.deleteIf(predicate)
+            this.pluginInfoSet.deleteIf(predicate)
         );
     }
 
@@ -142,30 +142,30 @@ public final class ConverterInfoSet extends AbstractSet<ConverterInfo> implement
     public ConverterInfoSet replace(final ConverterInfo oldInfo,
                                     final ConverterInfo newInfo) {
         return this.setElements(
-                this.pluginInfoSet.replace(
-                        oldInfo,
-                        newInfo
-                )
+            this.pluginInfoSet.replace(
+                oldInfo,
+                newInfo
+            )
         );
     }
 
     @Override
     public ImmutableSet<ConverterInfo> setElementsFailIfDifferent(final Set<ConverterInfo> infos) {
         return this.setElements(
-                this.pluginInfoSet.setElementsFailIfDifferent(
-                        infos
-                )
+            this.pluginInfoSet.setElementsFailIfDifferent(
+                infos
+            )
         );
     }
 
     @Override
     public ConverterInfoSet setElements(final Set<ConverterInfo> infos) {
         final ConverterInfoSet after = new ConverterInfoSet(
-                this.pluginInfoSet.setElements(infos)
+            this.pluginInfoSet.setElements(infos)
         );
         return this.pluginInfoSet.equals(infos) ?
-                this :
-                after;
+            this :
+            after;
     }
 
     @Override
@@ -216,10 +216,10 @@ public final class ConverterInfoSet extends AbstractSet<ConverterInfo> implement
     static ConverterInfoSet unmarshall(final JsonNode node,
                                        final JsonNodeUnmarshallContext context) {
         return with(
-                context.unmarshallSet(
-                        node,
-                        ConverterInfo.class
-                )
+            context.unmarshallSet(
+                node,
+                ConverterInfo.class
+            )
         );
     }
 
@@ -227,10 +227,10 @@ public final class ConverterInfoSet extends AbstractSet<ConverterInfo> implement
         ConverterInfo.register(); // force json registry
 
         JsonNodeContext.register(
-                JsonNodeContext.computeTypeName(ConverterInfoSet.class),
-                ConverterInfoSet::unmarshall,
-                ConverterInfoSet::marshall,
-                ConverterInfoSet.class
+            JsonNodeContext.computeTypeName(ConverterInfoSet.class),
+            ConverterInfoSet::unmarshall,
+            ConverterInfoSet::marshall,
+            ConverterInfoSet.class
         );
     }
 }

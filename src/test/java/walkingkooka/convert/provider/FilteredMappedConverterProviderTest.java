@@ -36,7 +36,7 @@ import java.util.Objects;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class FilteredMappedConverterProviderTest implements ConverterProviderTesting<FilteredMappedConverterProvider>,
-        ToStringTesting<FilteredMappedConverterProvider> {
+    ToStringTesting<FilteredMappedConverterProvider> {
 
     private final static AbsoluteUrl URL = Url.parseAbsolute("https://example.com/converter123");
 
@@ -51,114 +51,114 @@ public final class FilteredMappedConverterProviderTest implements ConverterProvi
     @Test
     public void testWithNullViewFails() {
         assertThrows(
-                NullPointerException.class,
-                () -> FilteredMappedConverterProvider.with(
-                        null,
-                        ConverterProviders.fake()
-                )
+            NullPointerException.class,
+            () -> FilteredMappedConverterProvider.with(
+                null,
+                ConverterProviders.fake()
+            )
         );
     }
 
     @Test
     public void testWithNullProviderFails() {
         assertThrows(
-                NullPointerException.class,
-                () -> FilteredMappedConverterProvider.with(
-                        ConverterInfoSet.EMPTY,
-                        null
-                )
+            NullPointerException.class,
+            () -> FilteredMappedConverterProvider.with(
+                ConverterInfoSet.EMPTY,
+                null
+            )
         );
     }
 
     @Test
     public void testConverterSelectorWithUnknownFails() {
         this.converterFails(
-                ConverterSelector.parse("unknown"),
-                CONTEXT
+            ConverterSelector.parse("unknown"),
+            CONTEXT
         );
     }
 
     @Test
     public void testConverterSelector() {
         this.converterAndCheck(
-                ConverterSelector.parse("" + NAME),
-                CONTEXT,
-                CONVERTER
+            ConverterSelector.parse("" + NAME),
+            CONTEXT,
+            CONVERTER
         );
     }
 
     @Test
     public void testConverterNameWithUnknownFails() {
         this.converterFails(
-                ConverterName.with("unknown"),
-                Lists.empty(),
-                CONTEXT
+            ConverterName.with("unknown"),
+            Lists.empty(),
+            CONTEXT
         );
     }
 
     @Test
     public void testConverterName() {
         this.converterAndCheck(
-                NAME,
-                Lists.empty(),
-                CONTEXT,
-                CONVERTER
+            NAME,
+            Lists.empty(),
+            CONTEXT,
+            CONVERTER
         );
     }
 
     @Test
     public void testInfos() {
         this.converterInfosAndCheck(
-                ConverterInfo.with(
-                        URL,
-                        NAME
-                )
+            ConverterInfo.with(
+                URL,
+                NAME
+            )
         );
     }
 
     @Test
     public void testToString() {
         this.toStringAndCheck(
-                this.createConverterProvider(),
-                "https://example.com/converter123 different-converter-name-123"
+            this.createConverterProvider(),
+            "https://example.com/converter123 different-converter-name-123"
         );
     }
 
     @Override
     public FilteredMappedConverterProvider createConverterProvider() {
         return FilteredMappedConverterProvider.with(
-                ConverterInfoSet.EMPTY.concat(
-                        ConverterInfo.with(
-                                URL,
-                                NAME
-                        )
-                ),
-                new FakeConverterProvider() {
+            ConverterInfoSet.EMPTY.concat(
+                ConverterInfo.with(
+                    URL,
+                    NAME
+                )
+            ),
+            new FakeConverterProvider() {
 
-                    @Override
-                    public <C extends ConverterContext> Converter<C> converter(final ConverterName name,
-                                                                               final List<?> values,
-                                                                               final ProviderContext context) {
-                        Objects.requireNonNull(name, "name");
-                        Objects.requireNonNull(values, "values");
-                        Objects.requireNonNull(context, "context");
+                @Override
+                public <C extends ConverterContext> Converter<C> converter(final ConverterName name,
+                                                                           final List<?> values,
+                                                                           final ProviderContext context) {
+                    Objects.requireNonNull(name, "name");
+                    Objects.requireNonNull(values, "values");
+                    Objects.requireNonNull(context, "context");
 
-                        if(false == name.equals(ORIGINAL_NAME)) {
-                            throw new IllegalArgumentException("Unknown Converter " + name);
-                        }
-                        return Cast.to(CONVERTER);
+                    if (false == name.equals(ORIGINAL_NAME)) {
+                        throw new IllegalArgumentException("Unknown Converter " + name);
                     }
-
-                    @Override
-                    public ConverterInfoSet converterInfos() {
-                        return ConverterInfoSet.EMPTY.concat(
-                                ConverterInfo.with(
-                                        URL,
-                                        ORIGINAL_NAME
-                                )
-                        );
-                    }
+                    return Cast.to(CONVERTER);
                 }
+
+                @Override
+                public ConverterInfoSet converterInfos() {
+                    return ConverterInfoSet.EMPTY.concat(
+                        ConverterInfo.with(
+                            URL,
+                            ORIGINAL_NAME
+                        )
+                    );
+                }
+            }
         );
     }
 

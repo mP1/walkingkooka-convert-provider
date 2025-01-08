@@ -27,7 +27,7 @@ import java.util.Objects;
 /**
  * A {@link ConverterProvider} that is empty without any {@link Converter}.
  */
-final class EmptyConverterProvider implements ConverterProvider{
+final class EmptyConverterProvider implements ConverterProvider {
 
     final static EmptyConverterProvider INSTANCE = new EmptyConverterProvider();
 

@@ -21,12 +21,12 @@ import walkingkooka.plugin.PluginHelperTesting;
 import walkingkooka.reflect.JavaVisibility;
 
 public final class ConverterPluginHelperTest implements PluginHelperTesting<ConverterPluginHelper,
-        ConverterName,
-        ConverterInfo,
-        ConverterInfoSet,
-        ConverterSelector,
-        ConverterAlias,
-        ConverterAliasSet> {
+    ConverterName,
+    ConverterInfo,
+    ConverterInfoSet,
+    ConverterSelector,
+    ConverterAlias,
+    ConverterAliasSet> {
 
     @Override
     public ConverterPluginHelper createPluginHelper() {

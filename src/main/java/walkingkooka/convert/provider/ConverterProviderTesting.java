@@ -37,41 +37,41 @@ public interface ConverterProviderTesting<T extends ConverterProvider> extends P
     @Test
     default void testConverterSelectorWithNullSelectorFails() {
         assertThrows(
-                NullPointerException.class,
-                () -> this.createConverterProvider()
-                        .converter(
-                                null,
-                                ProviderContexts.fake()
-                        )
+            NullPointerException.class,
+            () -> this.createConverterProvider()
+                .converter(
+                    null,
+                    ProviderContexts.fake()
+                )
         );
     }
 
     @Test
     default void testConverterSelectorWithNullContextFails() {
         assertThrows(
-                NullPointerException.class,
-                () -> this.createConverterProvider()
-                        .converter(
-                                ConverterSelector.parse("converter"),
-                                null
-                        )
+            NullPointerException.class,
+            () -> this.createConverterProvider()
+                .converter(
+                    ConverterSelector.parse("converter"),
+                    null
+                )
         );
     }
 
     default void converterFails(final String selector,
                                 final ProviderContext context) {
         this.converterFails(
-                ConverterSelector.parse(selector),
-                context
+            ConverterSelector.parse(selector),
+            context
         );
     }
 
     default void converterFails(final ConverterSelector selector,
                                 final ProviderContext context) {
         this.converterFails(
-                this.createConverterProvider(),
-                selector,
-                context
+            this.createConverterProvider(),
+            selector,
+            context
         );
     }
 
@@ -79,11 +79,11 @@ public interface ConverterProviderTesting<T extends ConverterProvider> extends P
                                 final ConverterSelector selector,
                                 final ProviderContext context) {
         assertThrows(
-                IllegalArgumentException.class,
-                () -> selector.evaluateValueText(
-                        provider,
-                        context
-                )
+            IllegalArgumentException.class,
+            () -> selector.evaluateValueText(
+                provider,
+                context
+            )
         );
     }
 
@@ -91,9 +91,9 @@ public interface ConverterProviderTesting<T extends ConverterProvider> extends P
                                    final ProviderContext context,
                                    final Converter<?> expected) {
         this.converterAndCheck(
-                ConverterSelector.parse(selector),
-                context,
-                expected
+            ConverterSelector.parse(selector),
+            context,
+            expected
         );
     }
 
@@ -101,10 +101,10 @@ public interface ConverterProviderTesting<T extends ConverterProvider> extends P
                                    final ProviderContext context,
                                    final Converter<?> expected) {
         this.converterAndCheck(
-                this.createConverterProvider(),
-                selector,
-                context,
-                expected
+            this.createConverterProvider(),
+            selector,
+            context,
+            expected
         );
     }
 
@@ -113,10 +113,10 @@ public interface ConverterProviderTesting<T extends ConverterProvider> extends P
                                    final ProviderContext context,
                                    final Converter<?> expected) {
         this.converterAndCheck(
-                provider,
-                ConverterSelector.parse(selector),
-                context,
-                expected
+            provider,
+            ConverterSelector.parse(selector),
+            context,
+            expected
         );
     }
 
@@ -125,11 +125,11 @@ public interface ConverterProviderTesting<T extends ConverterProvider> extends P
                                    final ProviderContext context,
                                    final Converter<?> expected) {
         this.checkEquals(
-                expected,
-                provider.converter(
-                        selector,
-                        context
-                )
+            expected,
+            provider.converter(
+                selector,
+                context
+            )
         );
     }
 
@@ -138,39 +138,39 @@ public interface ConverterProviderTesting<T extends ConverterProvider> extends P
     @Test
     default void testConverterNameWithNullNameFails() {
         assertThrows(
-                NullPointerException.class,
-                () -> this.createConverterProvider()
-                        .converter(
-                                null,
-                                Lists.empty(),
-                                ProviderContexts.fake()
-                        )
+            NullPointerException.class,
+            () -> this.createConverterProvider()
+                .converter(
+                    null,
+                    Lists.empty(),
+                    ProviderContexts.fake()
+                )
         );
     }
 
     @Test
     default void testConverterNameWithNullValueFails() {
         assertThrows(
-                NullPointerException.class,
-                () -> this.createConverterProvider()
-                        .converter(
-                                ConverterName.BOOLEAN_TO_NUMBER,
-                                null,
-                                ProviderContexts.fake()
-                        )
+            NullPointerException.class,
+            () -> this.createConverterProvider()
+                .converter(
+                    ConverterName.BOOLEAN_TO_NUMBER,
+                    null,
+                    ProviderContexts.fake()
+                )
         );
     }
 
     @Test
     default void testConverterNameWithNullContextFails() {
         assertThrows(
-                NullPointerException.class,
-                () -> this.createConverterProvider()
-                        .converter(
-                                ConverterName.BOOLEAN_TO_NUMBER,
-                                Lists.empty(),
-                                null
-                        )
+            NullPointerException.class,
+            () -> this.createConverterProvider()
+                .converter(
+                    ConverterName.BOOLEAN_TO_NUMBER,
+                    Lists.empty(),
+                    null
+                )
         );
     }
 
@@ -178,10 +178,10 @@ public interface ConverterProviderTesting<T extends ConverterProvider> extends P
                                 final List<?> values,
                                 final ProviderContext context) {
         this.converterFails(
-                this.createConverterProvider(),
-                name,
-                values,
-                context
+            this.createConverterProvider(),
+            name,
+            values,
+            context
         );
     }
 
@@ -190,12 +190,12 @@ public interface ConverterProviderTesting<T extends ConverterProvider> extends P
                                 final List<?> values,
                                 final ProviderContext context) {
         assertThrows(
-                IllegalArgumentException.class,
-                () -> provider.converter(
-                        name,
-                        values,
-                        context
-                )
+            IllegalArgumentException.class,
+            () -> provider.converter(
+                name,
+                values,
+                context
+            )
         );
     }
 
@@ -204,11 +204,11 @@ public interface ConverterProviderTesting<T extends ConverterProvider> extends P
                                    final ProviderContext context,
                                    final Converter<?> expected) {
         this.converterAndCheck(
-                this.createConverterProvider(),
-                name,
-                values,
-                context,
-                expected
+            this.createConverterProvider(),
+            name,
+            values,
+            context,
+            expected
         );
     }
 
@@ -218,13 +218,13 @@ public interface ConverterProviderTesting<T extends ConverterProvider> extends P
                                    final ProviderContext context,
                                    final Converter<?> expected) {
         this.checkEquals(
-                expected,
-                provider.converter(
-                        name,
-                        values,
-                        context
-                ),
-                () -> provider + " " + name + " " + values
+            expected,
+            provider.converter(
+                name,
+                values,
+                context
+            ),
+            () -> provider + " " + name + " " + values
         );
     }
 
@@ -232,36 +232,36 @@ public interface ConverterProviderTesting<T extends ConverterProvider> extends P
 
     default void converterInfosAndCheck(final ConverterInfo... expected) {
         this.converterInfosAndCheck(
-                this.createConverterProvider(),
-                expected
+            this.createConverterProvider(),
+            expected
         );
     }
 
     default void converterInfosAndCheck(final ConverterProvider provider,
                                         final ConverterInfo... expected) {
         this.converterInfosAndCheck(
-                provider,
-                ConverterInfoSet.with(
-                        Sets.of(
-                                expected
-                        )
+            provider,
+            ConverterInfoSet.with(
+                Sets.of(
+                    expected
                 )
+            )
         );
     }
 
     default void converterInfosAndCheck(final ConverterInfoSet expected) {
         this.converterInfosAndCheck(
-                this.createConverterProvider(),
-                expected
+            this.createConverterProvider(),
+            expected
         );
     }
 
     default void converterInfosAndCheck(final ConverterProvider provider,
                                         final ConverterInfoSet expected) {
         this.checkEquals(
-                expected,
-                provider.converterInfos(),
-                () -> provider.toString()
+            expected,
+            provider.converterInfos(),
+            () -> provider.toString()
         );
     }
 

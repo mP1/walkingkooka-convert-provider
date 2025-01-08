@@ -33,16 +33,16 @@ final class FilteredConverterProvider implements ConverterProvider {
     static FilteredConverterProvider with(final ConverterProvider provider,
                                           final ConverterInfoSet infos) {
         return new FilteredConverterProvider(
-                Objects.requireNonNull(provider, "provider"),
-                Objects.requireNonNull(infos, "infos")
+            Objects.requireNonNull(provider, "provider"),
+            Objects.requireNonNull(infos, "infos")
         );
     }
 
     private FilteredConverterProvider(final ConverterProvider provider,
                                       final ConverterInfoSet infos) {
         this.guard = FilteredProviderGuard.with(
-                infos.names(),
-                ConverterPluginHelper.INSTANCE
+            infos.names(),
+            ConverterPluginHelper.INSTANCE
         );
         this.provider = provider;
         this.infos = infos;
@@ -52,8 +52,8 @@ final class FilteredConverterProvider implements ConverterProvider {
     public <C extends ConverterContext> Converter<C> converter(final ConverterSelector selector,
                                                                final ProviderContext context) {
         return this.provider.converter(
-                selector,
-                context
+            selector,
+            context
         );
     }
 
@@ -66,9 +66,9 @@ final class FilteredConverterProvider implements ConverterProvider {
         Objects.requireNonNull(context, "context");
 
         return this.provider.converter(
-                this.guard.name(name),
-                values,
-                context
+            this.guard.name(name),
+            values,
+            context
         );
     }
 

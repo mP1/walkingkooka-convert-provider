@@ -39,44 +39,44 @@ public final class ConvertersConverterProviderTest implements ConverterProviderT
     @Test
     public void testConverterSelectorBooleanToNumber() {
         this.converterAndCheck(
-                ConverterSelector.with(
-                        ConverterName.BOOLEAN_TO_NUMBER,
-                        ""
-                ),
-                CONTEXT,
-                Converters.booleanToNumber()
+            ConverterSelector.with(
+                ConverterName.BOOLEAN_TO_NUMBER,
+                ""
+            ),
+            CONTEXT,
+            Converters.booleanToNumber()
         );
     }
 
     @Test
     public void testConverterSelectorCharacterOrStringToString() {
         this.converterAndCheck(
-                ConverterSelector.with(
-                        ConverterName.CHARACTER_OR_STRING_TO_STRING,
-                        ""
-                ),
-                CONTEXT,
-                Converters.characterOrStringToString()
+            ConverterSelector.with(
+                ConverterName.CHARACTER_OR_STRING_TO_STRING,
+                ""
+            ),
+            CONTEXT,
+            Converters.characterOrStringToString()
         );
     }
 
     @Test
     public void testConverterNameBooleanToNumber() {
         this.converterAndCheck(
-                ConverterName.BOOLEAN_TO_NUMBER,
-                Lists.empty(),
-                CONTEXT,
-                Converters.booleanToNumber()
+            ConverterName.BOOLEAN_TO_NUMBER,
+            Lists.empty(),
+            CONTEXT,
+            Converters.booleanToNumber()
         );
     }
 
     @Test
     public void testConverterNameCharacterOrStringToString() {
         this.converterAndCheck(
-                ConverterName.CHARACTER_OR_STRING_TO_STRING,
-                Lists.empty(),
-                CONTEXT,
-                Converters.characterOrStringToString()
+            ConverterName.CHARACTER_OR_STRING_TO_STRING,
+            Lists.empty(),
+            CONTEXT,
+            Converters.characterOrStringToString()
         );
     }
 
@@ -109,8 +109,8 @@ public final class ConvertersConverterProviderTest implements ConverterProviderT
             }
 
             final String name = CaseKind.CAMEL.change(
-                    methodName,
-                    CaseKind.KEBAB
+                methodName,
+                CaseKind.KEBAB
             );
 
             System.out.println(method + " " + name);
@@ -119,11 +119,11 @@ public final class ConvertersConverterProviderTest implements ConverterProviderT
 
             try {
                 ConverterSelector.with(
-                        converterName,
-                        ""
+                    converterName,
+                    ""
                 ).evaluateValueText(
-                        provider,
-                        CONTEXT
+                    provider,
+                    CONTEXT
                 );
             } catch (final Exception fail) {
                 missing.add(converterName);
@@ -133,40 +133,40 @@ public final class ConvertersConverterProviderTest implements ConverterProviderT
         }
 
         this.checkNotEquals(
-                0,
-                i
+            0,
+            i
         );
 
         this.checkEquals(
-                Sets.empty(),
-                missing
+            Sets.empty(),
+            missing
         );
     }
 
     @Test
     public void testConverterCollection() {
         this.converterAndCheck(
-                ConverterSelector.parse("collection (boolean-to-number)"),
-                CONTEXT,
-                Converters.collection(
-                        Lists.of(
-                                Converters.booleanToNumber()
-                        )
+            ConverterSelector.parse("collection (boolean-to-number)"),
+            CONTEXT,
+            Converters.collection(
+                Lists.of(
+                    Converters.booleanToNumber()
                 )
+            )
         );
     }
 
     @Test
     public void testConverterCollection2() {
         this.converterAndCheck(
-                ConverterSelector.parse("collection (boolean-to-number, character-or-string-to-string)"),
-                CONTEXT,
-                Converters.collection(
-                        Lists.of(
-                                Converters.booleanToNumber(),
-                                Converters.characterOrStringToString()
-                        )
+            ConverterSelector.parse("collection (boolean-to-number, character-or-string-to-string)"),
+            CONTEXT,
+            Converters.collection(
+                Lists.of(
+                    Converters.booleanToNumber(),
+                    Converters.characterOrStringToString()
                 )
+            )
         );
     }
 

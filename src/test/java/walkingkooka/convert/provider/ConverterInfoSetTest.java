@@ -29,15 +29,15 @@ import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 import static org.junit.jupiter.api.Assertions.assertSame;
 
 public final class ConverterInfoSetTest implements PluginInfoSetLikeTesting<ConverterName, ConverterInfo, ConverterInfoSet, ConverterSelector, ConverterAlias, ConverterAliasSet>,
-        ClassTesting<ConverterInfoSet> {
+    ClassTesting<ConverterInfoSet> {
 
     @Test
     public void testImmutableSet() {
         final ConverterInfoSet set = this.createSet();
 
         assertSame(
-                set,
-                Sets.immutable(set)
+            set,
+            Sets.immutable(set)
         );
     }
 
@@ -58,17 +58,17 @@ public final class ConverterInfoSetTest implements PluginInfoSetLikeTesting<Conv
     @Override
     public ConverterInfoSet createSet() {
         return ConverterInfoSet.with(
-                Sets.of(
-                        this.info()
-                )
+            Sets.of(
+                this.info()
+            )
         );
     }
 
     @Override
     public ConverterInfo info() {
         return ConverterInfo.with(
-                Url.parseAbsolute("https://example.com/Converter123"),
-                ConverterName.with("Converter123")
+            Url.parseAbsolute("https://example.com/Converter123"),
+            ConverterName.with("Converter123")
         );
     }
 
@@ -89,25 +89,25 @@ public final class ConverterInfoSetTest implements PluginInfoSetLikeTesting<Conv
     @Test
     public void testMarshallEmpty() {
         this.marshallAndCheck(
-                ConverterInfoSet.EMPTY,
-                JsonNode.array()
+            ConverterInfoSet.EMPTY,
+            JsonNode.array()
         );
     }
 
     @Test
     public void testMarshallNotEmpty2() {
         this.marshallAndCheck(
-                ConverterInfoSet.with(
-                        Sets.of(
-                                ConverterInfo.with(
-                                        Url.parseAbsolute("https://example.com/test123"),
-                                        ConverterName.with("test123")
-                                )
-                        )
-                ),
-                "[\n" +
-                        "  \"https://example.com/test123 test123\"\n" +
-                        "]"
+            ConverterInfoSet.with(
+                Sets.of(
+                    ConverterInfo.with(
+                        Url.parseAbsolute("https://example.com/test123"),
+                        ConverterName.with("test123")
+                    )
+                )
+            ),
+            "[\n" +
+                "  \"https://example.com/test123 test123\"\n" +
+                "]"
         );
     }
 
@@ -117,24 +117,24 @@ public final class ConverterInfoSetTest implements PluginInfoSetLikeTesting<Conv
     public ConverterInfoSet unmarshall(final JsonNode node,
                                        final JsonNodeUnmarshallContext context) {
         return ConverterInfoSet.unmarshall(
-                node,
-                context
+            node,
+            context
         );
     }
 
     @Override
     public ConverterInfoSet createJsonNodeMarshallingValue() {
         return ConverterInfoSet.with(
-                Sets.of(
-                        ConverterInfo.with(
-                                Url.parseAbsolute("https://example.com/test111"),
-                                ConverterName.with("test111")
-                        ),
-                        ConverterInfo.with(
-                                Url.parseAbsolute("https://example.com/test222"),
-                                ConverterName.with("test222")
-                        )
+            Sets.of(
+                ConverterInfo.with(
+                    Url.parseAbsolute("https://example.com/test111"),
+                    ConverterName.with("test111")
+                ),
+                ConverterInfo.with(
+                    Url.parseAbsolute("https://example.com/test222"),
+                    ConverterName.with("test222")
                 )
+            )
         );
     }
 

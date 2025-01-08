@@ -22,6 +22,7 @@ import walkingkooka.net.AbsoluteUrl;
 import walkingkooka.net.Url;
 import walkingkooka.plugin.PluginAliasLikeTesting;
 import walkingkooka.reflect.JavaVisibility;
+
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -31,11 +32,11 @@ public final class ConverterAliasTest implements PluginAliasLikeTesting<Converte
     private final static ConverterName NAME = ConverterName.with("Hello");
 
     private final static Optional<ConverterSelector> SELECTOR = Optional.of(
-            ConverterSelector.parse("converter123")
+        ConverterSelector.parse("converter123")
     );
 
     private final static Optional<AbsoluteUrl> URL = Optional.of(
-            Url.parseAbsolute("https://example.com/converter123")
+        Url.parseAbsolute("https://example.com/converter123")
     );
 
     // with.............................................................................................................
@@ -43,36 +44,36 @@ public final class ConverterAliasTest implements PluginAliasLikeTesting<Converte
     @Test
     public void testWithNullNameFails() {
         assertThrows(
-                NullPointerException.class,
-                () -> ConverterAlias.with(
-                        null,
-                        SELECTOR,
-                        URL
-                )
+            NullPointerException.class,
+            () -> ConverterAlias.with(
+                null,
+                SELECTOR,
+                URL
+            )
         );
     }
 
     @Test
     public void testWithNullSelectorFails() {
         assertThrows(
-                NullPointerException.class,
-                () -> ConverterAlias.with(
-                        NAME,
-                        null,
-                        URL
-                )
+            NullPointerException.class,
+            () -> ConverterAlias.with(
+                NAME,
+                null,
+                URL
+            )
         );
     }
 
     @Test
     public void testWithNullUrlFails() {
         assertThrows(
-                NullPointerException.class,
-                () -> ConverterAlias.with(
-                        NAME,
-                        SELECTOR,
-                        null
-                )
+            NullPointerException.class,
+            () -> ConverterAlias.with(
+                NAME,
+                SELECTOR,
+                null
+            )
         );
     }
 
@@ -81,16 +82,16 @@ public final class ConverterAliasTest implements PluginAliasLikeTesting<Converte
     @Test
     public void testParse() {
         this.parseStringAndCheck(
-                "alias1 name1 https://example.com",
-                ConverterAlias.with(
-                        ConverterName.with("alias1"),
-                        Optional.of(
-                                ConverterSelector.parse("name1")
-                        ),
-                        Optional.of(
-                                Url.parseAbsolute("https://example.com")
-                        )
+            "alias1 name1 https://example.com",
+            ConverterAlias.with(
+                ConverterName.with("alias1"),
+                Optional.of(
+                    ConverterSelector.parse("name1")
+                ),
+                Optional.of(
+                    Url.parseAbsolute("https://example.com")
                 )
+            )
         );
     }
 
@@ -104,9 +105,9 @@ public final class ConverterAliasTest implements PluginAliasLikeTesting<Converte
     @Override
     public ConverterAlias createComparable() {
         return ConverterAlias.with(
-                NAME,
-                SELECTOR,
-                URL
+            NAME,
+            SELECTOR,
+            URL
         );
     }
 

@@ -35,17 +35,17 @@ public final class EmptyConverterProviderTest implements ConverterProviderTestin
     @Test
     public void testConverterSelectorFails() {
         this.converterFails(
-                "unknown",
-                CONTEXT
+            "unknown",
+            CONTEXT
         );
     }
 
     @Test
     public void testConverterNameFails() {
         this.converterFails(
-                ConverterName.with("unknown"),
-                Lists.empty(),
-                CONTEXT
+            ConverterName.with("unknown"),
+            Lists.empty(),
+            CONTEXT
         );
     }
 
