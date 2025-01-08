@@ -36,8 +36,8 @@ final class FilteredMappedConverterProvider implements ConverterProvider {
         Objects.requireNonNull(provider, "provider");
 
         return new FilteredMappedConverterProvider(
-                infos,
-                provider
+            infos,
+            provider
         );
     }
 
@@ -45,9 +45,9 @@ final class FilteredMappedConverterProvider implements ConverterProvider {
                                             final ConverterProvider provider) {
         this.provider = provider;
         this.mapper = FilteredProviderMapper.with(
-                infos,
-                provider.converterInfos(),
-                ConverterPluginHelper.INSTANCE
+            infos,
+            provider.converterInfos(),
+            ConverterPluginHelper.INSTANCE
         );
     }
 
@@ -57,8 +57,8 @@ final class FilteredMappedConverterProvider implements ConverterProvider {
         Objects.requireNonNull(selector, "selector");
 
         return selector.evaluateValueText(
-                this,
-                context
+            this,
+            context
         );
     }
 
@@ -71,9 +71,9 @@ final class FilteredMappedConverterProvider implements ConverterProvider {
         Objects.requireNonNull(context, "context");
 
         return this.provider.converter(
-                this.mapper.name(name),
-                values,
-                context
+            this.mapper.name(name),
+            values,
+            context
         );
     }
 

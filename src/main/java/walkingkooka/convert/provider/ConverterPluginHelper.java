@@ -36,11 +36,11 @@ import java.util.SortedSet;
 import java.util.function.Function;
 
 final class ConverterPluginHelper implements PluginHelper<ConverterName,
-        ConverterInfo,
-        ConverterInfoSet,
-        ConverterSelector,
-        ConverterAlias,
-        ConverterAliasSet> {
+    ConverterInfo,
+    ConverterInfoSet,
+    ConverterSelector,
+    ConverterAlias,
+    ConverterAliasSet> {
 
     final static ConverterPluginHelper INSTANCE = new ConverterPluginHelper();
 
@@ -59,24 +59,24 @@ final class ConverterPluginHelper implements PluginHelper<ConverterName,
         Objects.requireNonNull(context, "context");
 
         return Parsers.stringInitialAndPartCharPredicate(
-                c -> ConverterName.isChar(0, c),
-                c -> ConverterName.isChar(1, c),
-                ConverterName.MIN_LENGTH, // minLength
-                ConverterName.MAX_LENGTH // maxLength
+            c -> ConverterName.isChar(0, c),
+            c -> ConverterName.isChar(1, c),
+            ConverterName.MIN_LENGTH, // minLength
+            ConverterName.MAX_LENGTH // maxLength
         ).parse(
-                cursor,
-                context
+            cursor,
+            context
         ).map(
-                (final ParserToken token) -> this.name(
-                        token.cast(StringParserToken.class).value()
-                )
+            (final ParserToken token) -> this.name(
+                token.cast(StringParserToken.class).value()
+            )
         );
     }
 
     @Override
     public Set<ConverterName> names(final Set<ConverterName> names) {
         return Sets.immutable(
-                Objects.requireNonNull(names, "names")
+            Objects.requireNonNull(names, "names")
         );
     }
 
@@ -116,9 +116,9 @@ final class ConverterPluginHelper implements PluginHelper<ConverterName,
                                 final Optional<ConverterSelector> selector,
                                 final Optional<AbsoluteUrl> url) {
         return ConverterAlias.with(
-                name,
-                selector,
-                url
+            name,
+            selector,
+            url
         );
     }
 

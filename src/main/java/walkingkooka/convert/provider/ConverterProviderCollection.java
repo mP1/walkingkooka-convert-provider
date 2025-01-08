@@ -35,37 +35,37 @@ final class ConverterProviderCollection implements ConverterProvider {
 
     static <C extends ConverterContext> ConverterProviderCollection with(final Set<ConverterProvider> providers) {
         return new ConverterProviderCollection(
-                Objects.requireNonNull(providers, "providers")
+            Objects.requireNonNull(providers, "providers")
         );
     }
 
     private ConverterProviderCollection(final Set<ConverterProvider> providers) {
         this.providers = ProviderCollection.with(
-                new ProviderCollectionProviderGetter<>() {
-                    @Override
-                    public Converter<?> get(final ConverterProvider provider,
-                                            final ConverterName name,
-                                            final List<?> values,
-                                            final ProviderContext context) {
-                        return Cast.to(
-                                provider.converter(
-                                        name,
-                                        values,
-                                        context
-                                )
-                        );
-                    }
+            new ProviderCollectionProviderGetter<>() {
+                @Override
+                public Converter<?> get(final ConverterProvider provider,
+                                        final ConverterName name,
+                                        final List<?> values,
+                                        final ProviderContext context) {
+                    return Cast.to(
+                        provider.converter(
+                            name,
+                            values,
+                            context
+                        )
+                    );
+                }
 
-                    @Override
-                    public Converter<?> get(final ConverterProvider provider,
-                                            final ConverterSelector selector,
-                                            final ProviderContext context) {
-                        throw new UnsupportedOperationException();
-                    }
-                },
-                ConverterProvider::converterInfos,
-                Converter.class.getSimpleName(),
-                providers
+                @Override
+                public Converter<?> get(final ConverterProvider provider,
+                                        final ConverterSelector selector,
+                                        final ProviderContext context) {
+                    throw new UnsupportedOperationException();
+                }
+            },
+            ConverterProvider::converterInfos,
+            Converter.class.getSimpleName(),
+            providers
         );
     }
 
@@ -75,8 +75,8 @@ final class ConverterProviderCollection implements ConverterProvider {
         Objects.requireNonNull(selector, "selector");
 
         return selector.evaluateValueText(
-                this,
-                context
+            this,
+            context
         );
     }
 
@@ -85,18 +85,18 @@ final class ConverterProviderCollection implements ConverterProvider {
                                                                final List<?> values,
                                                                final ProviderContext context) {
         return Cast.to(
-                this.providers.get(
-                        name,
-                        values,
-                        context
-                )
+            this.providers.get(
+                name,
+                values,
+                context
+            )
         );
     }
 
     @Override
     public ConverterInfoSet converterInfos() {
         return ConverterInfoSet.with(
-                this.providers.infos()
+            this.providers.infos()
         );
     }
 

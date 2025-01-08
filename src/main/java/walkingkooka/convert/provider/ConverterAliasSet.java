@@ -23,7 +23,6 @@ import walkingkooka.plugin.PluginAliasSet;
 import walkingkooka.plugin.PluginAliasSetLike;
 import walkingkooka.text.CharacterConstant;
 import walkingkooka.text.printer.IndentingPrinter;
-import walkingkooka.tree.expression.ExpressionFunctionName;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeContext;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
@@ -37,22 +36,22 @@ import java.util.Optional;
 import java.util.SortedSet;
 
 public final class ConverterAliasSet extends AbstractSet<ConverterAlias>
-        implements PluginAliasSetLike<ConverterName,
-        ConverterInfo,
-        ConverterInfoSet,
-        ConverterSelector,
-        ConverterAlias,
-        ConverterAliasSet>,
-        ImmutableSortedSetDefaults<ConverterAliasSet, ConverterAlias> {
+    implements PluginAliasSetLike<ConverterName,
+    ConverterInfo,
+    ConverterInfoSet,
+    ConverterSelector,
+    ConverterAlias,
+    ConverterAliasSet>,
+    ImmutableSortedSetDefaults<ConverterAliasSet, ConverterAlias> {
 
     /**
      * An empty {@link ConverterAliasSet}.
      */
     public final static ConverterAliasSet EMPTY = new ConverterAliasSet(
-            PluginAliasSet.with(
-                    SortedSets.empty(),
-                    ConverterPluginHelper.INSTANCE
-            )
+        PluginAliasSet.with(
+            SortedSets.empty(),
+            ConverterPluginHelper.INSTANCE
+        )
     );
 
     /**
@@ -69,10 +68,10 @@ public final class ConverterAliasSet extends AbstractSet<ConverterAlias>
 
     public static ConverterAliasSet parse(final String text) {
         return new ConverterAliasSet(
-                PluginAliasSet.parse(
-                        text,
-                        ConverterPluginHelper.INSTANCE
-                )
+            PluginAliasSet.parse(
+                text,
+                ConverterPluginHelper.INSTANCE
+            )
         );
     }
 
@@ -108,21 +107,21 @@ public final class ConverterAliasSet extends AbstractSet<ConverterAlias>
     @Override
     public ConverterAliasSet concatOrReplace(final ConverterAlias alias) {
         return new ConverterAliasSet(
-                this.pluginAliasSet.concatOrReplace(alias)
+            this.pluginAliasSet.concatOrReplace(alias)
         );
     }
 
     @Override
     public ConverterAliasSet deleteAliasOrNameAll(final Collection<ConverterName> aliasOrNames) {
         return this.setElements(
-                this.pluginAliasSet.deleteAliasOrNameAll(aliasOrNames)
+            this.pluginAliasSet.deleteAliasOrNameAll(aliasOrNames)
         );
     }
 
     @Override
     public ConverterAliasSet keepAliasOrNameAll(final Collection<ConverterName> aliasOrNames) {
         return this.setElements(
-                this.pluginAliasSet.keepAliasOrNameAll(aliasOrNames)
+            this.pluginAliasSet.keepAliasOrNameAll(aliasOrNames)
         );
     }
 
@@ -146,11 +145,11 @@ public final class ConverterAliasSet extends AbstractSet<ConverterAlias>
     @Override
     public ConverterAliasSet setElements(final SortedSet<ConverterAlias> aliases) {
         final ConverterAliasSet after = new ConverterAliasSet(
-                this.pluginAliasSet.setElements(aliases)
+            this.pluginAliasSet.setElements(aliases)
         );
         return this.pluginAliasSet.equals(aliases) ?
-                this :
-                after;
+            this :
+            after;
     }
 
     @Override
@@ -167,52 +166,52 @@ public final class ConverterAliasSet extends AbstractSet<ConverterAlias>
     public ConverterAliasSet subSet(final ConverterAlias from,
                                     final ConverterAlias to) {
         return this.setElements(
-                this.pluginAliasSet.subSet(
-                        from,
-                        to
-                )
+            this.pluginAliasSet.subSet(
+                from,
+                to
+            )
         );
     }
 
     @Override
     public ConverterAliasSet headSet(final ConverterAlias alias) {
         return this.setElements(
-                this.pluginAliasSet.headSet(alias)
+            this.pluginAliasSet.headSet(alias)
         );
     }
 
     @Override
     public ConverterAliasSet tailSet(final ConverterAlias alias) {
         return this.setElements(
-                this.pluginAliasSet.tailSet(alias)
+            this.pluginAliasSet.tailSet(alias)
         );
     }
 
     @Override
     public ConverterAliasSet concat(final ConverterAlias alias) {
         return this.setElements(
-                this.pluginAliasSet.concat(alias)
+            this.pluginAliasSet.concat(alias)
         );
     }
 
     @Override
     public ConverterAliasSet concatAll(final Collection<ConverterAlias> aliases) {
         return this.setElements(
-                this.pluginAliasSet.concatAll(aliases)
+            this.pluginAliasSet.concatAll(aliases)
         );
     }
 
     @Override
     public ConverterAliasSet delete(final ConverterAlias alias) {
         return this.setElements(
-                this.pluginAliasSet.delete(alias)
+            this.pluginAliasSet.delete(alias)
         );
     }
 
     @Override
     public ConverterAliasSet deleteAll(final Collection<ConverterAlias> aliases) {
         return this.setElements(
-                this.pluginAliasSet.deleteAll(aliases)
+            this.pluginAliasSet.deleteAll(aliases)
         );
     }
 
@@ -220,10 +219,10 @@ public final class ConverterAliasSet extends AbstractSet<ConverterAlias>
     public ConverterAliasSet replace(final ConverterAlias oldAlias,
                                      final ConverterAlias newAlias) {
         return this.setElements(
-                this.pluginAliasSet.replace(
-                        oldAlias,
-                        newAlias
-                )
+            this.pluginAliasSet.replace(
+                oldAlias,
+                newAlias
+            )
         );
     }
 
@@ -257,23 +256,23 @@ public final class ConverterAliasSet extends AbstractSet<ConverterAlias>
 
     private JsonNode marshall(final JsonNodeMarshallContext context) {
         return JsonNode.string(
-                this.pluginAliasSet.text()
+            this.pluginAliasSet.text()
         );
     }
 
     static ConverterAliasSet unmarshall(final JsonNode node,
                                         final JsonNodeUnmarshallContext context) {
         return parse(
-                node.stringOrFail()
+            node.stringOrFail()
         );
     }
 
     static {
         JsonNodeContext.register(
-                JsonNodeContext.computeTypeName(ConverterAliasSet.class),
-                ConverterAliasSet::unmarshall,
-                ConverterAliasSet::marshall,
-                ConverterAliasSet.class
+            JsonNodeContext.computeTypeName(ConverterAliasSet.class),
+            ConverterAliasSet::unmarshall,
+            ConverterAliasSet::marshall,
+            ConverterAliasSet.class
         );
         ConverterInfoSet.EMPTY.size(); // trigger static init and json marshall/unmarshall registry
     }

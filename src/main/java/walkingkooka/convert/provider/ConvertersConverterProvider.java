@@ -46,23 +46,23 @@ final class ConvertersConverterProvider implements ConverterProvider {
         super();
 
         this.infos = ConverterInfoSet.with(
-                Sets.readOnly(
-                        ConverterName.NAME_TO_FACTORY.keySet()
-                                .stream()
-                                .map(ConvertersConverterProvider::nameToConverterInfo)
-                                .collect(Collectors.toCollection(SortedSets::tree))
-                )
+            Sets.readOnly(
+                ConverterName.NAME_TO_FACTORY.keySet()
+                    .stream()
+                    .map(ConvertersConverterProvider::nameToConverterInfo)
+                    .collect(Collectors.toCollection(SortedSets::tree))
+            )
         );
     }
 
     private static ConverterInfo nameToConverterInfo(final ConverterName name) {
         return ConverterInfo.with(
-                ConverterProviders.BASE_URL.appendPath(
-                        UrlPath.parse(
-                                name.value()
-                        )
-                ),
-                name
+            ConverterProviders.BASE_URL.appendPath(
+                UrlPath.parse(
+                    name.value()
+                )
+            ),
+            name
         );
     }
 
@@ -72,8 +72,8 @@ final class ConvertersConverterProvider implements ConverterProvider {
         Objects.requireNonNull(selector, "selector");
 
         return selector.evaluateValueText(
-                this,
-                context
+            this,
+            context
         );
     }
 
@@ -91,9 +91,9 @@ final class ConvertersConverterProvider implements ConverterProvider {
         }
 
         return Cast.to(
-                factory.apply(
-                        Lists.immutable(values)
-                )
+            factory.apply(
+                Lists.immutable(values)
+            )
         );
     }
 

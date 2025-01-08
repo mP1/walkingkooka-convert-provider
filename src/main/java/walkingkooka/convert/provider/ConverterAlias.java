@@ -30,10 +30,10 @@ public final class ConverterAlias implements PluginAliasLike<ConverterName, Conv
 
     public static ConverterAlias parse(final String text) {
         return ConverterAlias.with(
-                PluginAlias.parse(
-                        text,
-                        ConverterPluginHelper.INSTANCE
-                )
+            PluginAlias.parse(
+                text,
+                ConverterPluginHelper.INSTANCE
+            )
         );
     }
 
@@ -41,17 +41,17 @@ public final class ConverterAlias implements PluginAliasLike<ConverterName, Conv
                                final Optional<ConverterSelector> selector,
                                final Optional<AbsoluteUrl> url) {
         return with(
-                PluginAlias.with(
-                        name,
-                        selector,
-                        url
-                )
+            PluginAlias.with(
+                name,
+                selector,
+                url
+            )
         );
     }
 
     public static ConverterAlias with(final PluginAlias<ConverterName, ConverterSelector> pluginAlias) {
         return new ConverterAlias(
-                Objects.requireNonNull(pluginAlias, "pluginAlias")
+            Objects.requireNonNull(pluginAlias, "pluginAlias")
         );
     }
 

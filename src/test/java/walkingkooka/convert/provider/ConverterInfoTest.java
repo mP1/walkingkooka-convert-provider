@@ -32,15 +32,15 @@ public final class ConverterInfoTest implements PluginInfoLikeTesting<ConverterI
         final ConverterName different = ConverterName.with("different");
 
         this.setNameAndCheck(
-                ConverterInfo.with(
-                        url,
-                        ConverterName.with("original-converter-name")
-                ),
-                different,
-                ConverterInfo.with(
-                        url,
-                        different
-                )
+            ConverterInfo.with(
+                url,
+                ConverterName.with("original-converter-name")
+            ),
+            different,
+            ConverterInfo.with(
+                url,
+                different
+            )
         );
     }
 
@@ -62,8 +62,8 @@ public final class ConverterInfoTest implements PluginInfoLikeTesting<ConverterI
     public ConverterInfo createPluginInfoLike(final AbsoluteUrl url,
                                               final ConverterName name) {
         return ConverterInfo.with(
-                url,
-                name
+            url,
+            name
         );
     }
 
@@ -73,8 +73,8 @@ public final class ConverterInfoTest implements PluginInfoLikeTesting<ConverterI
     public ConverterInfo unmarshall(final JsonNode json,
                                     final JsonNodeUnmarshallContext context) {
         return ConverterInfo.unmarshall(
-                json,
-                context
+            json,
+            context
         );
     }
 

@@ -41,10 +41,10 @@ public final class ConverterSelector implements PluginSelectorLike<ConverterName
      */
     public static ConverterSelector parse(final String text) {
         return new ConverterSelector(
-                PluginSelector.parse(
-                        text,
-                        ConverterName::with
-                )
+            PluginSelector.parse(
+                text,
+                ConverterName::with
+            )
         );
     }
 
@@ -54,10 +54,10 @@ public final class ConverterSelector implements PluginSelectorLike<ConverterName
     public static ConverterSelector with(final ConverterName name,
                                          final String text) {
         return new ConverterSelector(
-                PluginSelector.with(
-                        name,
-                        text
-                )
+            PluginSelector.with(
+                name,
+                text
+            )
         );
     }
 
@@ -81,13 +81,13 @@ public final class ConverterSelector implements PluginSelectorLike<ConverterName
         Objects.requireNonNull(name, "name");
 
         return this.name().equals(name) ?
-                this :
-                new ConverterSelector(
-                        PluginSelector.with(
-                                name,
-                                this.valueText()
-                        )
-                );
+            this :
+            new ConverterSelector(
+                PluginSelector.with(
+                    name,
+                    this.valueText()
+                )
+            );
     }
 
     // HasText..........................................................................................................
@@ -105,8 +105,8 @@ public final class ConverterSelector implements PluginSelectorLike<ConverterName
     public ConverterSelector setValueText(final String text) {
         final PluginSelector<ConverterName> different = this.selector.setValueText(text);
         return this.selector.equals(different) ?
-                this :
-                new ConverterSelector(different);
+            this :
+            new ConverterSelector(different);
     }
 
     private final PluginSelector<ConverterName> selector;
@@ -117,8 +117,8 @@ public final class ConverterSelector implements PluginSelectorLike<ConverterName
     public ConverterSelector setValues(final List<?> values) {
         final PluginSelector<ConverterName> different = this.selector.setValues(values);
         return this.selector.equals(different) ?
-                this :
-                new ConverterSelector(different);
+            this :
+            new ConverterSelector(different);
     }
 
     // evaluateText.....................................................................................................
@@ -143,9 +143,9 @@ public final class ConverterSelector implements PluginSelectorLike<ConverterName
         Objects.requireNonNull(provider, "context");
 
         return this.selector.evaluateValueText(
-                ConverterPluginHelper.INSTANCE::parseName,
-                provider::converter,
-                context
+            ConverterPluginHelper.INSTANCE::parseName,
+            provider::converter,
+            context
         );
     }
 
@@ -159,7 +159,7 @@ public final class ConverterSelector implements PluginSelectorLike<ConverterName
     @Override
     public boolean equals(final Object other) {
         return this == other ||
-                other instanceof ConverterSelector && this.equals0((ConverterSelector) other);
+            other instanceof ConverterSelector && this.equals0((ConverterSelector) other);
     }
 
     private boolean equals0(final ConverterSelector other) {
@@ -191,10 +191,10 @@ public final class ConverterSelector implements PluginSelectorLike<ConverterName
 
     static {
         JsonNodeContext.register(
-                JsonNodeContext.computeTypeName(ConverterSelector.class),
-                ConverterSelector::unmarshall,
-                ConverterSelector::marshall,
-                ConverterSelector.class
+            JsonNodeContext.computeTypeName(ConverterSelector.class),
+            ConverterSelector::unmarshall,
+            ConverterSelector::marshall,
+            ConverterSelector.class
         );
     }
 

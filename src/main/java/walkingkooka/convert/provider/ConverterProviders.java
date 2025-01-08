@@ -22,7 +22,6 @@ import walkingkooka.net.AbsoluteUrl;
 import walkingkooka.net.Url;
 import walkingkooka.reflect.PublicStaticHelper;
 
-import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -35,7 +34,7 @@ public final class ConverterProviders implements PublicStaticHelper {
      * converter will be appended to this base.
      */
     public final static AbsoluteUrl BASE_URL = Url.parseAbsolute(
-            "https://github.com/mP1/walkingkooka-convert-provider/" + Converter.class.getSimpleName()
+        "https://github.com/mP1/walkingkooka-convert-provider/" + Converter.class.getSimpleName()
     );
 
     /**
@@ -44,8 +43,8 @@ public final class ConverterProviders implements PublicStaticHelper {
     public static ConverterProvider aliases(final ConverterAliasSet aliases,
                                             final ConverterProvider provider) {
         return AliasesConverterProvider.with(
-                aliases,
-                provider
+            aliases,
+            provider
         );
     }
 
@@ -83,8 +82,8 @@ public final class ConverterProviders implements PublicStaticHelper {
     public static ConverterProvider filtered(final ConverterProvider provider,
                                              final ConverterInfoSet infos) {
         return FilteredConverterProvider.with(
-                provider,
-                infos
+            provider,
+            infos
         );
     }
 
@@ -94,8 +93,8 @@ public final class ConverterProviders implements PublicStaticHelper {
     public static ConverterProvider filteredMapped(final ConverterInfoSet infos,
                                                    final ConverterProvider provider) {
         return FilteredMappedConverterProvider.with(
-                infos,
-                provider
+            infos,
+            provider
         );
     }
 
@@ -105,8 +104,8 @@ public final class ConverterProviders implements PublicStaticHelper {
     public static ConverterProvider mergedMapped(final ConverterInfoSet infos,
                                                  final ConverterProvider provider) {
         return MergedMappedConverterProvider.with(
-                infos,
-                provider
+            infos,
+            provider
         );
     }
 

@@ -39,36 +39,36 @@ final public class ConverterNameTest implements PluginNameTesting<ConverterName>
     @Test
     public void testConstantNamesMatchConvertersFactoryMethods() {
         final Set<String> constantNames = Arrays.stream(ConverterName.class.getFields())
-                .filter(m -> FieldAttributes.STATIC.is(m))
-                .filter(m -> JavaVisibility.of(m) == JavaVisibility.PUBLIC)
-                .filter(m -> m.getType() == ConverterName.class)
-                .map(m -> {
-                    try {
-                        final ConverterName n = (ConverterName) m.get(null);
-                        return n.value();
-                    } catch (final Exception rethrow) {
-                        throw new Error(rethrow);
-                    }
-                }).filter(n -> false == "fake".equals(n))
-                .collect(Collectors.toCollection(SortedSets::tree));
+            .filter(m -> FieldAttributes.STATIC.is(m))
+            .filter(m -> JavaVisibility.of(m) == JavaVisibility.PUBLIC)
+            .filter(m -> m.getType() == ConverterName.class)
+            .map(m -> {
+                try {
+                    final ConverterName n = (ConverterName) m.get(null);
+                    return n.value();
+                } catch (final Exception rethrow) {
+                    throw new Error(rethrow);
+                }
+            }).filter(n -> false == "fake".equals(n))
+            .collect(Collectors.toCollection(SortedSets::tree));
 
         final Set<String> factoryNames = Arrays.stream(Converters.class.getMethods())
-                .filter(m -> MethodAttributes.STATIC.is(m))
-                .filter(m -> JavaVisibility.of(m) == JavaVisibility.PUBLIC)
-                .map(m -> m.getName())
-                .filter(n -> false == "fake".equals(n))
-                .map(m -> CaseKind.CAMEL.change(m, CaseKind.KEBAB).toLowerCase())
-                .collect(Collectors.toCollection(SortedSets::tree));
+            .filter(m -> MethodAttributes.STATIC.is(m))
+            .filter(m -> JavaVisibility.of(m) == JavaVisibility.PUBLIC)
+            .map(m -> m.getName())
+            .filter(n -> false == "fake".equals(n))
+            .map(m -> CaseKind.CAMEL.change(m, CaseKind.KEBAB).toLowerCase())
+            .collect(Collectors.toCollection(SortedSets::tree));
 
         this.checkEquals(
-                CharacterConstant.with('\n').toSeparatedString(
-                        constantNames,
-                        Function.identity()
-                ),
-                CharacterConstant.with('\n').toSeparatedString(
-                        factoryNames,
-                        Function.identity()
-                )
+            CharacterConstant.with('\n').toSeparatedString(
+                constantNames,
+                Function.identity()
+            ),
+            CharacterConstant.with('\n').toSeparatedString(
+                factoryNames,
+                Function.identity()
+            )
         );
     }
 

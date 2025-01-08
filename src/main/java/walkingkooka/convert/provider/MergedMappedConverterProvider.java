@@ -19,7 +19,8 @@ package walkingkooka.convert.provider;
 
 import walkingkooka.convert.Converter;
 import walkingkooka.convert.ConverterContext;
-import walkingkooka.plugin.*;
+import walkingkooka.plugin.MergedProviderMapper;
+import walkingkooka.plugin.ProviderContext;
 
 import java.util.List;
 import java.util.Objects;
@@ -35,8 +36,8 @@ final class MergedMappedConverterProvider implements ConverterProvider {
         Objects.requireNonNull(provider, "provider");
 
         return new MergedMappedConverterProvider(
-                infos,
-                provider
+            infos,
+            provider
         );
     }
 
@@ -44,9 +45,9 @@ final class MergedMappedConverterProvider implements ConverterProvider {
                                           final ConverterProvider provider) {
         this.provider = provider;
         this.mapper = MergedProviderMapper.with(
-                infos,
-                provider.converterInfos(),
-                ConverterPluginHelper.INSTANCE
+            infos,
+            provider.converterInfos(),
+            ConverterPluginHelper.INSTANCE
         );
     }
 
@@ -56,8 +57,8 @@ final class MergedMappedConverterProvider implements ConverterProvider {
         Objects.requireNonNull(selector, "selector");
 
         return selector.evaluateValueText(
-                this,
-                context
+            this,
+            context
         );
     }
 
@@ -70,9 +71,9 @@ final class MergedMappedConverterProvider implements ConverterProvider {
         Objects.requireNonNull(context, "context");
 
         return this.provider.converter(
-                this.mapper.name(name),
-                values,
-                context
+            this.mapper.name(name),
+            values,
+            context
         );
     }
 

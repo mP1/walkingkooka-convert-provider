@@ -30,30 +30,30 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class ConverterAliasSetTest implements PluginAliasSetLikeTesting<ConverterName,
-        ConverterInfo,
-        ConverterInfoSet,
-        ConverterSelector,
-        ConverterAlias,
-        ConverterAliasSet>,
-        HashCodeEqualsDefinedTesting2<ConverterAliasSet>,
-        ToStringTesting<ConverterAliasSet>,
-        JsonNodeMarshallingTesting<ConverterAliasSet> {
+    ConverterInfo,
+    ConverterInfoSet,
+    ConverterSelector,
+    ConverterAlias,
+    ConverterAliasSet>,
+    HashCodeEqualsDefinedTesting2<ConverterAliasSet>,
+    ToStringTesting<ConverterAliasSet>,
+    JsonNodeMarshallingTesting<ConverterAliasSet> {
 
     // with.............................................................................................................
 
     @Test
     public void testWithNullFails() {
         assertThrows(
-                NullPointerException.class,
-                () -> ConverterAliasSet.with(null)
+            NullPointerException.class,
+            () -> ConverterAliasSet.with(null)
         );
     }
 
     @Test
     public void testWithEmpty() {
         assertSame(
-                ConverterAliasSet.EMPTY,
-                ConverterAliasSet.with(SortedSets.empty())
+            ConverterAliasSet.EMPTY,
+            ConverterAliasSet.with(SortedSets.empty())
         );
     }
 
@@ -64,35 +64,35 @@ public final class ConverterAliasSetTest implements PluginAliasSetLikeTesting<Co
         final ConverterName abc = ConverterName.with("abc");
 
         this.aliasOrNameAndCheck(
-                this.createSet(),
-                abc,
-                abc
+            this.createSet(),
+            abc,
+            abc
         );
     }
 
     @Test
     public void testAliasOrNameWithAlias() {
         this.aliasOrNameAndCheck(
-                this.createSet(),
-                ConverterName.with("sunshine-alias"),
-                ConverterName.with("sunshine")
+            this.createSet(),
+            ConverterName.with("sunshine-alias"),
+            ConverterName.with("sunshine")
         );
     }
 
     @Test
     public void testAliasSelectorWithName() {
         this.aliasSelectorAndCheck(
-                this.createSet(),
-                ConverterName.with("abc")
+            this.createSet(),
+            ConverterName.with("abc")
         );
     }
 
     @Test
     public void testAliasSelectorWithAlias() {
         this.aliasSelectorAndCheck(
-                this.createSet(),
-                ConverterName.with("custom-alias"),
-                ConverterSelector.parse("custom(1)")
+            this.createSet(),
+            ConverterName.with("custom-alias"),
+            ConverterSelector.parse("custom(1)")
         );
     }
 
@@ -113,7 +113,7 @@ public final class ConverterAliasSetTest implements PluginAliasSetLikeTesting<Co
     @Test
     public void testEqualsDifferent() {
         this.checkNotEquals(
-                ConverterAliasSet.parse("different")
+            ConverterAliasSet.parse("different")
         );
     }
 
@@ -126,10 +126,10 @@ public final class ConverterAliasSetTest implements PluginAliasSetLikeTesting<Co
 
     @Override
     public ConverterAliasSet unmarshall(final JsonNode json,
-                                                 final JsonNodeUnmarshallContext context) {
+                                        final JsonNodeUnmarshallContext context) {
         return ConverterAliasSet.unmarshall(
-                json,
-                context
+            json,
+            context
         );
     }
 
