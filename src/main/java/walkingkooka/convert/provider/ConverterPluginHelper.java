@@ -58,7 +58,7 @@ final class ConverterPluginHelper implements PluginHelper<ConverterName,
         Objects.requireNonNull(cursor, "cursor");
         Objects.requireNonNull(context, "context");
 
-        return Parsers.stringInitialAndPartCharPredicate(
+        return Parsers.initialAndPartCharPredicateString(
             c -> ConverterName.isChar(0, c),
             c -> ConverterName.isChar(1, c),
             ConverterName.MIN_LENGTH, // minLength

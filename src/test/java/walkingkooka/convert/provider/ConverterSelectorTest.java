@@ -215,7 +215,7 @@ public final class ConverterSelectorTest implements PluginSelectorLikeTesting<Co
     public void testEvaluateValueTextStringUnclosedFail() {
         this.evaluateValueTextFails(
             NAME + " (\"unclosed",
-            "Missing terminating '\"'"
+            "Missing closing '\"'"
         );
     }
 
