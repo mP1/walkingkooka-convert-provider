@@ -146,7 +146,7 @@ public final class ConverterSelectorTest implements PluginSelectorLikeTesting<Co
     public void testEvaluateValueTextOpenParensFail() {
         this.evaluateValueTextFails(
             NAME + "(",
-            "Invalid character '(' at 24 in \"super-magic-converter123(\""
+            "Invalid character '(' at 24"
         );
     }
 
@@ -207,7 +207,7 @@ public final class ConverterSelectorTest implements PluginSelectorLikeTesting<Co
 
         this.evaluateValueTextFails(
             NAME + "(1",
-            "Invalid character '1' at 25 in \"super-magic-converter123(1\""
+            "Invalid character '1' at 25"
         );
     }
 
