@@ -117,6 +117,16 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
         CHAIN_STRING
     );
 
+    private final static String CHARACTER_OR_CHAR_SEQUENCE_OR_HAS_TEXT_OR_STRING_TO_CHAR_SEQUENCE_OR_STRING_STRING = "character-or-char-sequence-or-has-text-or-string-to-character-or-char-sequence-or-string";
+
+    /**
+     * The name of the {@link Converter} returned by {@link Converters#characterOrCharSequenceOrHasTextOrStringToCharacterOrCharSequenceOrString()}
+     */
+    public final static ConverterName CHARACTER_OR_CHAR_SEQUENCE_OR_HAS_TEXT_OR_STRING_TO_CHAR_SEQUENCE_OR_STRING = registerConstantName(
+        CHARACTER_OR_CHAR_SEQUENCE_OR_HAS_TEXT_OR_STRING_TO_CHAR_SEQUENCE_OR_STRING_STRING,
+        Converters::characterOrCharSequenceOrHasTextOrStringToCharacterOrCharSequenceOrString
+    );
+
     private final static String CHARACTER_OR_STRING_TO_STRING_STRING = "character-or-string-to-string";
 
     /**
@@ -448,6 +458,9 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
                 break;
             case CHARACTER_OR_STRING_TO_STRING_STRING:
                 converterName = CHARACTER_OR_STRING_TO_STRING;
+                break;
+            case CHARACTER_OR_CHAR_SEQUENCE_OR_HAS_TEXT_OR_STRING_TO_CHAR_SEQUENCE_OR_STRING_STRING:
+                converterName = CHARACTER_OR_CHAR_SEQUENCE_OR_HAS_TEXT_OR_STRING_TO_CHAR_SEQUENCE_OR_STRING;
                 break;
             case CHAIN_STRING:
                 converterName = CHAIN;
