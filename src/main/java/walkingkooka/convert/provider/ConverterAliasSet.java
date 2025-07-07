@@ -64,7 +64,9 @@ public final class ConverterAliasSet extends AbstractSet<ConverterAlias>
      * Factory that creates {@link ConverterAliasSet} with the given aliases.
      */
     public static ConverterAliasSet with(final SortedSet<ConverterAlias> aliases) {
-        return EMPTY.setElements(aliases);
+        return aliases instanceof ConverterAliasSet ?
+            (ConverterAliasSet) aliases :
+            EMPTY.setElements(aliases);
     }
 
     public static ConverterAliasSet parse(final String text) {
