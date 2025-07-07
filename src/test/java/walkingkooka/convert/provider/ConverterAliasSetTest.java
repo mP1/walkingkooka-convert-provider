@@ -57,6 +57,15 @@ public final class ConverterAliasSetTest implements PluginAliasSetLikeTesting<Co
         );
     }
 
+    @Test
+    public void testWithConverterAliasSetDoesntWrap() {
+        final ConverterAliasSet converterAliasSet = this.createSet();
+        assertSame(
+            converterAliasSet,
+            ConverterAliasSet.with(converterAliasSet)
+        );
+    }
+
     // name.............................................................................................................
 
     @Test
