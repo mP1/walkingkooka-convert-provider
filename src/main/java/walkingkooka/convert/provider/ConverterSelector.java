@@ -140,7 +140,7 @@ public final class ConverterSelector implements PluginSelectorLike<ConverterName
     public <C extends ConverterContext> Converter<C> evaluateValueText(final ConverterProvider provider,
                                                                        final ProviderContext context) {
         Objects.requireNonNull(provider, "provider");
-        Objects.requireNonNull(provider, "context");
+        Objects.requireNonNull(context, "context");
 
         return this.selector.evaluateValueText(
             ConverterPluginHelper.INSTANCE::parseName,
