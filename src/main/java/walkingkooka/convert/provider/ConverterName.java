@@ -165,14 +165,14 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
         CUSTOM_TO_STRING_STRING
     );
 
-    private final static String HAS_TEXT_TO_STRING_STRING = "has-text-to-string";
+    private final static String HAS_TEXT_STRING = "has-text";
 
     /**
-     * The name of the {@link Converter} returned by {@link Converters#hasTextToString()}
+     * The name of the {@link Converter} returned by {@link Converters#hasText()}
      */
-    public final static ConverterName HAS_TEXT_TO_STRING = registerConstantName(
-        HAS_TEXT_TO_STRING_STRING,
-        Converters::hasTextToString
+    public final static ConverterName HAS_TEXT = registerConstantName(
+        HAS_TEXT_STRING,
+        Converters::hasText
     );
 
     private final static String LOCAL_DATE_TIME_TO_LOCAL_DATE_STRING = "local-date-time-to-local-date";
@@ -435,6 +435,66 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
         STRING_TO_NUMBER_STRING
     );
 
+    private final static String TEXT_TO_BOOLEAN_LIST_STRING = "text-to-boolean-list";
+
+    /**
+     * The name of the {@link Converter} returned by {@link Converters#textToBooleanList()} 
+     */
+    public final static ConverterName TEXT_TO_BOOLEAN_LIST = registerConstantName(
+        TEXT_TO_BOOLEAN_LIST_STRING,
+        Converters::textToBooleanList
+    );
+
+    private final static String TEXT_TO_LOCAL_DATE_LIST_STRING = "text-to-local-date-list";
+
+    /**
+     * The name of the {@link Converter} returned by {@link Converters#textToLocalDateList()}
+     */
+    public final static ConverterName TEXT_TO_LOCAL_DATE_LIST = registerConstantName(
+        TEXT_TO_LOCAL_DATE_LIST_STRING,
+        Converters::textToLocalDateList
+    );
+
+    private final static String TEXT_TO_LOCAL_DATE_TIME_LIST_STRING = "text-to-local-date-time-list";
+
+    /**
+     * The name of the {@link Converter} returned by {@link Converters#textToLocalDateTimeList()}
+     */
+    public final static ConverterName TEXT_TO_LOCAL_DATE_TIME_LIST = registerConstantName(
+        TEXT_TO_LOCAL_DATE_TIME_LIST_STRING,
+        Converters::textToLocalDateTimeList
+    );
+
+    private final static String TEXT_TO_LOCAL_TIME_LIST_STRING = "text-to-local-time-list";
+
+    /**
+     * The name of the {@link Converter} returned by {@link Converters#textToLocalTimeList()}
+     */
+    public final static ConverterName TEXT_TO_LOCAL_TIME_LIST = registerConstantName(
+        TEXT_TO_LOCAL_TIME_LIST_STRING,
+        Converters::textToLocalTimeList
+    );
+
+    private final static String TEXT_TO_NUMBER_LIST_STRING = "text-to-number-list";
+
+    /**
+     * The name of the {@link Converter} returned by {@link Converters#textToNumberList()}
+     */
+    public final static ConverterName TEXT_TO_NUMBER_LIST = registerConstantName(
+        TEXT_TO_NUMBER_LIST_STRING,
+        Converters::textToNumberList
+    );
+
+    private final static String TEXT_TO_STRING_LIST_STRING = "text-to-string-list";
+
+    /**
+     * The name of the {@link Converter} returned by {@link Converters#textToStringList()}
+     */
+    public final static ConverterName TEXT_TO_STRING_LIST = registerConstantName(
+        TEXT_TO_STRING_LIST_STRING,
+        Converters::textToStringList
+    );
+    
     private final static String TO_BOOLEAN_STRING = "to-boolean";
 
     /**
@@ -471,8 +531,8 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
             case CUSTOM_TO_STRING_STRING:
                 converterName = CUSTOM_TO_STRING;
                 break;
-            case HAS_TEXT_TO_STRING_STRING:
-                converterName = HAS_TEXT_TO_STRING;
+            case HAS_TEXT_STRING:
+                converterName = HAS_TEXT;
                 break;
             case LOCAL_DATE_TIME_TO_LOCAL_DATE_STRING:
                 converterName = LOCAL_DATE_TIME_TO_LOCAL_DATE;
@@ -554,6 +614,24 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
                 break;
             case STRING_TO_NUMBER_STRING:
                 converterName = STRING_TO_NUMBER;
+                break;
+            case TEXT_TO_BOOLEAN_LIST_STRING:
+                converterName = TEXT_TO_BOOLEAN_LIST;
+                break;
+            case TEXT_TO_LOCAL_DATE_LIST_STRING:
+                converterName = TEXT_TO_LOCAL_DATE_LIST;
+                break;
+            case TEXT_TO_LOCAL_DATE_TIME_LIST_STRING:
+                converterName = TEXT_TO_LOCAL_DATE_TIME_LIST;
+                break;
+            case TEXT_TO_LOCAL_TIME_LIST_STRING:
+                converterName = TEXT_TO_LOCAL_TIME_LIST;
+                break;
+            case TEXT_TO_NUMBER_LIST_STRING:
+                converterName = TEXT_TO_NUMBER_LIST;
+                break;
+            case TEXT_TO_STRING_LIST_STRING:
+                converterName = TEXT_TO_STRING_LIST;
                 break;
             case TO_BOOLEAN_STRING:
                 converterName = TO_BOOLEAN;
