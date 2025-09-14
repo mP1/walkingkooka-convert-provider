@@ -150,7 +150,7 @@ public final class ConverterInfoSet extends AbstractSet<ConverterInfo> implement
     }
 
     @Override
-    public ImmutableSet<ConverterInfo> setElementsFailIfDifferent(final Set<ConverterInfo> infos) {
+    public ConverterInfoSet setElementsFailIfDifferent(final Collection<ConverterInfo> infos) {
         return this.setElements(
             this.pluginInfoSet.setElementsFailIfDifferent(
                 infos
@@ -159,7 +159,7 @@ public final class ConverterInfoSet extends AbstractSet<ConverterInfo> implement
     }
 
     @Override
-    public ConverterInfoSet setElements(final Set<ConverterInfo> infos) {
+    public ConverterInfoSet setElements(final Collection<ConverterInfo> infos) {
         final ConverterInfoSet after = new ConverterInfoSet(
             this.pluginInfoSet.setElements(infos)
         );

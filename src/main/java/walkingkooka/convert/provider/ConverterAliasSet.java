@@ -146,7 +146,7 @@ public final class ConverterAliasSet extends AbstractSet<ConverterAlias>
     }
 
     @Override
-    public ConverterAliasSet setElements(final SortedSet<ConverterAlias> aliases) {
+    public ConverterAliasSet setElements(final Collection<ConverterAlias> aliases) {
         final ConverterAliasSet after = new ConverterAliasSet(
             this.pluginAliasSet.setElements(aliases)
         );
@@ -156,8 +156,8 @@ public final class ConverterAliasSet extends AbstractSet<ConverterAlias>
     }
 
     @Override
-    public ConverterAliasSet setElementsFailIfDifferent(SortedSet<ConverterAlias> sortedSet) {
-        return null;
+    public ConverterAliasSet setElementsFailIfDifferent(final Collection<ConverterAlias> sortedSet) {
+        throw new UnsupportedOperationException();
     }
 
     @Override
