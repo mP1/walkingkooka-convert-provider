@@ -156,6 +156,16 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
         }
     );
 
+    private final static String COLLECTION_TO_LIST_STRING = "collection-to-list";
+
+    /**
+     * The name of the {@link Converter} returned by {@link Converters#collectionToList()}
+     */
+    public final static ConverterName COLLECTION_TO_LIST = registerConstantName(
+        COLLECTION_TO_LIST_STRING,
+        Converters::collectionToList
+    );
+
     private final static String CUSTOM_TO_STRING_STRING = "custom-to-string";
 
     /**
@@ -445,6 +455,16 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
         Converters::textToBooleanList
     );
 
+    private final static String TEXT_TO_CSV_STRING_LIST_STRING = "text-to-csv-string-list";
+
+    /**
+     * The name of the {@link Converter} returned by {@link Converters#textToCsvStringList()}
+     */
+    public final static ConverterName TEXT_TO_CSV_STRING_LIST = registerConstantName(
+        TEXT_TO_CSV_STRING_LIST_STRING,
+        Converters::textToCsvStringList
+    );
+
     private final static String TEXT_TO_LOCAL_DATE_LIST_STRING = "text-to-local-date-list";
 
     /**
@@ -527,6 +547,9 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
                 break;
             case COLLECTION_STRING:
                 converterName = COLLECTION;
+                break;
+            case COLLECTION_TO_LIST_STRING:
+                converterName = COLLECTION_TO_LIST;
                 break;
             case CUSTOM_TO_STRING_STRING:
                 converterName = CUSTOM_TO_STRING;
@@ -617,6 +640,9 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
                 break;
             case TEXT_TO_BOOLEAN_LIST_STRING:
                 converterName = TEXT_TO_BOOLEAN_LIST;
+                break;
+            case TEXT_TO_CSV_STRING_LIST_STRING:
+                converterName = TEXT_TO_CSV_STRING_LIST;
                 break;
             case TEXT_TO_LOCAL_DATE_LIST_STRING:
                 converterName = TEXT_TO_LOCAL_DATE_LIST;
