@@ -34,7 +34,9 @@ public final class ConvertProviderStartup implements PublicStaticHelper {
         PluginStartup.init();
 
         // register json marshallers/unmarshallers.
+        ConverterAliasSet.EMPTY.size();
         ConverterInfoSet.EMPTY.size();
+        ConverterSelector.parse("Hello");
     }
 
     public static void init() {
