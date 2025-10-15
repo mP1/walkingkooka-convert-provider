@@ -29,7 +29,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class ConverterAliasTest implements PluginAliasLikeTesting<ConverterName, ConverterSelector, ConverterAlias> {
 
-    private final static ConverterName NAME = ConverterName.with("Hello");
+    private final static ConverterName NAME = ConverterName.with("hello");
 
     private final static Optional<ConverterSelector> SELECTOR = Optional.of(
         ConverterSelector.parse("converter123")

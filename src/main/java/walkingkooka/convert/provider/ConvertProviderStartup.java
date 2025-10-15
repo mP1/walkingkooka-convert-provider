@@ -36,7 +36,7 @@ public final class ConvertProviderStartup implements PublicStaticHelper {
         // register json marshallers/unmarshallers.
         ConverterAliasSet.EMPTY.size();
         ConverterInfoSet.EMPTY.size();
-        ConverterSelector.parse("Hello");
+        ConverterSelector.parse("hello");
     }
 
     public static void init() {

@@ -67,8 +67,8 @@ public final class ConverterInfoSetTest implements PluginInfoSetLikeTesting<Conv
     @Override
     public ConverterInfo info() {
         return ConverterInfo.with(
-            Url.parseAbsolute("https://example.com/Converter123"),
-            ConverterName.with("Converter123")
+            Url.parseAbsolute("https://example.com/converter-123"),
+            ConverterName.with("converter-123")
         );
     }
 
@@ -100,13 +100,13 @@ public final class ConverterInfoSetTest implements PluginInfoSetLikeTesting<Conv
             ConverterInfoSet.with(
                 Sets.of(
                     ConverterInfo.with(
-                        Url.parseAbsolute("https://example.com/test123"),
-                        ConverterName.with("test123")
+                        Url.parseAbsolute("https://example.com/test-123"),
+                        ConverterName.with("test-123")
                     )
                 )
             ),
             "[\n" +
-                "  \"https://example.com/test123 test123\"\n" +
+                "  \"https://example.com/test-123 test-123\"\n" +
                 "]"
         );
     }
@@ -127,12 +127,12 @@ public final class ConverterInfoSetTest implements PluginInfoSetLikeTesting<Conv
         return ConverterInfoSet.with(
             Sets.of(
                 ConverterInfo.with(
-                    Url.parseAbsolute("https://example.com/test111"),
-                    ConverterName.with("test111")
+                    Url.parseAbsolute("https://example.com/test-111"),
+                    ConverterName.with("test-111")
                 ),
                 ConverterInfo.with(
-                    Url.parseAbsolute("https://example.com/test222"),
-                    ConverterName.with("test222")
+                    Url.parseAbsolute("https://example.com/test-222"),
+                    ConverterName.with("test-222")
                 )
             )
         );
