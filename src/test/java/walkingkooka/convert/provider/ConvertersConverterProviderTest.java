@@ -171,6 +171,15 @@ public final class ConvertersConverterProviderTest implements ConverterProviderT
     }
 
     @Test
+    public void testConverterCollectionTo() {
+        this.converterAndCheck(
+            ConverterSelector.parse("collection-to"),
+            CONTEXT,
+            Converters.collectionTo()
+        );
+    }
+
+    @Test
     public void testConverterOptionalTo() {
         this.converterAndCheck(
             ConverterSelector.parse("optional-to"),

@@ -156,6 +156,16 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
         }
     );
 
+    private final static String COLLECTION_TO_STRING = "collection-to";
+
+    /**
+     * The name of the {@link Converter} returned by {@link Converters#collectionTo()}
+     */
+    public final static ConverterName COLLECTION_TO = registerConstantName(
+        COLLECTION_TO_STRING,
+        Converters::collectionTo
+    );
+
     private final static String COLLECTION_TO_LIST_STRING = "collection-to-list";
 
     /**
