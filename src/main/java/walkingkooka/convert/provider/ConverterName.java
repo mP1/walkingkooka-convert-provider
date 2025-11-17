@@ -380,6 +380,16 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
         Converters::objectToString
     );
 
+    private final static String OPTIONAL_TO_STRING = "optional-to";
+
+    /**
+     * The name of the {@link Converter} returned by {@link Converters#optionalTo()}.
+     */
+    public final static ConverterName OPTIONAL_TO = registerConstantName(
+        OPTIONAL_TO_STRING,
+        Converters::optionalTo
+    );
+    
     private final static String PARSER_STRING = "parser";
 
     /**
@@ -616,6 +626,9 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
                 break;
             case OBJECT_TO_STRING_STRING:
                 converterName = OBJECT_TO_STRING;
+                break;
+            case OPTIONAL_TO_STRING:
+                converterName = OPTIONAL_TO;
                 break;
             case PARSER_STRING:
                 converterName = PARSER;
