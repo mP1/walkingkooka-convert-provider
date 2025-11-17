@@ -170,6 +170,15 @@ public final class ConvertersConverterProviderTest implements ConverterProviderT
         );
     }
 
+    @Test
+    public void testConverterOptionalTo() {
+        this.converterAndCheck(
+            ConverterSelector.parse("optional-to"),
+            CONTEXT,
+            Converters.optionalTo()
+        );
+    }
+
     @Override
     public ConvertersConverterProvider createConverterProvider() {
         return ConvertersConverterProvider.INSTANCE;
