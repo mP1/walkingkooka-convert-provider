@@ -188,6 +188,15 @@ public final class ConvertersConverterProviderTest implements ConverterProviderT
         );
     }
 
+    @Test
+    public void testConverterTextToLineEnding() {
+        this.converterAndCheck(
+            ConverterSelector.parse("text-to-line-ending"),
+            CONTEXT,
+            Converters.textToLineEnding()
+        );
+    }
+
     @Override
     public ConvertersConverterProvider createConverterProvider() {
         return ConvertersConverterProvider.INSTANCE;

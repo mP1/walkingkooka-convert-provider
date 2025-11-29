@@ -485,6 +485,16 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
         Converters::textToCsvStringList
     );
 
+    private final static String TEXT_TO_LINE_ENDING_STRING = "text-to-line-ending";
+
+    /**
+     * The name of the {@link Converter} returned by {@link Converters#textToLineEnding()}
+     */
+    public final static ConverterName TEXT_TO_LINE_ENDING = registerConstantName(
+        TEXT_TO_LINE_ENDING_STRING,
+        Converters::textToLineEnding
+    );
+
     private final static String TEXT_TO_LOCAL_DATE_LIST_STRING = "text-to-local-date-list";
 
     /**
@@ -666,6 +676,9 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
                 break;
             case TEXT_TO_CSV_STRING_LIST_STRING:
                 converterName = TEXT_TO_CSV_STRING_LIST;
+                break;
+            case TEXT_TO_LINE_ENDING_STRING:
+                converterName = TEXT_TO_LINE_ENDING;
                 break;
             case TEXT_TO_LOCAL_DATE_LIST_STRING:
                 converterName = TEXT_TO_LOCAL_DATE_LIST;
