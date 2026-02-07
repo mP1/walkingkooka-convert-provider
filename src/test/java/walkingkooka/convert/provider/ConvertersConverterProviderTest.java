@@ -197,6 +197,15 @@ public final class ConvertersConverterProviderTest implements ConverterProviderT
         );
     }
 
+    @Test
+    public void testConverterTextToZoneOffset() {
+        this.converterAndCheck(
+            ConverterSelector.parse("text-to-zone-offset"),
+            CONTEXT,
+            Converters.textToZoneOffset()
+        );
+    }
+
     @Override
     public ConvertersConverterProvider createConverterProvider() {
         return ConvertersConverterProvider.INSTANCE;

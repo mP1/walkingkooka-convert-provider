@@ -544,6 +544,16 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
         TEXT_TO_STRING_LIST_STRING,
         Converters::textToStringList
     );
+
+    private final static String TEXT_TO_ZONE_OFFSET_STRING = "text-to-zone-offset";
+
+    /**
+     * The name of the {@link Converter} returned by {@link Converters#textToZoneOffset()}.
+     */
+    public final static ConverterName TEXT_TO_ZONE_OFFSET = registerConstantName(
+        TEXT_TO_ZONE_OFFSET_STRING,
+        Converters::textToZoneOffset
+    );
     
     private final static String TO_BOOLEAN_STRING = "to-boolean";
 
@@ -694,6 +704,9 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
                 break;
             case TEXT_TO_STRING_LIST_STRING:
                 converterName = TEXT_TO_STRING_LIST;
+                break;
+            case TEXT_TO_ZONE_OFFSET_STRING:
+                converterName = TEXT_TO_ZONE_OFFSET;
                 break;
             case TO_BOOLEAN_STRING:
                 converterName = TO_BOOLEAN;
