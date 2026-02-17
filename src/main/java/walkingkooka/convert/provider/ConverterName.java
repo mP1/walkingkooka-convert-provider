@@ -292,6 +292,36 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
         LOCAL_TIME_TO_STRING_STRING
     );
 
+    private final static String LOCALE_TO_DATE_TIME_SYMBOLS_STRING = "locale-to-date-time-symbols";
+
+    /**
+     * The name of the {@link Converter} returned by {@link Converters#localeToDateTimeSymbols()}
+     */
+    public final static ConverterName LOCALE_TO_DATE_TIME_SYMBOLS = registerConstantName(
+        LOCALE_TO_DATE_TIME_SYMBOLS_STRING,
+        Converters::localeToDateTimeSymbols
+    );
+
+    private final static String LOCALE_TO_DECIMAL_NUMBER_SYMBOLS_STRING = "locale-to-decimal-number-symbols";
+
+    /**
+     * The name of the {@link Converter} returned by {@link Converters#localeToDateTimeSymbols()}
+     */
+    public final static ConverterName LOCALE_TO_DECIMAL_NUMBER_SYMBOLS = registerConstantName(
+        LOCALE_TO_DECIMAL_NUMBER_SYMBOLS_STRING,
+        Converters::localeToDecimalNumberSymbols
+    );
+    
+    private final static String LOCALE_TO_STRING_STRING = "locale-to-string";
+
+    /**
+     * The name of the {@link Converter} returned by {@link Converters#localeToString()}
+     */
+    public final static ConverterName LOCALE_TO_STRING = registerConstantName(
+        LOCALE_TO_STRING_STRING,
+        Converters::localeToString
+    );
+
     private final static String MAPPER_STRING = "mapper";
 
     /**
@@ -495,6 +525,16 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
         Converters::textToLineEnding
     );
 
+    private final static String TEXT_TO_LOCALE_STRING = "text-to-locale";
+
+    /**
+     * The name of the {@link Converter} returned by {@link Converters#textToLineEnding()}
+     */
+    public final static ConverterName TEXT_TO_LOCALE = registerConstantName(
+        TEXT_TO_LOCALE_STRING,
+        Converters::textToLocale
+    );
+
     private final static String TEXT_TO_LOCAL_DATE_LIST_STRING = "text-to-local-date-list";
 
     /**
@@ -564,6 +604,16 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
         TO_BOOLEAN_STRING
     );
 
+    private final static String TO_LOCALE_STRING = "to-locale";
+
+    /**
+     * The name of the {@link Converter} returned by {@link Converters#toLocale()}.
+     */
+    public final static ConverterName TO_LOCALE = registerConstantName(
+        TO_LOCALE_STRING,
+        Converters::toLocale
+    );
+
     /**
      * Factory that creates a {@link ConverterName}
      */
@@ -626,6 +676,15 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
                 break;
             case LOCAL_TIME_TO_STRING_STRING:
                 converterName = LOCAL_TIME_TO_STRING;
+                break;
+            case LOCALE_TO_DATE_TIME_SYMBOLS_STRING:
+                converterName = LOCALE_TO_DATE_TIME_SYMBOLS;
+                break;
+            case LOCALE_TO_DECIMAL_NUMBER_SYMBOLS_STRING:
+                converterName = LOCALE_TO_DECIMAL_NUMBER_SYMBOLS;
+                break;
+            case LOCALE_TO_STRING_STRING:
+                converterName = LOCALE_TO_STRING;
                 break;
             case MAPPER_STRING:
                 converterName = MAPPER;
@@ -699,6 +758,9 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
             case TEXT_TO_LOCAL_TIME_LIST_STRING:
                 converterName = TEXT_TO_LOCAL_TIME_LIST;
                 break;
+            case TEXT_TO_LOCALE_STRING:
+                converterName = TEXT_TO_LOCALE;
+                break;
             case TEXT_TO_NUMBER_LIST_STRING:
                 converterName = TEXT_TO_NUMBER_LIST;
                 break;
@@ -710,6 +772,9 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
                 break;
             case TO_BOOLEAN_STRING:
                 converterName = TO_BOOLEAN;
+                break;
+            case TO_LOCALE_STRING:
+                converterName = TO_LOCALE;
                 break;
             default:
                 converterName = new ConverterName(name);
