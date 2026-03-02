@@ -180,6 +180,15 @@ public final class ConvertersConverterProviderTest implements ConverterProviderT
     }
 
     @Test
+    public void testConverterHasProperties() {
+        this.converterAndCheck(
+            ConverterSelector.parse("has-properties"),
+            CONTEXT,
+            Converters.hasProperties()
+        );
+    }
+
+    @Test
     public void testConverterOptionalTo() {
         this.converterAndCheck(
             ConverterSelector.parse("optional-to"),
@@ -194,6 +203,15 @@ public final class ConvertersConverterProviderTest implements ConverterProviderT
             ConverterSelector.parse("text-to-line-ending"),
             CONTEXT,
             Converters.textToLineEnding()
+        );
+    }
+
+    @Test
+    public void testConverterTextToProperties() {
+        this.converterAndCheck(
+            ConverterSelector.parse("text-to-properties"),
+            CONTEXT,
+            Converters.textToProperties()
         );
     }
 
