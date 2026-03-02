@@ -185,6 +185,16 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
         CUSTOM_TO_STRING_STRING
     );
 
+    private final static String HAS_PROPERTIES_STRING = "has-properties";
+
+    /**
+     * The name of the {@link Converter} returned by {@link Converters#hasProperties()}
+     */
+    public final static ConverterName HAS_PROPERTIES = registerConstantName(
+        HAS_PROPERTIES_STRING,
+        Converters::hasProperties
+    );
+    
     private final static String HAS_TEXT_STRING = "has-text";
 
     /**
@@ -575,6 +585,16 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
         Converters::textToNumberList
     );
 
+    private final static String TEXT_TO_PROPERTIES_STRING = "text-to-properties";
+
+    /**
+     * The name of the {@link Converter} returned by {@link Converters#textToProperties()}
+     */
+    public final static ConverterName TEXT_TO_PROPERTIES = registerConstantName(
+        TEXT_TO_PROPERTIES_STRING,
+        Converters::textToProperties
+    );
+
     private final static String TEXT_TO_STRING_LIST_STRING = "text-to-string-list";
 
     /**
@@ -646,6 +666,9 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
                 break;
             case HAS_TEXT_STRING:
                 converterName = HAS_TEXT;
+                break;
+            case HAS_PROPERTIES_STRING:
+                converterName = HAS_PROPERTIES;
                 break;
             case LOCAL_DATE_TIME_TO_LOCAL_DATE_STRING:
                 converterName = LOCAL_DATE_TIME_TO_LOCAL_DATE;
@@ -763,6 +786,9 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
                 break;
             case TEXT_TO_NUMBER_LIST_STRING:
                 converterName = TEXT_TO_NUMBER_LIST;
+                break;
+            case TEXT_TO_PROPERTIES_STRING:
+                converterName = TEXT_TO_PROPERTIES;
                 break;
             case TEXT_TO_STRING_LIST_STRING:
                 converterName = TEXT_TO_STRING_LIST;
