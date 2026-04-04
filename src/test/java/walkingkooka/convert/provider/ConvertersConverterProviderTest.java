@@ -115,7 +115,7 @@ public final class ConvertersConverterProviderTest implements ConverterProviderT
 
             System.out.println(method + " " + name);
 
-            if(name.equals("properties-to-date-time-symbols") || name.equals("properties-to-decimal-number-symbols")) {
+            if(name.equals("properties-to-decimal-number-symbols")) {
                 continue;
             }
 
@@ -198,6 +198,15 @@ public final class ConvertersConverterProviderTest implements ConverterProviderT
             ConverterSelector.parse("optional-to"),
             CONTEXT,
             Converters.optionalTo()
+        );
+    }
+
+    @Test
+    public void testConverterPropertiesToDateTimeSymbols() {
+        this.converterAndCheck(
+            ConverterSelector.parse("properties-to-date-time-symbols"),
+            CONTEXT,
+            Converters.propertiesToDateTimeSymbols()
         );
     }
 
