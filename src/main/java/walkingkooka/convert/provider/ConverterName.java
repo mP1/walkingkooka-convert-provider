@@ -469,15 +469,6 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
         Converters::stringToCharacterOrString
     );
 
-    private final static String STRING_TO_NUMBER_STRING = "string-to-number";
-
-    /**
-     * The name of the {@link Converter} returned by {@link Converters#stringToNumber(Function)}
-     */
-    public final static ConverterName STRING_TO_NUMBER = registerConstantName(
-        STRING_TO_NUMBER_STRING
-    );
-
     private final static String TEXT_TO_BOOLEAN_LIST_STRING = "text-to-boolean-list";
 
     /**
@@ -564,6 +555,15 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
     public final static ConverterName TEXT_TO_LOCAL_TIME_LIST = registerConstantName(
         TEXT_TO_LOCAL_TIME_LIST_STRING,
         Converters::textToLocalTimeList
+    );
+
+    private final static String TEXT_TO_NUMBER_STRING = "text-to-number";
+
+    /**
+     * The name of the {@link Converter} returned by {@link Converters#textToNumber(Function)}
+     */
+    public final static ConverterName TEXT_TO_NUMBER = registerConstantName(
+        TEXT_TO_NUMBER_STRING
     );
 
     private final static String TEXT_TO_NUMBER_LIST_STRING = "text-to-number-list";
@@ -751,9 +751,6 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
             case STRING_TO_CHARACTER_OR_STRING_STRING:
                 converterName = STRING_TO_CHARACTER_OR_STRING;
                 break;
-            case STRING_TO_NUMBER_STRING:
-                converterName = STRING_TO_NUMBER;
-                break;
             case TEXT_TO_BOOLEAN_LIST_STRING:
                 converterName = TEXT_TO_BOOLEAN_LIST;
                 break;
@@ -783,6 +780,9 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
                 break;
             case TEXT_TO_LOCALE_STRING:
                 converterName = TEXT_TO_LOCALE;
+                break;
+            case TEXT_TO_NUMBER_STRING:
+                converterName = TEXT_TO_NUMBER;
                 break;
             case TEXT_TO_NUMBER_LIST_STRING:
                 converterName = TEXT_TO_NUMBER_LIST;
