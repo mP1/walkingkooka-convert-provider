@@ -115,10 +115,6 @@ public final class ConvertersConverterProviderTest implements ConverterProviderT
 
             System.out.println(method + " " + name);
 
-            if(name.equals("properties-to-decimal-number-symbols")) {
-                continue;
-            }
-
             final ConverterName converterName = ConverterName.with(name);
 
             try {
@@ -207,6 +203,15 @@ public final class ConvertersConverterProviderTest implements ConverterProviderT
             ConverterSelector.parse("properties-to-date-time-symbols"),
             CONTEXT,
             Converters.propertiesToDateTimeSymbols()
+        );
+    }
+
+    @Test
+    public void testConverterPropertiesToDecimalNumberSymbols() {
+        this.converterAndCheck(
+            ConverterSelector.parse("properties-to-decimal-number-symbols"),
+            CONTEXT,
+            Converters.propertiesToDecimalNumberSymbols()
         );
     }
 

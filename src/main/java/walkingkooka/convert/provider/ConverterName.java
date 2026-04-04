@@ -459,6 +459,16 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
         Converters::propertiesToDateTimeSymbols
     );
 
+    private final static String PROPERTIES_TO_DECIMAL_NUMBER_SYMBOLS_STRING = "properties-to-decimal-number-symbols";
+
+    /**
+     * The name of the {@link Converter} returned by {@link Converters#propertiesToDateTimeSymbols()} .
+     */
+    public final static ConverterName PROPERTIES_TO_DECIMAL_NUMBER_SYMBOLS = registerConstantName(
+        PROPERTIES_TO_DECIMAL_NUMBER_SYMBOLS_STRING,
+        Converters::propertiesToDecimalNumberSymbols
+    );
+
     private final static String SIMPLE_STRING = "simple";
 
     /**
@@ -757,6 +767,9 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
                 break;
             case PROPERTIES_TO_DATE_TIME_SYMBOLS_STRING:
                 converterName = PROPERTIES_TO_DATE_TIME_SYMBOLS;
+                break;
+            case PROPERTIES_TO_DECIMAL_NUMBER_SYMBOLS_STRING:
+                converterName = PROPERTIES_TO_DECIMAL_NUMBER_SYMBOLS;
                 break;
             case SIMPLE_STRING:
                 converterName = SIMPLE;

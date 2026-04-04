@@ -58,7 +58,6 @@ final public class ConverterNameTest implements PluginNameTesting<ConverterName>
             .map(m -> m.getName())
             .filter(n -> false == "fake".equals(n))
             .map(m -> CaseKind.CAMEL.change(m, CaseKind.KEBAB).toLowerCase())
-            .filter(n -> false == n.equals("properties-to-decimal-number-symbols"))
             .collect(Collectors.toCollection(SortedSets::tree));
 
         this.checkEquals(
