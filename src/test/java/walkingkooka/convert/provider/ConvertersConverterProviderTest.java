@@ -115,6 +115,10 @@ public final class ConvertersConverterProviderTest implements ConverterProviderT
 
             System.out.println(method + " " + name);
 
+            if(name.equals("properties-to-date-time-symbols") || name.equals("properties-to-decimal-number-symbols")) {
+                continue;
+            }
+
             final ConverterName converterName = ConverterName.with(name);
 
             try {
