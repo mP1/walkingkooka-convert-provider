@@ -596,6 +596,16 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
         Converters::textToLocale
     );
 
+    private final static String TEXT_TO_LOCALE_LANGUAGE_TAG_STRING = "text-to-locale-language-tag";
+
+    /**
+     * The name of the {@link Converter} returned by {@link Converters#textToLocaleLanguageTag()}
+     */
+    public final static ConverterName TEXT_TO_LOCALE_LANGUAGE_TAG = registerConstantName(
+        TEXT_TO_LOCALE_LANGUAGE_TAG_STRING,
+        Converters::textToLocaleLanguageTag
+    );
+
     private final static String TEXT_TO_NUMBER_STRING = "text-to-number";
 
     /**
