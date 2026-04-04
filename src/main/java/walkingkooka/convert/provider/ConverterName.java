@@ -469,33 +469,6 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
         Converters::stringToCharacterOrString
     );
 
-    private final static String STRING_TO_LOCAL_DATE_STRING = "string-to-local-date";
-
-    /**
-     * The name of the {@link Converter} returned by {@link Converters#stringToLocalDate(Function)}
-     */
-    public final static ConverterName STRING_TO_LOCAL_DATE = registerConstantName(
-        STRING_TO_LOCAL_DATE_STRING
-    );
-
-    private final static String STRING_TO_LOCAL_DATE_TIME_STRING = "string-to-local-date-time";
-
-    /**
-     * The name of the {@link Converter} returned by {@link Converters#stringToLocalDateTime(Function)}
-     */
-    public final static ConverterName STRING_TO_LOCAL_DATE_TIME = registerConstantName(
-        STRING_TO_LOCAL_DATE_TIME_STRING
-    );
-
-    private final static String STRING_TO_LOCAL_TIME_STRING = "string-to-local-time";
-
-    /**
-     * The name of the {@link Converter} returned by {@link Converters#stringToLocalTime(Function)}
-     */
-    public final static ConverterName STRING_TO_LOCAL_TIME = registerConstantName(
-        STRING_TO_LOCAL_TIME_STRING
-    );
-
     private final static String STRING_TO_NUMBER_STRING = "string-to-number";
 
     /**
@@ -557,6 +530,15 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
 
     private final static String TEXT_TO_LOCAL_DATE_TIME_LIST_STRING = "text-to-local-date-time-list";
 
+    private final static String TEXT_TO_LOCAL_DATE_STRING = "text-to-local-date";
+
+    /**
+     * The name of the {@link Converter} returned by {@link Converters#textToLocalDate(Function)}
+     */
+    public final static ConverterName TEXT_TO_LOCAL_DATE = registerConstantName(
+        TEXT_TO_LOCAL_DATE_STRING
+    );
+
     /**
      * The name of the {@link Converter} returned by {@link Converters#textToLocalDateTimeList()}
      */
@@ -567,6 +549,15 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
 
     private final static String TEXT_TO_LOCAL_TIME_LIST_STRING = "text-to-local-time-list";
 
+    private final static String TEXT_TO_LOCAL_DATE_TIME_STRING = "text-to-local-date-time";
+
+    /**
+     * The name of the {@link Converter} returned by {@link Converters#textToLocalDateTime(Function)}
+     */
+    public final static ConverterName TEXT_TO_LOCAL_DATE_TIME = registerConstantName(
+        TEXT_TO_LOCAL_DATE_TIME_STRING
+    );
+
     /**
      * The name of the {@link Converter} returned by {@link Converters#textToLocalTimeList()}
      */
@@ -576,6 +567,15 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
     );
 
     private final static String TEXT_TO_NUMBER_LIST_STRING = "text-to-number-list";
+
+    private final static String TEXT_TO_LOCAL_TIME_STRING = "text-to-local-time";
+
+    /**
+     * The name of the {@link Converter} returned by {@link Converters#textToLocalTime(Function)}
+     */
+    public final static ConverterName TEXT_TO_LOCAL_TIME = registerConstantName(
+        TEXT_TO_LOCAL_TIME_STRING
+    );
 
     /**
      * The name of the {@link Converter} returned by {@link Converters#textToNumberList()}
@@ -751,15 +751,6 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
             case STRING_TO_CHARACTER_OR_STRING_STRING:
                 converterName = STRING_TO_CHARACTER_OR_STRING;
                 break;
-            case STRING_TO_LOCAL_DATE_STRING:
-                converterName = STRING_TO_LOCAL_DATE;
-                break;
-            case STRING_TO_LOCAL_DATE_TIME_STRING:
-                converterName = STRING_TO_LOCAL_DATE_TIME;
-                break;
-            case STRING_TO_LOCAL_TIME_STRING:
-                converterName = STRING_TO_LOCAL_TIME;
-                break;
             case STRING_TO_NUMBER_STRING:
                 converterName = STRING_TO_NUMBER;
                 break;
@@ -775,11 +766,20 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
             case TEXT_TO_LOCAL_DATE_LIST_STRING:
                 converterName = TEXT_TO_LOCAL_DATE_LIST;
                 break;
+            case TEXT_TO_LOCAL_DATE_STRING:
+                converterName = TEXT_TO_LOCAL_DATE;
+                break;
             case TEXT_TO_LOCAL_DATE_TIME_LIST_STRING:
                 converterName = TEXT_TO_LOCAL_DATE_TIME_LIST;
                 break;
+            case TEXT_TO_LOCAL_DATE_TIME_STRING:
+                converterName = TEXT_TO_LOCAL_DATE_TIME;
+                break;
             case TEXT_TO_LOCAL_TIME_LIST_STRING:
                 converterName = TEXT_TO_LOCAL_TIME_LIST;
+                break;
+            case TEXT_TO_LOCAL_TIME_STRING:
+                converterName = TEXT_TO_LOCAL_TIME;
                 break;
             case TEXT_TO_LOCALE_STRING:
                 converterName = TEXT_TO_LOCALE;
