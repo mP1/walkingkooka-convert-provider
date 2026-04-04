@@ -499,16 +499,6 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
         Converters::textToLineEnding
     );
 
-    private final static String TEXT_TO_LOCALE_STRING = "text-to-locale";
-
-    /**
-     * The name of the {@link Converter} returned by {@link Converters#textToLineEnding()}
-     */
-    public final static ConverterName TEXT_TO_LOCALE = registerConstantName(
-        TEXT_TO_LOCALE_STRING,
-        Converters::textToLocale
-    );
-
     private final static String TEXT_TO_LOCAL_DATE_LIST_STRING = "text-to-local-date-list";
 
     /**
@@ -519,8 +509,6 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
         Converters::textToLocalDateList
     );
 
-    private final static String TEXT_TO_LOCAL_DATE_TIME_LIST_STRING = "text-to-local-date-time-list";
-
     private final static String TEXT_TO_LOCAL_DATE_STRING = "text-to-local-date";
 
     /**
@@ -530,6 +518,8 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
         TEXT_TO_LOCAL_DATE_STRING
     );
 
+    private final static String TEXT_TO_LOCAL_DATE_TIME_LIST_STRING = "text-to-local-date-time-list";
+
     /**
      * The name of the {@link Converter} returned by {@link Converters#textToLocalDateTimeList()}
      */
@@ -537,8 +527,6 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
         TEXT_TO_LOCAL_DATE_TIME_LIST_STRING,
         Converters::textToLocalDateTimeList
     );
-
-    private final static String TEXT_TO_LOCAL_TIME_LIST_STRING = "text-to-local-time-list";
 
     private final static String TEXT_TO_LOCAL_DATE_TIME_STRING = "text-to-local-date-time";
 
@@ -549,12 +537,33 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
         TEXT_TO_LOCAL_DATE_TIME_STRING
     );
 
+    private final static String TEXT_TO_LOCAL_TIME_STRING = "text-to-local-time";
+
+    /**
+     * The name of the {@link Converter} returned by {@link Converters#textToLocalTime(Function)}
+     */
+    public final static ConverterName TEXT_TO_LOCAL_TIME = registerConstantName(
+        TEXT_TO_LOCAL_TIME_STRING
+    );
+
+    private final static String TEXT_TO_LOCAL_TIME_LIST_STRING = "text-to-local-time-list";
+
     /**
      * The name of the {@link Converter} returned by {@link Converters#textToLocalTimeList()}
      */
     public final static ConverterName TEXT_TO_LOCAL_TIME_LIST = registerConstantName(
         TEXT_TO_LOCAL_TIME_LIST_STRING,
         Converters::textToLocalTimeList
+    );
+
+    private final static String TEXT_TO_LOCALE_STRING = "text-to-locale";
+
+    /**
+     * The name of the {@link Converter} returned by {@link Converters#textToLineEnding()}
+     */
+    public final static ConverterName TEXT_TO_LOCALE = registerConstantName(
+        TEXT_TO_LOCALE_STRING,
+        Converters::textToLocale
     );
 
     private final static String TEXT_TO_NUMBER_STRING = "text-to-number";
@@ -567,15 +576,6 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
     );
 
     private final static String TEXT_TO_NUMBER_LIST_STRING = "text-to-number-list";
-
-    private final static String TEXT_TO_LOCAL_TIME_STRING = "text-to-local-time";
-
-    /**
-     * The name of the {@link Converter} returned by {@link Converters#textToLocalTime(Function)}
-     */
-    public final static ConverterName TEXT_TO_LOCAL_TIME = registerConstantName(
-        TEXT_TO_LOCAL_TIME_STRING
-    );
 
     /**
      * The name of the {@link Converter} returned by {@link Converters#textToNumberList()}
