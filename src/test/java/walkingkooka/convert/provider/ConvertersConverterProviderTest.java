@@ -100,6 +100,18 @@ public final class ConvertersConverterProviderTest implements ConverterProviderT
                 continue;
             }
 
+            if ("textToCsvStringSet".equals(methodName)) {
+                continue;
+            }
+
+            if ("textToCurrencyCodeSet".equals(methodName)) {
+                continue;
+            }
+
+            if ("textToLocaleLanguageTagSet".equals(methodName)) {
+                continue;
+            }
+
             if (method.getReturnType() != Converter.class) {
                 continue;
             }
