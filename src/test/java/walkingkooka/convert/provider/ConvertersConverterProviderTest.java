@@ -100,10 +100,6 @@ public final class ConvertersConverterProviderTest implements ConverterProviderT
                 continue;
             }
 
-            if ("textToCsvStringSet".equals(methodName)) {
-                continue;
-            }
-
             if ("textToCurrencyCodeSet".equals(methodName)) {
                 continue;
             }
@@ -224,6 +220,15 @@ public final class ConvertersConverterProviderTest implements ConverterProviderT
             ConverterSelector.parse("properties-to-decimal-number-symbols"),
             CONTEXT,
             Converters.propertiesToDecimalNumberSymbols()
+        );
+    }
+
+    @Test
+    public void testConverterTextToCsvStringSet() {
+        this.converterAndCheck(
+            ConverterSelector.parse("text-to-csv-string-set"),
+            CONTEXT,
+            Converters.textToCsvStringSet()
         );
     }
 
