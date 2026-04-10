@@ -509,6 +509,16 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
         Converters::textToCurrencyCode
     );
 
+    private final static String TEXT_TO_CURRENCY_CODE_SET_STRING = "text-to-currency-code-set";
+
+    /**
+     * The name of the {@link Converter} returned by {@link Converters#textToCurrencyCodeSet()}
+     */
+    public final static ConverterName TEXT_TO_CURRENCY_CODE_SET = registerConstantName(
+        TEXT_TO_CURRENCY_CODE_SET_STRING,
+        Converters::textToCurrencyCodeSet
+    );
+
     private final static String TEXT_TO_CSV_STRING_LIST_STRING = "text-to-csv-string-list";
 
     /**
@@ -812,6 +822,9 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
                 break;
             case TEXT_TO_CURRENCY_CODE_STRING:
                 converterName = TEXT_TO_CURRENCY_CODE;
+                break;
+            case TEXT_TO_CURRENCY_CODE_SET_STRING:
+                converterName = TEXT_TO_CURRENCY_CODE_SET;
                 break;
             case TEXT_TO_CSV_STRING_LIST_STRING:
                 converterName = TEXT_TO_CSV_STRING_LIST;
