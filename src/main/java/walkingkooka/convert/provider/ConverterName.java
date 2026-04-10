@@ -519,6 +519,16 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
         Converters::textToCsvStringList
     );
 
+    private final static String TEXT_TO_CSV_STRING_SET_STRING = "text-to-csv-string-set";
+
+    /**
+     * The name of the {@link Converter} returned by {@link Converters#textToCsvStringSet()}
+     */
+    public final static ConverterName TEXT_TO_CSV_STRING_SET = registerConstantName(
+        TEXT_TO_CSV_STRING_SET_STRING,
+        Converters::textToCsvStringSet
+    );
+
     private final static String TEXT_TO_LINE_ENDING_STRING = "text-to-line-ending";
 
     /**
@@ -805,6 +815,9 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
                 break;
             case TEXT_TO_CSV_STRING_LIST_STRING:
                 converterName = TEXT_TO_CSV_STRING_LIST;
+                break;
+            case TEXT_TO_CSV_STRING_SET_STRING:
+                converterName = TEXT_TO_CSV_STRING_SET;
                 break;
             case TEXT_TO_LINE_ENDING_STRING:
                 converterName = TEXT_TO_LINE_ENDING;
