@@ -866,6 +866,9 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
             case TEXT_TO_LOCALE_STRING:
                 converterName = TEXT_TO_LOCALE;
                 break;
+            case TEXT_TO_LOCALE_LANGUAGE_TAG_STRING:
+                converterName = TEXT_TO_LOCALE_LANGUAGE_TAG;
+                break;
             case TEXT_TO_LOCALE_LANGUAGE_TAG_SET_STRING:
                 converterName = TEXT_TO_LOCALE_LANGUAGE_TAG_SET;
                 break;
