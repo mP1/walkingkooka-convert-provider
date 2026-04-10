@@ -265,6 +265,15 @@ public final class ConvertersConverterProviderTest implements ConverterProviderT
     }
 
     @Test
+    public void testConverterTextToLocaleLanguageTagSet() {
+        this.converterAndCheck(
+            ConverterSelector.parse("text-to-locale-language-tag-set"),
+            CONTEXT,
+            Converters.textToLocaleLanguageTagSet()
+        );
+    }
+
+    @Test
     public void testConverterTextToProperties() {
         this.converterAndCheck(
             ConverterSelector.parse("text-to-properties"),
