@@ -56,7 +56,7 @@ final public class ConverterNameTest implements PluginNameTesting<ConverterName>
             .filter(m -> MethodAttributes.STATIC.is(m))
             .filter(m -> JavaVisibility.of(m) == JavaVisibility.PUBLIC)
             .map(m -> m.getName())
-            .filter(n -> false == "fake".equals(n) && false == "textToCurrencyCodeSet".equals(n) && false == "textToLocaleLanguageTagSet".equals(n))
+            .filter(n -> false == "fake".equals(n) && false == "textToLocaleLanguageTagSet".equals(n))
             .map(m -> CaseKind.CAMEL.change(m, CaseKind.KEBAB).toLowerCase())
             .collect(Collectors.toCollection(SortedSets::tree));
 

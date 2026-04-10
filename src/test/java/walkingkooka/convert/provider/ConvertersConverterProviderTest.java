@@ -100,10 +100,6 @@ public final class ConvertersConverterProviderTest implements ConverterProviderT
                 continue;
             }
 
-            if ("textToCurrencyCodeSet".equals(methodName)) {
-                continue;
-            }
-
             if ("textToLocaleLanguageTagSet".equals(methodName)) {
                 continue;
             }
@@ -238,6 +234,15 @@ public final class ConvertersConverterProviderTest implements ConverterProviderT
             ConverterSelector.parse("text-to-currency-code"),
             CONTEXT,
             Converters.textToCurrencyCode()
+        );
+    }
+
+    @Test
+    public void testConverterTextToCurrencyCodeSet() {
+        this.converterAndCheck(
+            ConverterSelector.parse("text-to-currency-code-set"),
+            CONTEXT,
+            Converters.textToCurrencyCodeSet()
         );
     }
 
