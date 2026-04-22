@@ -176,6 +176,16 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
         Converters::collectionToList
     );
 
+    private final static String CURRENCY_CODE_TO_CURRENCY_STRING = "currency-code-to-currency";
+
+    /**
+     * The name of the {@link Converter} returned by {@link Converters#currencyCodeToCurrency()}
+     */
+    public final static ConverterName CURRENCY_CODE_TO_CURRENCY = registerConstantName(
+        CURRENCY_CODE_TO_CURRENCY_STRING,
+        Converters::currencyCodeToCurrency
+    );
+    
     private final static String CUSTOM_TO_STRING_STRING = "custom-to-string";
 
     /**
@@ -730,6 +740,9 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
                 break;
             case COLLECTION_TO_LIST_STRING:
                 converterName = COLLECTION_TO_LIST;
+                break;
+            case CURRENCY_CODE_TO_CURRENCY_STRING:
+                converterName = CURRENCY_CODE_TO_CURRENCY;
                 break;
             case CUSTOM_TO_STRING_STRING:
                 converterName = CUSTOM_TO_STRING;

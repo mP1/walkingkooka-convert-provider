@@ -184,6 +184,15 @@ public final class ConvertersConverterProviderTest implements ConverterProviderT
     }
 
     @Test
+    public void testConverterCurrencyCodeToCurrency() {
+        this.converterAndCheck(
+            ConverterSelector.parse("currency-code-to-currency"),
+            CONTEXT,
+            Converters.currencyCodeToCurrency()
+        );
+    }
+
+    @Test
     public void testConverterHasProperties() {
         this.converterAndCheck(
             ConverterSelector.parse("has-properties"),
