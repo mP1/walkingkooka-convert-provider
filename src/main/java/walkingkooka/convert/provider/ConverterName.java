@@ -371,6 +371,16 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
         Converters::numberToBoolean
     );
 
+    private final static String NUMBER_TO_CURRENCY_VALUE_STRING = "number-to-currency-value";
+
+    /**
+     * The name of the {@link Converter} returned by {@link Converters#numberToCurrencyValue()}
+     */
+    public final static ConverterName NUMBER_TO_CURRENCY_VALUE = registerConstantName(
+        NUMBER_TO_CURRENCY_VALUE_STRING,
+        Converters::numberToCurrencyValue
+    );
+
     private final static String NUMBER_TO_LOCAL_DATE_STRING = "number-to-local-date";
 
     /**
@@ -800,6 +810,9 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
                 break;
             case NUMBER_TO_BOOLEAN_STRING:
                 converterName = NUMBER_TO_BOOLEAN;
+                break;
+            case NUMBER_TO_CURRENCY_VALUE_STRING:
+                converterName = NUMBER_TO_CURRENCY_VALUE;
                 break;
             case NUMBER_TO_LOCAL_DATE_STRING:
                 converterName = NUMBER_TO_LOCAL_DATE;
