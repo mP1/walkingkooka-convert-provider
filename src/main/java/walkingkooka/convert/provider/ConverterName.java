@@ -876,12 +876,6 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
             case TEXT_TO_BOOLEAN_LIST_STRING:
                 converterName = TEXT_TO_BOOLEAN_LIST;
                 break;
-            case TEXT_TO_CURRENCY_CODE_STRING:
-                converterName = TEXT_TO_CURRENCY_CODE;
-                break;
-            case TEXT_TO_CURRENCY_CODE_SET_STRING:
-                converterName = TEXT_TO_CURRENCY_CODE_SET;
-                break;
             case TEXT_TO_CSV_STRING_LIST_STRING:
                 converterName = TEXT_TO_CSV_STRING_LIST;
                 break;
@@ -890,6 +884,12 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
                 break;
             case TEXT_TO_CURRENCY_STRING:
                 converterName = TEXT_TO_CURRENCY;
+                break;
+            case TEXT_TO_CURRENCY_CODE_STRING:
+                converterName = TEXT_TO_CURRENCY_CODE;
+                break;
+            case TEXT_TO_CURRENCY_CODE_SET_STRING:
+                converterName = TEXT_TO_CURRENCY_CODE_SET;
                 break;
             case TEXT_TO_CURRENCY_VALUE_STRING:
                 converterName = TEXT_TO_CURRENCY_VALUE;
