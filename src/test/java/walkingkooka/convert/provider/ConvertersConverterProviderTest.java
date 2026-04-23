@@ -265,6 +265,15 @@ public final class ConvertersConverterProviderTest implements ConverterProviderT
     }
 
     @Test
+    public void testConverterTextToCurrencyValue() {
+        this.converterAndCheck(
+            ConverterSelector.parse("text-to-currency-value"),
+            CONTEXT,
+            Converters.textToCurrencyValue()
+        );
+    }
+
+    @Test
     public void testConverterTextToLineEnding() {
         this.converterAndCheck(
             ConverterSelector.parse("text-to-line-ending"),
