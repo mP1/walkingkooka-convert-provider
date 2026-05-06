@@ -283,6 +283,15 @@ public final class ConvertersConverterProviderTest implements ConverterProviderT
     }
 
     @Test
+    public void testConverterTextToIndentation() {
+        this.converterAndCheck(
+            ConverterSelector.parse("text-to-indentation"),
+            CONTEXT,
+            Converters.textToIndentation()
+        );
+    }
+
+    @Test
     public void testConverterTextToLineEnding() {
         this.converterAndCheck(
             ConverterSelector.parse("text-to-line-ending"),
