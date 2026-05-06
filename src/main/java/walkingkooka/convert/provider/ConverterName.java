@@ -744,6 +744,16 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
         Converters::toLocale
     );
 
+    private final static String VALUE_TO_STRING = "value-to";
+
+    /**
+     * The name of the {@link Converter} returned by {@link Converters#valueTo()}.
+     */
+    public final static ConverterName VALUE_TO = registerConstantName(
+        VALUE_TO_STRING,
+        Converters::valueTo
+    );
+
     /**
      * Factory that creates a {@link ConverterName}
      */
@@ -944,6 +954,9 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
                 break;
             case TO_LOCALE_STRING:
                 converterName = TO_LOCALE;
+                break;
+            case VALUE_TO_STRING:
+                converterName = VALUE_TO;
                 break;
             default:
                 converterName = new ConverterName(name);

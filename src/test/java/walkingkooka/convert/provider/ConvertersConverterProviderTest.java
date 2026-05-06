@@ -327,6 +327,15 @@ public final class ConvertersConverterProviderTest implements ConverterProviderT
         );
     }
 
+    @Test
+    public void testConverterValueTo() {
+        this.converterAndCheck(
+            ConverterSelector.parse("value-to"),
+            CONTEXT,
+            Converters.valueTo()
+        );
+    }
+
     @Override
     public ConvertersConverterProvider createConverterProvider() {
         return ConvertersConverterProvider.INSTANCE;
