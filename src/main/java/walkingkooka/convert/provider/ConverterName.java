@@ -215,6 +215,16 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
         Converters::hasText
     );
 
+    private final static String HAS_VALUE_TO_STRING = "has-value-to";
+
+    /**
+     * The name of the {@link Converter} returned by {@link Converters#hasValueTo()}.
+     */
+    public final static ConverterName HAS_VALUE_TO = registerConstantName(
+        HAS_VALUE_TO_STRING,
+        Converters::hasValueTo
+    );
+
     private final static String LOCAL_DATE_TIME_TO_LOCAL_DATE_STRING = "local-date-time-to-local-date";
 
     /**
@@ -754,16 +764,6 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
         Converters::toLocale
     );
 
-    private final static String VALUE_TO_STRING = "value-to";
-
-    /**
-     * The name of the {@link Converter} returned by {@link Converters#valueTo()}.
-     */
-    public final static ConverterName VALUE_TO = registerConstantName(
-        VALUE_TO_STRING,
-        Converters::valueTo
-    );
-
     /**
      * Factory that creates a {@link ConverterName}
      */
@@ -802,6 +802,9 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
                 break;
             case HAS_PROPERTIES_STRING:
                 converterName = HAS_PROPERTIES;
+                break;
+            case HAS_VALUE_TO_STRING:
+                converterName = HAS_VALUE_TO;
                 break;
             case LOCAL_DATE_TIME_TO_LOCAL_DATE_STRING:
                 converterName = LOCAL_DATE_TIME_TO_LOCAL_DATE;
@@ -967,9 +970,6 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
                 break;
             case TO_LOCALE_STRING:
                 converterName = TO_LOCALE;
-                break;
-            case VALUE_TO_STRING:
-                converterName = VALUE_TO;
                 break;
             default:
                 converterName = new ConverterName(name);
