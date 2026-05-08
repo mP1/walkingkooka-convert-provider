@@ -185,6 +185,16 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
         CURRENCY_CODE_TO_CURRENCY_STRING,
         Converters::currencyCodeToCurrency
     );
+
+    private final static String CURRENCY_VALUE_TO_STRING = "currency-value-to";
+
+    /**
+     * The name of the {@link Converter} returned by {@link Converters#currencyValueTo()}
+     */
+    public final static ConverterName CURRENCY_VALUE_TO = registerConstantName(
+        CURRENCY_VALUE_TO_STRING,
+        Converters::currencyValueTo
+    );
     
     private final static String CUSTOM_TO_STRING_STRING = "custom-to-string";
 
@@ -793,6 +803,9 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
                 break;
             case CURRENCY_CODE_TO_CURRENCY_STRING:
                 converterName = CURRENCY_CODE_TO_CURRENCY;
+                break;
+            case CURRENCY_VALUE_TO_STRING:
+                converterName = CURRENCY_VALUE_TO;
                 break;
             case CUSTOM_TO_STRING_STRING:
                 converterName = CUSTOM_TO_STRING;
