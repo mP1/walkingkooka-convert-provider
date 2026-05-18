@@ -202,6 +202,15 @@ public final class ConvertersConverterProviderTest implements ConverterProviderT
     }
 
     @Test
+    public void testConverterCurrencyValueToNumber() {
+        this.converterAndCheck(
+            ConverterSelector.parse("currency-value-to-number"),
+            CONTEXT,
+            Converters.currencyValueToNumber()
+        );
+    }
+
+    @Test
     public void testConverterHasProperties() {
         this.converterAndCheck(
             ConverterSelector.parse("has-properties"),
