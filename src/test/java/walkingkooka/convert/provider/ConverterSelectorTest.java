@@ -544,6 +544,16 @@ public final class ConverterSelectorTest implements PluginSelectorLikeTesting<Co
         );
     }
 
+    // HasContentType...................................................................................................
+
+    @Test
+    public void testContentType() {
+        this.contentTypeAndCheck(
+            this.createObject(),
+            "application/json+walkingkooka.convert.provider.ConverterSelector"
+        );
+    }
+
     // type name testing................................................................................................
 
     @Override
