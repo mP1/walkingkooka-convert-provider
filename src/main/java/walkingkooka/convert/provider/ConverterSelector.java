@@ -19,6 +19,8 @@ package walkingkooka.convert.provider;
 
 import walkingkooka.convert.Converter;
 import walkingkooka.convert.ConverterContext;
+import walkingkooka.net.header.HasContentType;
+import walkingkooka.net.header.MediaType;
 import walkingkooka.plugin.PluginSelector;
 import walkingkooka.plugin.PluginSelectorLike;
 import walkingkooka.plugin.ProviderContext;
@@ -30,6 +32,7 @@ import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 /**
  * Contains the {@link ConverterName} and some text which may contain an expression for a {@link Converter}.
@@ -196,6 +199,15 @@ public final class ConverterSelector implements PluginSelectorLike<ConverterName
             ConverterSelector::marshall,
             ConverterSelector.class
         );
+    }
+
+    // HasContentType...................................................................................................
+
+    public final static MediaType CONTENT_TYPE = HasContentType.json(ConverterSelector.class);
+
+    @Override
+    public Optional<MediaType> contentType() {
+        return Optional.of(CONTENT_TYPE);
     }
 
     // TreePrintable....................................................................................................
