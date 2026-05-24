@@ -211,6 +211,15 @@ public final class ConvertersConverterProviderTest implements ConverterProviderT
     }
 
     @Test
+    public void testConverterHasBinaryToString() {
+        this.converterAndCheck(
+            ConverterSelector.parse("has-binary-to-string"),
+            CONTEXT,
+            Converters.hasBinaryToString()
+        );
+    }
+
+    @Test
     public void testConverterHasProperties() {
         this.converterAndCheck(
             ConverterSelector.parse("has-properties"),
