@@ -836,11 +836,11 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
             case HAS_BINARY_TO_STRING_STRING:
                 converterName = HAS_BINARY_TO_STRING;
                 break;
-            case HAS_TEXT_STRING:
-                converterName = HAS_TEXT;
-                break;
             case HAS_PROPERTIES_STRING:
                 converterName = HAS_PROPERTIES;
+                break;
+            case HAS_TEXT_STRING:
+                converterName = HAS_TEXT;
                 break;
             case HAS_VALUE_TO_STRING:
                 converterName = HAS_VALUE_TO;
