@@ -215,6 +215,16 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
         CUSTOM_TO_STRING_STRING
     );
 
+    private final static String HAS_BINARY_TO_STRING_STRING = "has-binary-to-string";
+
+    /**
+     * The name of the {@link Converter} returned by {@link Converters#hasBinaryToString()}
+     */
+    public final static ConverterName HAS_BINARY_TO_STRING = registerConstantName(
+        HAS_BINARY_TO_STRING_STRING,
+        Converters::hasBinaryToString
+    );
+    
     private final static String HAS_PROPERTIES_STRING = "has-properties";
 
     /**
@@ -819,6 +829,9 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
                 break;
             case CUSTOM_TO_STRING_STRING:
                 converterName = CUSTOM_TO_STRING;
+                break;
+            case HAS_BINARY_TO_STRING_STRING:
+                converterName = HAS_BINARY_TO_STRING;
                 break;
             case HAS_TEXT_STRING:
                 converterName = HAS_TEXT;
