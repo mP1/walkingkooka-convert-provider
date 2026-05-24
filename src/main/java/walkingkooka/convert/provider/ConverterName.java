@@ -824,6 +824,9 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
             case CURRENCY_CODE_TO_CURRENCY_STRING:
                 converterName = CURRENCY_CODE_TO_CURRENCY;
                 break;
+            case CURRENCY_VALUE_TO_NUMBER_STRING:
+                converterName = CURRENCY_VALUE_TO_NUMBER;
+                break;
             case CURRENCY_VALUE_TO_STRING:
                 converterName = CURRENCY_VALUE_TO;
                 break;
