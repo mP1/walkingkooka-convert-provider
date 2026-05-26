@@ -549,6 +549,16 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
         Converters::stringToCharacterOrString
     );
 
+    private final static String TEXT_TO_BINARY_STRING = "text-to-binary";
+
+    /**
+     * The name of the {@link Converter} returned by {@link Converters#textToBinary()}
+     */
+    public final static ConverterName TEXT_TO_BINARY = registerConstantName(
+        TEXT_TO_BINARY_STRING,
+        Converters::textToBinary
+    );
+    
     private final static String TEXT_TO_BOOLEAN_LIST_STRING = "text-to-boolean-list";
 
     /**
@@ -947,6 +957,9 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
                 break;
             case TEXT_TO_BOOLEAN_LIST_STRING:
                 converterName = TEXT_TO_BOOLEAN_LIST;
+                break;
+            case TEXT_TO_BINARY_STRING:
+                converterName = TEXT_TO_BINARY;
                 break;
             case TEXT_TO_CHARSET_STRING:
                 converterName = TEXT_TO_CHARSET;

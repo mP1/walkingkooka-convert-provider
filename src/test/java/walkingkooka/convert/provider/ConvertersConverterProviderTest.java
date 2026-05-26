@@ -274,6 +274,15 @@ public final class ConvertersConverterProviderTest implements ConverterProviderT
     }
 
     @Test
+    public void testConverterTextToBinary() {
+        this.converterAndCheck(
+            ConverterSelector.parse("text-to-binary"),
+            CONTEXT,
+            Converters.textToBinary()
+        );
+    }
+
+    @Test
     public void testConverterTextToCharset() {
         this.converterAndCheck(
             ConverterSelector.parse("text-to-charset"),
