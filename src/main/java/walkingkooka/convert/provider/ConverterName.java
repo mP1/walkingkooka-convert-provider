@@ -559,6 +559,16 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
         Converters::textToBooleanList
     );
 
+    private final static String TEXT_TO_CHARSET_STRING = "text-to-charset";
+
+    /**
+     * The name of the {@link Converter} returned by {@link Converters#textToCharset()}
+     */
+    public final static ConverterName TEXT_TO_CHARSET = registerConstantName(
+        TEXT_TO_CHARSET_STRING,
+        Converters::textToCharset
+    );
+    
     private final static String TEXT_TO_CURRENCY_CODE_STRING = "text-to-currency-code";
 
     /**
@@ -937,6 +947,9 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
                 break;
             case TEXT_TO_BOOLEAN_LIST_STRING:
                 converterName = TEXT_TO_BOOLEAN_LIST;
+                break;
+            case TEXT_TO_CHARSET_STRING:
+                converterName = TEXT_TO_CHARSET;
                 break;
             case TEXT_TO_CSV_STRING_LIST_STRING:
                 converterName = TEXT_TO_CSV_STRING_LIST;

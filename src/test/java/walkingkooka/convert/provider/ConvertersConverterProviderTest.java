@@ -274,6 +274,15 @@ public final class ConvertersConverterProviderTest implements ConverterProviderT
     }
 
     @Test
+    public void testConverterTextToCharset() {
+        this.converterAndCheck(
+            ConverterSelector.parse("text-to-charset"),
+            CONTEXT,
+            Converters.textToCharset()
+        );
+    }
+
+    @Test
     public void testConverterTextToCsvStringSet() {
         this.converterAndCheck(
             ConverterSelector.parse("text-to-csv-string-set"),
