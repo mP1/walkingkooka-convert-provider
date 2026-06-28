@@ -382,6 +382,24 @@ public final class ConvertersConverterProviderTest implements ConverterProviderT
     }
 
     @Test
+    public void testConverterTextToTsvStringList() {
+        this.converterAndCheck(
+            ConverterSelector.parse("text-to-tsv-string-list"),
+            CONTEXT,
+            Converters.textToTsvStringList()
+        );
+    }
+
+    @Test
+    public void testConverterTextToTsvStringSet() {
+        this.converterAndCheck(
+            ConverterSelector.parse("text-to-tsv-string-set"),
+            CONTEXT,
+            Converters.textToTsvStringSet()
+        );
+    }
+
+    @Test
     public void testConverterTextToZoneOffset() {
         this.converterAndCheck(
             ConverterSelector.parse("text-to-zone-offset"),

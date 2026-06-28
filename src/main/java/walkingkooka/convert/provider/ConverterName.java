@@ -785,6 +785,26 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
         Converters::textToStringList
     );
 
+    private final static String TEXT_TO_TSV_STRING_LIST_STRING = "text-to-tsv-string-list";
+
+    /**
+     * The name of the {@link Converter} returned by {@link Converters#textToTsvStringList()}
+     */
+    public final static ConverterName TEXT_TO_TSV_STRING_LIST = registerConstantName(
+        TEXT_TO_TSV_STRING_LIST_STRING,
+        Converters::textToTsvStringList
+    );
+
+    private final static String TEXT_TO_TSV_STRING_SET_STRING = "text-to-tsv-string-set";
+
+    /**
+     * The name of the {@link Converter} returned by {@link Converters#textToTsvStringSet()}
+     */
+    public final static ConverterName TEXT_TO_TSV_STRING_SET = registerConstantName(
+        TEXT_TO_TSV_STRING_SET_STRING,
+        Converters::textToTsvStringSet
+    );
+
     private final static String TEXT_TO_ZONE_OFFSET_STRING = "text-to-zone-offset";
 
     /**
@@ -1026,6 +1046,12 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
                 break;
             case TEXT_TO_STRING_LIST_STRING:
                 converterName = TEXT_TO_STRING_LIST;
+                break;
+            case TEXT_TO_TSV_STRING_LIST_STRING:
+                converterName = TEXT_TO_TSV_STRING_LIST;
+                break;
+            case TEXT_TO_TSV_STRING_SET_STRING:
+                converterName = TEXT_TO_TSV_STRING_SET;
                 break;
             case TEXT_TO_ZONE_OFFSET_STRING:
                 converterName = TEXT_TO_ZONE_OFFSET;
