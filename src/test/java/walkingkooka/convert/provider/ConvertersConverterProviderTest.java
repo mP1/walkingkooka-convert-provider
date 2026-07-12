@@ -408,6 +408,15 @@ public final class ConvertersConverterProviderTest implements ConverterProviderT
         );
     }
 
+    @Test
+    public void testConverterToDateTimeSymbols() {
+        this.converterAndCheck(
+            ConverterSelector.parse("to-date-time-symbols"),
+            CONTEXT,
+            Converters.toDateTimeSymbols()
+        );
+    }
+
     @Override
     public ConvertersConverterProvider createConverterProvider() {
         return ConvertersConverterProvider.INSTANCE;

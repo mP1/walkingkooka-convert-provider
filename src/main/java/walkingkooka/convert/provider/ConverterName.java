@@ -824,6 +824,16 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
         TO_BOOLEAN_STRING
     );
 
+    private final static String TO_DATE_TIME_SYMBOLS_STRING = "to-date-time-symbols";
+
+    /**
+     * The name of the {@link Converter} returned by {@link Converters#toDateTimeSymbols()}.
+     */
+    public final static ConverterName TO_DATE_TIME_SYMBOLS = registerConstantName(
+        TO_DATE_TIME_SYMBOLS_STRING,
+        Converters::toDateTimeSymbols
+    );
+
     private final static String TO_LOCALE_STRING = "to-locale";
 
     /**
@@ -832,6 +842,16 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
     public final static ConverterName TO_LOCALE = registerConstantName(
         TO_LOCALE_STRING,
         Converters::toLocale
+    );
+
+    private final static String TO_LOCALE_LANGUAGE_TAG_STRING = "to-locale-language-tag";
+
+    /**
+     * The name of the {@link Converter} returned by {@link Converters#toLocaleLanguageTag()} ()}.
+     */
+    public final static ConverterName TO_LOCALE_LANGUAGE_TAG = registerConstantName(
+        TO_LOCALE_LANGUAGE_TAG_STRING,
+        Converters::toLocaleLanguageTag
     );
 
     /**
@@ -1059,8 +1079,14 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
             case TO_BOOLEAN_STRING:
                 converterName = TO_BOOLEAN;
                 break;
+            case TO_DATE_TIME_SYMBOLS_STRING:
+                converterName = TO_DATE_TIME_SYMBOLS;
+                break;
             case TO_LOCALE_STRING:
                 converterName = TO_LOCALE;
+                break;
+            case TO_LOCALE_LANGUAGE_TAG_STRING:
+                converterName = TO_LOCALE_LANGUAGE_TAG;
                 break;
             default:
                 converterName = new ConverterName(name);
