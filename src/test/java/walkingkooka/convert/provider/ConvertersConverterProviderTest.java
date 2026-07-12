@@ -417,6 +417,15 @@ public final class ConvertersConverterProviderTest implements ConverterProviderT
         );
     }
 
+    @Test
+    public void testConverterToDecimalNumberSymbols() {
+        this.converterAndCheck(
+            ConverterSelector.parse("to-decimal-number-symbols"),
+            CONTEXT,
+            Converters.toDecimalNumberSymbols()
+        );
+    }
+
     @Override
     public ConvertersConverterProvider createConverterProvider() {
         return ConvertersConverterProvider.INSTANCE;
