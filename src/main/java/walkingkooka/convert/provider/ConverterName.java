@@ -834,6 +834,16 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
         Converters::toDateTimeSymbols
     );
 
+    private final static String TO_DECIMAL_NUMBER_SYMBOLS_STRING = "to-decimal-number-symbols";
+
+    /**
+     * The name of the {@link Converter} returned by {@link Converters#toDateTimeSymbols()}.
+     */
+    public final static ConverterName TO_DECIMAL_NUMBER_SYMBOLS = registerConstantName(
+        TO_DECIMAL_NUMBER_SYMBOLS_STRING,
+        Converters::toDecimalNumberSymbols
+    );
+
     private final static String TO_LOCALE_STRING = "to-locale";
 
     /**
@@ -1081,6 +1091,9 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
                 break;
             case TO_DATE_TIME_SYMBOLS_STRING:
                 converterName = TO_DATE_TIME_SYMBOLS;
+                break;
+            case TO_DECIMAL_NUMBER_SYMBOLS_STRING:
+                converterName = TO_DECIMAL_NUMBER_SYMBOLS;
                 break;
             case TO_LOCALE_STRING:
                 converterName = TO_LOCALE;
