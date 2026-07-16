@@ -426,6 +426,15 @@ public final class ConvertersConverterProviderTest implements ConverterProviderT
         );
     }
 
+    @Test
+    public void testConverterToText() {
+        this.converterAndCheck(
+            ConverterSelector.parse("to-text"),
+            CONTEXT,
+            Converters.toText()
+        );
+    }
+
     @Override
     public ConvertersConverterProvider createConverterProvider() {
         return ConvertersConverterProvider.INSTANCE;

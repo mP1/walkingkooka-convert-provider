@@ -223,16 +223,6 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
     public final static ConverterName CUSTOM_TO_STRING = registerConstantName(
         CUSTOM_TO_STRING_STRING
     );
-    
-    private final static String HAS_TEXT_STRING = "has-text";
-
-    /**
-     * The name of the {@link Converter} returned by {@link Converters#hasText()}
-     */
-    public final static ConverterName HAS_TEXT = registerConstantName(
-        HAS_TEXT_STRING,
-        Converters::hasText
-    );
 
     private final static String HAS_VALUE_TO_STRING = "has-value-to";
 
@@ -863,6 +853,15 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
         Converters::toProperties
     );
 
+    private final static String TO_TEXT_STRING = "to-text";
+
+    /**
+     * The name of the {@link Converter} returned by {@link Converters#toText()}
+     */
+    public final static ConverterName TO_TEXT = registerConstantName(
+        TO_TEXT_STRING,
+        Converters::toText
+    );
 
     /**
      * Factory that creates a {@link ConverterName}
@@ -905,9 +904,6 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
                 break;
             case CUSTOM_TO_STRING_STRING:
                 converterName = CUSTOM_TO_STRING;
-                break;
-            case HAS_TEXT_STRING:
-                converterName = HAS_TEXT;
                 break;
             case HAS_VALUE_TO_STRING:
                 converterName = HAS_VALUE_TO;
@@ -1100,6 +1096,9 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
                 break;
             case TO_PROPERTIES_STRING:
                 converterName = TO_PROPERTIES;
+                break;
+            case TO_TEXT_STRING:
+                converterName = TO_TEXT;
                 break;
             default:
                 converterName = new ConverterName(name);
