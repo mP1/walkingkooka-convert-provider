@@ -390,6 +390,16 @@ public final class ConvertersConverterProviderTest implements ConverterProviderT
         );
     }
 
+
+    @Test
+    public void testConverterToBinary() {
+        this.converterAndCheck(
+            ConverterSelector.parse("to-binary"),
+            CONTEXT,
+            Converters.toBinary()
+        );
+    }
+
     @Test
     public void testConverterToDateTimeSymbols() {
         this.converterAndCheck(
