@@ -783,6 +783,16 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
         TEXT_TO_ZONE_OFFSET_STRING,
         Converters::textToZoneOffset
     );
+
+    private final static String TO_BINARY_STRING = "to-binary";
+
+    /**
+     * The name of the {@link Converter} returned by {@link Converters#toBinary()}.
+     */
+    public final static ConverterName TO_BINARY = registerConstantName(
+        TO_BINARY_STRING,
+        Converters::toBinary
+    );
     
     private final static String TO_BOOLEAN_STRING = "to-boolean";
 
@@ -1075,6 +1085,9 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
                 break;
             case TEXT_TO_ZONE_OFFSET_STRING:
                 converterName = TEXT_TO_ZONE_OFFSET;
+                break;
+            case TO_BINARY_STRING:
+                converterName = TO_BINARY;
                 break;
             case TO_BOOLEAN_STRING:
                 converterName = TO_BOOLEAN;
