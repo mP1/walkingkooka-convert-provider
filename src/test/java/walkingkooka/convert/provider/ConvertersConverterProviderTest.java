@@ -220,15 +220,6 @@ public final class ConvertersConverterProviderTest implements ConverterProviderT
     }
 
     @Test
-    public void testConverterHasProperties() {
-        this.converterAndCheck(
-            ConverterSelector.parse("has-properties"),
-            CONTEXT,
-            Converters.hasProperties()
-        );
-    }
-
-    @Test
     public void testConverterHasValueTo() {
         this.converterAndCheck(
             ConverterSelector.parse("has-value-to"),
@@ -423,6 +414,15 @@ public final class ConvertersConverterProviderTest implements ConverterProviderT
             ConverterSelector.parse("to-decimal-number-symbols"),
             CONTEXT,
             Converters.toDecimalNumberSymbols()
+        );
+    }
+
+    @Test
+    public void testConverterToProperties() {
+        this.converterAndCheck(
+            ConverterSelector.parse("to-properties"),
+            CONTEXT,
+            Converters.toProperties()
         );
     }
 
