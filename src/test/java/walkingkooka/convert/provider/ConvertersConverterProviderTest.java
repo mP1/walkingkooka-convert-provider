@@ -220,15 +220,6 @@ public final class ConvertersConverterProviderTest implements ConverterProviderT
     }
 
     @Test
-    public void testConverterHasValueTo() {
-        this.converterAndCheck(
-            ConverterSelector.parse("has-value-to"),
-            CONTEXT,
-            Converters.hasValueTo()
-        );
-    }
-
-    @Test
     public void testConverterNumberToCurrencyValue() {
         this.converterAndCheck(
             ConverterSelector.parse("number-to-currency-value"),
@@ -432,6 +423,15 @@ public final class ConvertersConverterProviderTest implements ConverterProviderT
             ConverterSelector.parse("to-text"),
             CONTEXT,
             Converters.toText()
+        );
+    }
+
+    @Test
+    public void testConverterToValue() {
+        this.converterAndCheck(
+            ConverterSelector.parse("to-value"),
+            CONTEXT,
+            Converters.toValue()
         );
     }
 
