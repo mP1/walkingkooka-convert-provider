@@ -37,6 +37,15 @@ public final class ConvertersConverterProviderTest implements ConverterProviderT
     private final static ProviderContext CONTEXT = ProviderContexts.fake();
 
     @Test
+    public void testConverterSelectorBinaryToString() {
+        this.converterAndCheck(
+            "binary-to-string",
+            CONTEXT,
+            Converters.binaryToString()
+        );
+    }
+
+    @Test
     public void testConverterSelectorBooleanToNumber() {
         this.converterAndCheck(
             ConverterSelector.with(
@@ -207,15 +216,6 @@ public final class ConvertersConverterProviderTest implements ConverterProviderT
             ConverterSelector.parse("currency-value-to-number"),
             CONTEXT,
             Converters.currencyValueToNumber()
-        );
-    }
-
-    @Test
-    public void testConverterHasBinaryToString() {
-        this.converterAndCheck(
-            ConverterSelector.parse("has-binary-to-string"),
-            CONTEXT,
-            Converters.hasBinaryToString()
         );
     }
 

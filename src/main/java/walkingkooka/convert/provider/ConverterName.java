@@ -97,6 +97,15 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
      */
     final static Map<ConverterName, Function<List<?>, Converter<?>>> NAME_TO_FACTORY = Maps.sorted();
 
+    private final static String BINARY_TO_STRING_STRING = "binary-to-string";
+
+    /**
+     * The name of the {@link Converter} returned by {@link Converters#binaryToString()}
+     */
+    public final static ConverterName BINARY_TO_STRING = registerConstantName(
+        BINARY_TO_STRING_STRING,
+        Converters::binaryToString
+    );
 
     private final static String BOOLEAN_TO_NUMBER_STRING = "boolean-to-number";
 
@@ -213,16 +222,6 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
      */
     public final static ConverterName CUSTOM_TO_STRING = registerConstantName(
         CUSTOM_TO_STRING_STRING
-    );
-
-    private final static String HAS_BINARY_TO_STRING_STRING = "has-binary-to-string";
-
-    /**
-     * The name of the {@link Converter} returned by {@link Converters#hasBinaryToString()}
-     */
-    public final static ConverterName HAS_BINARY_TO_STRING = registerConstantName(
-        HAS_BINARY_TO_STRING_STRING,
-        Converters::hasBinaryToString
     );
     
     private final static String HAS_PROPERTIES_STRING = "has-properties";
@@ -873,6 +872,9 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
         final ConverterName converterName;
 
         switch (name) {
+            case BINARY_TO_STRING_STRING:
+                converterName = BINARY_TO_STRING;
+                break;
             case BOOLEAN_TO_NUMBER_STRING:
                 converterName = BOOLEAN_TO_NUMBER;
                 break;
@@ -902,9 +904,6 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
                 break;
             case CUSTOM_TO_STRING_STRING:
                 converterName = CUSTOM_TO_STRING;
-                break;
-            case HAS_BINARY_TO_STRING_STRING:
-                converterName = HAS_BINARY_TO_STRING;
                 break;
             case HAS_PROPERTIES_STRING:
                 converterName = HAS_PROPERTIES;
