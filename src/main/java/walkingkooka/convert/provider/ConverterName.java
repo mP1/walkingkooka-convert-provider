@@ -224,16 +224,6 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
         CUSTOM_TO_STRING_STRING
     );
     
-    private final static String HAS_PROPERTIES_STRING = "has-properties";
-
-    /**
-     * The name of the {@link Converter} returned by {@link Converters#hasProperties()}
-     */
-    public final static ConverterName HAS_PROPERTIES = registerConstantName(
-        HAS_PROPERTIES_STRING,
-        Converters::hasProperties
-    );
-    
     private final static String HAS_TEXT_STRING = "has-text";
 
     /**
@@ -863,6 +853,17 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
         Converters::toLocaleLanguageTag
     );
 
+    private final static String TO_PROPERTIES_STRING = "to-properties";
+
+    /**
+     * The name of the {@link Converter} returned by {@link Converters#toProperties()}
+     */
+    public final static ConverterName TO_PROPERTIES = registerConstantName(
+        TO_PROPERTIES_STRING,
+        Converters::toProperties
+    );
+
+
     /**
      * Factory that creates a {@link ConverterName}
      */
@@ -904,9 +905,6 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
                 break;
             case CUSTOM_TO_STRING_STRING:
                 converterName = CUSTOM_TO_STRING;
-                break;
-            case HAS_PROPERTIES_STRING:
-                converterName = HAS_PROPERTIES;
                 break;
             case HAS_TEXT_STRING:
                 converterName = HAS_TEXT;
@@ -1099,6 +1097,9 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
                 break;
             case TO_LOCALE_LANGUAGE_TAG_STRING:
                 converterName = TO_LOCALE_LANGUAGE_TAG;
+                break;
+            case TO_PROPERTIES_STRING:
+                converterName = TO_PROPERTIES;
                 break;
             default:
                 converterName = new ConverterName(name);
