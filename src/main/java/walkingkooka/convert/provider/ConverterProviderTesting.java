@@ -199,6 +199,18 @@ public interface ConverterProviderTesting<T extends ConverterProvider> extends P
         );
     }
 
+    default void converterAndCheck(final String name,
+                                   final List<?> values,
+                                   final ProviderContext context,
+                                   final Converter<?> expected) {
+        this.converterAndCheck(
+            ConverterName.with(name),
+            values,
+            context,
+            expected
+        );
+    }
+
     default void converterAndCheck(final ConverterName name,
                                    final List<?> values,
                                    final ProviderContext context,
