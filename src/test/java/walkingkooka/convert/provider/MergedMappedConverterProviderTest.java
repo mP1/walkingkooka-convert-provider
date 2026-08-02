@@ -150,7 +150,7 @@ public final class MergedMappedConverterProviderTest implements ConverterProvide
     public void testToString() {
         this.toStringAndCheck(
             this.createConverterProvider(),
-            "https://example.com/provider-only-converter-222 provider-only-converter-222,https://example.com/renamed-converter-111 renamed-rename-converter-111"
+            "https://example.com/provider-only-converter-222 provider-only-converter-222, https://example.com/renamed-converter-111 renamed-rename-converter-111"
         );
     }
 
