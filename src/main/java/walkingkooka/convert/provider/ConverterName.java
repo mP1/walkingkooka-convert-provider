@@ -734,6 +734,16 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
         Converters::textToNumberList
     );
 
+    private final static String TEXT_TO_PATH_STRING = "text-to-path";
+
+    /**
+     * The name of the {@link Converter} returned by {@link Converters#textToPath()}
+     */
+    public final static ConverterName TEXT_TO_PATH = registerConstantName(
+        TEXT_TO_PATH_STRING,
+        Converters::textToPath
+    );
+    
     private final static String TEXT_TO_PROPERTIES_STRING = "text-to-properties";
 
     /**
