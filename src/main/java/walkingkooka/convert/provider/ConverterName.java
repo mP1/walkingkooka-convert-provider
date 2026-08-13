@@ -17,6 +17,7 @@
 
 package walkingkooka.convert.provider;
 
+import javaemul.internal.annotations.GwtIncompatible;
 import walkingkooka.Cast;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.convert.Converter;
@@ -42,7 +43,8 @@ import java.util.function.Supplier;
 /**
  * The {@link Name} of a {@link Converter}. Note comparator names are case-sensitive.
  */
-final public class ConverterName implements PluginNameLike<ConverterName> {
+final public class ConverterName extends ConverterNameGwt
+    implements PluginNameLike<ConverterName> {
 
     public static boolean isChar(final int pos,
                                  final char c) {
@@ -68,8 +70,8 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
         );
     }
 
-    private static ConverterName registerConstantName(final String name,
-                                                      final Supplier<Converter<?>> converter) {
+    static ConverterName registerConstantName(final String name,
+                                              final Supplier<Converter<?>> converter) {
         return registerConstantName(
             name,
             (p) -> {
@@ -741,8 +743,13 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
      */
     public final static ConverterName TEXT_TO_PATH = registerConstantName(
         TEXT_TO_PATH_STRING,
-        Converters::textToPath
+        textToPathConverterSupplier()
     );
+
+    @GwtIncompatible
+    static Supplier<Converter<?>> textToPathConverterSupplier() {
+        return Converters::textToPath;
+    }
     
     private final static String TEXT_TO_PROPERTIES_STRING = "text-to-properties";
 
