@@ -355,6 +355,15 @@ public final class ConvertersConverterProviderTest implements ConverterProviderT
     }
 
     @Test
+    public void testConverterTextToPath() {
+        this.converterAndCheck(
+            ConverterSelector.parse("text-to-path"),
+            CONTEXT,
+            Converters.textToPath()
+        );
+    }
+
+    @Test
     public void testConverterTextToProperties() {
         this.converterAndCheck(
             ConverterSelector.parse("text-to-properties"),
