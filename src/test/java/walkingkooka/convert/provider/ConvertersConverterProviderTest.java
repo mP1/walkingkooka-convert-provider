@@ -410,6 +410,15 @@ public final class ConvertersConverterProviderTest implements ConverterProviderT
     }
 
     @Test
+    public void testConverterToCsvStringList() {
+        this.converterAndCheck(
+            ConverterSelector.parse("to-csv-string-list"),
+            CONTEXT,
+            Converters.toCsvStringList()
+        );
+    }
+
+    @Test
     public void testConverterToDateTimeSymbols() {
         this.converterAndCheck(
             ConverterSelector.parse("to-date-time-symbols"),

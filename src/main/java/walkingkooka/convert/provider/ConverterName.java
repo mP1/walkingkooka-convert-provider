@@ -820,6 +820,16 @@ final public class ConverterName extends ConverterNameGwt
         TO_BOOLEAN_STRING
     );
 
+    private final static String TO_CSV_STRING_LIST_STRING = "to-csv-string-list";
+
+    /**
+     * The name of the {@link Converter} returned by {@link Converters#toCsvStringList()} ()}.
+     */
+    public final static ConverterName TO_CSV_STRING_LIST = registerConstantName(
+        TO_CSV_STRING_LIST_STRING,
+        Converters::toCsvStringList
+    );
+
     private final static String TO_DATE_TIME_SYMBOLS_STRING = "to-date-time-symbols";
 
     /**
@@ -1108,6 +1118,9 @@ final public class ConverterName extends ConverterNameGwt
                 break;
             case TO_BOOLEAN_STRING:
                 converterName = TO_BOOLEAN;
+                break;
+            case TO_CSV_STRING_LIST_STRING:
+                converterName = TO_CSV_STRING_LIST;
                 break;
             case TO_DATE_TIME_SYMBOLS_STRING:
                 converterName = TO_DATE_TIME_SYMBOLS;
