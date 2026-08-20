@@ -455,6 +455,15 @@ public final class ConvertersConverterProviderTest implements ConverterProviderT
     }
 
     @Test
+    public void testConverterToTsvStringList() {
+        this.converterAndCheck(
+            ConverterSelector.parse("to-tsv-string-list"),
+            CONTEXT,
+            Converters.toTsvStringList()
+        );
+    }
+
+    @Test
     public void testConverterToValue() {
         this.converterAndCheck(
             ConverterSelector.parse("to-value"),

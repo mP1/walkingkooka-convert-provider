@@ -890,6 +890,16 @@ final public class ConverterName extends ConverterNameGwt
         Converters::toText
     );
 
+    private final static String TO_TSV_STRING_LIST_STRING = "to-tsv-string-list";
+
+    /**
+     * The name of the {@link Converter} returned by {@link Converters#toTsvStringList()} ()}.
+     */
+    public final static ConverterName TO_TSV_STRING_LIST = registerConstantName(
+        TO_TSV_STRING_LIST_STRING,
+        Converters::toTsvStringList
+    );
+    
     private final static String TO_VALUE_STRING = "to-value";
 
     /**
@@ -1139,6 +1149,9 @@ final public class ConverterName extends ConverterNameGwt
                 break;
             case TO_TEXT_STRING:
                 converterName = TO_TEXT;
+                break;
+            case TO_TSV_STRING_LIST_STRING:
+                converterName = TO_TSV_STRING_LIST;
                 break;
             case TO_VALUE_STRING:
                 converterName = TO_VALUE;
