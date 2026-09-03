@@ -870,6 +870,16 @@ final public class ConverterName extends ConverterNameGwt
         Converters::toLocaleLanguageTag
     );
 
+    private final static String TO_MULTI_LINE_TEXT_STRING = "to-multi-line-text";
+
+    /**
+     * The name of the {@link Converter} returned by {@link Converters#toMultiLineText()}
+     */
+    public final static ConverterName TO_MULTI_LINE_TEXT = registerConstantName(
+        TO_MULTI_LINE_TEXT_STRING,
+        Converters::toMultiLineText
+    );
+    
     private final static String TO_PROPERTIES_STRING = "to-properties";
 
     /**
@@ -1143,6 +1153,9 @@ final public class ConverterName extends ConverterNameGwt
                 break;
             case TO_LOCALE_LANGUAGE_TAG_STRING:
                 converterName = TO_LOCALE_LANGUAGE_TAG;
+                break;
+            case TO_MULTI_LINE_TEXT_STRING:
+                converterName = TO_MULTI_LINE_TEXT;
                 break;
             case TO_PROPERTIES_STRING:
                 converterName = TO_PROPERTIES;
