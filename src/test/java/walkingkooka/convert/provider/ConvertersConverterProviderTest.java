@@ -28,11 +28,13 @@ import walkingkooka.plugin.ProviderContexts;
 import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.reflect.MethodAttributes;
 import walkingkooka.text.CaseKind;
+import walkingkooka.text.printer.TreePrintableTesting;
 
 import java.lang.reflect.Method;
 import java.util.Set;
 
-public final class ConvertersConverterProviderTest implements ConverterProviderTesting<ConvertersConverterProvider> {
+public final class ConvertersConverterProviderTest implements ConverterProviderTesting<ConvertersConverterProvider>,
+    TreePrintableTesting {
 
     private final static ProviderContext CONTEXT = ProviderContexts.fake();
 
@@ -485,6 +487,101 @@ public final class ConvertersConverterProviderTest implements ConverterProviderT
     public ConvertersConverterProvider createConverterProvider() {
         return ConvertersConverterProvider.INSTANCE;
     }
+
+    // TreePrintable....................................................................................................
+
+    @Test
+    public void testPrintTree() {
+        this.treePrintAndCheck(
+            this.createConverterProvider()
+                .converterInfos(),
+            "ConverterInfoSet\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/binary-to-string binary-to-string\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/boolean-to-number boolean-to-number\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/chain chain\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/character-or-char-sequence-or-has-text-or-string-to-character-or-char-sequence-or-string character-or-char-sequence-or-has-text-or-string-to-character-or-char-sequence-or-string\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/character-or-string-to-string character-or-string-to-string\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/collection collection\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/collection-to collection-to\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/collection-to-list collection-to-list\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/currency-code-to-currency currency-code-to-currency\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/currency-value-to currency-value-to\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/currency-value-to-number currency-value-to-number\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/custom-to-string custom-to-string\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/local-date-time-to-local-date local-date-time-to-local-date\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/local-date-time-to-local-time local-date-time-to-local-time\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/local-date-time-to-number local-date-time-to-number\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/local-date-time-to-string local-date-time-to-string\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/local-date-to-local-date-time local-date-to-local-date-time\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/local-date-to-number local-date-to-number\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/local-date-to-string local-date-to-string\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/local-time-to-local-date-time local-time-to-local-date-time\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/local-time-to-number local-time-to-number\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/local-time-to-string local-time-to-string\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/locale-to-date-time-symbols locale-to-date-time-symbols\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/locale-to-decimal-number-symbols locale-to-decimal-number-symbols\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/locale-to-string locale-to-string\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/mapper mapper\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/never never\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/number-to-boolean number-to-boolean\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/number-to-currency-value number-to-currency-value\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/number-to-local-date number-to-local-date\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/number-to-local-date-time number-to-local-date-time\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/number-to-local-time number-to-local-time\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/number-to-number number-to-number\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/number-to-string number-to-string\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/object object\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/object-to-string object-to-string\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/optional-to optional-to\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/parser parser\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/properties-to-date-time-symbols properties-to-date-time-symbols\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/properties-to-decimal-number-symbols properties-to-decimal-number-symbols\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/simple simple\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/string-to-character-or-string string-to-character-or-string\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/text-to-binary text-to-binary\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/text-to-boolean-list text-to-boolean-list\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/text-to-charset text-to-charset\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/text-to-csv-string-list text-to-csv-string-list\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/text-to-csv-string-set text-to-csv-string-set\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/text-to-currency text-to-currency\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/text-to-currency-code text-to-currency-code\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/text-to-currency-code-set text-to-currency-code-set\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/text-to-currency-value text-to-currency-value\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/text-to-indentation text-to-indentation\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/text-to-line-ending text-to-line-ending\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/text-to-local-date text-to-local-date\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/text-to-local-date-list text-to-local-date-list\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/text-to-local-date-time text-to-local-date-time\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/text-to-local-date-time-list text-to-local-date-time-list\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/text-to-local-time text-to-local-time\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/text-to-local-time-list text-to-local-time-list\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/text-to-locale text-to-locale\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/text-to-locale-language-tag text-to-locale-language-tag\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/text-to-locale-language-tag-set text-to-locale-language-tag-set\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/text-to-number text-to-number\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/text-to-number-list text-to-number-list\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/text-to-path text-to-path\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/text-to-properties text-to-properties\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/text-to-string-list text-to-string-list\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/text-to-tsv-string-list text-to-tsv-string-list\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/text-to-tsv-string-set text-to-tsv-string-set\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/text-to-zone-offset text-to-zone-offset\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/to-binary to-binary\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/to-boolean to-boolean\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/to-csv-string-list to-csv-string-list\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/to-date-time-symbols to-date-time-symbols\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/to-decimal-number-symbols to-decimal-number-symbols\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/to-locale to-locale\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/to-locale-language-tag to-locale-language-tag\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/to-multi-line-text to-multi-line-text\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/to-properties to-properties\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/to-text to-text\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/to-tsv-string-list to-tsv-string-list\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/to-value to-value\n"
+        );
+    }
+
+    // class............................................................................................................
 
     @Override
     public JavaVisibility typeVisibility() {
