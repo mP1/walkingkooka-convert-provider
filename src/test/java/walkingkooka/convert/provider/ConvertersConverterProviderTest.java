@@ -437,6 +437,15 @@ public final class ConvertersConverterProviderTest implements ConverterProviderT
     }
 
     @Test
+    public void testConverterToMultiLineText() {
+        this.converterAndCheck(
+            ConverterSelector.parse("to-multi-line-text"),
+            CONTEXT,
+            Converters.toMultiLineText()
+        );
+    }
+
+    @Test
     public void testConverterToProperties() {
         this.converterAndCheck(
             ConverterSelector.parse("to-properties"),
