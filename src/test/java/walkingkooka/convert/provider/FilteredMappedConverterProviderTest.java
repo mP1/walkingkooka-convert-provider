@@ -168,9 +168,4 @@ public final class FilteredMappedConverterProviderTest implements ConverterProvi
     public Class<FilteredMappedConverterProvider> type() {
         return FilteredMappedConverterProvider.class;
     }
-
-    @Override
-    public JavaVisibility typeVisibility() {
-        return JavaVisibility.PACKAGE_PRIVATE;
-    }
 }

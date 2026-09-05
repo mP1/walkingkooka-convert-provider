@@ -239,9 +239,4 @@ public final class AliasesConverterProviderTest implements ConverterProviderTest
     public Class<AliasesConverterProvider> type() {
         return AliasesConverterProvider.class;
     }
-
-    @Override
-    public JavaVisibility typeVisibility() {
-        return JavaVisibility.PACKAGE_PRIVATE;
-    }
 }

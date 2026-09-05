@@ -105,9 +105,4 @@ public final class FilteredConverterProviderTest implements ConverterProviderTes
     public Class<FilteredConverterProvider> type() {
         return FilteredConverterProvider.class;
     }
-
-    @Override
-    public JavaVisibility typeVisibility() {
-        return JavaVisibility.PACKAGE_PRIVATE;
-    }
 }
