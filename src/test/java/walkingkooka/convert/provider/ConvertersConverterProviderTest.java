@@ -584,11 +584,6 @@ public final class ConvertersConverterProviderTest implements ConverterProviderT
     // class............................................................................................................
 
     @Override
-    public JavaVisibility typeVisibility() {
-        return JavaVisibility.PACKAGE_PRIVATE;
-    }
-
-    @Override
     public Class<ConvertersConverterProvider> type() {
         return ConvertersConverterProvider.class;
     }

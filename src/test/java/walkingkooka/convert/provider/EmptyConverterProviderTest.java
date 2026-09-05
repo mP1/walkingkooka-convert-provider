@@ -58,9 +58,4 @@ public final class EmptyConverterProviderTest implements ConverterProviderTestin
     public Class<EmptyConverterProvider> type() {
         return EmptyConverterProvider.class;
     }
-
-    @Override
-    public JavaVisibility typeVisibility() {
-        return JavaVisibility.PACKAGE_PRIVATE;
-    }
 }

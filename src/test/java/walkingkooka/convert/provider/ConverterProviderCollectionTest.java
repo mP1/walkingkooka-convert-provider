@@ -91,9 +91,4 @@ public final class ConverterProviderCollectionTest implements ConverterProviderT
     public Class<ConverterProviderCollection> type() {
         return ConverterProviderCollection.class;
     }
-
-    @Override
-    public JavaVisibility typeVisibility() {
-        return JavaVisibility.PACKAGE_PRIVATE;
-    }
 }

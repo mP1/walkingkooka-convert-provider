@@ -209,9 +209,4 @@ public final class MergedMappedConverterProviderTest implements ConverterProvide
     public Class<MergedMappedConverterProvider> type() {
         return MergedMappedConverterProvider.class;
     }
-
-    @Override
-    public JavaVisibility typeVisibility() {
-        return JavaVisibility.PACKAGE_PRIVATE;
-    }
 }
