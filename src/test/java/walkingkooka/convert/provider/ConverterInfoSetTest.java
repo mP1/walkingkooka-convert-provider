@@ -18,6 +18,7 @@
 package walkingkooka.convert.provider;
 
 import org.junit.jupiter.api.Test;
+import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.set.Sets;
 import walkingkooka.net.Url;
 import walkingkooka.plugin.PluginInfoSetLikeTesting;
@@ -38,6 +39,15 @@ public final class ConverterInfoSetTest implements PluginInfoSetLikeTesting<Conv
         assertSame(
             set,
             Sets.immutable(set)
+        );
+    }
+
+    @Test
+    public void testSetElementsWithEmpty() {
+        this.setElementsAndCheck(
+            ConverterInfoSet.EMPTY.concat(this.info()),
+            Lists.empty(),
+            ConverterInfoSet.EMPTY
         );
     }
 
