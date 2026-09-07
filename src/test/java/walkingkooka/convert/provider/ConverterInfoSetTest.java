@@ -57,7 +57,7 @@ public final class ConverterInfoSetTest implements PluginInfoSetLikeTesting<Conv
 
     @Override
     public ConverterInfoSet createSet() {
-        return ConverterInfoSet.with(
+        return ConverterInfoSet.EMPTY.setElements(
             Sets.of(
                 this.info()
             )
@@ -70,18 +70,6 @@ public final class ConverterInfoSetTest implements PluginInfoSetLikeTesting<Conv
             Url.parseAbsolute("https://example.com/converter-123"),
             ConverterName.with("converter-123")
         );
-    }
-
-    // ImmutableSetTesting..............................................................................................
-
-    @Override
-    public void testSetElementsNullFails() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public void testSetElementsSame() {
-        throw new UnsupportedOperationException();
     }
 
     // json.............................................................................................................
@@ -97,7 +85,7 @@ public final class ConverterInfoSetTest implements PluginInfoSetLikeTesting<Conv
     @Test
     public void testMarshallNotEmpty2() {
         this.marshallAndCheck(
-            ConverterInfoSet.with(
+            ConverterInfoSet.EMPTY.setElements(
                 Sets.of(
                     ConverterInfo.with(
                         Url.parseAbsolute("https://example.com/test-123"),
@@ -124,7 +112,7 @@ public final class ConverterInfoSetTest implements PluginInfoSetLikeTesting<Conv
 
     @Override
     public ConverterInfoSet createJsonNodeMarshallingValue() {
-        return ConverterInfoSet.with(
+        return ConverterInfoSet.EMPTY.setElements(
             Sets.of(
                 ConverterInfo.with(
                     Url.parseAbsolute("https://example.com/test-111"),

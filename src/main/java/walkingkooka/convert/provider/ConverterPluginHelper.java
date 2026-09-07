@@ -103,7 +103,7 @@ final class ConverterPluginHelper implements PluginHelper<ConverterName,
 
     @Override
     public ConverterInfoSet infoSet(final Set<ConverterInfo> infos) {
-        return ConverterInfoSet.with(infos);
+        return ConverterInfoSet.EMPTY.setElements(infos);
     }
 
     @Override

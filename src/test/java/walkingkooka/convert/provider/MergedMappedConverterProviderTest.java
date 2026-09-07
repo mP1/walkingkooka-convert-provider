@@ -157,7 +157,7 @@ public final class MergedMappedConverterProviderTest implements ConverterProvide
     @Override
     public MergedMappedConverterProvider createConverterProvider() {
         return MergedMappedConverterProvider.with(
-            ConverterInfoSet.with(
+            ConverterInfoSet.EMPTY.setElements(
                 Sets.of(
                     ConverterInfo.with(
                         RENAMED_URL,
@@ -186,7 +186,7 @@ public final class MergedMappedConverterProviderTest implements ConverterProvide
 
                 @Override
                 public ConverterInfoSet converterInfos() {
-                    return ConverterInfoSet.with(
+                    return ConverterInfoSet.EMPTY.setElements(
                         Sets.of(
                             ConverterInfo.with(
                                 RENAMED_URL,

@@ -221,7 +221,7 @@ public final class AliasesConverterProviderTest implements ConverterProviderTest
 
                 @Override
                 public ConverterInfoSet converterInfos() {
-                    return ConverterInfoSet.with(
+                    return ConverterInfoSet.EMPTY.setElements(
                         Sets.of(
                             INFO1,
                             INFO2,

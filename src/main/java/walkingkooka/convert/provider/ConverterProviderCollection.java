@@ -95,7 +95,7 @@ final class ConverterProviderCollection implements ConverterProvider {
 
     @Override
     public ConverterInfoSet converterInfos() {
-        return ConverterInfoSet.with(
+        return ConverterInfoSet.EMPTY.setElements(
             this.providers.infos()
         );
     }
