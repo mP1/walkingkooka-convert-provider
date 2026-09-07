@@ -17,15 +17,8 @@
 
 package walkingkooka.convert.provider;
 
-import javaemul.internal.annotations.GwtIncompatible;
-import walkingkooka.collect.map.Maps;
 import walkingkooka.convert.Converter;
-import walkingkooka.convert.Converters;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.function.Function;
 import java.util.function.Supplier;
 
 /**

@@ -23,7 +23,6 @@ import walkingkooka.collect.list.Lists;
 import walkingkooka.convert.Converters;
 import walkingkooka.plugin.ProviderContext;
 import walkingkooka.plugin.ProviderContexts;
-import walkingkooka.reflect.JavaVisibility;
 
 import java.util.List;
 

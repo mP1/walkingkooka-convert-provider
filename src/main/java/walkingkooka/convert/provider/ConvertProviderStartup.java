@@ -17,12 +17,8 @@
 
 package walkingkooka.convert.provider;
 
-import walkingkooka.net.email.EmailAddress;
-import walkingkooka.net.header.Accept;
-import walkingkooka.net.http.HttpEntity;
 import walkingkooka.plugin.PluginStartup;
 import walkingkooka.reflect.PublicStaticHelper;
-import walkingkooka.tree.json.TreeJsonStartup;
 import walkingkooka.tree.json.marshall.JsonNodeContext;
 
 /**
