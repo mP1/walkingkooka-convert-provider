@@ -17,7 +17,6 @@
 
 package walkingkooka.convert.provider;
 
-import walkingkooka.collect.set.ImmutableSet;
 import walkingkooka.collect.set.Sets;
 import walkingkooka.net.AbsoluteUrl;
 import walkingkooka.plugin.PluginInfoSet;
@@ -31,7 +30,6 @@ import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 import java.util.AbstractSet;
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.Objects;
 import java.util.Set;
 import java.util.function.Predicate;
 

@@ -23,7 +23,6 @@ import walkingkooka.collect.set.Sets;
 import walkingkooka.convert.Converters;
 import walkingkooka.plugin.ProviderContext;
 import walkingkooka.plugin.ProviderContexts;
-import walkingkooka.reflect.JavaVisibility;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 

@@ -1,6 +1,5 @@
 package walkingkooka.convert.provider;
 
-import walkingkooka.net.*;
 import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.reflect.PublicStaticHelperTesting;
 

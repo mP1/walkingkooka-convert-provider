@@ -27,7 +27,6 @@ import walkingkooka.convert.FakeConverter;
 import walkingkooka.convert.FakeConverterContext;
 import walkingkooka.plugin.ProviderContext;
 import walkingkooka.plugin.ProviderContexts;
-import walkingkooka.reflect.JavaVisibility;
 
 import java.util.List;
 
