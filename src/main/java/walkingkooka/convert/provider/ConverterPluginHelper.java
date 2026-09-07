@@ -129,7 +129,7 @@ final class ConverterPluginHelper implements PluginHelper<ConverterName,
 
     @Override
     public ConverterAliasSet aliasSet(final SortedSet<ConverterAlias> aliases) {
-        return ConverterAliasSet.with(aliases);
+        return ConverterAliasSet.EMPTY.setElements(aliases);
     }
 
     @Override

@@ -60,15 +60,6 @@ public final class ConverterAliasSet extends AbstractSet<ConverterAlias>
      */
     public final static CharacterConstant SEPARATOR = PluginAliasSet.SEPARATOR;
 
-    /**
-     * Factory that creates {@link ConverterAliasSet} with the given aliases.
-     */
-    public static ConverterAliasSet with(final SortedSet<ConverterAlias> aliases) {
-        return aliases instanceof ConverterAliasSet ?
-            (ConverterAliasSet) aliases :
-            EMPTY.setElements(aliases);
-    }
-
     public static ConverterAliasSet parse(final String text) {
         return new ConverterAliasSet(
             PluginAliasSet.parse(
@@ -147,12 +138,21 @@ public final class ConverterAliasSet extends AbstractSet<ConverterAlias>
 
     @Override
     public ConverterAliasSet setElements(final Collection<ConverterAlias> aliases) {
-        final ConverterAliasSet after = new ConverterAliasSet(
-            this.pluginAliasSet.setElements(aliases)
-        );
-        return this.pluginAliasSet.equals(aliases) ?
-            this :
-            after;
+        final ConverterAliasSet converterAliasSet;
+
+        // dont wrap if ConverterAliasSet
+        if (aliases instanceof ConverterAliasSet) {
+            converterAliasSet = (ConverterAliasSet) aliases;
+        } else {
+            final ConverterAliasSet after = new ConverterAliasSet(
+                this.pluginAliasSet.setElements(aliases)
+            );
+            converterAliasSet = this.pluginAliasSet.equals(aliases) ?
+                this :
+                after;
+        }
+
+        return converterAliasSet;
     }
 
     @Override

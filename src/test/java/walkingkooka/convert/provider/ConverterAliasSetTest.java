@@ -39,33 +39,6 @@ public final class ConverterAliasSetTest implements PluginAliasSetLikeTesting<Co
     ToStringTesting<ConverterAliasSet>,
     JsonNodeMarshallerTesting<ConverterAliasSet> {
 
-    // with.............................................................................................................
-
-    @Test
-    public void testWithNullFails() {
-        assertThrows(
-            NullPointerException.class,
-            () -> ConverterAliasSet.with(null)
-        );
-    }
-
-    @Test
-    public void testWithEmpty() {
-        assertSame(
-            ConverterAliasSet.EMPTY,
-            ConverterAliasSet.with(SortedSets.empty())
-        );
-    }
-
-    @Test
-    public void testWithConverterAliasSetDoesntWrap() {
-        final ConverterAliasSet converterAliasSet = this.createSet();
-        assertSame(
-            converterAliasSet,
-            ConverterAliasSet.with(converterAliasSet)
-        );
-    }
-
     // name.............................................................................................................
 
     @Test
@@ -104,6 +77,24 @@ public final class ConverterAliasSetTest implements PluginAliasSetLikeTesting<Co
             ConverterSelector.parse("custom(1)")
         );
     }
+
+    @Test
+    public void testSetElementsWithEmpty() {
+        assertSame(
+            ConverterAliasSet.EMPTY,
+            ConverterAliasSet.EMPTY.setElements(SortedSets.empty())
+        );
+    }
+
+    @Test
+    public void testSetElementsWithConverterAliasSetDoesntWrap() {
+        final ConverterAliasSet converterAliasSet = this.createSet();
+        assertSame(
+            converterAliasSet,
+            ConverterAliasSet.EMPTY.setElements(converterAliasSet)
+        );
+    }
+
 
     @Override
     public ConverterAliasSet createSet() {
