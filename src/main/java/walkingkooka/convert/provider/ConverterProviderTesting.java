@@ -253,7 +253,7 @@ public interface ConverterProviderTesting<T extends ConverterProvider> extends P
                                         final ConverterInfo... expected) {
         this.converterInfosAndCheck(
             provider,
-            ConverterInfoSet.with(
+            ConverterInfoSet.EMPTY.setElements(
                 Sets.of(
                     expected
                 )

@@ -45,7 +45,7 @@ final class ConvertersConverterProvider implements ConverterProvider {
     private ConvertersConverterProvider() {
         super();
 
-        this.infos = ConverterInfoSet.with(
+        this.infos = ConverterInfoSet.EMPTY.setElements(
             Sets.readOnly(
                 ConverterName.NAME_TO_FACTORY.keySet()
                     .stream()

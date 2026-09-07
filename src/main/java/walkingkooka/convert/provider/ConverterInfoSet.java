@@ -55,15 +55,6 @@ public final class ConverterInfoSet extends AbstractSet<ConverterInfo> implement
         );
     }
 
-    public static ConverterInfoSet with(final Set<ConverterInfo> infos) {
-        Objects.requireNonNull(infos, "infos");
-
-        final PluginInfoSet<ConverterName, ConverterInfo> pluginInfoSet = PluginInfoSet.with(infos);
-        return pluginInfoSet.isEmpty() ?
-            EMPTY :
-            new ConverterInfoSet(pluginInfoSet);
-    }
-
     private ConverterInfoSet(final PluginInfoSet<ConverterName, ConverterInfo> pluginInfoSet) {
         this.pluginInfoSet = pluginInfoSet;
     }
@@ -160,12 +151,22 @@ public final class ConverterInfoSet extends AbstractSet<ConverterInfo> implement
 
     @Override
     public ConverterInfoSet setElements(final Collection<ConverterInfo> infos) {
-        final ConverterInfoSet after = new ConverterInfoSet(
-            this.pluginInfoSet.setElements(infos)
-        );
-        return this.pluginInfoSet.equals(infos) ?
-            this :
-            after;
+        ConverterInfoSet after;
+
+        if (infos instanceof ConverterInfoSet) {
+            after = (ConverterInfoSet) infos;
+        } else {
+            after = new ConverterInfoSet(
+                this.pluginInfoSet.setElements(infos)
+            );
+            after = after.isEmpty() ?
+                EMPTY :
+                this.equals(after) ?
+                    this :
+                    after;
+        }
+
+        return after;
     }
 
     @Override
@@ -215,7 +216,7 @@ public final class ConverterInfoSet extends AbstractSet<ConverterInfo> implement
     // @VisibleForTesting
     static ConverterInfoSet unmarshall(final JsonNode node,
                                        final JsonNodeUnmarshallContext context) {
-        return with(
+        return EMPTY.setElements(
             context.unmarshallSet(
                 node,
                 ConverterInfo.class
