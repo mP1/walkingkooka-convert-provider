@@ -128,8 +128,6 @@ public final class ConvertersConverterProviderTest implements ConverterProviderT
                 CaseKind.KEBAB
             );
 
-            System.out.println(method + " " + name);
-
             final ConverterName converterName = ConverterName.with(name);
 
             try {
