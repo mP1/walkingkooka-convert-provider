@@ -355,6 +355,15 @@ public final class ConvertersConverterProviderTest implements ConverterProviderT
     }
 
     @Test
+    public void testConverterTextToLoggingLevel() {
+        this.converterAndCheck(
+            ConverterSelector.parse("text-to-logging-level"),
+            CONTEXT,
+            Converters.textToLoggingLevel()
+        );
+    }
+
+    @Test
     public void testConverterTextToPath() {
         this.converterAndCheck(
             ConverterSelector.parse("text-to-path"),
@@ -556,6 +565,7 @@ public final class ConvertersConverterProviderTest implements ConverterProviderT
                 "  https://github.com/mP1/walkingkooka-convert-provider/Converter/text-to-locale text-to-locale\n" +
                 "  https://github.com/mP1/walkingkooka-convert-provider/Converter/text-to-locale-language-tag text-to-locale-language-tag\n" +
                 "  https://github.com/mP1/walkingkooka-convert-provider/Converter/text-to-locale-language-tag-set text-to-locale-language-tag-set\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/text-to-logging-level text-to-logging-level\n" +
                 "  https://github.com/mP1/walkingkooka-convert-provider/Converter/text-to-number text-to-number\n" +
                 "  https://github.com/mP1/walkingkooka-convert-provider/Converter/text-to-number-list text-to-number-list\n" +
                 "  https://github.com/mP1/walkingkooka-convert-provider/Converter/text-to-path text-to-path\n" +
