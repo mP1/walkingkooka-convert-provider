@@ -717,6 +717,16 @@ final public class ConverterName extends ConverterNameGwt
         Converters::textToLocaleLanguageTagSet
     );
 
+    private final static String TEXT_TO_LOGGING_LEVEL_STRING = "text-to-logging-level";
+
+    /**
+     * The name of the {@link Converter} returned by {@link Converters#textToLineEnding()}
+     */
+    public final static ConverterName TEXT_TO_LOGGING_LEVEL = registerConstantName(
+        TEXT_TO_LOGGING_LEVEL_STRING,
+        Converters::textToLoggingLevel
+    );
+    
     private final static String TEXT_TO_NUMBER_STRING = "text-to-number";
 
     /**
@@ -1111,6 +1121,9 @@ final public class ConverterName extends ConverterNameGwt
                 break;
             case TEXT_TO_LOCALE_LANGUAGE_TAG_SET_STRING:
                 converterName = TEXT_TO_LOCALE_LANGUAGE_TAG_SET;
+                break;
+            case TEXT_TO_LOGGING_LEVEL_STRING:
+                converterName = TEXT_TO_LOGGING_LEVEL;
                 break;
             case TEXT_TO_NUMBER_STRING:
                 converterName = TEXT_TO_NUMBER;
