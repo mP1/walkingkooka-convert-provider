@@ -17,7 +17,6 @@
 
 package walkingkooka.convert.provider;
 
-import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.reflect.PublicStaticHelperTesting;
 
 import java.lang.reflect.Method;
@@ -27,11 +26,6 @@ public final class ConverterProvidersTest implements PublicStaticHelperTesting<C
     @Override
     public Class<ConverterProviders> type() {
         return ConverterProviders.class;
-    }
-
-    @Override
-    public JavaVisibility typeVisibility() {
-        return JavaVisibility.PUBLIC;
     }
 
     @Override
