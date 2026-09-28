@@ -839,6 +839,16 @@ final public class ConverterName extends ConverterNameGwt
         TO_CURRENCY_STRING,
         Converters::toCurrency
     );
+
+    private final static String TO_CURRENCY_CODE_STRING = "to-currency-code";
+
+    /**
+     * The name of the {@link Converter} returned by {@link Converters#toCurrencyCode()}.
+     */
+    public final static ConverterName TO_CURRENCY_CODE = registerConstantName(
+        TO_CURRENCY_CODE_STRING,
+        Converters::toCurrencyCode
+    );
     
     private final static String TO_CSV_STRING_LIST_STRING = "to-csv-string-list";
 
@@ -1167,6 +1177,9 @@ final public class ConverterName extends ConverterNameGwt
                 break;
             case TO_CURRENCY_STRING:
                 converterName = TO_CURRENCY;
+                break;
+            case TO_CURRENCY_CODE_STRING:
+                converterName = TO_CURRENCY_CODE;
                 break;
             case TO_DATE_TIME_SYMBOLS_STRING:
                 converterName = TO_DATE_TIME_SYMBOLS;
