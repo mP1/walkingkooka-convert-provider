@@ -18,7 +18,6 @@
 package walkingkooka.convert.provider;
 
 import walkingkooka.plugin.PluginHelperTesting;
-import walkingkooka.reflect.JavaVisibility;
 
 public final class ConverterPluginHelperTest implements PluginHelperTesting<ConverterPluginHelper,
     ConverterName,
@@ -43,10 +42,5 @@ public final class ConverterPluginHelperTest implements PluginHelperTesting<Conv
     @Override
     public Class<ConverterPluginHelper> type() {
         return ConverterPluginHelper.class;
-    }
-
-    @Override
-    public JavaVisibility typeVisibility() {
-        return JavaVisibility.PACKAGE_PRIVATE;
     }
 }
