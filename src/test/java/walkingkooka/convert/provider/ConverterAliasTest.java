@@ -21,7 +21,6 @@ import org.junit.jupiter.api.Test;
 import walkingkooka.net.AbsoluteUrl;
 import walkingkooka.net.Url;
 import walkingkooka.plugin.PluginAliasLikeTesting;
-import walkingkooka.reflect.JavaVisibility;
 
 import java.util.Optional;
 
@@ -116,10 +115,5 @@ public final class ConverterAliasTest implements PluginAliasLikeTesting<Converte
     @Override
     public Class<ConverterAlias> type() {
         return ConverterAlias.class;
-    }
-
-    @Override
-    public JavaVisibility typeVisibility() {
-        return JavaVisibility.PUBLIC;
     }
 }
