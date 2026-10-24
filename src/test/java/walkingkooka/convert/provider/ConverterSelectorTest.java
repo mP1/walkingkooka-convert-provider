@@ -28,7 +28,6 @@ import walkingkooka.plugin.PluginSelectorEvaluateValueTextProvider;
 import walkingkooka.plugin.PluginSelectorLikeTesting;
 import walkingkooka.plugin.ProviderContext;
 import walkingkooka.plugin.ProviderContexts;
-import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.text.CharSequences;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
@@ -497,18 +496,6 @@ public final class ConverterSelectorTest implements PluginSelectorLikeTesting<Co
         );
     }
 
-    // ClassTesting.....................................................................................................
-
-    @Override
-    public Class<ConverterSelector> type() {
-        return ConverterSelector.class;
-    }
-
-    @Override
-    public JavaVisibility typeVisibility() {
-        return JavaVisibility.PUBLIC;
-    }
-
     // Json.............................................................................................................
 
     @Test
@@ -554,7 +541,12 @@ public final class ConverterSelectorTest implements PluginSelectorLikeTesting<Co
         );
     }
 
-    // type name testing................................................................................................
+    // Class............................................................................................................
+
+    @Override
+    public Class<ConverterSelector> type() {
+        return ConverterSelector.class;
+    }
 
     @Override
     public String typeNamePrefix() {
