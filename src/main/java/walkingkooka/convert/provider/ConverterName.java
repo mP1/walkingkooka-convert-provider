@@ -842,6 +842,16 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
         TO_CURRENCY_CODE_STRING,
         Converters::toCurrencyCode
     );
+
+    private final static String TO_CURRENCY_VALUE_STRING = "to-currency-value";
+
+    /**
+     * The name of the {@link Converter} returned by {@link Converters#toCurrencyValue()}.
+     */
+    public final static ConverterName TO_CURRENCY_VALUE = registerConstantName(
+        TO_CURRENCY_VALUE_STRING,
+        Converters::toCurrencyValue
+    );
     
     private final static String TO_CSV_STRING_LIST_STRING = "to-csv-string-list";
 
