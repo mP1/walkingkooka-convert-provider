@@ -446,6 +446,15 @@ public final class ConvertersConverterProviderTest implements ConverterProviderT
     }
 
     @Test
+    public void testConverterToCurrencyValue() {
+        this.converterAndCheck(
+            ConverterSelector.parse("to-currency-value"),
+            CONTEXT,
+            Converters.toCurrencyValue()
+        );
+    }
+
+    @Test
     public void testConverterToDateTimeSymbols() {
         this.converterAndCheck(
             ConverterSelector.parse("to-date-time-symbols"),
@@ -597,6 +606,7 @@ public final class ConvertersConverterProviderTest implements ConverterProviderT
                 "  https://github.com/mP1/walkingkooka-convert-provider/Converter/to-csv-string-list to-csv-string-list\n" +
                 "  https://github.com/mP1/walkingkooka-convert-provider/Converter/to-currency to-currency\n" +
                 "  https://github.com/mP1/walkingkooka-convert-provider/Converter/to-currency-code to-currency-code\n" +
+                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/to-currency-value to-currency-value\n" +
                 "  https://github.com/mP1/walkingkooka-convert-provider/Converter/to-date-time-symbols to-date-time-symbols\n" +
                 "  https://github.com/mP1/walkingkooka-convert-provider/Converter/to-decimal-number-symbols to-decimal-number-symbols\n" +
                 "  https://github.com/mP1/walkingkooka-convert-provider/Converter/to-locale to-locale\n" +
