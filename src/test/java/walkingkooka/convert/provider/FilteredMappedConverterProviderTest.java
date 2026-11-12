@@ -35,7 +35,7 @@ import java.util.Objects;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class FilteredMappedConverterProviderTest implements ConverterProviderTesting<FilteredMappedConverterProvider>,
-    ToStringTesting<FilteredMappedConverterProvider> {
+    ToStringTesting {
 
     private final static AbsoluteUrl URL = Url.parseAbsolute("https://example.com/converter123");
 

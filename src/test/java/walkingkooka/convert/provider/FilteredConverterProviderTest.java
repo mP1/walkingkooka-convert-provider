@@ -27,7 +27,7 @@ import walkingkooka.plugin.ProviderContexts;
 import java.util.List;
 
 public final class FilteredConverterProviderTest implements ConverterProviderTesting<FilteredConverterProvider>,
-    ToStringTesting<FilteredConverterProvider> {
+    ToStringTesting {
 
     private final static ProviderContext CONTEXT = ProviderContexts.fake();
 
