@@ -35,8 +35,8 @@ public final class ConverterAliasSetTest implements PluginAliasSetLikeTesting<Co
     ConverterAlias,
     ConverterAliasSet>,
     HashCodeEqualsDefinedTesting2<ConverterAliasSet>,
-    ToStringTesting<ConverterAliasSet>,
-    JsonNodeMarshallerTesting<ConverterAliasSet> {
+    JsonNodeMarshallerTesting<ConverterAliasSet>,
+    ToStringTesting {
 
     // name.............................................................................................................
 
