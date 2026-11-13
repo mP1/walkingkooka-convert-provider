@@ -25,13 +25,11 @@ import walkingkooka.reflect.FieldAttributes;
 import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.reflect.MethodAttributes;
 import walkingkooka.text.CaseKind;
-import walkingkooka.text.CharacterConstant;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 import java.util.Arrays;
 import java.util.Set;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 final public class ConverterNameTest implements PluginNameTesting<ConverterName> {
@@ -61,17 +59,12 @@ final public class ConverterNameTest implements PluginNameTesting<ConverterName>
             .collect(Collectors.toCollection(SortedSets::tree));
 
         this.checkEquals(
-            CharacterConstant.with('\n').toSeparatedString(
-                constantNames,
-                Function.identity()
-            ),
-            CharacterConstant.with('\n').toSeparatedString(
-                factoryNames,
-                Function.identity()
-            )
+            constantNames.stream()
+                .collect(Collectors.joining("\n")),
+            factoryNames.stream()
+                .collect(Collectors.joining("\n"))
         );
     }
-
     @Override
     public ConverterName createName(final String name) {
         return ConverterName.with(name);
