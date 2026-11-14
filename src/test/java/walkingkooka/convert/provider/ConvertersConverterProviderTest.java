@@ -274,15 +274,6 @@ public final class ConvertersConverterProviderTest implements ConverterProviderT
     }
 
     @Test
-    public void testConverterTextToCsvStringSet() {
-        this.converterAndCheck(
-            ConverterSelector.parse("text-to-csv-string-set"),
-            CONTEXT,
-            Converters.textToCsvStringSet()
-        );
-    }
-
-    @Test
     public void testConverterTextToCurrency() {
         this.converterAndCheck(
             ConverterSelector.parse("text-to-currency"),
@@ -576,7 +567,6 @@ public final class ConvertersConverterProviderTest implements ConverterProviderT
                 "  https://github.com/mP1/walkingkooka-convert-provider/Converter/text-to-boolean-list text-to-boolean-list\n" +
                 "  https://github.com/mP1/walkingkooka-convert-provider/Converter/text-to-charset text-to-charset\n" +
                 "  https://github.com/mP1/walkingkooka-convert-provider/Converter/text-to-csv-string-list text-to-csv-string-list\n" +
-                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/text-to-csv-string-set text-to-csv-string-set\n" +
                 "  https://github.com/mP1/walkingkooka-convert-provider/Converter/text-to-currency text-to-currency\n" +
                 "  https://github.com/mP1/walkingkooka-convert-provider/Converter/text-to-currency-code text-to-currency-code\n" +
                 "  https://github.com/mP1/walkingkooka-convert-provider/Converter/text-to-currency-code-set text-to-currency-code-set\n" +
