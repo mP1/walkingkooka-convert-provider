@@ -382,15 +382,6 @@ public final class ConvertersConverterProviderTest implements ConverterProviderT
     }
 
     @Test
-    public void testConverterTextToTsvStringSet() {
-        this.converterAndCheck(
-            ConverterSelector.parse("text-to-tsv-string-set"),
-            CONTEXT,
-            Converters.textToTsvStringSet()
-        );
-    }
-
-    @Test
     public void testConverterTextToZoneOffset() {
         this.converterAndCheck(
             ConverterSelector.parse("text-to-zone-offset"),
@@ -589,7 +580,6 @@ public final class ConvertersConverterProviderTest implements ConverterProviderT
                 "  https://github.com/mP1/walkingkooka-convert-provider/Converter/text-to-properties text-to-properties\n" +
                 "  https://github.com/mP1/walkingkooka-convert-provider/Converter/text-to-string-list text-to-string-list\n" +
                 "  https://github.com/mP1/walkingkooka-convert-provider/Converter/text-to-tsv-string-list text-to-tsv-string-list\n" +
-                "  https://github.com/mP1/walkingkooka-convert-provider/Converter/text-to-tsv-string-set text-to-tsv-string-set\n" +
                 "  https://github.com/mP1/walkingkooka-convert-provider/Converter/text-to-zone-offset text-to-zone-offset\n" +
                 "  https://github.com/mP1/walkingkooka-convert-provider/Converter/to-binary to-binary\n" +
                 "  https://github.com/mP1/walkingkooka-convert-provider/Converter/to-boolean to-boolean\n" +
