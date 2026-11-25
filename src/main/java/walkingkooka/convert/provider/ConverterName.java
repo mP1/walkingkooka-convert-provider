@@ -1198,7 +1198,10 @@ final public class ConverterName implements PluginNameLike<ConverterName> {
      */
     private ConverterName(final String name) {
         super();
-        this.name = PluginName.with(name);
+        this.name = PluginName.with(
+            "ConverterName",
+            name
+        );
     }
 
     @Override
