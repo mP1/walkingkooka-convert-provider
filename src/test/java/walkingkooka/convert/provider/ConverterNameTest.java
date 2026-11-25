@@ -18,12 +18,14 @@
 package walkingkooka.convert.provider;
 
 import org.junit.jupiter.api.Test;
+import walkingkooka.InvalidCharacterException;
 import walkingkooka.collect.set.SortedSets;
 import walkingkooka.convert.Converters;
 import walkingkooka.plugin.PluginNameTesting;
 import walkingkooka.reflect.FieldAttributes;
 import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.reflect.MethodAttributes;
+import walkingkooka.reflect.ThrowableTesting;
 import walkingkooka.text.CaseKind;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
@@ -32,7 +34,10 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-final public class ConverterNameTest implements PluginNameTesting<ConverterName> {
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+final public class ConverterNameTest implements PluginNameTesting<ConverterName>,
+    ThrowableTesting {
 
     @Test
     public void testConstantNamesMatchConvertersFactoryMethods() {
@@ -65,6 +70,18 @@ final public class ConverterNameTest implements PluginNameTesting<ConverterName>
                 .collect(Collectors.joining("\n"))
         );
     }
+
+    @Test
+    public void testWithInvalidCharacterFails() {
+        this.getMessageAndCheck(
+            assertThrows(
+                InvalidCharacterException.class,
+                () -> ConverterName.with("hello!")
+            ),
+            "Invalid \"ConverterName\" character '!' at 5"
+        );
+    }
+
     @Override
     public ConverterName createName(final String name) {
         return ConverterName.with(name);
